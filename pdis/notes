@@ -4,35 +4,84 @@
 
 Context
 ========================================
+- gene expression and its uses;
+- some of the mechanisms that regulate gene transcription are unknown;
+- tools that streamline the entire analysis process are uncommon;
 
 Objective
 ========================================
-
-Method
-========================================
-
-Results
-========================================
-
-Conclusions
-========================================
+- review the state-of-the-art related to the problems in analysis;
+- early exploration of tools commonly used in these contexts, facilitating later
+  choices;
+- define a detailed work plan for the subsequent thesis;
 
 ################################################################################
 # Intro
 ################################################################################
 
+Context and Motivation
+========================================
+- a brief overview about gene expression;
+- refer the lack of knowledge about gene transcription mechanisms and why this
+  knowledge is relevant;
+- refer the lack of tools that incorporate the entire pipeline, and
+  contextualize the need for such platforms with the reduced cost and high
+  availability of modern sequencing techniques;
+
+Objectives
+========================================
+- explain the dynamics of the transcription mechanisms;
+- refer the production of a information system prototype, capable of sequencing
+  data storage and assembly and analysis of said data;
+
+Outline
+========================================
+- brief outline of the rest of the document;
+
 ################################################################################
 # Background
 ################################################################################
 
-################################################################################
-# Approach
-################################################################################
+Introduction
+========================================
+- standard chapter introduction;
+- refer that there are two major themes to be revised in this section, genome
+  assembly and machine learning;
+
+Genome Assembly
+========================================
+- refer different assembly techniques and their differences (possible table?);
+- refer some tools for genome assembly;
+- refer some of the most common formats (is it relevant?);
+
+Machine Learning
+========================================
+- refer some general algorithms in this area;
+- refer some general tools used for this purpose;
 
 ################################################################################
-# Validation
+# Datasets and Validation
 ################################################################################
 
+Datasets
+========================================
+- refer the use of established datasets like Flybase;
+- refer chinese laboratory sequencing data;
+
+Validation
+========================================
+- refer that most technical validation for the biology part will be made by IBMC
+  workers;
+
 ################################################################################
-# Workplan
+# Work plan
 ################################################################################
+
+Development Phases
+========================================
+- refer the different main phases of the project, by order of starting date;
+
+Schedule
+========================================
+- same work plan as the presentation, add Gantt charts as needed;
+
