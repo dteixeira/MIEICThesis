@@ -6,6 +6,52 @@
 
 \section{Objectives} \label{sec:goals}
 
+While defining the concrete objectives of this thesis it becomes relevant to
+separate them in two groups: strictly biology research related objectives and
+more general, software solution development objectives. Despite this division,
+both objectives are tightly interconnected, and each complements the other.
+
+From a molecular biology standpoint, the main objective of this thesis will be
+to try to understand the mechanisms that regulate the speed of transcription for
+coding regions of the \dna. This information will be obtained using the
+\rnaseq{} method, that will be further discussed in chapter \ref{chap:sota}.
+There are several intermediate objectives for this particular problems, as
+follows:
+
+\begin{itemize}
+
+  \item
+  Alignment of the given sequencing reads into a known reference genome. This is
+  one of the first steps in the \rnaseq{} process and is effectively one of the
+  most complex problems addressed by this thesis. Some of the tools used in this
+  particular step of the process will be referenced in section \ref{sec:seqtools}.
+
+  \item
+  Further analysis of the \rnaseq{} results using machine learning algorithms,
+  applied to data mining. These techniques will be used in an effort to try to
+  understand the already mentioned transcription mechanisms. This topic will be
+  developed in section \ref{sec:mlearning}.
+
+\end{itemize}
+
+The last objective of this thesis is the development of a software platform
+prototype. This prototype comes as a materialization of the work done along the
+previous objectives, combining the developed genetic data processing pipeline,
+with a web information system and with data mining tools. When completed, the
+prototype should allow for users to store, search and manipulate their genome
+sequencing data. This data can them be assembled using the tool pipeline
+developed for the analysis of our own experimental dataset. Lastly, the
+prototype should integrate data mining tools, that would allow users to
+reproduce the types of data analysis that were done in this thesis, on their own
+results.
+
+This document, however, will not dwell in the details of the implementation of
+such a platform, but rather in the molecular biology section of the overall
+problem. This is largely due to the fact that the development of the web
+platform is highly dependent on the tools and methods that will be used for
+tackling the biology aspects of the problem and, as such, is likely to suffer
+significant alterations.
+
 \section{Document Outline} \label{sec:outline}
 
 Besides the introduction chapter, this document is composed three additional
