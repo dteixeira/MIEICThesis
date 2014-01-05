@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Remove existent PDF file.
+rm techreport.pdf 2> /dev/null
+
 # Build report.
 if [[ "$#" -eq 1 ]]; then
 
