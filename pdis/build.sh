@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Build report.
 if [[ "$#" -eq 1 ]]; then
 
   if [[ "$1" =~ s|S ]]; then
@@ -11,3 +12,6 @@ if [[ "$#" -eq 1 ]]; then
 else
   make techreport
 fi
+
+# Clean compilation files.
+make clean
