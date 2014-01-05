@@ -1,0 +1,13 @@
+\newlabel{chap:intro}
+\newlabel{chap:sota}
+\newlabel{chap:validation}
+\newlabel{chap:workplan}
+\newlabel{sec:assembly}
+\newlabel{sec:context}
+\newlabel{sec:datasets}
+\newlabel{sec:devphases}
+\newlabel{sec:goals}
+\newlabel{sec:mlearning}
+\newlabel{sec:outline}
+\newlabel{sec:schedule}
+\newlabel{sec:validation}
