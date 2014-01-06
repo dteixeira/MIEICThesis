@@ -85,3 +85,42 @@ Schedule
 ========================================
 - same work plan as the presentation, add Gantt charts as needed;
 
+################################################################################
+# Questions
+################################################################################
+
+Is talking about data formats relevant?
+========================================
+
+Should all the phases of the RNA-Seq be explained, or just the transcriptome
+alignment and data analysis?
+========================================
+
+Not knowing the state in which the initial data set will be presented, is it
+relevant to describe (in detail or at all) the data pre analysis/processing?
+========================================
+
+What is relevant to say about the data mining? Overview of some algorithms?
+Specific tools?
+========================================
+
+How will my results be validated and verified? By IBMC investigators? Will I use
+any quality analysis methods?
+========================================
+
+What tools for RNA-Seq should I talk about? A few tools that I know now that
+could possible be used?
+========================================
+
+By what process will I be able to chose the best tools? Will I have the
+opportunity to test different tools? If so, what measures will I use to evaluate
+the different results?
+========================================
+
+Is there any other information about the initial read data that I might refer,
+apart that it is being produced by a chinese lab and will be made available to
+me through IBMC?
+========================================
+
+How to correctly reference Wikipedia images?
+========================================
