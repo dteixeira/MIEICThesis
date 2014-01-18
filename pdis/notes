@@ -91,18 +91,22 @@ Schedule
 
 Is talking about data formats relevant?
 ========================================
+- yes
 
 Should all the phases of the RNA-Seq be explained, or just the transcriptome
 alignment and data analysis?
 ========================================
+- yes
 
 Not knowing the state in which the initial data set will be presented, is it
 relevant to describe (in detail or at all) the data pre analysis/processing?
 ========================================
+- no
 
 What is relevant to say about the data mining? Overview of some algorithms?
 Specific tools?
 ========================================
+- see later
 
 How will my results be validated and verified? By IBMC investigators? Will I use
 any quality analysis methods?
@@ -121,9 +125,11 @@ Is there any other information about the initial read data that I might refer,
 apart that it is being produced by a chinese lab and will be made available to
 me through IBMC?
 ========================================
+- no, that should suffice
 
 How to correctly reference Wikipedia images?
 ========================================
+- link in a footnote
 
 What is the recommended level of detail in which to explain the biology terms
 (gene expression, DNA, RNA)? Should I assume familiarity of the reader with
