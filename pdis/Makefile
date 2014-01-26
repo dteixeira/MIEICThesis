@@ -2578,7 +2578,7 @@ $(default_stems_ss): %: %.pdf ;
 # This builds and displays the wanted file.
 .PHONY: $(addsuffix ._show,$(stems_ssg))
 $(addsuffix ._show,$(stems_ssg)): %._show: %.pdf
-	$(QUIET)$(VIEW_PDF) $< &
+	$(QUIET)$(VIEW_PDF) $< 2>/dev/null &
 
 ifeq "$(strip $(BUILD_STRATEGY))" "latex"
 .SECONDARY: $(all_pdf_targets)
