@@ -18,19 +18,20 @@ the motivation that led to its proposal. Furthermore there will be brief
 description of this thesis' main objectives and the methods that will be used to
 achieve those objectives.
 
-\section{Context and Motivation} \label{sec:context}
+% TODO REWRITE
+\section{Context} \label{sec:context}
 
 Molecular biology is a branch of biology that studies biological activities of
 living being, at a molecular level. The early grounds for this field of study
 were set in the early 1930's, although only emerging in its modern form in the
 1960's, with the discovery of the structure of \dna. Among the processes studied
-by this branch of biology is gene expression. Gene expression is the process by
-each \dna{} molecules are transformed into useful genetic products, typically
-proteins, which are essential for living organisms. This knowledge is not only
-important in fields like evolutionary biology or molecular biology, but may have
-crucial applications in fields such as medicine. One example of such an
-application is the usage of gene expression analysis in the treatment of cancer
-patients \cite{Pusztai01062003}.
+by this branch of biology is gene expression. Gene expression (further explained
+in Chapter \ref{chap:sota}) is the process by which \dna{} molecules are
+transformed into useful genetic products, typically proteins, which are
+essential for living organisms. This knowledge is not only important in fields
+like evolutionary or molecular biology, but may have crucial applications in
+fields such as medicine. One example of such an application is the usage of gene
+expression analysis in the treatment of cancer patients \cite{Pusztai01062003}.
 
 With the advent of \ngs{} (Next Generation Sequencing) techniques, researchers
 have at their disposal huge amounts of sequencing data, that is not only cheaper
@@ -38,9 +39,56 @@ and faster to produce, but also more commonly available. This data can then be
 used to obtain relevant information about organisms' gene expression. But, as
 the cost of sequencing genomes was reduced, the cost of processing such
 information was increased. \ngs{} techniques tend to produce much smaller
-reads\footnote{A \textit{read} is a single fragment of a genome/transcriptome,
-obtained through sequencing techniques.} than previously used techniques, which
-present a much harder problem, from a computational standpoint \cite{Wolf2013}.
+reads\footnote{A \textit{read} is a single fragment of a genome/\trans, obtained
+through sequencing techniques.} than previously used techniques, which present a
+much harder problem, from a computational standpoint \cite{Wolf2013}.
+
+\section{Motivation and objectives} \label{sec:motivation}
+
+Despite its great advancements in the past decades, molecular biology is still a
+relatively new subject and, as such, there are still some unknowns and partial
+knowledge. In respect to gene expression, there are still some mechanisms of
+this intricate process that are yet to be fully understood. One such mechanism
+is the one that regulates the transcription speed of \rna. The main objective of
+this thesis is to understand how the final segments of the genome's exons are
+responsible for the speed at which the exons themselves are transcribed.
+
+
+To achieve this goal we will use a method called \rnaseq{}\footnote{\rnaseq{} is
+also referred to as \qt{Whole \Trans{} Shotgun Sequencing}, or WTSS.}
+
+\section{Project} \label{sec:project}
+
+\section{Structure of the report} \label{sec:outline}
+
+Besides the introduction chapter, this document is composed three additional
+chapters. These chapters have the following structure:
+
+\begin{description}
+
+  \item[Chapter \ref{chap:sota}]
+  introduces some basic Biology and \rnaseq{} concepts, that are essential to
+  understand the problems with which this document deals. Furthermore, we
+  describe the main techniques used for genome/\trans sequencing and assembly,
+  their differences and applications and the tools and data formats typically
+  used on those areas. Lastly, we give some insight about data mining algorithms
+  and how they will be applied to this work.
+
+  \item[Chapter \ref{chap:workplan}]
+  outlines the main steps in the development of this thesis (and the respective
+  software prototype) and attempts to provide a feasible schedule for the work's
+  execution. It also presents the datasets that will be studied and used in this
+  work, their origins and features, as well as the validation methods that will
+  be used to ascertain the quality of our results.
+
+  \item[Chapter \ref{chap:conclusions}]
+  sums up the what has been defined in the report, emphasizing the problem that
+  the thesis addresses and the work that will be executed towards solving that
+  problem. It will also give a brief idea of what are the expected results at
+  the end of the project.
+
+\end{description}
+% TODO END REWRITE
 
 \section{Objectives} \label{sec:goals}
 
@@ -89,33 +137,3 @@ problem. This is largely due to the fact that the development of the web
 platform is highly dependent on the tools and methods that will be used for
 tackling the biology aspects of the problem and, as such, is likely to suffer
 significant alterations.
-
-\section{Structure of the Report} \label{sec:outline}
-
-Besides the introduction chapter, this document is composed three additional
-chapters. These chapters have the following structure:
-
-\begin{description}
-
-  \item[Chapter \ref{chap:sota}]
-  introduces some basic Biology and \rnaseq{} concepts, that are essential to
-  understand the problems with which this document deals. Furthermore, we
-  describe the main techniques used for genome/transcriptome sequencing and
-  assembly, their differences and applications and the tools and data formats
-  typically used on those areas. Lastly, we give some insight about data mining
-  algorithms and how they will be applied to this work.
-
-  \item[Chapter \ref{chap:workplan}]
-  outlines the main steps in the development of this thesis (and the respective
-  software prototype) and attempts to provide a feasible schedule for the work's
-  execution. It also presents the datasets that will be studied and used in this
-  work, their origins and features, as well as the validation methods that will
-  be used to ascertain the quality of our results.
-
-  \item[Chapter \ref{chap:conclusions}]
-  sums up the what has been defined in the report, emphasizing the problem that
-  the thesis addresses and the work that will be executed towards solving that
-  problem. It will also give a brief idea of what are the expected results at
-  the end of the project.
-
-\end{description}
