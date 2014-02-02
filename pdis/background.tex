@@ -94,4 +94,100 @@ reads are available.
 
 \subsection{Data Mining Tools}\label{sec:mintools}
 
+Except in rare cases of very specific problems, it typically makes no sense for
+someone to implement any data mining algorithm that they might need. In fact,
+today we have lots of data mining tools (many of which are free), that already
+implement many of those algorithms. These tools are usually customizable, making
+it easy to adapt them to most problems. Below we'll briefly review some of the
+most popular data mining tools, that apply to the specific needs of this thesis.
+
+\subsubsection{RapidMiner}
+
+RapidMiner\footnote{\url{http://www.rapidminer.com/}} is a complete solution for
+data mining problems. It's available as a standalone GUI based application, as
+seen in Figure \ref{fig:rapidminer}. It is a commercial application, although
+its core and earlier versions are distributed under an open source license and
+it offers a free version, beyond its multiple paid versions. Being one of the
+most popular data mining tools used today, its applications span several
+domains, including education, training, industrial and personal applications,
+among others. Its functionality can also be easily extended through the use of
+plugins\footnote{Plugin is a software module that adds new functionality to an
+existing software application. Plugins are typically dependent on the platform
+they extend and can't be used as standalone tools.}, reflecting in an increased
+value for this tool. One such example in the area of bioinformatics is the
+integration plugin between RapidMiner and the
+Taverna\footnote{\url{http://www.taverna.org.uk/}} open source workflow
+management system \cite{Jupp2011}.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=1.0\textwidth]{rapidminer}
+    \caption{RapidMiner user interface}
+    \label{fig:rapidminer}
+  \end{center}
+\end{figure}
+
+\subsubsection{Weka}
+
+Weka\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is an open source tool that
+collects several machine learning algorithms and allows its user to easily apply
+those algorithms to data mining tasks \cite{Hall}. Created at the University of
+Waikato, New Zeland in 1997 (the current version was completely rewritten in
+1997, despite the first iteration of the tool being developed as early as 1993),
+it's still in active development to date. Weka supports several common data
+mining tasks, like data preprocessing, classification, clustering, regression
+and data visualization. It's core libraries are written in Java and allow for an
+easy integration of its data mining algorithms in pre existing code and
+applications. Other than that, Weka can be used directly through a command
+line/terminal or through one of its multiple GUI's (Figure \ref{fig:weka}). Its
+simple API and well structure architecture allow it to be easily extended by
+users, should they need new functionalities.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=0.7\textwidth]{weka}
+    \caption{Weka interface selection}
+    \label{fig:weka}
+  \end{center}
+\end{figure}
+
+\subsubsection{R language}
+
+R\footnote{\url{http://www.r-project.org/}} is a free programming language and
+software environment for statistical computing and graphics generation.
+Originally developed by Ross Ihaka and Robert Gentleman at the University of
+Auckland, New Zealand in 1993 \cite{Ihaka1998}, it's still under active
+development. R is typically used by statisticians and data miners, either for
+direct data analysis or for developing new statistical software \cite{Fox2005}.
+
+R is an implementation of the S programming language\footnote{S is an object
+oriented statistical programming language, appearing in 1976 at Bell
+Laboratories.}, borrowing some characteristics from the Scheme programming
+language. It's core is written in a combination of C, Fortran and R itself. It
+is possible directly manipulate R objects in languages like C, C++ and Java. R
+can be used directly through the command line or through several third party
+graphical user interfaces like
+Deducer\footnote{\url{http://www.deducer.org/pmwiki/index.php}}. There are also
+R wrappers for several scripting languages.
+
+R provides several different statistical and graphical techniques, including
+linear and nonlinear modeling, classical statistical tests, time-series
+analysis, classification, clustering, among others. It can also be used to
+produce publication-quality static graphics. Tools like Sweave
+\cite{lmucs-papers:Leisch:2002} allow users to embed R code in \LaTeX{}
+documents, for complete data analysis.
+
+\subsubsection*{Bioconductor package}
+
+Bioconductor is a free and open source set of tools for genomic data analysis,
+in the context of molecular biology \cite{lmucs-papers:Leisch:2002}. It is
+primarily based on R. It is under active development, with two stable releases
+each year. Counting with more than seven hundred different packages, it's the
+most comprehensive set of genomic data analysis tools available for the R
+programming language. It also provides a set of tools to read and manipulate
+several of the most common file formats used in molecular biology oriented
+applications, including fasta, fastq, BAM and gff.
+
 \section{Chapter Conclusions}
