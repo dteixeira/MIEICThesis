@@ -67,22 +67,49 @@ sequencing technique. For quite some time this process was carried out using the
 Sanger sequencing method and other similar methods \cite{Reis-Filho2009}. Though
 effective, such methods we're notably slow and costly, with large projects like
 the Human Genome Project (HGP) consuming roughly thirteen years and US\$ 3
-billion. The past few years have seen the appearance and rise in popularity of
-the \ngs{} techniques. These techniques differ from the more classical ones by
-producing larger amounts of information, in less time. They are also typically
-more cost effective than previous techniques, which has greatly contributed to
-their popularity. As a disadvantage, \ngs{} techniques produce shorter reads
-than their older counterparts, posing a complicated problem in terms of genome
-assembly and raising new computational challenges. Although this thesis will not
-deal with the problems of sequencing techniques, it is important to indicate
-that the read dataset that will be used is a result of \ngs{} techniques. As
-such, we will use assembly techniques more suited to situations where short
-reads are available.
+billion. Other than the realm of human genetics, this kind of study was
+restricted to model organisms, such as the fruit fly and mouse genomes
+\cite{Wolf2013}. The past few years have seen the appearance and rise in
+popularity of the \ngs{} techniques. These techniques differ from the more
+classical ones by producing larger amounts of information, in less time. They
+are also typically more cost effective than previous techniques and can be
+easily employed by single laboratories, which has greatly contributed to their
+popularity. As a disadvantage, \ngs{} techniques produce shorter reads than
+their older counterparts, being that \qt{ (...) transcriptome assembly from
+billions of RNA-Seq reads (...) poses a significant informatics challenge}
+\cite[p. 671]{Martin2011} Although this thesis will not deal with the problems
+of sequencing techniques, it is important to indicate that the read dataset that
+will be used is a result of \ngs{} techniques. As such, we will use assembly
+techniques more suited to situations where short reads are available.
 
-\section{Genome Assembly and \rnaseq}\label{sec:assembly}
+\section{\Trans{} Assembly and \rnaseq}\label{sec:assembly}
 
-- talk about genome assembly, talk briefly about micro arrays, more about RNA
-  seq and de novo vs guided assembly/alignment;\\
+\Trans{} assembly is the process by which experimentally obtained genetic data
+reads can be organized and merged together in a partial or complete genome
+expression profile. As stated above, the advent of next generation sequencing
+techniques, with their reduced costs, greatly increased the availability of
+genome sequencing data.
+
+For years, microarrays were the standard tool available for examining features
+of the transcriptome and global patterns of gene expression \cite{Wolf2013}.
+However, microarrays typically produce data more oriented towards assembly
+against existing reference data, hence limiting its application to species with
+well known reference genomes. This is impractical, as \ngs{} techniques allow to
+cheaply obtain genetic information of previously not studied species. This is
+one of the reasons that led to the inception of RNA-Seq. Contrary to
+microarrays, RNA-Seq techniques are able to wield results that are suitable for
+both reference guided assembly and \textit{de novo} assembly approaches.
+\textit{De novo} or exploratory assembly has captured the interest of
+researchers in the past few years, leading to the appearance of multiple RNA-Seq
+tools that are capable of making this type of assembly without a reference
+genome \cite{nuno11:assemblathon}. Despite this amazing capability, we will
+restrict this project to reference genome guided problems, which are simpler and
+more oriented to a Masters level thesis.
+
+Below we will present some bioinformatic tools, used to support the multiple
+steps of the RNA-Seq process. We will also present some of the most popular file
+formats used in this context, along with some tools used to manipulate these
+files.
 
 \subsection{\rnaseq{} Tools}\label{sec:seqtools}
 
