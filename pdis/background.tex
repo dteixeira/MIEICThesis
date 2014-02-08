@@ -257,19 +257,34 @@ method. A brief review of the most common methods is given below.
 \begin{description}
 
   \item[Classification]
-  %TODO
+  is a method that tries to generalize the already known structure, so that it
+  applies to new datasets. In other words, with classification we try to learn a
+  function that is capable of mapping our data into predefined classes.
 
   \item[Regression]
-  %TODO
+  tries to learn a function that models relationships between variables in the
+  dataset. That function can latter be used to find real value predictions of
+  future behaviour of the same or similar datasets.
 
   \item[Clustering]
-  %TODO
+  consists in identifying a finite set of categories or clusters of similar
+  values, to describe the dataset. As such, it is used without prior knowledge
+  about data structure.
 
   \item[Summarization]
-  %TODO
+  provides a more compact representation of a subset of data, in a way that the
+  summarized data retains the central points of the original data. This can be
+  accomplished in several different ways, like using report generation or
+  multivariate visualization techniques.
 
   \item[Dependency modelling]
-  %TODO
+  finds a model which describes relationships between variables, revealing their
+  dependencies.
+
+  \item[Change and deviation detection]
+  tries to discover the most significant changes in the data, when compared with
+  previously measured data. This method is useful to find interesting data
+  variations or data errors.
 
 \end{description}
 
@@ -299,25 +314,71 @@ classification problems.
 
 % TODO
 
-\subsection{Evaluation Procedures and Measures}
+\subsection{Model Evaluation Procedures and Measures}
 
-% TODO
+Creating a data model using a suitable classification algorithms is not the last
+step in the data mining process. At this point our model works well with the
+original training data, but we need to verify its power to generalize to other
+sets of data. Without this evaluation process, our models may be susceptible to
+problems like overfitting, in which the model wrongly describes a random error
+or data noise as a significant pattern \cite{han2006data}. As such, we need
+methods that allow us to test our models before deployment, as well as standard
+measures, to determine their quality.
 
 \subsubsection*{Evaluation Procedures}
 
-% TODO
+As stated, evaluation procedures are essential to verify the generalization
+capabilities of a given model. These procedures typically consist of dividing
+the test dataset in two or more subsets, using some of them for training and the
+others for testing. We will present a brief overview of some of these procedures
+below.
 
 \paragraph{Hold-Out}
 
-% TODO
+The \textit{hold-out} method reserves a part of the dataset for training
+purposes and uses the remaining data for testing \cite{witten2011data}.
+Typically we separate one third of the original dataset for testing, using the
+other two thirds for training.
+
+However, this arbitrary division of the dataset might be problematic if the
+subsets aren't representative of the population. For example, if the test subset
+is missing a class our results might be erratic. One way to attenuate this
+problem is to use stratification. Using stratification of the dataset we ensure
+that both subsets are representative, with approximately equal proportions for
+each class. We can lessen error rates even further and make the
+\textit{hold-out} estimate more reliable using the \textit{repeated hold-out}
+method. This is an iterative method, where in each iteration a subset is
+randomly selected to use as training (possibly using set stratification), using
+the remaining subset for testing. After all the iterations, the error rates of
+each one are averaged to yield an overall error rate.
 
 \paragraph{Cross-Validation}
 
-% TODO
+\textit{Repeated hold-out} methods pose a problem: the different test subsets
+will eventually overlap. This may cause that some examples never appear in the
+training subsets. The overlapping problem can be solved using the
+\textit{cross-validation} procedure, also called \textit{k-fold
+cross-validation}. This method consists in splitting the original dataset into
+\textit{k} subsets, using each subset in turn for testing and the remainder for
+training.
+
+The standard method for evaluation is \textit{10-fold cross validation}, where
+the dataset is divided into ten subsets. The subsets are typically stratified to
+reduce result variance. In each iteration one of the ten folds is picked as test
+and the other nine are used for training. Sometimes, to further reduce variance,
+\textit{repeated stratified cross-validation} is used, repeating normal
+\textit{10-fold cross-validation} ten times, then averaging the results.
 
 \paragraph{Leave-One-Out}
 
-% TODO
+\textit{Leave-one-out} method is a form of \textit{cross-validation}, taken to
+extreme lengths. In this particular method, the original dataset is divided into
+\textit{n} folds, where \textit{n} is the number is the number of individual
+training instances. It has some benefits, like allowing for a better use of the
+dataset and involving no random set sampling. However, the sheer number of folds
+and tests makes it a very computationally expensive method. Another disadvantage
+is that no stratification is possible, as there is always only one instance in
+the test subset.
 
 \subsubsection*{Common Measures}
 
