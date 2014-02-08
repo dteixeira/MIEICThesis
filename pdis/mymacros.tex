@@ -3,6 +3,8 @@
 
 % format
 \newcommand{\class}[1]{{\normalfont\slshape #1\/}}
+\let\originalparagraph\paragraph
+\renewcommand{\paragraph}[2][.]{\originalparagraph{#2#1}}
 
 % entities
 \newcommand{\Feup}{Faculty of Engineering of the University of Porto}

@@ -8,7 +8,7 @@ the art review in the fields of genome/\trans{} assembly and data mining.
 Lastly, we will present some of the tools used in each of those areas, as well
 as some relevant data representation formats for genetic data.
 
-\section{Introduction}
+\section{Biological Base Concepts}
 
 Before dwelling in the details of the state of the art that are on the
 foundation of this thesis, it is important to explain some concepts of the
@@ -115,21 +115,37 @@ project we will create our own assembly pipeline, using specialized tools for
 every step. We will also present some of the most popular file formats used in
 this context, along with some tools used to manipulate these files.
 
-\subsubsection{Tuxedo Suite}
+\subsubsection*{Tuxedo Suite}
 
-\subsubsection*{TopHat}
+% TODO
 
-\subsubsection*{Bowtie}
+\paragraph{TopHat}
 
-\subsubsection*{Cufflinks}
+% TODO
 
-\subsubsection*{CummeRbund}
+\paragraph{Bowtie}
 
-\subsubsection{Burrows-Wheeler Aligner}
+% TODO
 
-\subsubsection{SAM Tools}
+\paragraph{Cufflinks}
 
-\subsubsection{BLAST}
+% TODO
+
+\paragraph{CummeRbund}
+
+% TODO
+
+\subsubsection*{Burrows-Wheeler Aligner}
+
+% TODO
+
+\subsubsection*{SAM Tools}
+
+% TODO
+
+\subsubsection*{BLAST}
+
+% TODO
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
@@ -140,7 +156,7 @@ of already established formats. Below we will present a few of the most popular
 and wide spread file formats, talking about their basic structure, the types of
 data they represent and their applications.
 
-\subsection{FASTA}
+\subsubsection*{FASTA}
 
 FASTA is the standard line and character sequence format used by NCBI
 \cite{ncbi:fasta}, using this last organization's character code conventions. It
@@ -151,7 +167,7 @@ sequences and other character sequences in database systems. Its simplicity
 makes it extremely easy to manipulate and parse, presenting also an attractive
 solution for data transfer between different tools.
 
-\subsection{FASTQ}
+\subsubsection*{FASTQ}
 
 FASTQ is used to store store character sequences, typically nucleotide sequences
 \cite{Cock2010}. It's quite similar to the standard FASTA format, in respect to
@@ -162,7 +178,7 @@ single characters, taking values between and including ASCII-33 to ASCII-126.
 It's typically used in the same situations as the FASTA format, when quality
 scores are available/relevant.
 
-\subsection{SAM and BAM}
+\subsubsection*{SAM and BAM}
 
 The SAM format is a text format for storing sequence alignment data
 \cite{genome:sam}. It is widely used to store mapping information between
@@ -177,7 +193,7 @@ means that BAM sacrifices human readability for increased machine processing
 performance, as it is more efficient to work with compressed and indexed binary
 data.
 
-\subsection{VCF}
+\subsubsection*{VCF}
 
 VCF is a text file format used to store gene sequence variants \cite{smith13}.
 In the past few years, as larger and larger \dna{} sequencing projects became
@@ -190,7 +206,7 @@ only the variations (and their respective positions) of newly sequenced genomes
 relatively to a known reference genome, typically in a compressed text file. As
 such, it is a format often used when building genome databases.
 
-\subsection{GFF and GTF}
+\subsubsection*{GFF and GTF}
 
 GFF is a text based file format to store gene features \cite{sanger11}. Many
 genome assembly tools execute this process in two seperate steps: feature
@@ -241,19 +257,19 @@ method. A brief review of the most common methods is given below.
 \begin{description}
 
   \item[Classification]
-  TODO
+  %TODO
 
   \item[Regression]
-  TODO
+  %TODO
 
   \item[Clustering]
-  TODO
+  %TODO
 
   \item[Summarization]
-  TODO
+  %TODO
 
   \item[Dependency modelling]
-  TODO
+  %TODO
 
 \end{description}
 
@@ -263,13 +279,69 @@ In this project we will be concerned with the classification side of data
 mining. Below, we will review some algorithms that can be used in
 classification problems.
 
-\subsubsection{C4.5}
+\subsubsection*{Decision Trees}
 
-\subsubsection{Random Forest}
+% TODO
 
-\subsubsection{Support Vector Machines}
+\subsubsection*{Random Forest}
 
-\subsubsection{K-NN}
+% TODO
+
+\subsubsection*{Support Vector Machines}
+
+% TODO
+
+\subsubsection*{K-NN}
+
+% TODO
+
+\subsubsection*{Inductive Logic Programming}
+
+% TODO
+
+\subsection{Evaluation Procedures and Measures}
+
+% TODO
+
+\subsubsection*{Evaluation Procedures}
+
+% TODO
+
+\paragraph{Hold-Out}
+
+% TODO
+
+\paragraph{Cross-Validation}
+
+% TODO
+
+\paragraph{Leave-One-Out}
+
+% TODO
+
+\subsubsection*{Common Measures}
+
+% TODO
+
+\paragraph{Accuracy}
+
+% TODO
+
+\paragraph{Precision}
+
+% TODO
+
+\paragraph{Recall}
+
+% TODO
+
+\paragraph{F-Measure}
+
+% TODO
+
+\paragraph{AUC}
+
+% TODO
 
 \subsection{Data Mining Tools}\label{sec:mintools}
 
@@ -280,7 +352,7 @@ implement many of those algorithms. These tools are usually customizable, making
 it easy to adapt them to most problems. Below we'll briefly review some of the
 most popular data mining tools, that apply to the specific needs of this thesis.
 
-\subsubsection{RapidMiner}
+\subsubsection*{RapidMiner}
 
 RapidMiner\footnote{\url{http://www.rapidminer.com/}} is a complete solution for
 data mining problems. It's available as a standalone GUI based application, as
@@ -307,7 +379,7 @@ management system \cite{Jupp2011}.
   \end{center}
 \end{figure}
 
-\subsubsection{Weka}
+\subsubsection*{Weka}
 
 Weka\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is an open source tool that
 collects several machine learning algorithms and allows its user to easily apply
@@ -332,7 +404,7 @@ users, should they need new functionalities.
   \end{center}
 \end{figure}
 
-\subsubsection{R Language}
+\subsubsection*{R Language}
 
 R\footnote{\url{http://www.r-project.org/}} is a free programming language and
 software environment for statistical computing and graphics generation.
@@ -358,7 +430,7 @@ produce publication-quality static graphics. Tools like Sweave
 \cite{lmucs-papers:Leisch:2002} allow users to embed R code in \LaTeX{}
 documents, for complete data analysis.
 
-\subsubsection*{Bioconductor Package}
+\paragraph{Bioconductor Package}
 
 Bioconductor is a free and open source set of tools for genomic data analysis,
 in the context of molecular biology \cite{lmucs-papers:Leisch:2002}. It is
@@ -371,5 +443,9 @@ applications, including FASTA, FASTQ, BAM and GFF.
 
 \section{Chapter Conclusions}
 
+% TODO
+
 - in this chapter we talked about...\\
+- we don't know where classification algorithms will be sufficient or if we'll
+  need ILP...\\
 - what else?\\
