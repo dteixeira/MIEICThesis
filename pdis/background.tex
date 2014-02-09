@@ -113,39 +113,74 @@ steps of the RNA-Seq process. Although there are several tools capable of
 executing all steps of the RNA-Seq process, it has been decided that in this
 project we will create our own assembly pipeline, using specialized tools for
 every step. We will also present some of the most popular file formats used in
-this context, along with some tools used to manipulate these files.
+this context, along with some tools used to manipulate these files. We will
+focus in open source, Unix command line based tools.
 
 \subsubsection*{Tuxedo Suite}
 
-TODO\\
-
-\paragraph{TopHat}
-
-TODO\\
+The Tuxedo suite is a free, open-source collection of applications that has been
+widely adopted as analysis toolset for fast alignment of short reads. It is
+composed by four separate tools, TopHat, Bowtie, Cufflinks and CummRbund,
+briefly reviewed below. These tools are extensively used for \rnaseq{} analysis.
+Although the applications are made for command line execution, there are several
+workflow managers, like Galaxy\footnote{\url{http://galaxyproject.org/}}, that
+easily integrates with the suite, providing a web interface for its use.
 
 \paragraph{Bowtie}
 
-TODO\\
+Bowtie\footnote{\url{http://bowtie-bio.sourceforge.net/index.shtml}} is an
+ultrafast, memory-efficient short read aligner. Bowtie is typically used to
+build a reference index for the genome of the organism being studied, for
+posterior use by other tools, like TopHat. It can also output alignments in the
+standard SAM format, allowing Bowtie to interoperate with tools like SAM Tools.
+However, it shouldn't be used as a general purpose alignment tool, as it was
+created and is more effective when aligning short read sequences against large
+reference genomes.
+
+\paragraph{TopHat}
+
+TopHat\footnote{\url{http://tophat.cbcb.umd.edu/}} is a fast splice junction
+mapper for \rnaseq{} reads. It uses Bowtie as the underlying aligning tool,
+using its results and a FASTA formated reference genome to identify splice
+junctions between exons.
 
 \paragraph{Cufflinks}
 
-TODO\\
+Cufflinks\footnote{\url{http://cufflinks.cbcb.umd.edu/}} assembles transcripts,
+estimates their abundances, and tests for differential expression and regulation
+in \rnaseq{} samples. It uses the SAM or BAM formatted files as input, typically
+the ones produced by TopHat, outputting GTF files as a result.
 
 \paragraph{CummeRbund}
 
-TODO\\
-
-\subsubsection*{Burrows-Wheeler Aligner}
-
-TODO\\
+Lastly, CummeRbund\footnote{\url{http://compbio.mit.edu/cummeRbund/}} is an R
+package (see Section \ref{sec:mintools}) designed to help the visualization and
+analysis of Cufflinks' \rnaseq{} output. As such, it is not directly involved in
+the trascriptome alignment process. It takes the various output files from
+Cufflinks and uses them to build a SQLite database describing appropriate
+relationships between genes, transcripts, etc. It implements several plotting
+functions, as well as commonly used data visualizations.
 
 \subsubsection*{SAM Tools}
 
-TODO\\
+SAM Tools\footnote{\url{http://samtools.sourceforge.net/}} is a library and
+package designed for parsing and manipulating alignment files in the SAM/BAM
+format \cite{Li2009} (see Section \ref{sec:formats}). SAM Tools has two separate
+implementations, one in C and the other in Java, with slightly different
+functionality. Beyond manipulation of SAM and BAM files, this package is able to
+convert between other read alignment formats, sort and merge alignments and show
+them in a text-based viewer.
 
 \subsubsection*{BLAST}
 
-TODO\\
+BLAST\footnote{\url{http://blast.ncbi.nlm.nih.gov/Blast.cgi}} is a tool,
+implemented in C++, that is used to find regions of local similarity between
+biological sequences. It uses FASTA sequences (see Section \ref{sec:formats}) as
+search input and outputs the results reports in XML, HTML or plain text. There
+are several different BLAST programs available at the moment, that can be used
+depending on our objective and type of data. BLAST is particularly useful to
+search biologic sequence databases, but can be used in for other purposes, like
+identifying an unknown species or comparing common genes in two related species.
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
@@ -241,7 +276,7 @@ Section \ref{sec:minalgo} and Section \ref{sec:mintools}, respectively.
 
 We can divide data mining into main types: descriptive data mining and
 predictive data mining \cite{Fayyad1996}. Descriptive data mining is focused on
-finding the underlaying structure of a given set of data. Instead of predicting
+finding the underlying structure of a given set of data. Instead of predicting
 future values, it concerns the intrinsic structure, relations and
 interconnectedness of the data being analysed, presenting its interesting
 characteristics without having any predefined target. On the other hand,
