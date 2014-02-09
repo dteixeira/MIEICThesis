@@ -480,7 +480,28 @@ of other algorithms to reduce multi-class tasks to binary ones.
 
 \subsubsection*{K-NN}
 
-TODO\\
+K-NN is a non-parametric method for classification and regression problems.
+First described in the early 1950s \cite{han2006data}, it's one of the simplest
+machine learning algorithms and is widely used in the area of pattern
+recognition.
+
+Nearest neighbor classifiers are based on the premise of learning by analogy, in
+other words, by comparing a given test tuple with similar training tuples. This
+classification of tuples as \qt{similar} is typically based on simple rules,
+like the \textit{Euclidian distance} between tuples.
+
+In k-NN, each training tuple is described by $n$ attributes and is represented
+as a point in an $n$-dimensional space. For classification problems, the test
+tuple is represented in this space, along with the training tuples. The unknown
+tuple is then assigned to the most common class among its $k$ nearest neighbors.
+
+K-NN as several advantages when compared to other classification algorithms. For
+one it has a very simple implementation. It's also very robust in terms of
+search space (the classes don't have to be linearly separable) and has few
+parameters, making it easy to tune. On the other side, it's an expensive method
+in terms of testing, as we need to calculate the distance between a testing
+tuple and every other known tuple. Furthermore, it's sensitive to noisy or
+irrelevant attributes and unbalanced datasets.
 
 \subsubsection*{Inductive Logic Programming}
 
