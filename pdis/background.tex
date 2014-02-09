@@ -440,13 +440,43 @@ This continues until all the trees are grown to the largest extent possible, as
 no pruning is made.
 
 Random forest is a fairly fast method and is able to deal with unbalanced and
-missing data. As a limitation, when used for regression random forests cannot
-predict beyond the range in the training data, and that they may overfit
-datasets that are particularly noisy.
+missing data. It as few parameters to tune and can be easily and effectively
+used with default parameters. As a limitation, when used for regression random
+forests cannot predict beyond the range in the training data, and that they may
+overfit datasets that are particularly noisy.
 
 \subsubsection*{Support Vector Machines}
 
-TODO\\
+Support vector machines are a set of related supervised learning methods used
+for pattern recognition, that can be applied to classification and regression
+problems \cite{Cortes1995}. SVMs typically fall under a simple premise, the
+spacial division of classes. As seen in Figure \ref{fig:svm}, we can define an
+infinite number of possible separating hyperplanes or \qt{decision boundaries}
+(in this case straight lines). The objective of an SVM is to find the optimal
+hyperplane or set of hyperplanes to separate the classes. To classify a new set
+of data each value is represented in the space and classified according to the
+side of the hyperplane in which it falls.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=0.9\textwidth]{svm}
+    \caption[Example of linearly separable training data in a two dimensional
+    space]{Example of linearly separable training data in a two dimensional
+    space \cite{han2006data}}
+    \label{fig:svm}
+  \end{center}
+\end{figure}
+
+SVMs are widely used nowadays, and have been successfully applied in areas such
+handwritten digit recognition, object recognition, and speaker identification,
+as well as benchmark time-series prediction tests \cite{han2006data}. They are
+typically regarded. They are highly accurate, due in part to their ability to
+model complex nonlinear decision boundaries.
+
+However, even the fastest SVMs can be extremely slow in both the training and
+testing steps. It is also directly limited to two-class tasks, requiring the use
+of other algorithms to reduce multi-class tasks to binary ones.
 
 \subsubsection*{K-NN}
 
