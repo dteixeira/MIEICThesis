@@ -331,7 +331,95 @@ classification problems.
 
 \subsubsection*{Decision Trees}
 
-TODO\\
+\textit{\qt{A decision tree is a flowchart-like tree structure, where each
+internal node (nonleaf node) denotes a test on an attribute, each branch
+represents an outcome of the test, and each leaf node (or terminal node) holds a
+class label}} \cite[p. 291]{han2006data}, as seen in Figure \ref{fig:tree}.
+Decision tree learning algorithms use a decision tree as a predictive model,
+that maps observed data about an individual to conclusions about the expected
+value for that individual. From a classification problem standpoint, this means
+means creating a decision tree structure that is able to predict the class of an
+individual based on its attributes.
+
+\begin{figure}[htb]
+  \centering
+
+  % Node levels and identation.
+  \tikzstyle{level 1}=[level distance=1.5cm, sibling distance=4.25cm]
+  \tikzstyle{level 2}=[level distance=1.5cm, sibling distance=2.25cm]
+  \tikzstyle{level 3}=[level distance=1.5cm, sibling distance=4.25cm]
+  \tikzstyle{level 4}=[level distance=1.5cm, sibling distance=2.25cm]
+
+  % Node style.
+  \tikzset{decision/.style={
+    draw=black!80, solid, fill=gray!10, rectangle, 
+    anchor=north,
+    inner sep=2mm, outer sep=0, text centered, growth parent anchor=south} 
+  }
+  \tikzset{prediction/.style={
+    draw=black!80, solid, fill=gray!30, ellipse, 
+    anchor=north,
+    inner sep=2mm, outer sep=0, text centered, growth parent anchor=south} 
+  }
+  \tikzset{arrow/.style={-latex, thick}}
+
+  \tikzset{arrow-dashed/.style={-latex, dashed, thick}}
+  % Tree.
+  \begin{tikzpicture}
+    \node [decision] {\textit{age?}} [solid, -latex, thick, -]
+      child {
+        node [decision] {\textit{student?}} [solid, -latex, thick, -]
+        child {
+          node [prediction] {no} [solid, -latex, thick, -]
+          edge from parent
+          node[left] {no}
+        }
+        child {
+          node [prediction] {yes} [solid, -latex, thick, -]
+          edge from parent
+          node[right] {yes}
+        }
+        edge from parent
+        node[left] {youth}
+      }
+      child {
+        node [prediction] {yes} [solid, -latex, thick, -]
+        edge from parent
+        node[below] {middle\_aged}
+      }
+      child {
+        node [decision] {\textit{credit\_rating?}} [solid, -latex, thick, -]
+        child {
+          node [prediction] {no} [solid, -latex, thick, -]
+          edge from parent
+          node[left] {no}
+        }
+        child {
+          node [prediction] {yes} [solid, -latex, thick, -]
+          edge from parent
+          node[right] {yes}
+        }
+        edge from parent
+        node[right] {senior}
+      }
+    ;
+  \end{tikzpicture}
+  \caption{Example of a decision tree for the concept \textit{buys\_computer}}
+  \label{fig:tree}
+\end{figure}
+
+Decision tree classifiers are among the most popular used nowadays. They are
+able to handle high dimensional data and their learning and classification steps
+are simple and fast. Other than that, the construction of decision tree
+classifiers does not not require domain knowledge or parameter setting. These
+classifiers usually have a good level of accuracy, though it may vary with the
+type of data available.
+
+That are several algorithms that use the decision tree principle, most notably
+\textit{\textit{ID3}, C4.5} and \textit{CART}. As the problem of learning an
+optimal decision tree is NP-complete, most algorithms for decision tree
+construction are based in some sort of heuristics (the aforementioned algorithms
+adopt a greedy approach).
 
 \subsubsection*{Random Forest}
 
