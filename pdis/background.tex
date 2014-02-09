@@ -423,7 +423,26 @@ adopt a greedy approach).
 
 \subsubsection*{Random Forest}
 
-TODO\\
+Random forest \cite{breiman2001random} is an ensemble approach for
+classification and regression problems. Ensembles use a divide-and-conquer
+approach to classification problems, in order to increase performance. The base
+principle behind ensembles is simple: a group of \qt{weak} learners can come
+together to become a \qt{strong} learner, where their individual shortcomings
+are amortized by their combined results. As such, random forest algorithms use
+several individual decision trees, in order to mitigate the problems with
+variance and bias in single decision trees.
+
+Each individual tree in the forest in trained used a random subset of the
+original dataset, where the subsets distribution is the same across the forest.
+Then, at each node we choose the predictor variable that provides the best split
+(as per an objective function) and use it to do a binary split at that node.
+This continues until all the trees are grown to the largest extent possible, as
+no pruning is made.
+
+Random forest is a fairly fast method and is able to deal with unbalanced and
+missing data. As a limitation, when used for regression random forests cannot
+predict beyond the range in the training data, and that they may overfit
+datasets that are particularly noisy.
 
 \subsubsection*{Support Vector Machines}
 
