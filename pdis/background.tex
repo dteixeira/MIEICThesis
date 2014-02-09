@@ -117,35 +117,35 @@ this context, along with some tools used to manipulate these files.
 
 \subsubsection*{Tuxedo Suite}
 
-% TODO
+TODO\\
 
 \paragraph{TopHat}
 
-% TODO
+TODO\\
 
 \paragraph{Bowtie}
 
-% TODO
+TODO\\
 
 \paragraph{Cufflinks}
 
-% TODO
+TODO\\
 
 \paragraph{CummeRbund}
 
-% TODO
+TODO\\
 
 \subsubsection*{Burrows-Wheeler Aligner}
 
-% TODO
+TODO\\
 
 \subsubsection*{SAM Tools}
 
-% TODO
+TODO\\
 
 \subsubsection*{BLAST}
 
-% TODO
+TODO\\
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
@@ -296,23 +296,23 @@ classification problems.
 
 \subsubsection*{Decision Trees}
 
-% TODO
+TODO\\
 
 \subsubsection*{Random Forest}
 
-% TODO
+TODO\\
 
 \subsubsection*{Support Vector Machines}
 
-% TODO
+TODO\\
 
 \subsubsection*{K-NN}
 
-% TODO
+TODO\\
 
 \subsubsection*{Inductive Logic Programming}
 
-% TODO
+TODO\\
 
 \subsection{Model Evaluation Procedures and Measures}
 
@@ -382,27 +382,114 @@ the test subset.
 
 \subsubsection*{Common Measures}
 
-% TODO
-
-\paragraph{Accuracy}
-
-% TODO
+Applying evaluation procedures is not sufficient by itself. In order to appraise
+the quality of our models, we need to use standard quality measures, that give
+meaning to the obtained results. Below we will review some common measures, used
+in the context of classification problems.
 
 \paragraph{Precision}
 
-% TODO
+Precision determines the fraction of positive cases that are correctly
+identified as such. Low precision values mean that the model identifies many
+cases as positive when they are in reality false positives. Precision is
+calculated as shown in Equation \ref{eq:precision}.
+
+\begin{equation}
+  Precision=\frac{\tp}{\tp + \fp}
+  \label{eq:precision}
+\end{equation}
 
 \paragraph{Recall}
 
-% TODO
+Recall represents the portion of actual positive results in the dataset that
+were identified as such. From a statistical standpoint, it can be viewed as the
+average probability of find all the positive cases in the dataset. The value is
+computed using Equation \ref{eq:recall}.
+
+\begin{equation}
+  Recall=\frac{\tp}{\tp + \fn}
+  \label{eq:recall}
+\end{equation}
+
+\paragraph{Accuracy}
+
+Accuracy represents the percentage of predictions that are in fact correct. This
+measure relates to the ability of our model to correctly predict the class of
+new data. It can be calculated with Equation \ref{eq:accuracy}. For a given
+problem, better accuracy might not always mean that a model is better than
+another. As such, other measures like precision and recall are also taken into
+account.
+
+\begin{equation}
+  Accuracy=\frac{\tp + \tn}{\tp + \fp + \tn + \fn}
+  \label{eq:accuracy}
+\end{equation}
 
 \paragraph{F-Measure}
 
-% TODO
+F-measure is the harmonic mean of precision and recall. The reason behind the
+usage of an harmonic mean instead of an arithmetic mean is that the first is
+more intuitive, when computing a mean of ratios \cite{Sasaki2007}. F-measure is
+calculated as shown in Equation \ref{eq:fmeasure}. It is particularly useful to
+differentiate between cases where one of the variables (precision or recall) has
+a very high value and the other has a very low value. For example, if in a
+particular situation we have a precision of $1.0$ and a recall of $0.2$, the
+arithmetic mean would be $0.6$. However, a system with a recall as low as $0.2$
+might not be very useful. On the other hand, in the same situation the harmonic
+mean would be $0.333(3)$, giving a much more realistic measure of the quality of
+the model.
+
+\begin{equation}
+  \mathit{F\-measure}=2 \cdot \frac{\mathit{Precision} \cdot
+  \mathit{Recall}}{\mathit{Precision}+\mathit{Recall}} \label{eq:fmeasure}
+\end{equation}
 
 \paragraph{AUC}
 
-% TODO
+Sometimes in order to evaluate the quality of a certain model we might plot a
+ROC (or \textit{receiver operating characteristic}) curve. ROC curves depict the
+performance of a classifier without regard to class distribution or error
+costs. The curve is build by plotting false positive rates in the $x$ axis and
+true positive rates (recalls) in the $y$ axis (Figure \ref{fig:roccurve}).
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        domain=0:1,
+        legend pos=south east,
+        xlabel=False Positive Rate,
+        ylabel=True Positive Rate]
+        \addplot[mark=none, samples=10, red] function {x};
+        \addplot[smooth, color=blue, mark=none]
+          plot coordinates {
+              (0.0,0.0)
+              (0.1,0.4)
+              (0.2,0.7)
+              (0.3,0.8)
+              (0.4,0.85)
+              (0.5,0.88)
+              (0.6,0.91)
+              (0.7,0.94)
+              (0.8,0.97)
+              (0.9,0.99)
+              (1.0,1.0)
+          };
+        \legend{Random model,Created model}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{ROC curve example}
+    \label{fig:roccurve}
+  \end{center}
+\end{figure}
+
+However, the curve can be hard to interpret at times. In this situation we can
+use the AUC measure (or \textit{area under the curve}), in order to condensate
+the curve's information in a single value. The AUC of a random classification
+system is $0.5$. This means that any model that as an AUC of $0.5$ is not able
+to distinguish between two groups. As the AUC increases, the model's quality
+also increases and at a value of AUC equal to $1.0$ the model is able to
+perfectly separate both groups.
 
 \subsection{Data Mining Tools}\label{sec:mintools}
 
@@ -503,8 +590,6 @@ several of the most common file formats used in molecular biology oriented
 applications, including FASTA, FASTQ, BAM and GFF.
 
 \section{Chapter Conclusions}
-
-% TODO
 
 - in this chapter we talked about...\\
 - we don't know where classification algorithms will be sufficient or if we'll
