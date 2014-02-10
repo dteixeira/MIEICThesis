@@ -32,7 +32,7 @@ exons, as seen in Figure \ref{fig:intron_exon}.
   \begin{center}
     \leavevmode
     \includegraphics[width=0.7\textwidth]{intron_exon}
-    \caption{Overall structure of a gene, with its different areas (simplified)}
+    \caption[Overall structure of a gene]{Overall structure of a gene, with its different areas (simplified).}
     \label{fig:intron_exon}
   \end{center}
 \end{figure}
@@ -50,8 +50,8 @@ each exon affects the transcription speed of the exon itself.
   \begin{center}
     \leavevmode
     \includegraphics[width=0.58\textwidth]{splicing}
-    \caption{The removal (splicing) of introns from the precursor mRNA, during
-    the transcription process}
+    \caption[Removal of introns from precursor mRNA]{The removal (splicing) of introns from the precursor mRNA, during
+    the transcription process.}
     \label{fig:splicing}
   \end{center}
 \end{figure}
@@ -352,18 +352,16 @@ individual based on its attributes.
 
   % Node style.
   \tikzset{decision/.style={
-    draw=black!80, solid, fill=gray!10, rectangle, 
+    draw=black!80, solid, fill=white!10, rectangle,
     anchor=north,
     inner sep=2mm, outer sep=0, text centered, growth parent anchor=south} 
   }
   \tikzset{prediction/.style={
-    draw=black!80, solid, fill=gray!30, ellipse, 
+    draw=black!80, solid, fill=white!30, ellipse,
     anchor=north,
     inner sep=2mm, outer sep=0, text centered, growth parent anchor=south} 
   }
-  \tikzset{arrow/.style={-latex, thick}}
 
-  \tikzset{arrow-dashed/.style={-latex, dashed, thick}}
   % Tree.
   \begin{tikzpicture}
     \node [decision] {\textit{age?}} [solid, -latex, thick, -]
@@ -380,12 +378,12 @@ individual based on its attributes.
           node[right] {yes}
         }
         edge from parent
-        node[left] {youth}
+        node[above left] {youth}
       }
       child {
         node [prediction] {yes} [solid, -latex, thick, -]
         edge from parent
-        node[below] {middle\_aged}
+        node[below,fill=white,inner sep=1pt] {middle\_aged}
       }
       child {
         node [decision] {\textit{credit\_rating?}} [solid, -latex, thick, -]
@@ -400,11 +398,16 @@ individual based on its attributes.
           node[right] {yes}
         }
         edge from parent
-        node[right] {senior}
+        node[above right] {senior}
       }
     ;
   \end{tikzpicture}
-  \caption{Example of a decision tree for the concept \textit{buys\_computer}}
+  \caption[Example of a decision tree]
+  {Example of a decision tree for the concept \textit{buys\_computer},
+  indicating whether a customer is likely to purchase a computer. Each internal
+  (nonleaf) node represents a test on an attribute. Each leaf node represents a
+  class (either \textit{buys\_computer = yes} or \textit{buys\_computer = no})
+  \cite[p. 291]{han2006data}.}
   \label{fig:tree}
 \end{figure}
 
@@ -461,9 +464,10 @@ side of the hyperplane in which it falls.
   \begin{center}
     \leavevmode
     \includegraphics[width=0.9\textwidth]{svm}
-    \caption[Example of linearly separable training data in a two dimensional
-    space]{Example of linearly separable training data in a two dimensional
-    space \cite{han2006data}}
+    \caption[Example of linearly separable training data]
+    {Example of linearly separable training data in a two dimensional
+    space. There are an infinite number of (possible) separating hyperplanes or
+    \qt{decision boundaries} \cite[p. 338]{han2006data}.}
     \label{fig:svm}
   \end{center}
 \end{figure}
@@ -671,7 +675,7 @@ true positive rates (recalls) in the $y$ axis (Figure \ref{fig:roccurve}).
         \legend{Random model,Created model}
       \end{axis}
     \end{tikzpicture}
-    \caption{ROC curve example}
+    \caption[Example of ROC curve]{Example of ROC curve.}
     \label{fig:roccurve}
   \end{center}
 \end{figure}
@@ -715,7 +719,7 @@ management system \cite{Jupp2011}.
   \begin{center}
     \leavevmode
     \includegraphics[width=1.0\textwidth]{rapidminer}
-    \caption{RapidMiner user interface}
+    \caption[RapidMiner user interface]{RapidMiner user interface.}
     \label{fig:rapidminer}
   \end{center}
 \end{figure}
@@ -740,7 +744,7 @@ users, should they need new functionalities.
   \begin{center}
     \leavevmode
     \includegraphics[width=0.7\textwidth]{weka}
-    \caption{Weka interface selection}
+    \caption[Weka interface selection]{Weka interface selection.}
     \label{fig:weka}
   \end{center}
 \end{figure}
