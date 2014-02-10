@@ -205,12 +205,12 @@ solution for data transfer between different tools.
 \subsubsection*{FASTQ}
 
 FASTQ is used to store store character sequences, typically nucleotide sequences
-\cite{Cock2010}. It's quite similar to the standard FASTA format, in respect to
+\cite{Cock2010}. it is quite similar to the standard FASTA format, in respect to
 the manner in which character sequences are represented. However, for every
 sequence, there is a second sequence of equal length, representing the quality
 scores of the original sequence. These quality scores are also represented as
 single characters, taking values between and including ASCII-33 to ASCII-126.
-It's typically used in the same situations as the FASTA format, when quality
+it is typically used in the same situations as the FASTA format, when quality
 scores are available/relevant.
 
 \subsubsection*{SAM and BAM}
@@ -419,7 +419,7 @@ classifiers usually have a good level of accuracy, though it may vary with the
 type of data available.
 
 That are several algorithms that use the decision tree principle, most notably
-\textit{\textit{ID3}, C4.5} and \textit{CART}. As the problem of learning an
+\textit{ID3}, \textit{C4.5} and \textit{CART}. As the problem of learning an
 optimal decision tree is NP-complete, most algorithms for decision tree
 construction are based in some sort of heuristics (the aforementioned algorithms
 adopt a greedy approach).
@@ -485,7 +485,7 @@ of other algorithms to reduce multi-class tasks to binary ones.
 \subsubsection*{K-NN}
 
 K-NN is a non-parametric method for classification and regression problems.
-First described in the early 1950s \cite{han2006data}, it's one of the simplest
+First described in the early 1950s \cite{han2006data}, it is one of the simplest
 machine learning algorithms and is widely used in the area of pattern
 recognition.
 
@@ -500,18 +500,18 @@ tuple is represented in this space, along with the training tuples. The unknown
 tuple is then assigned to the most common class among its $k$ nearest neighbors.
 
 K-NN as several advantages when compared to other classification algorithms. For
-one it has a very simple implementation. It's also very robust in terms of
+one it has a very simple implementation. it is also very robust in terms of
 search space (the classes don't have to be linearly separable) and has few
-parameters, making it easy to tune. On the other side, it's an expensive method
+parameters, making it easy to tune. On the other side, it is an expensive method
 in terms of testing, as we need to calculate the distance between a testing
-tuple and every other known tuple. Furthermore, it's sensitive to noisy or
+tuple and every other known tuple. Furthermore, it is sensitive to noisy or
 irrelevant attributes and unbalanced datasets.
 
 \subsubsection*{Inductive Logic Programming}
 
 TODO\\
 
-\subsection{Model Evaluation Procedures and Measures}
+\subsection{Model Evaluation Procedures and Measures}\label{sec:mineval}
 
 Creating a data model using a suitable classification algorithms is not the last
 step in the data mining process. At this point our model works well with the
@@ -700,7 +700,7 @@ most popular data mining tools, that apply to the specific needs of this thesis.
 \subsubsection*{RapidMiner}
 
 RapidMiner\footnote{\url{http://www.rapidminer.com/}} is a complete solution for
-data mining problems. It's available as a standalone GUI based application, as
+data mining problems. it is available as a standalone GUI based application, as
 seen in Figure \ref{fig:rapidminer}. It is a commercial application, although
 its core and earlier versions are distributed under an open source license and
 it offers a free version, beyond its multiple paid versions. Being one of the
@@ -731,9 +731,9 @@ collects several machine learning algorithms and allows its user to easily apply
 those algorithms to data mining tasks \cite{Hall}. Created at the University of
 Waikato, New Zeland in 1997 (the current version was completely rewritten in
 1997, despite the first iteration of the tool being developed as early as 1993),
-it's still in active development to date. Weka supports several common data
+it is still in active development to date. Weka supports several common data
 mining tasks, like data preprocessing, classification, clustering, regression
-and data visualization. It's core libraries are written in Java and allow for an
+and data visualization. it is core libraries are written in Java and allow for an
 easy integration of its data mining algorithms in pre existing code and
 applications. Other than that, Weka can be used directly through a command
 line/terminal or through one of its multiple GUI's (Figure \ref{fig:weka}). Its
@@ -754,14 +754,14 @@ users, should they need new functionalities.
 R\footnote{\url{http://www.r-project.org/}} is a free programming language and
 software environment for statistical computing and graphics generation.
 Originally developed by Ross Ihaka and Robert Gentleman at the University of
-Auckland, New Zealand in 1993 \cite{Ihaka1998}, it's still under active
+Auckland, New Zealand in 1993 \cite{Ihaka1998}, it is still under active
 development. R is typically used by statisticians and data miners, either for
 direct data analysis or for developing new statistical software \cite{Fox2005}.
 
 R is an implementation of the S programming language\footnote{S is an object
 oriented statistical programming language, appearing in 1976 at Bell
 Laboratories.}, borrowing some characteristics from the Scheme programming
-language. It's core is written in a combination of C, Fortran and R itself. It
+language. it is core is written in a combination of C, Fortran and R itself. It
 is possible directly manipulate R objects in languages like C, C++ and Java. R
 can be used directly through the command line or through several third party
 graphical user interfaces like
@@ -780,7 +780,7 @@ documents, for complete data analysis.
 Bioconductor is a free and open source set of tools for genomic data analysis,
 in the context of molecular biology \cite{lmucs-papers:Leisch:2002}. It is
 primarily based on R. It is under active development, with two stable releases
-each year. Counting with more than seven hundred different packages, it's the
+each year. Counting with more than seven hundred different packages, it is the
 most comprehensive set of genomic data analysis tools available for the R
 programming language. It also provides a set of tools to read and manipulate
 several of the most common file formats used in molecular biology oriented
@@ -788,7 +788,13 @@ applications, including FASTA, FASTQ, BAM and GFF.
 
 \section{Chapter Conclusions}
 
-- in this chapter we talked about...\\
-- we don't know where classification algorithms will be sufficient or if we'll
-  need ILP...\\
-- what else?\\
+In this chapter we gave a brief introduction of the molecular biology concepts
+that serve as base of the thesis. We also reviewed the concepts on RNA-Seq and
+data mining and presented short analyses of concrete tools that will likely be
+used during the project.
+
+At this moment we do not possess all the necessary information about the dataset
+that will be used in the data mining phase of the project. We are unable, at the
+present, to determine the nature of our data, which means that we cannot predict
+whether it could be modeled by classification algorithms. As such, we presented
+ILP as an alternative approach for this situation.
