@@ -509,7 +509,30 @@ irrelevant attributes and unbalanced datasets.
 
 \subsubsection*{Inductive Logic Programming}
 
-TODO\\
+ILP is a subfield of machine learning that uses first order logic to represent
+both the data and the hypotheses \cite{Lavrac1998}. ILP might be used to tackle
+several machine learning and data mining problems, like classification,
+regression and clustering. ILP systems use techniques based on logic, such as
+inverting rules of deduction, therefore inducing hypotheses that may solve the
+learning problem.
+
+The first and most important motivation for ILP systems is that they overcome
+the representation limitations of attribute-value learning systems, such as the
+previously mentioned data mining algorithms. Attribute-value systems base their
+representations of data in table based representations. Although effective in
+many situations, these representation is not very expressive and might not even
+be feasible for certain problems \cite{Bratko:1995:AIL:219717.219771}. The
+second motivation for ILP is that by using a logical representation, the
+hypotheses are understandable and interpretable by humans. This representation
+also means that background knowledge can be represented and employed in the
+induction process, in contrast to attribute-value models, where this information
+is difficult to represent.
+
+Despite these advantages, ILP cannot be applied indiscriminately to any
+classification or regression problem. ILP systems are typically very heavy when
+it comes to computational resource consumption and run for long periods of time
+\cite{fonseca2003implementation}. As such, its typically a bad idea to apply ILP
+to very large datasets, due to its poor scaling capabilities.
 
 \subsection{Model Evaluation Procedures and Measures}\label{sec:mineval}
 
@@ -797,4 +820,6 @@ At this moment we do not possess all the necessary information about the dataset
 that will be used in the data mining phase of the project. We are unable, at the
 present, to determine the nature of our data, which means that we cannot predict
 whether it could be modeled by classification algorithms. As such, we presented
-ILP as an alternative approach for this situation.
+ILP as an alternative approach for this situation. In case ILP techniques become
+in fact necessary, further work will include a more profound and complete
+revision.
