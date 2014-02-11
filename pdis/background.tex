@@ -4,29 +4,30 @@
 
 In this chapter we will begin by making a more in depth presentation of the
 process of gene expression. This will be followed by a literature and state of
-the art review in the fields of genome/\trans{} assembly and data mining.
-Lastly, we will present some of the tools used in each of those areas, as well
-as some relevant data representation formats for genetic data.
+the art review in the fields of \trans{} assembly and data mining.
+Lastly, we will present some of the tools used in each of those areas and
+common result evaluation techniques, as well as some relevant data
+representation formats for genetic information.
 
 \section{Biological Base Concepts}
 
 Before dwelling in the details of the state of the art that are on the
-foundation of this thesis, it is important to explain some concepts of the
+foundation of the thesis, it is important to explain some concepts of the
 domain of molecular biology. As explained in Section \ref{sec:context}, gene
 expression is the mechanism by which an organism's \dna{} can be expressed into
-functional genetic products, like proteins, rRNA and tRNA. This process starts
-with the genetic code, or nucleotide sequence, of each gene. Different genes in
-an organism's \dna{} are responsible for the creation of different genetic
+functional genetic products, like proteins. This process starts with the
+genetic code, or nucleotide sequence, of each gene. Different genes in an
+organism's \dna{} are responsible for the creation of different genetic
 products. The process of gene expression itself is composed by two main stages,
 transcription and translation \cite{leic:gene_expr}.
 
 Transcription is the stage at which genetic data in the form of \dna{} is used
-to synthesize \rna{}, being this the process that concerns the thesis main
+to synthesize \rna{}, being this the process that concerns the thesis' main
 question. Several different types of \rna{} are produced by this process,
 including mRNA (which specifies the sequences of amino acids that form a
-protein), rRNA and tRNA, both later used in the translation stage. Simplifying a
-gene's structure, it can be seen as composed by two types of areas, introns and
-exons, as seen in Figure \ref{fig:intron_exon}.
+protein), rRNA and tRNA, both later used in the translation stage. Simplifying
+a gene's structure, it can be seen as composed by two types of sequences,
+introns and exons, as seen in Figure \ref{fig:intron_exon}.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -40,7 +41,7 @@ exons, as seen in Figure \ref{fig:intron_exon}.
 
 Only the exons are useful in the gene expression process, being also known as
 coding regions. Introns, on the other hand, are not used in the process. They
-are present in an early stage mRNA molecule, the precursor RNA, but are later
+are present in an early stage mRNA molecule, the precursor mRNA, but are later
 removed (or spliced) in the final molecule before the translation stage
 \cite{leic:gene_expr}. Figure \ref{fig:splicing} illustrates the removal of
 introns from the mRNA molecule, during the  splicing process. As stated before,
@@ -63,24 +64,25 @@ acids that constitute the particular protein being produced. The other types of
 RNA molecules (rRNA and tRNA) are also used in this stage of the gene expression
 process.
 
-Obtaining this genetic information is done experimentally, by employing a genome
-sequencing technique. For quite some time this process was carried out using the
-Sanger sequencing method and other similar methods \cite{Reis-Filho2009}. Though
-effective, such methods we're notably slow and costly, with large projects like
-the Human Genome Project (HGP) consuming roughly thirteen years and US\$ 3
-billion. Other than the realm of human genetics, this kind of study was
-restricted to model organisms, such as the fruit fly and mouse genomes
-\cite{Wolf2013}. The past few years have seen the appearance and rise in
-popularity of the \ngs{} techniques. These techniques differ from the more
-classical ones by producing larger amounts of information, in less time. They
-are also typically more cost effective than previous techniques and can be
-easily employed by single laboratories, which has greatly contributed to their
-popularity. As a disadvantage, \ngs{} techniques produce shorter reads than
-their older counterparts, being that \qt{\textit{(...) transcriptome assembly
-from billions of RNA-Seq reads (...) poses a significant informatics challenge}}
-\cite[p. 671]{Martin2011} Although this thesis will not deal with the problems
-of sequencing techniques, it is important to indicate that the read dataset that
-will be used is a result of \ngs{} techniques. As such, we will use assembly
+Obtaining this genetic information is done experimentally, by employing a
+sequencing technique. For quite some time this process was carried out using
+the Sanger's and other similar sequencing methods methods
+\cite{Reis-Filho2009}. Though effective, such methods were notably slow and
+costly, with large projects like the Human Genome Project (HGP) consuming
+roughly thirteen years and US\$ 3 billion. These limitations were so severe
+that, other than the realm of human genetics, this kind of study was restricted
+to model organisms, such as the fruit fly and mouse genomes \cite{Wolf2013}.
+The past few years have seen the appearance and rise in popularity of the
+\ngs{} techniques. These techniques differ from the more classical ones by
+producing larger amounts of information, at less cost. They are also typically
+more cost effective than previous techniques and can be easily employed by
+single laboratories, which has greatly contributed to their popularity. As a
+disadvantage, \ngs{} techniques produce shorter reads than their older
+counterparts, being that \qt{\textit{(...) transcriptome assembly from billions
+of RNA-Seq reads (...) poses a significant informatics challenge}} \cite[p.
+671]{Martin2011}. Although the thesis will not deal with the problems of
+sequencing techniques, it is important to indicate that the read dataset that
+will be used is the result of \ngs{} techniques. As such, we will use assembly
 techniques more suited to situations where short reads are available.
 
 \section{\rnaseq{} and \Trans{} Assembly}\label{sec:assembly}
@@ -93,10 +95,10 @@ genome sequencing data.
 
 For years, microarrays were the standard tool available for examining features
 of the transcriptome and global patterns of gene expression \cite{Wolf2013}.
-However, microarrays typically produce data more oriented towards assembly
-against existing reference data, hence limiting its application to species with
-well known reference genomes. This is impractical, as \ngs{} techniques allow to
-cheaply obtain genetic information of previously not studied species. This is
+However, microarrays are typically more oriented towards assembly against
+existing reference data, hence limiting its application to species with well
+known reference genomes. This is impractical, as \ngs{} techniques allow to
+cheaply obtain genetic information of previously non-studied species. This is
 one of the reasons that led to the inception of RNA-Seq. Contrary to
 microarrays, RNA-Seq techniques are able to wield results that are suitable for
 both reference guided assembly and \textit{de novo} assembly approaches
@@ -105,23 +107,23 @@ interest of researchers in the past few years, leading to the appearance of
 multiple RNA-Seq tools that are capable of making this type of assembly without
 a reference genome \cite{nuno11:assemblathon}. Despite this amazing capability,
 we will restrict this project to reference genome guided problems, which are
-simpler and more oriented to a Masters level thesis.
+simpler and more suitable for a Masters level thesis.
 
 \subsection{\rnaseq{} Tools}\label{sec:seqtools}
 
 Below we will present some bioinformatic tools, used to support the multiple
-steps of the RNA-Seq process. Although there are several tools capable of
-executing all steps of the RNA-Seq process, it has been decided that in this
-project we will create our own assembly pipeline, using specialized tools for
-every step. We will also present some of the most popular file formats used in
-this context, along with some tools used to manipulate these files. We will
-focus in open source, Unix command line based tools.
+steps of the \rnaseq{} process. Although there are several tools capable of
+executing all steps of this process, it has been decided we will create our own
+alignment/assembly pipeline, using specialized tools for every step. We will also present
+some of the most popular file formats used in this context, along with some
+tools used to manipulate those formats. We will focus in open source, Unix
+command line based tools.
 
 \subsubsection*{Tuxedo Suite}
 
 The Tuxedo suite is a free, open-source collection of applications that has been
 widely adopted as analysis toolset for fast alignment of short reads. It is
-composed by four separate tools, TopHat, Bowtie, Cufflinks and CummRbund,
+composed by four separate tools, Bowtie, TopHat, Cufflinks and CummRbund,
 briefly reviewed below. These tools are extensively used for \rnaseq{} analysis.
 Although the applications are made for command line execution, there are several
 workflow managers, like Galaxy\footnote{\url{http://galaxyproject.org/}}, that
@@ -134,14 +136,14 @@ ultrafast, memory-efficient short read aligner. Bowtie is typically used to
 build a reference index for the genome of the organism being studied, for
 posterior use by other tools, like TopHat. It can also output alignments in the
 standard SAM format, allowing Bowtie to interoperate with tools like SAM Tools.
-However, it shouldn't be used as a general purpose alignment tool, as it was
+However, it should not be used as a general purpose alignment tool, as it was
 created and is more effective when aligning short read sequences against large
 reference genomes.
 
 \paragraph{TopHat}
 
 TopHat\footnote{\url{http://tophat.cbcb.umd.edu/}} is a fast splice junction
-mapper for \rnaseq{} reads. It uses Bowtie as the underlying aligning tool,
+mapper for \rnaseq{} reads. It uses Bowtie as the underlying alignment tool,
 using its results and a FASTA formated reference genome to identify splice
 junctions between exons.
 
@@ -164,7 +166,7 @@ functions, as well as commonly used data visualizations.
 
 \subsubsection*{SAM Tools}
 
-SAM Tools\footnote{\url{http://samtools.sourceforge.net/}} is a library and
+SAM Tools\footnote{\url{http://samtools.sourceforge.net/}} is a library 
 package designed for parsing and manipulating alignment files in the SAM/BAM
 format \cite{Li2009} (see Section \ref{sec:formats}). SAM Tools has two separate
 implementations, one in C and the other in Java, with slightly different
@@ -180,8 +182,9 @@ biological sequences. It uses FASTA sequences (see Section \ref{sec:formats}) as
 search input and outputs the results reports in XML, HTML or plain text. There
 are several different BLAST programs available at the moment, that can be used
 depending on our objective and type of data. BLAST is particularly useful to
-search biologic sequence databases, but can be used in for other purposes, like
-identifying an unknown species or comparing common genes in two related species.
+search biologic sequence databases, but can be used for other purposes, like
+identifying an unknown species or comparing common genes in two related
+species.
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
@@ -189,8 +192,8 @@ As expected, the great diversity of \rnaseq{} tools brings with it a wealth of
 file formats. Some of these formats are developed from the ground up to satisfy
 a specific need, while other are mere contextual adaptations or specializations
 of already established formats. Below we will present a few of the most popular
-and wide spread file formats, talking about their basic structure, the types of
-data they represent and their applications.
+and widely spread file formats, talking about their basic structure, the types
+of data they represent and their applications.
 
 \subsubsection*{FASTA}
 
@@ -206,12 +209,12 @@ solution for data transfer between different tools.
 \subsubsection*{FASTQ}
 
 FASTQ is used to store store character sequences, typically nucleotide sequences
-\cite{Cock2010}. it is quite similar to the standard FASTA format, in respect to
+\cite{Cock2010}. It is quite similar to the standard FASTA format, in respect to
 the manner in which character sequences are represented. However, for every
 sequence, there is a second sequence of equal length, representing the quality
 scores of the original sequence. These quality scores are also represented as
 single characters, taking values between and including ASCII-33 to ASCII-126.
-it is typically used in the same situations as the FASTA format, when quality
+It is typically used in the same situations as the FASTA format, when quality
 scores are available/relevant.
 
 \subsubsection*{SAM and BAM}
@@ -232,7 +235,7 @@ data.
 \subsubsection*{VCF}
 
 VCF is a text file format used to store gene sequence variants \cite{smith13}.
-In the past few years, as larger and larger \dna{} sequencing projects became
+In the past few years, as larger and larger genome sequencing projects became
 more common (like the 1000 Genomes Project\footnote{The 1000 Genomes Project,
 started back in 2008, is an international effort to establish the most
 comprehensive catalogue to date of human genetic variations.}), storing such
@@ -245,7 +248,7 @@ such, it is a format often used when building genome databases.
 \subsubsection*{GFF and GTF}
 
 GFF is a text based file format to store gene features \cite{sanger11}. Many
-genome assembly tools execute this process in two seperate steps: feature
+genome assembly tools execute this process in two separate steps: feature
 detection for identification of specific regions (exons, introns, etc.) and
 genome assembly, using those features as reference. However, often times it is
 beneficial to decouple these two steps, using different and more efficient tools
@@ -255,12 +258,12 @@ transfer between tools.
 The GTF format is similar to the GFF format, in which it is based. It is also
 used in similar situations. However, GTF builds on top of GFF, defining
 additional conventions, specific to the domain of genetic information. Despite
-their initial relation, both formats are developed individually.
+their initial relation, both formats continue to be developed individually.
 
 \section{Data Mining}\label{sec:mlearning}
 
 Data mining is the process of \qt{\textit{extracting or \qt{mining} knowledge
-from large amounts of data}} \cite[p. 5]{han2006data}. As such, it consists in a
+from large amounts of data}} \cite[p. 5]{han2006data}. As such, it consists of a
 set of techniques that can be used to find interesting patterns in large data
 sets, that translate in newfound knowledge. Data mining borrows techniques from
 multiple fields, such as artificial intelligence, machine learning, statistics,
@@ -279,11 +282,11 @@ We can divide data mining into main types: descriptive data mining and
 predictive data mining \cite{Fayyad1996}. Descriptive data mining is focused on
 finding the underlying structure of a given set of data. Instead of predicting
 future values, it concerns the intrinsic structure, relations and
-interconnectedness of the data being analysed, presenting its interesting
+interconnectedness of the data being analyzed, presenting its interesting
 characteristics without having any predefined target. On the other hand,
 predictive data mining is used to predict explicit values, based on patterns
 determined from the dataset. With predictive data mining we try to build models
-using known data and use those models as a base to predict future behaviour.
+using known data and use those models as a base to predict future behavior.
 
 As we're seeing, data mining does not represent a single type problem. In fact
 there are several different types of problems that can be addressed by data
@@ -293,14 +296,15 @@ method. A brief review of the most common methods is given below.
 \begin{description}
 
   \item[Classification]
-  is a method that tries to generalize the already known structure, so that it
-  applies to new datasets. In other words, with classification we try to learn a
-  function that is capable of mapping our data into predefined classes.
+  is a method that tries to generalize the already known structure of a
+  dataset, so that it applies to new datasets. In other words, with
+  classification we try to learn a function that is capable of mapping our data
+  into predefined classes.
 
   \item[Regression]
   tries to learn a function that models relationships between variables in the
   dataset. That function can latter be used to find real value predictions of
-  future behaviour of the same or similar datasets.
+  future behavior of the same or similar datasets.
 
   \item[Clustering]
   consists in identifying a finite set of categories or clusters of similar
@@ -313,7 +317,7 @@ method. A brief review of the most common methods is given below.
   accomplished in several different ways, like using report generation or
   multivariate visualization techniques.
 
-  \item[Dependency modelling]
+  \item[Dependency modeling]
   finds a model which describes relationships between variables, revealing their
   dependencies.
 
@@ -494,7 +498,7 @@ recognition.
 Nearest neighbor classifiers are based on the premise of learning by analogy, in
 other words, by comparing a given test tuple with similar training tuples. This
 classification of tuples as \qt{similar} is typically based on simple rules,
-like the \textit{Euclidian distance} between tuples.
+like the \textit{Euclidean distance} between tuples.
 
 In k-NN, each training tuple is described by $n$ attributes and is represented
 as a point in an $n$-dimensional space. For classification problems, the test
@@ -761,7 +765,7 @@ mining tasks, like data preprocessing, classification, clustering, regression
 and data visualization. it is core libraries are written in Java and allow for an
 easy integration of its data mining algorithms in pre existing code and
 applications. Other than that, Weka can be used directly through a command
-line/terminal or through one of its multiple GUI's (Figure \ref{fig:weka}). Its
+line/terminal or through one of its multiple GUIs (Figure \ref{fig:weka}). Its
 simple API and well structure architecture allow it to be easily extended by
 users, should they need new functionalities.
 

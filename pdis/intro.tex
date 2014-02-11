@@ -2,28 +2,28 @@
 
 \section*{}
 
-This chapter aims at giving a general overview about the themes addressed by
-this thesis. We will present the problem we are addressing, as well as the
-motivation that led to its choice. Furthermore there will be a brief description
-of the thesis main objectives and the methods that will be used to achieve those
+This chapter aims at giving a general overview about the themes addressed by the
+thesis. We will present the problem being targeted, as well as the motivation
+that led to its choice. Furthermore, there will be a brief description of the
+thesis' main objectives and the methods that will be used to achieve those
 objectives.
 
 \section{Context} \label{sec:context}
 
 Molecular biology is a branch of biology that studies biological activities of
-living beings, at a molecular level. The early grounds for this field of study
-were set in the early 1930's, although it only emerged in its modern form in the
-1960's, with the discovery of the structure of \dna. Among the processes studied
+living beings, at a molecular level. The grounds for this field of study were
+set in the early 1930s, although it only emerged in its modern form in the
+1960s, with the discovery of the structure of \dna. Among the processes studied
 by this branch of biology is gene expression. Gene expression (further explained
 in Chapter \ref{chap:sota}) is the process by which \dna{} molecules are
 transformed into useful genetic products, typically proteins, which are
 essential for living organisms. This knowledge is not only important in fields
-like evolutionary or molecular biology, but may have crucial applications in
-fields such as medicine. One example of such an application is the usage of gene
+like evolutionary or molecular biology, but has crucial applications in fields
+such as medicine. One example of such an application is the usage of gene
 expression analysis in the diagnosis and treatment of cancer patients
 \cite{Pusztai01062003}.
 
-With the advent of \ngs{} (Next Generation Sequencing) techniques, researchers
+With the advent of \ngs{} (\textit{Next Generation Sequencing}) techniques, researchers
 have at their disposal huge amounts of sequencing data, that is not only cheaper
 and faster to produce, but also more commonly available. This data can then be
 used to obtain relevant information about organisms' gene expression. But, as
@@ -39,22 +39,22 @@ Despite its great advancements in the past decades, molecular biology is still a
 relatively new subject and, as such, there are still some unknowns and partial
 knowledge in this area. In respect to gene expression, some mechanisms of this
 intricate process are yet to be fully understood. One such mechanism is the one
-that regulates the transcription speed of \rna. The objective of this thesis is
-to understand how the final segments of the genome's exons are responsible for
-the speed at which the exons themselves are transcribed. This is, however, a
-complex task, that can be further decomposed in the two main problems that will
-be address in the thesis, namely:
+that regulates the transcription speed of \rna. The objective of the thesis is
+to understand how the final sequences of a gene's exons are responsible for the
+speed at which the exons themselves are transcribed. This is, however, a complex
+task that can be further decomposed in the two main problems that will be
+address in the thesis, namely:
 
 \begin{itemize}
 
   \item
   Assembly of the study \trans, using experimental sequencing reads and a
   reference genome. This is effectively one of the most complex problems
-  addressed in this thesis. In order to assemble the genome a method called
-  \rnaseq{}\footnote{\rnaseq{} is also referred to as \qt{Whole \Trans{} Shotgun
-  Sequencing}, or WTSS.} will be used. Further insight about this method will be
-  given in Chapter \ref{chap:sota}, with particular emphasis for \rnaseq{} tools
-  (Section \ref{sec:seqtools}).
+  addressed in the thesis. We will use data obtained through a sequencing method
+  called \rnaseq{}\footnote{\rnaseq{} is also referred to as \textit{Whole \Trans{}
+  Shotgun Sequencing}, or WTSS.}. Further insight about this method will be
+  given in Chapter \ref{chap:sota}, with particular emphasis for tools used to
+  align/assemble \trans s from this data (Section \ref{sec:seqtools}).
 
   \item
   Further analysis of the assembled \trans s, using machine learning algorithms
@@ -65,21 +65,21 @@ be address in the thesis, namely:
 \end{itemize}
 
 Solving these problems requires the use of computational tools. As such, the
-development of a computer system to address these problems emerges as a
-secondary objective of the thesis. Some details of this system will be presented
-in Section \ref{sec:project}, along with its overall structure, main components
-and possible technologies to be used.
+development of a computer system to tackle these problems emerges as a secondary
+objective of the thesis. Some details of this system will be presented in
+Section \ref{sec:project}, along with its overall structure, main components and
+technologies being considered for its development.
 
 \section{Project} \label{sec:project}
 
 The project itself will revolve around the development of a prototype computer
 system. The first objective of this prototype is to solve the aforementioned
-thesis problems, namely the \trans{} assembly and analysis. Beyond this
-objective, the prototype should become an easy to use and useful tool for any
-researcher investigating this or other similar problems. To fulfill these
-objectives, we will need to develop a complex system, composed by several
-smaller systems. Therefore, the envisioned system architecture is divided into
-three major components, to wit:
+problems, namely the \trans 's assembly and analysis. Beyond this objective, the
+prototype should become an useful and intuitive tool for any researcher
+investigating this or other similar problems. To fulfill these objectives, we
+will need to develop a complex system, composed by several smaller systems.
+Therefore, the envisioned system architecture is divided into three major
+components, to wit:
 
 \begin{description}
 
@@ -87,7 +87,7 @@ three major components, to wit:
   is responsible for storing and managing genetic data, coordinating interaction
   between the other components of the system and providing a web interface for
   user interaction. This component will be based mainly on typical web
-  technologies, that is, relational databases for data storage (SQL DBMS's), web
+  technologies, that is, relational databases for data storage (SQL DBMSs), web
   frameworks for business logic implementation (Ruby on Rails, Padrino,
   NodeJS\footnote{Ruby on Rails and Padrino are Ruby based web frameworks, while
   NodeJS is a Javascript based web framework.}) and web markup and styling
@@ -96,7 +96,7 @@ three major components, to wit:
   \item[Assembly pipeline]
   will use genetic data stored in the information system in order to produce
   assembled \trans s. This pipeline will be composed by several tools,
-  corresponding to each phase of the \rnaseq{} process, possibly intercalated
+  corresponding to each phase of the assembly process, possibly intercalated
   with data format conversion programs. The tools to be used in this component
   will be further discussed in Section \ref{sec:seqtools}.
 
@@ -116,18 +116,18 @@ rather a natural consequence of the project's work process.
 
 \section{Structure of the Report} \label{sec:outline}
 
-Besides the introduction chapter, this document is composed three additional
+Besides the introduction chapter, this document is composed by three additional
 chapters. These chapters have the following structure:
 
-Chapter \ref{chap:sota} introduces some basic Biology and \rnaseq{} concepts,
+Chapter \ref{chap:sota} introduces some basic biology and RNA-Seq concepts,
 that are essential to understand the problems with which this document deals.
-Furthermore, we describe the main techniques used for genome/\trans sequencing
-and assembly, their differences and applications and the tools and data formats
-typically used on those areas. Lastly, we give some insight about data mining
-algorithms and how they will be applied to this work.
+Furthermore, we describe the main techniques used for genome/\trans{} sequencing
+and assembly, their differences, applications and the tools and data formats
+typically used in those areas. Lastly, we give some insight about data mining
+algorithms and how they will be applied in the context of the project.
 
-Chapter \ref{chap:workplan} outlines the main steps in the development of this
-thesis (and the respective software prototype) and attempts to provide a
+Chapter \ref{chap:workplan} outlines the main steps in the development of the
+project (and the respective software prototype) and attempts to provide a
 feasible schedule for the work's execution. It also presents the datasets that
 will be studied and used in this work, their origins and features, as well as
 the validation methods that will be used to ascertain the quality of our
