@@ -2,14 +2,6 @@
 
 \section*{}
 
-This chapter aims at giving a general overview about the themes addressed by the
-thesis. We will present the problem being targeted, as well as the motivation
-that led to its choice. Furthermore, there will be a brief description of the
-thesis' main objectives and the methods that will be used to achieve those
-objectives.
-
-\section{Context} \label{sec:context}
-
 Molecular biology is a branch of biology that studies biological activities of
 living beings, at a molecular level. The grounds for this field of study were
 set in the early 1930s, although it only emerged in its modern form in the
@@ -33,7 +25,7 @@ reads\footnote{A \textit{read} is a single fragment of a genome/\trans, obtained
 through sequencing techniques.} than previously used techniques, presenting a
 more complicated problem, from a computational standpoint \cite{Wolf2013}.
 
-\section{Motivation and Objectives} \label{sec:motivation}
+\section{Domain Problem} \label{sec:problem}
 
 Despite its great advancements in the past decades, molecular biology is still a
 relatively new subject and, as such, there are still some unknowns and partial
@@ -69,6 +61,21 @@ development of a computer system to tackle these problems emerges as a secondary
 objective of the thesis. Some details of this system will be presented in
 Section \ref{sec:project}, along with its overall structure, main components and
 technologies being considered for its development.
+
+\section{Motivation and Objectives} \label{sec:motivation}
+
+As mentioned above, the assembly of a \trans{} is a very complex problem, even
+more so when \rnaseq{} is used. Aligning such large amounts of data in the form
+of small reads to a complete (and therefore extensive) genome is a complicated
+task. It is, however, an essential problem that needs to be solved, as without
+an assembled \trans{} there is no analyzable data. In turn, this analysis of the
+\trans{} is essential to further scientific development in fields like
+molecular biology and medicine, as stated above. With this project we aim at
+developing an automated computer system, capable of solving these problems. More
+than applying exclusively to the particular problem at hand, we want to develop
+an useful and intuitive solution, that might easily be used by researchers in
+this field of study to solve similar problems, extending its benefits to a
+broader scientific community.
 
 \section{Project} \label{sec:project}
 
@@ -117,23 +124,18 @@ rather a natural consequence of the project's work process.
 \section{Structure of the Report} \label{sec:outline}
 
 Besides the introduction chapter, this document is composed by three additional
-chapters. These chapters have the following structure:
-
-Chapter \ref{chap:sota} introduces some basic biology and RNA-Seq concepts,
-that are essential to understand the problems with which this document deals.
-Furthermore, we describe the main techniques used for genome/\trans{} sequencing
-and assembly, their differences, applications and the tools and data formats
-typically used in those areas. Lastly, we give some insight about data mining
-algorithms and how they will be applied in the context of the project.
-
+chapters. Chapter \ref{chap:sota} introduces some basic biology and RNA-Seq
+concepts, that are essential to understand the problems with which this document
+deals. Furthermore, we describe the main techniques used for genome/\trans{}
+sequencing and assembly, their differences, applications and the tools and data
+formats typically used in those areas. Lastly, we give some insight about data
+mining algorithms and how they will be applied in the context of the project.
 Chapter \ref{chap:workplan} outlines the main steps in the development of the
 project (and the respective software prototype) and attempts to provide a
 feasible schedule for the work's execution. It also presents the datasets that
 will be studied and used in this work, their origins and features, as well as
 the validation methods that will be used to ascertain the quality of our
-results.
-
-Chapter \ref{chap:conclusions} sums up the what has been defined in the report,
-emphasizing the problem that the thesis addresses and the work that will be
-executed towards solving that problem. It will also give a brief idea of what
+results. Chapter \ref{chap:conclusions} sums up the what has been defined in the
+report, emphasizing the problem that the thesis addresses and the work that will
+be executed towards solving that problem. It will also give a brief idea of what
 are the expected results at the end of the project.

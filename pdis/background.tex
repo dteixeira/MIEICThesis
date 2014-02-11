@@ -13,7 +13,7 @@ representation formats for genetic information.
 
 Before dwelling in the details of the state of the art that are on the
 foundation of the thesis, it is important to explain some concepts of the
-domain of molecular biology. As explained in Section \ref{sec:context}, gene
+domain of molecular biology. As explained in Chapter \ref{chap:intro}, gene
 expression is the mechanism by which an organism's \dna{} can be expressed into
 functional genetic products, like proteins. This process starts with the
 genetic code, or nucleotide sequence, of each gene. Different genes in an
@@ -516,11 +516,13 @@ irrelevant attributes and unbalanced datasets.
 \subsubsection*{Inductive Logic Programming}
 
 ILP is a subfield of machine learning that uses first order logic to represent
-both the data and the hypotheses \cite{Lavrac1998}. ILP might be used to tackle
-several machine learning and data mining problems, like classification,
-regression and clustering. ILP systems use techniques based on logic, such as
-inverting rules of deduction, therefore inducing hypotheses that may solve the
-learning problem.
+both data and models \cite{Lavrac1998}. ILP induces hypotheses (models) from
+examples and background knowledge. Examples are of two types: instances of the
+concept to be \qt{learned} and non-instances of the concept. Background
+knowledge is a set of predicates encoding all information that the experts find
+useful to construct the models. ILP might be used to tackle several machine
+learning and data mining problems, like classification, regression and
+clustering.
 
 The first and most important motivation for ILP systems is that they overcome
 the representation limitations of attribute-value learning systems, such as the
@@ -529,7 +531,8 @@ representations of data in table based representations. Although effective in
 many situations, these representation is not very expressive and might not even
 be feasible for certain problems \cite{Bratko:1995:AIL:219717.219771}. The
 second motivation for ILP is that by using a logical representation, the
-hypotheses are understandable and interpretable by humans. This representation
+hypotheses are understandable and interpretable by humans, being therefore
+useful to explain the phenomenons that produce the data. This representation
 also means that background knowledge can be represented and employed in the
 induction process, in contrast to attribute-value models, where this information
 is difficult to represent.
@@ -537,8 +540,7 @@ is difficult to represent.
 Despite these advantages, ILP cannot be applied indiscriminately to any
 classification or regression problem. ILP systems are typically very heavy when
 it comes to computational resource consumption and run for long periods of time
-\cite{fonseca2003implementation}. As such, its typically a bad idea to apply ILP
-to very large datasets, due to its poor scaling capabilities.
+\cite{fonseca2003implementation}.
 
 \subsection{Model Evaluation Procedures and Measures}\label{sec:mineval}
 
