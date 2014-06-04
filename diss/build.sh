@@ -11,7 +11,7 @@ if [[ "$#" -eq 1 ]]; then
     if [ "$(uname)" == "Darwin" ]; then
       MD5=$(md5 -r ./report.pdf | awk '{ print $1; }')
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-      MD5=$(md5 -r ./report.pdf | awk '{ print $1; }')
+      MD5=$(md5sum -r ./report.pdf | awk '{ print $1; }')
     fi
     cp ./report.pdf "$MD5.pdf"
   else
