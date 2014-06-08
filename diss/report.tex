@@ -9,11 +9,15 @@
 \documentclass[11pt,a4paper,twoside,openright]{report}
 
 %% For iso-8859-1 (latin1), comment next line and uncomment the second line
-\usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese,english]{babel}
+\selectlanguage{english}
 
 %% MIEIC options
 \usepackage[mieic]{feupteses}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyvrb}
 %\usepackage[mieic,juri]{feupteses}
 %\usepackage[mieic,final]{feupteses}
 %\usepackage[mieic,final,onpaper]{feupteses}
@@ -53,6 +57,12 @@ language=C,                        % choose the language of the code
  morekeywords={*,var,template,new}  % if you want to add more keywords to the set
 }
 
+% Gantt charts
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{flafter}
+
 %% Uncomment to create an index (at the end of the document)
 %\makeindex
 
@@ -70,7 +80,7 @@ language=C,                        % choose the language of the code
 %%----------------------------------------
 %% Information about the work
 %%----------------------------------------
-\title{Neat Title of the Dissertation}
+\title{Information and Data Analysis System for Gene Expression}
 \author{Diogo André Rocha Teixeira}
 
 %% Uncomment next line for date of submission
@@ -101,7 +111,7 @@ language=C,                        % choose the language of the code
 \begin{Prolog}
   \include{abstract_en} % the abstract
   \include{acknows_en}  % the acknowledgments
-  \include{quote}       % initial quotation if desired
+  %\include{quote}       % initial quotation if desired
   \cleardoublepage
   \pdfbookmark[0]{Table of Contents}{contents}
   \tableofcontents
@@ -119,11 +129,11 @@ language=C,                        % choose the language of the code
 %%----------------------------------------
 \StartBody
 
-%\include{chapter1}
-%\include{chapter2}
-%\include{chapter3}
-%\include{chapter4}
-%\include{chapter5}
+\include{intro}
+\include{background}
+\include{description}
+\include{implementation}
+\include{conclusion}
 
 %%----------------------------------------
 %% Final materials
