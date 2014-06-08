@@ -31,9 +31,19 @@
 \usepackage{color}
 \definecolor{cloudwhite}{cmyk}{0,0,0,0.025}
 
+%% Create comments and notes
+\usepackage{comment}
+\definecolor{noteblue}{cmyk}{0.8,0.4,0,0}
+\specialcomment{Notes}{
+  \begingroup\Large\color{noteblue}NOTES\endgroup\\
+  \begingroup
+    \color{noteblue}}
+  {\endgroup}
+%\excludecomment{Notes}
+
 %% Include source-code listings package
 \usepackage{listings}
-\lstset{
+\lstset{%
 language=C,                        % choose the language of the code
  basicstyle=\footnotesize\ttfamily,
  keywordstyle=\bfseries,
@@ -144,6 +154,7 @@ language=C,                        % choose the language of the code
 %% Appendix
 \appendix
 \include{glossary}
+\include{irapconfig}
 
 %% Index
 %% Uncomment next command if index is required

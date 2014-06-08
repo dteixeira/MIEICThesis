@@ -2,6 +2,10 @@
 
 \section*{}
 
+\begin{Notes}
+- Change transcriptome assembly to read alignment.\\
+\end{Notes}
+
 In this chapter we will begin by making a more in depth presentation of the
 process of gene expression. This will be followed by a literature and state of
 the art review in the fields of \trans{} assembly and data mining.
@@ -10,6 +14,11 @@ common result evaluation techniques, as well as some relevant data
 representation formats for genetic information.
 
 \section{Biological Base Concepts}
+
+\begin{Notes}
+- Base concepts look good.\\
+- Include part about RNA binding proteins.\\
+\end{Notes}
 
 Before dwelling in the details of the state of the art that are on the
 foundation of the thesis, it is important to explain some concepts of the
@@ -87,6 +96,12 @@ techniques more suited to situations where short reads are available.
 
 \section{\rnaseq{} and \Trans{} Assembly}\label{sec:assembly}
 
+\begin{Notes}
+- Again, careful with genome assembly references.\\
+- The part about genome assembly seems nice to have here, but explain that the
+focus is read alignment.\\
+\end{Notes}
+
 \Trans{} assembly is the process by which experimentally obtained genetic data
 reads can be organized and merged together in a partial or complete genome
 expression profile. As stated above, the advent of next generation sequencing
@@ -110,6 +125,13 @@ we will restrict this project to reference genome guided problems, which are
 simpler and more suitable for a Masters level thesis.
 
 \subsection{\rnaseq{} Tools}\label{sec:seqtools}
+
+\begin{Notes}
+- Add section about differential expression analysis tools.\\
+- Refer the whole Tuxedo Suite, but remind that some are not used.\\
+- Refer iRAP.
+- Refer any other used tools.
+\end{Notes}
 
 Below we will present some bioinformatic tools, used to support the multiple
 steps of the \rnaseq{} process. Although there are several tools capable of
@@ -188,6 +210,10 @@ species.
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
+\begin{Notes}
+- Still relevant, not much to change.\\
+\end{Notes}
+
 As expected, the great diversity of \rnaseq{} tools brings with it a wealth of
 file formats. Some of these formats are developed from the ground up to satisfy
 a specific need, while other are mere contextual adaptations or specializations
@@ -262,6 +288,11 @@ their initial relation, both formats continue to be developed individually.
 
 \section{Data Mining}\label{sec:mlearning}
 
+\begin{Notes}
+- Still relevant, don't change.\\
+- Important part is now clustering, not classification.
+\end{Notes}
+
 Data mining is the process of \qt{\textit{extracting or \qt{mining} knowledge
 from large amounts of data}} \cite[p. 5]{han2006data}. As such, it consists of a
 set of techniques that can be used to find interesting patterns in large data
@@ -329,6 +360,11 @@ method. A brief review of the most common methods is given below.
 \end{description}
 
 \subsection{Data Mining Algorithms}\label{sec:minalgo}
+
+\begin{Notes}
+- Focus is now on clustering algorithms.
+- See Wikipedia's page on "clustering" for a good reference on algorithm types.\\
+\end{Notes}
 
 In this project we will be concerned with the classification side of data
 mining. Below, we will review some algorithms that can be used in
@@ -515,6 +551,11 @@ classification problems.
 
 \subsubsection*{Inductive Logic Programming}
 
+\begin{Notes}
+- Still seems relevant, later refer that it wasn't possible to conduct ILP
+clustering due to lack of time/problems with tools.\\
+\end{Notes}
+
 ILP is a subfield of machine learning that uses first order logic to represent
 both data and models \cite{Lavrac1998}. ILP induces hypotheses (models) from
 examples and background knowledge. Examples are of two types: instances of the
@@ -542,7 +583,15 @@ classification or regression problem. ILP systems are typically very heavy when
 it comes to computational resource consumption and run for long periods of time
 \cite{fonseca2003implementation}.
 
-%\subsection{Model Evaluation Procedures and Measures}\label{sec:mineval}
+\subsection{Model Evaluation Procedures and Measures}\label{sec:mineval}
+
+\begin{Notes}
+- No longer relevant.\\
+- Explain internal and external evaluation.\\
+- Explain that due to the novelty of our analysis we will merely focus on
+internal analysis.\\
+- Describe some internal analysis measures (don't forget silhouettes).\\
+\end{Notes}
 
 %Creating a data model using a suitable classification algorithms is not the last
 %step in the data mining process. At this point our model works well with the
@@ -730,6 +779,13 @@ most popular data mining tools, that apply to the specific needs of this thesis.
 
 \subsubsection*{RapidMiner}
 
+\begin{Notes}
+- Still relevant.\\
+- Refer that RapidMiner and Weka were only used for testing purposes, and are
+note part of the final solutions.\\
+- Refer other relevant R packages.\\
+\end{Notes}
+
 RapidMiner\footnote{\url{http://www.rapidminer.com/}} is a complete solution for
 data mining problems. it is available as a standalone GUI based application, as
 seen in Figure \ref{fig:rapidminer}. It is a commercial application, although
@@ -818,6 +874,10 @@ several of the most common file formats used in molecular biology oriented
 applications, including FASTA, FASTQ, BAM and GFF.
 
 \section{Chapter Conclusions}
+
+\begin{Notes}
+- Remove the uncertainty part, talk about what was done.\\
+\end{Notes}
 
 In this chapter we gave a brief introduction of the molecular biology concepts
 that serve as base of the thesis. We also reviewed the concepts on RNA-Seq and

@@ -2,6 +2,11 @@
 
 \section*{}
 
+\begin{Notes}
+- Introduction seems fine, check later if emphasis on sequencing should be toned
+down.
+\end{Notes}
+
 Molecular biology is a branch of biology that studies biological activities of
 living beings, at a molecular level. The grounds for this field of study were
 set in the early 1930s, although it only emerged in its modern form in the
@@ -15,17 +20,24 @@ such as medicine. One example of such an application is the usage of gene
 expression analysis in the diagnosis and treatment of cancer patients
 \cite{Pusztai01062003}.
 
-With the advent of \ngs{} (\textit{Next Generation Sequencing}) techniques, researchers
-have at their disposal huge amounts of sequencing data, that is not only cheaper
-and faster to produce, but also more commonly available. This data can then be
-used to obtain relevant information about organisms' gene expression. But, as
-the cost of sequencing genomes was reduced, the cost of processing such
-information was increased. \ngs{} techniques tend to produce much smaller
-reads\footnote{A \textit{read} is a single fragment of a genome/\trans, obtained
-through sequencing techniques.} than previously used techniques, presenting a
-more complicated problem, from a computational standpoint \cite{Wolf2013}.
+With the advent of \ngs{} (\textit{Next Generation Sequencing}) techniques,
+researchers have at their disposal huge amounts of sequencing data, that is not
+only cheaper and faster to produce, but also more commonly available. This data
+can then be used to obtain relevant information about organisms' gene
+expression. But, as the cost of sequencing genomes was reduced, the cost of
+processing such information was increased. \ngs{} techniques tend to produce
+much smaller reads\footnote{A \textit{read} is a single fragment of a
+genome/\trans, obtained through sequencing techniques.} than previously used
+techniques, presenting a more complicated problem, from a computational
+standpoint \cite{Wolf2013}.
 
 \section{Domain Problem} \label{sec:problem}
+
+\begin{Notes}
+- Genome assembly is not part of the work, read alignment is.\\
+- Work objectives float around differential expression analysis, gene enrichment
+and protein binding site discovery.\\
+\end{Notes}
 
 Despite its great advancements in the past decades, molecular biology is still a
 relatively new subject and, as such, there are still some unknowns and partial
@@ -64,6 +76,11 @@ technologies being considered for its development.
 
 \section{Motivation and Objectives} \label{sec:motivation}
 
+\begin{Notes}
+- Check previous notes, genome assembly is not needed.\\
+- Don't forget to mention the gene enrichment/protein binding site analysis.
+\end{Notes}
+
 As mentioned above, the assembly of a \trans{} is a very complex problem, even
 more so when \rnaseq{} is used. Aligning such large amounts of data in the form
 of small reads to a complete (and therefore extensive) genome is a complicated
@@ -78,6 +95,13 @@ this field of study to solve similar problems, extending its benefits to a
 broader scientific community.
 
 \section{Project} \label{sec:project}
+
+\begin{Notes}
+- Change project description to fit the alignment/differential expression
+pipeline and the PBS tool.\\
+- Refer both tools as independent, but mention that they're supposed to be
+integrated with each other.\\
+\end{Notes}
 
 The project itself will revolve around the development of a prototype computer
 system. The first objective of this prototype is to solve the aforementioned
@@ -122,6 +146,10 @@ that the development of the system itself is not the focus of the thesis, but
 rather a natural consequence of the project's work process.
 
 \section{Structure of the Report} \label{sec:outline}
+
+\begin{Notes}
+- Update this last.\\
+\end{Notes}
 
 Besides the introduction chapter, this document is composed by three additional
 chapters. Chapter \ref{chap:sota} introduces some basic biology and RNA-Seq
