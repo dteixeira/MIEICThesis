@@ -34,12 +34,19 @@
 %% Create comments and notes
 \usepackage{comment}
 \definecolor{noteblue}{cmyk}{0.8,0.4,0,0}
+\definecolor{notegreen}{cmyk}{0.31,0,0.44, 0.25}
 \specialcomment{Notes}{
-  \begingroup\Large\color{noteblue}NOTES\endgroup\\
+  \begingroup\Large\color{noteblue}\flushleft{NOTES}\endgroup\\
   \begingroup
     \color{noteblue}}
   {\endgroup}
+\specialcomment{Structure}{
+  \begingroup\Large\color{notegreen}\flushleft{STRUCTURE}\endgroup\\
+  \begingroup
+    \color{notegreen}}
+  {\endgroup}
 %\excludecomment{Notes}
+%\excludecomment{Structure}
 
 %% Include source-code listings package
 \usepackage{listings}
