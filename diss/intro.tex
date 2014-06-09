@@ -43,42 +43,57 @@ Despite its great advancements in the past decades, molecular biology is still a
 relatively new subject and, as such, there are still some unknowns and partial
 knowledge in this area. In respect to gene expression, some mechanisms of this
 intricate process are yet to be fully understood. One such mechanism is the one
-that regulates the transcription speed of \rna. The objective of the thesis is
-to understand how the final sequences of a gene's exons are responsible for the
-speed at which the exons themselves are transcribed. This is, however, a complex
-task that can be further decomposed in the two main problems that will be
-address in the thesis, namely:
+that regulates the transcription speed of \rna. One of the objectives of the
+thesis is to understand how the final sequences of a gene's exons are
+responsible for the speed at which the exons themselves are transcribed. The
+other objective is to understand how RNA binding protein (RBP) manipulation can
+be used to better understand an organism's gene expression. This are, however,
+complex tasks that can be further decomposed in the three main problems that
+will be addressed in the thesis, namely:
 
 \begin{itemize}
 
   \item
-  Assembly of the study \trans, using experimental sequencing reads and a
-  reference genome. This is effectively one of the most complex problems
-  addressed in the thesis. We will use data obtained through a sequencing method
-  called \rnaseq{}\footnote{\rnaseq{} is also referred to as \textit{Whole \Trans{}
+  Sequencing read alignment against a reference genome and differential
+  expression analysis between samples of different individuals (of the same
+  species). This is effectively one of the most complex problems addressed in
+  the thesis. We will use data obtained through a sequencing method called
+  \rnaseq{}\footnote{\rnaseq{} is also referred to as \textit{Whole \Trans{}
   Shotgun Sequencing}, or WTSS.}. Further insight about this method will be
   given in Chapter \ref{chap:sota}, with particular emphasis for tools used to
-  align/assemble \trans s from this data (Section \ref{sec:seqtools}).
+  align and analyze this data (Section \ref{sec:seqtools}).
 
   \item
-  Further analysis of the assembled \trans s, using machine learning algorithms
-  applied to data mining. These techniques will be used in an effort to try to
-  understand the already mentioned transcription mechanisms. This topic will be
-  developed in Section \ref{sec:mlearning}.
+  Gene enrichment and RBP analysis. This part of the work aims to collect as
+  much relevant information as possible about the particular genes being studied
+  at the time, to help biologists better understand their function. RBP
+  knowledge is particularly important for gene manipulation and a great tool for
+  better understanding gene expression, as will be further described in Chapter
+  \ref{chap:sota}.
+
+  \item
+  Further analysis of the produced data, using machine learning techniques
+  applied to data mining, specifically to clustering analysis. These techniques
+  will be employed in an effort to try to give biologists more relevant
+  information about gene expression, uncovering possible relationships in the
+  retrieved information. This topic will be developed in Section
+  \ref{sec:mlearning}.
 
 \end{itemize}
 
 Solving these problems requires the use of computational tools. As such, the
-development of a computer system to tackle these problems emerges as a secondary
-objective of the thesis. Some details of this system will be presented in
-Section \ref{sec:project}, along with its overall structure, main components and
-technologies being considered for its development.
+development of a computer system (or multiple systems) to tackle these problems
+emerges as a secondary objective of the thesis. The details of the idealization
+of this system will be presented in Chapter \ref{chap:description}, while its
+concrete implementation will be discussed in Chapter \ref{chap:implementation}.
 
 \section{Motivation and Objectives} \label{sec:motivation}
 
 \begin{Notes}
 - Check previous notes, genome assembly is not needed.\\
 - Don't forget to mention the gene enrichment/protein binding site analysis.
+- Talk about how simplicity is needed because many times biologists don't
+understand the tools already available.
 \end{Notes}
 
 As mentioned above, the assembly of a \trans{} is a very complex problem, even
