@@ -2,10 +2,10 @@
 
 \section*{}
 
-\begin{Notes}
-- Introduction seems fine, check later if emphasis on sequencing should be toned
-down.
-\end{Notes}
+%\begin{Notes}
+%- Introduction seems fine, check later if emphasis on sequencing should be toned
+%down.
+%\end{Notes}
 
 Molecular biology is a branch of biology that studies biological activities of
 living beings, at a molecular level. The grounds for this field of study were
@@ -33,11 +33,11 @@ standpoint \cite{Wolf2013}.
 
 \section{Domain Problem} \label{sec:problem}
 
-\begin{Notes}
-- Genome assembly is not part of the work, read alignment is.\\
-- Work objectives float around differential expression analysis, gene enrichment
-and protein binding site discovery.\\
-\end{Notes}
+%\begin{Notes}
+%- Genome assembly is not part of the work, read alignment is.\\
+%- Work objectives float around differential expression analysis, gene enrichment
+%and protein binding site discovery.\\
+%\end{Notes}
 
 Despite its great advancements in the past decades, molecular biology is still a
 relatively new subject and, as such, there are still some unknowns and partial
@@ -46,7 +46,7 @@ intricate process are yet to be fully understood. One such mechanism is the one
 that regulates the transcription speed of \rna. One of the objectives of the
 thesis is to understand how the final sequences of a gene's exons are
 responsible for the speed at which the exons themselves are transcribed. The
-other objective is to understand how RNA binding protein (RBP) manipulation can
+other objective is to understand how RNA-binding protein (RBP) manipulation can
 be used to better understand an organism's gene expression. This are, however,
 complex tasks that can be further decomposed in the three main problems that
 will be addressed in the thesis, namely:
@@ -89,76 +89,70 @@ concrete implementation will be discussed in Chapter \ref{chap:implementation}.
 
 \section{Motivation and Objectives} \label{sec:motivation}
 
-\begin{Notes}
-- Check previous notes, genome assembly is not needed.\\
-- Don't forget to mention the gene enrichment/protein binding site analysis.
-- Talk about how simplicity is needed because many times biologists don't
-understand the tools already available.
-\end{Notes}
+%\begin{Notes}
+%- Check previous notes, genome assembly is not needed.\\
+%- Don't forget to mention the gene enrichment/protein binding site analysis.
+%- Talk about how simplicity is needed because many times biologists don't
+%understand the tools already available.
+%\end{Notes}
 
-As mentioned above, the assembly of a \trans{} is a very complex problem, even
-more so when \rnaseq{} is used. Aligning such large amounts of data in the form
-of small reads to a complete (and therefore extensive) genome is a complicated
-task. It is, however, an essential problem that needs to be solved, as without
-an assembled \trans{} there is no analyzable data. In turn, this analysis of the
-\trans{} is essential to further scientific development in fields like
-molecular biology and medicine, as stated above. With this project we aim at
-developing an automated computer system, capable of solving these problems. More
-than applying exclusively to the particular problem at hand, we want to develop
-an useful and intuitive solution, that might easily be used by researchers in
-this field of study to solve similar problems, extending its benefits to a
-broader scientific community.
+Gene expression analysis is essential for modern day molecular biology. Among
+many of the possible applications of this information, we can highlight: better
+classification and diagnosis of diseases, assessing how cells react to a
+specific treatment, and others.
+
+While nowadays powerful computational tools exist to target almost any biology
+problem, many of those tools require a very specific set of technical skills and
+have a steep learning curve. Possibly the most important motivation behind this
+thesis, and ultimately its main objective, is to provide researchers with
+powerful yet simple and user friendly tools. This means developing a system
+simple enough that any user can learn to operate it in a few minutes with
+minimal effort, but sufficiently advanced to suit the user's research needs.
+
+Another typical problem that biology researchers face nowadays is information
+dispersion and the repetitive and lengthy task of compiling that information.
+Researchers frequently have to manually join information originating from a
+multitude of different platforms, which use inconsistent formats and notations.
+Our second objective is therefore to provide a system that is able to take this
+burden off the user, making the process faster and simpler.
 
 \section{Project} \label{sec:project}
 
 \begin{Notes}
-- Change project description to fit the alignment/differential expression
-pipeline and the PBS tool.\\
-- Refer both tools as independent, but mention that they're supposed to be
-integrated with each other.\\
+- Add chapter/section references.\\
 \end{Notes}
 
-The project itself will revolve around the development of a prototype computer
-system. The first objective of this prototype is to solve the aforementioned
-problems, namely the \trans 's assembly and analysis. Beyond this objective, the
-prototype should become an useful and intuitive tool for any researcher
-investigating this or similar problems. To fulfill these objectives, we will
-need to develop a complex system, composed by several smaller systems.
-Therefore, the envisioned system architecture is divided into three major
-components, to wit:
+The project itself revolves around the development of a prototype computer
+system, capable of solving the aforementioned problems. Due to the complexity of
+the complete system, its development followed a module based organization
+(further described in Chapter \ref{chap:description}). Therefore, the envisioned
+system architecture is divided into three major components, to wit:
 
 \begin{description}
 
-  \item[Information system]
+  \item[Differential expression analysis pipeline]
+  is responsible for aligning reads against a reference genome and compare
+  contrasts between different samples. The pipeline is based on the preexisting
+  iRAP pipeline. The pipeline's capabilities are further enhanced with both job
+  configuration automation and differential expression results consolidation
+  (combining results from multiple differential expression tools).
+
+  \item[RNA-binding protein analysis workflow]
+  aggregates information about RBPs from multiple biologic web databases
+  (Ensembl, NCBI, UniProt, etc.) and organizes it in ways that are useful to
+  biology researchers. Moreover, this information is clustered using data mining
+  techniques, in order to reveal groups of genes and RBPs that may hold biologic
+  relevance.
+
+  \item[Web platform]
   is responsible for storing and managing genetic data, coordinating interaction
   between the other components of the system and providing a web interface for
-  user interaction. This component will be based mainly on typical web
-  technologies, that is, relational databases for data storage (SQL DBMSs), web
-  frameworks for business logic implementation (Ruby on Rails, Padrino,
-  NodeJS\footnote{Ruby on Rails and Padrino are Ruby based web frameworks, while
-  NodeJS is a Javascript based web framework.}) and web markup and styling
+  user interaction. This component is based mainly on typical web technologies,
+  that is, a document based database for data storage (MongoDB), a web framework
+  for business logic implementation (Padrino) and web markup and styling
   languages for interface implementation (HTML, CSS).
 
-  \item[Assembly pipeline]
-  will use genetic data stored in the information system in order to produce
-  assembled \trans s. This pipeline will be composed by several tools,
-  corresponding to each phase of the assembly process, possibly intercalated
-  with data format conversion programs. The tools to be used in this component
-  will be further discussed in Section \ref{sec:seqtools}.
-
-  \item[\Trans{} analysis]
-  will be responsible for the data mining analysis of the assembled \trans s, in
-  the context of the problem of the thesis. It is expected that this component
-  integrates with the rest of the system. Further information about the tools
-  that will be used in this component is given in Section \ref{sec:mintools}.
-
 \end{description}
-
-From here, this document will not dwell in the details of the implementation of
-such a system, focusing instead the specificities of the problem's solution,
-from the molecular biology and data mining perspectives. This is due to the fact
-that the development of the system itself is not the focus of the thesis, but
-rather a natural consequence of the project's work process.
 
 \section{Structure of the Report} \label{sec:outline}
 
