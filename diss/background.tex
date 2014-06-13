@@ -2,16 +2,17 @@
 
 \section*{}
 
-\begin{Notes}
-- Change transcriptome assembly to read alignment.\\
-\end{Notes}
+%\begin{Notes}
+%- Change transcriptome assembly to read alignment.\\
+%\end{Notes}
 
 In this chapter we will begin by making a more in depth presentation of the
 process of gene expression. This will be followed by a literature and state of
-the art review in the fields of \trans{} assembly and data mining.
-Lastly, we will present some of the tools used in each of those areas and
-common result evaluation techniques, as well as some relevant data
-representation formats for genetic information.
+the art review in the fields of read alignment, differential expression analysis
+and data mining. We will present the tools used in the development of the
+analysis pipelines and the web platform. Lastly, we review some result
+evaluation techniques and relevant data representation formats for genetic
+information.
 
 \section{Biological Base Concepts}
 
@@ -22,13 +23,17 @@ representation formats for genetic information.
 
 Before dwelling in the details of the state of the art that are on the
 foundation of the thesis, it is important to explain some concepts of the
-domain of molecular biology. As explained in Chapter \ref{chap:intro}, gene
-expression is the mechanism by which an organism's \dna{} can be expressed into
-functional genetic products, like proteins. This process starts with the
-genetic code, or nucleotide sequence, of each gene. Different genes in an
-organism's \dna{} are responsible for the creation of different genetic
-products. The process of gene expression itself is composed by two main stages,
-transcription and translation \cite{leic:gene_expr}.
+domain of molecular biology.
+
+\subsection{Gene Expression}
+
+As explained in Chapter \ref{chap:intro}, gene expression is the mechanism by
+which an organism's \dna{} can be expressed into functional genetic products,
+like proteins. This process starts with the genetic code, or nucleotide
+sequence, of each gene. Different genes in an organism's \dna{} are responsible
+for the creation of different genetic products. The process of gene expression
+itself is composed by two main stages, transcription and translation
+\cite{leic:gene_expr}.
 
 Transcription is the stage at which genetic data in the form of \dna{} is used
 to synthesize \rna{}, being this the process that concerns the thesis' main
@@ -48,14 +53,12 @@ introns and exons, as seen in Figure \ref{fig:intron_exon}.
   \end{center}
 \end{figure}
 
-Only the exons are useful in the gene expression process, being also known as
-coding regions. Introns, on the other hand, are not used in the process. They
-are present in an early stage mRNA molecule, the precursor mRNA, but are later
+The exons are useful in the gene expression process, being also known as coding
+regions. Introns, on the other hand, are not used in the process. They are
+present in an early stage mRNA molecule, the precursor mRNA, but are later
 removed (or spliced) in the final molecule before the translation stage
 \cite{leic:gene_expr}. Figure \ref{fig:splicing} illustrates the removal of
-introns from the mRNA molecule, during the  splicing process. As stated before,
-the main goal of this thesis is to explain how the final nucleotide sequence of
-each exon affects the transcription speed of the exon itself.
+introns from the mRNA molecule, during the  splicing process.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -73,26 +76,65 @@ acids that constitute the particular protein being produced. The other types of
 RNA molecules (rRNA and tRNA) are also used in this stage of the gene expression
 process.
 
-Obtaining this genetic information is done experimentally, by employing a
-sequencing technique. For quite some time this process was carried out using
-the Sanger's and other similar sequencing methods methods
-\cite{Reis-Filho2009}. Though effective, such methods were notably slow and
-costly, with large projects like the Human Genome Project (HGP) consuming
-roughly thirteen years and US\$ 3 billion. These limitations were so severe
-that, other than the realm of human genetics, this kind of study was restricted
-to model organisms, such as the fruit fly and mouse genomes \cite{Wolf2013}.
-The past few years have seen the appearance and rise in popularity of the
-\ngs{} techniques. These techniques differ from the more classical ones by
-producing larger amounts of information, at less cost. They are also typically
-more cost effective than previous techniques and can be easily employed by
-single laboratories, which has greatly contributed to their popularity. As a
-disadvantage, \ngs{} techniques produce shorter reads than their older
-counterparts, being that \qt{\textit{(...) transcriptome assembly from billions
-of RNA-Seq reads (...) poses a significant informatics challenge}} \cite[p.
-671]{Martin2011}. Although the thesis will not deal with the problems of
-sequencing techniques, it is important to indicate that the read dataset that
-will be used is the result of \ngs{} techniques. As such, we will use assembly
-techniques more suited to situations where short reads are available.
+\subsection{RNA-Binding Proteins}
+
+RNA-binding proteins, also referred to as RBP, regulate every aspect of the RNA
+metabolism, including pre-mRNA splicing, mRNA transport, location, stability and
+translation control \cite{Cooper2009777, Muller-McNicoll2013, Sonenberg2007721,
+Sonenberg2009731}, as shown in Figure \ref{fig:rbp}.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=\textwidth]{rbp}
+    \caption[Role of RBPs in the RNA metabolism process]{
+      Diagram of a typical cell showing the multiple roles of RBPs in post
+      transcriptional processes \cite{janga2011construction}. The grey ellipses
+      represent RBPs. The numbered text represents the different processes in
+      which RBPs take part. Multiple RBPs can bind with a single RNA at one or
+      more locations, creating an abundance of different combinations and
+      possibilities in every step of the RNA metabolism.
+    }
+    \label{fig:rbp}
+  \end{center}
+\end{figure}
+
+The binding of RBPs to RNA depends on different RNA-sequence specificities and
+affinities. This aspect, coupled with the existence of hundreds of RBPs in an
+organism, gives rise to a plethora of different combinations and outcomes to the
+RNA metabolism.
+
+RBPs regulate gene expression in health and disease, and mutations affecting the
+function of RBPs may cause several diseases \cite{Cooper2009777}. Therefore,
+understanding the binding patterns of RBPs during a particular biological
+process is crucial to get insight into that process, both during health and
+disease conditions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO Change places below.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Obtaining this genetic information is done experimentally, by employing a
+%sequencing technique. For quite some time this process was carried out using the
+%Sanger's and other similar sequencing methods methods \cite{Reis-Filho2009}.
+%Though effective, such methods were notably slow and costly, with large projects
+%like the Human Genome Project (HGP) consuming roughly thirteen years and US\$ 3
+%billion. These limitations were so severe that, other than the realm of human
+%genetics, this kind of study was restricted to model organisms, such as the
+%fruit fly and mouse genomes \cite{Wolf2013}. The past few years have seen the
+%appearance and rise in popularity of the \ngs{} techniques. These techniques
+%differ from the more classical ones by producing larger amounts of information,
+%at lower cost. They are also typically more cost effective than previous
+%techniques and can be easily employed by single laboratories, which has greatly
+%contributed to their popularity. As a disadvantage, \ngs{} techniques produce
+%shorter reads than their older counterparts, being that \qt{\textit{(...)
+%transcriptome assembly from billions of RNA-Seq reads (...) poses a significant
+%informatics challenge}} \cite[p. 671]{Martin2011}. Although the thesis will not
+%deal with the problems of sequencing techniques, it is important to indicate
+%that all read data sets that were used resulted from \ngs{} techniques. As such,
+%suitable techniques and tools for this particular type of data were used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{\rnaseq{} and \Trans{} Assembly}\label{sec:assembly}
 
