@@ -135,7 +135,7 @@ their older counterparts, being that \qt{\textit{(...) transcriptome assembly
 from billions of RNA-Seq reads (...) poses a significant informatics challenge}}
 \cite[p. 671]{Martin2011}.
 
-Although this thesis will not deal with the problems of sequencing techniques, it
+Although this thesis does not deal with the problems of sequencing techniques, it
 is important to indicate that the read data sets that were used resulted from
 \ngs{} techniques, in particular RNA-Seq. As such, suitable tools for this
 particular type of data were used.
@@ -159,24 +159,38 @@ both reference guided assembly and \textit{de novo} assembly approaches
 \cite{Wilhelm2009}. \textit{De novo} or exploratory assembly has captured the
 interest of researchers in the past few years, leading to the appearance of
 multiple RNA-Seq tools that are capable of making this type of assembly without
-a reference genome \cite{nuno11:assemblathon}.
+a reference genome \cite{nuno11:assemblathon}. Transcriptome assembly was not
+performed during this thesis, as its main focus in terms of the RNA-Seq process
+is read alignment and differential expression analysis.
 
-\subsection{\rnaseq{} Tools}\label{sec:seqtools}
+\section{RNA-Seq Analysis}
 
 \begin{Notes}
-- Add section about differential expression analysis tools.\\
-- Refer the whole Tuxedo Suite, but remind that some are not used.\\
-- Refer iRAP.
-- Refer any other used tools.
+- Describe the same workflow as iRAP.\\
+- Refer that we'll talk about specific tools below, and they all are Unix
+command line tools.
 \end{Notes}
 
-Below we will present some bioinformatic tools, used to support the multiple
-steps of the \rnaseq{} process. Although there are several tools capable of
-executing all steps of this process, it has been decided we will create our own
-alignment/assembly pipeline, using specialized tools for every step. We will also present
-some of the most popular file formats used in this context, along with some
-tools used to manipulate those formats. We will focus in open source, Unix
-command line based tools.
+\subsection{RNA-Seq Pipeline}
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics{irap}
+    \caption[iRAP RNA-Seq data analysis pipeline]{
+      iRAP RNA-Seq data analysis pipeline. Note that the gene enrichment step
+      (in dashed line) is optional and was not used.
+    }
+    \label{fig:irap}
+  \end{center}
+\end{figure}
+
+\subsection{\rnaseq{} Read Alignment and Analysis Tools}
+
+Below we present some bioinformatic tools, used to support the multiple steps of
+the \rnaseq{} read alignment and data analysis process. It is important to note that none of these
+tools were used separately, but rather as parts of an analysis pipeline (also
+described below).
 
 \subsubsection*{Tuxedo Suite}
 
@@ -186,32 +200,32 @@ composed by four separate tools, Bowtie, TopHat, Cufflinks and CummRbund,
 briefly reviewed below. These tools are extensively used for \rnaseq{} analysis.
 Although the applications are made for command line execution, there are several
 workflow managers, like Galaxy\footnote{\url{http://galaxyproject.org/}}, that
-easily integrates with the suite, providing a web interface for its use.
+easily integrates with the suite, providing a web interface for its use. Note
+that not all components of the Tuxedo Suite were used.
 
 \paragraph{Bowtie}
 
-Bowtie\footnote{\url{http://bowtie-bio.sourceforge.net/index.shtml}} is an
-ultrafast, memory-efficient short read aligner. Bowtie is typically used to
-build a reference index for the genome of the organism being studied, for
-posterior use by other tools, like TopHat. It can also output alignments in the
-standard SAM format, allowing Bowtie to interoperate with tools like SAM Tools.
-However, it should not be used as a general purpose alignment tool, as it was
-created and is more effective when aligning short read sequences against large
-reference genomes.
+Bowtie is an ultrafast, memory-efficient short read aligner
+\cite{langmead2009ultrafast}. Bowtie is typically used to build a reference
+index for the genome of the organism being studied, for posterior use by other
+tools, like TopHat. It can also output alignments in the standard SAM format,
+allowing Bowtie to interoperate with tools like SAM Tools. However, it should
+not be used as a general purpose alignment tool, as it was created and is more
+effective when aligning short read sequences against large reference genomes.
 
 \paragraph{TopHat}
 
-TopHat\footnote{\url{http://tophat.cbcb.umd.edu/}} is a fast splice junction
-mapper for \rnaseq{} reads. It uses Bowtie as the underlying alignment tool,
-using its results and a FASTA formated reference genome to identify splice
-junctions between exons.
+TopHat is a fast splice junction mapper for \rnaseq{} reads
+\cite{Trapnell01052009}. It uses Bowtie as the underlying alignment tool, using
+its results and a FASTA formated reference genome to identify splice junctions
+between exons.
 
 \paragraph{Cufflinks}
 
-Cufflinks\footnote{\url{http://cufflinks.cbcb.umd.edu/}} assembles transcripts,
-estimates their abundances, and tests for differential expression and regulation
-in \rnaseq{} samples. It uses the SAM or BAM formatted files as input, typically
-the ones produced by TopHat, outputting GTF files as a result.
+Cufflinks assembles transcripts, estimates their abundances, and tests for
+differential expression and regulation in \rnaseq{} samples
+\cite{trapnell2010transcript}. It uses the SAM or BAM formatted files as input,
+typically the ones produced by TopHat, outputting GTF files as a result.
 
 \paragraph{CummeRbund}
 
@@ -220,12 +234,67 @@ package (see Section \ref{sec:mintools}) designed to help the visualization and
 analysis of Cufflinks' \rnaseq{} output. As such, it is not directly involved in
 the trascriptome alignment process. It takes the various output files from
 Cufflinks and uses them to build a SQLite database describing appropriate
-relationships between genes, transcripts, etc. It implements several plotting
-functions, as well as commonly used data visualizations.
+relationships between genes, transcripts, etc. This database is later used to
+convert that data to R objects which allows them to be used the included
+plotting functions, as well as in other commonly used data visualizations.
+
+\subsubsection*{HTSeq}
+
+HTSeq is a programming framework used for processing data resulting from next
+generation sequencing methods \cite{htseq}, developed in Python. While many
+tools can efficiently align reads, sometimes data needs to be manipulated before
+being passed to those tools. This data can either be badly formated (or
+\qt{dirty}) or simply in a format different from the one that is needed. The
+latter is a particularly common problem when trying to pass the results of one
+tool to the one that succeeds it in the pipeline. HTSeq is useful to easily
+create scripts that accomplish this task, acting as a \qt{glue} between tools.
+
+HTSeq provides parsers for many popular formats for representing genetic
+information (see Section \ref{sec:formats}). In addition, it ships with two
+standalone scripts, HTSeq-QA and HTSeq-Count. HTSeq-QA is used to provide an
+initial assessment of the quality of sequencing runs, producing plots with that
+information. HTSeq-Count takes a SAM/BAM file and GTF/GFF file containing gene
+models. It then counts, for each gene, how many aligned reads overlap that
+gene's exons.
+
+\subsection{Differential Expression Analysis Tools}
+
+Below we describe the tools that were used for differential expression analysis.
+These tools are integrated in the iRAP pipeline, and make are used in its fourth
+stage.
+
+\subsubsection*{DESeq}
+
+DESeq in an R package (see Section \ref{sec:mintools}), included in the
+Bioconductor super package \cite{20979621}. DESeq takes count data generated
+from RNA-Seq analysis assays. As count data is discrete and skewed, it is not
+well approximated by a normal distribution. DESeq solves this problem by
+applying a test based on the negative binomial distribution, which can reflect
+these properties. This method has a much higher power to detect differential
+expression.
+
+\subsubsection*{edgeR}
+
+edgeR in an R package (see Section \ref{sec:mintools}), included in the
+Bioconductor super package \cite{robinson2010edger}. It provides methods for the
+statistical analysis of count data from comparative experiments on next
+generation sequencing platforms, among which is RNA-Seq, the most common source
+of data used with edgeR. It has many characteristics in common with the
+previously mentioned DESeq, as it also uses negative binomial models (among
+others) to distinguish biological from technical variation. Later we describe
+how both tools can be used together to produce better results.
+
+\subsection{File Manipulation and Pre-processing Tools}
+
+Sometimes data is badly formated or otherwise in a format that is not compatible
+with a specific tool. This is particularly frequent when passing data between
+two different tools in a pipeline. As such, we need some intermediate tools that
+are able to easily manipulate and transform data, making it useful again. Below
+we present some tools that can be used to accomplish this task.
 
 \subsubsection*{SAM Tools}
 
-SAM Tools\footnote{\url{http://samtools.sourceforge.net/}} is a library 
+SAM Tools\footnote{\url{http://samtools.sourceforge.net/}} is a library
 package designed for parsing and manipulating alignment files in the SAM/BAM
 format \cite{Li2009} (see Section \ref{sec:formats}). SAM Tools has two separate
 implementations, one in C and the other in Java, with slightly different
@@ -245,15 +314,15 @@ search biologic sequence databases, but can be used for other purposes, like
 identifying an unknown species or comparing common genes in two related
 species.
 
+\subsubsection*{FASTX}
+
+\subsubsection*{FastQC}
+
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
-\begin{Notes}
-- Still relevant, not much to change.\\
-\end{Notes}
-
-As expected, the great diversity of \rnaseq{} tools brings with it a wealth of
+As expected, the great diversity of RNA-Seq tools brings with it a wealth of
 file formats. Some of these formats are developed from the ground up to satisfy
-a specific need, while other are mere contextual adaptations or specializations
+a specific need, while others are mere contextual adaptations or specializations
 of already established formats. Below we will present a few of the most popular
 and widely spread file formats, talking about their basic structure, the types
 of data they represent and their applications.
