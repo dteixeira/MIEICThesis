@@ -16,10 +16,10 @@ information.
 
 \section{Biological Base Concepts}
 
-\begin{Notes}
-- Base concepts look good.\\
-- Include part about RNA binding proteins.\\
-\end{Notes}
+%\begin{Notes}
+%- Base concepts look good.\\
+%- Include part about RNA binding proteins.\\
+%\end{Notes}
 
 Before dwelling in the details of the state of the art that are on the
 foundation of the thesis, it is important to explain some concepts of the
@@ -110,45 +110,42 @@ understanding the binding patterns of RBPs during a particular biological
 process is crucial to get insight into that process, both during health and
 disease conditions.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO Change places below.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Obtaining this genetic information is done experimentally, by employing a
-%sequencing technique. For quite some time this process was carried out using the
-%Sanger's and other similar sequencing methods methods \cite{Reis-Filho2009}.
-%Though effective, such methods were notably slow and costly, with large projects
-%like the Human Genome Project (HGP) consuming roughly thirteen years and US\$ 3
-%billion. These limitations were so severe that, other than the realm of human
-%genetics, this kind of study was restricted to model organisms, such as the
-%fruit fly and mouse genomes \cite{Wolf2013}. The past few years have seen the
-%appearance and rise in popularity of the \ngs{} techniques. These techniques
-%differ from the more classical ones by producing larger amounts of information,
-%at lower cost. They are also typically more cost effective than previous
-%techniques and can be easily employed by single laboratories, which has greatly
-%contributed to their popularity. As a disadvantage, \ngs{} techniques produce
-%shorter reads than their older counterparts, being that \qt{\textit{(...)
-%transcriptome assembly from billions of RNA-Seq reads (...) poses a significant
-%informatics challenge}} \cite[p. 671]{Martin2011}. Although the thesis will not
-%deal with the problems of sequencing techniques, it is important to indicate
-%that all read data sets that were used resulted from \ngs{} techniques. As such,
-%suitable techniques and tools for this particular type of data were used.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO END
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sequencing}
 
-\section{\rnaseq{} and \Trans{} Assembly}\label{sec:assembly}
+Obtaining genetic information is done experimentally, by employing a sequencing
+technique. For quite some time this process was carried out using the Sanger's
+and other similar sequencing methods methods \cite{Reis-Filho2009}. Though
+effective, such methods were notably slow and costly, with large projects like
+the Human Genome Project (HGP) consuming roughly thirteen years and US\$ 3
+billion. These limitations were so severe that, other than the realm of human
+genetics, this kind of study was restricted to model organisms, such as the
+fruit fly and mouse genomes \cite{Wolf2013}. The past few years have seen the
+appearance and rise in popularity of the \ngs{} techniques. These techniques
+differ from the more classical ones by producing larger amounts of information,
+at lower cost. They are also typically more cost effective than previous
+techniques and can be easily employed by single laboratories, which has greatly
+contributed to their popularity.
 
-\begin{Notes}
-- Again, careful with genome assembly references.\\
-- The part about genome assembly seems nice to have here, but explain that the
-focus is read alignment.\\
-\end{Notes}
+The rise in popularity and availability of \ngs{} techniques, coupled with the
+importance of RNA knowledge in understanding gene expression, led to the
+appearance of RNA-Seq. RNA-Seq makes use of these newly available
+deep-sequencing techniques to profile complete transcriptomes. This is, however,
+a difficult task to accomplish. \ngs{} techniques produce shorter reads than
+their older counterparts, being that \qt{\textit{(...) transcriptome assembly
+from billions of RNA-Seq reads (...) poses a significant informatics challenge}}
+\cite[p. 671]{Martin2011}.
 
-\Trans{} assembly is the process by which experimentally obtained genetic data
-reads can be organized and merged together in a partial or complete genome
-expression profile. As stated above, the advent of next generation sequencing
-techniques, with their reduced costs, greatly increased the availability of
-genome sequencing data.
+Although this thesis will not deal with the problems of sequencing techniques, it
+is important to indicate that the read data sets that were used resulted from
+\ngs{} techniques, in particular RNA-Seq. As such, suitable tools for this
+particular type of data were used.
+
+\subsection{\Trans{} Assembly}
+
+\Trans{} assembly is the process by which experimentally obtained RNA data reads
+can be organized and merged together in a partial or complete \trans. As stated
+above, the advent of next generation sequencing techniques, with their reduced
+costs, greatly increased the availability of transcript sequencing data.
 
 For years, microarrays were the standard tool available for examining features
 of the transcriptome and global patterns of gene expression \cite{Wolf2013}.
@@ -162,9 +159,7 @@ both reference guided assembly and \textit{de novo} assembly approaches
 \cite{Wilhelm2009}. \textit{De novo} or exploratory assembly has captured the
 interest of researchers in the past few years, leading to the appearance of
 multiple RNA-Seq tools that are capable of making this type of assembly without
-a reference genome \cite{nuno11:assemblathon}. Despite this amazing capability,
-we will restrict this project to reference genome guided problems, which are
-simpler and more suitable for a Masters level thesis.
+a reference genome \cite{nuno11:assemblathon}.
 
 \subsection{\rnaseq{} Tools}\label{sec:seqtools}
 
