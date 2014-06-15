@@ -140,7 +140,7 @@ is important to indicate that the read data sets that were used resulted from
 \ngs{} techniques, in particular RNA-Seq. As such, suitable tools for this
 particular type of data were used.
 
-\subsection{\Trans{} Assembly}
+\subsection{\Trans{} Assembly}\label{sec:transassembly}
 
 \Trans{} assembly is the process by which experimentally obtained RNA data reads
 can be organized and merged together in a partial or complete \trans. As stated
@@ -165,13 +165,109 @@ is read alignment and differential expression analysis.
 
 \section{RNA-Seq Analysis}
 
-\begin{Notes}
-- Describe the same workflow as iRAP.\\
-- Refer that we'll talk about specific tools below, and they all are Unix
-command line tools.
-\end{Notes}
+%\begin{Notes}
+%- Describe the same workflow as iRAP.\\
+%- Refer that we'll talk about specific tools below, and they all are Unix
+%command line tools.
+%\end{Notes}
 
 \subsection{RNA-Seq Pipeline}
+
+The analysis of RNA-Seq data is a complex process, with multiple stages. As
+such, in order to produce relevant results one needs to use a pipeline. An
+analysis pipeline is a set of tools, chained together in such a way that the
+output of one tool becomes the input to the succeeding tool.
+
+A typical RNA-Seq analysis pipeline is composed by six essential stages
+\cite{rnaseqpipeline} (see Figure \ref{fig:rnaseq}):
+
+\begin{description}
+
+  \item[Read quality control and improvement]
+  is a pre-processing stage. It comprises the usage of quality control tools,
+  whose function is to trim bad quality data, in order to improve the overall
+  quality of the data set. Other than direct data manipulation, this stage might
+  produce some statistical data about the reads, that can later be used to
+  better drive the succeeding stages.
+
+  \item[Sample contamination checking]
+  is also a pre-processing stage. As read data is obtained experimentally, it is
+  not uncommon for contamination of the samples to occur. Bacterial
+  contaminations, such as \emph{E. coli}, are fairly common and can sometimes
+  skew the analysis results. In some cases it is possible to detect these
+  contaminations and remove the affected data, hopefully improving the final
+  results.
+
+  \item[Read alignment]
+  is the stage in which reads are positioned against a reference sequence. This
+  sequence be either be a known and annotated reference genome (typically a
+  combination of a FASTA file and a GTF file) or an assembled transcriptome,
+  either assembled \emph{de novo} or against a reference genome (see Section
+  \ref{sec:transassembly}). This alignment will allow to assess gene abundance
+  in later stages of the pipeline.
+
+  \item[Quantification]
+  is the stage where transcript abundance is determined/estimated (gene
+  expression). This involves counting the number of occurrences of certain
+  transcripts in the read data. Typically this stage produces transcript count
+  tables, that can later be used for differential expression analysis.
+
+  \item[Differential expression]
+  is the stage where transcript abundances between different samples are
+  compared. As such, the produced count data is used to predict differences
+  between transcript abundances between two or more samples, effectively
+  demonstrating differences in gene expression. A common task for differential
+  expression analysis is the comparison between a control and a mutated sample.
+
+  \item[Result reporting]
+  is the final stage in most pipelines. In this stage the resulting data is
+  organized and represented in a manner that is useful to the user. This usually
+  involves producing plots, tables and reports. Some pipelines may perform
+  additional task before or after this stage, like gene set enrichment.
+
+\end{description}
+
+Note that this is only a generic conception of a RNA-Seq analysis pipeline. In
+practice new stages can be added and other can be removed, to better suit the
+experiment at hand and the available data. In the given example (Figure
+\ref{fig:rnaseq}) there is an additional stage, gene model parsing, that is only
+applied when the read are aligned against an annotated genome.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics{rnaseq}
+    \caption[Representation of a standard RNA-Seq analysis pipeline]{
+      Representation of a standard RNA-Seq analysis pipeline
+      \cite{rnaseqpipeline}. The analysis workflow has a slight variation
+      depending on whether an annotated genome or an assembled transcriptome are
+      used as reference for read alignment. Although this is a standard
+      representation of the stages of RNA-Seq analysis, stages can be added or
+      removed as needed to suit a particular assay.
+    }
+    \label{fig:rnaseq}
+  \end{center}
+\end{figure}
+
+
+\subsubsection*{iRAP}
+
+iRAP is a RNA-Seq analysis pipeline. It implements a workflow similar to the one
+described above, albeit with some differences (see Figure \ref{fig:irap}). iRAP
+also allows some stages of the analysis to be skipped. Differential expression
+analysis is one such stage. This particular analysis will only be performed at
+user request. The gene set enrichment stage (Figure \ref{fig:irap}, in dashed
+line) is also optional. This stage uses Piano \cite{varemo01042013}, an R
+package capable of conducting gene set analysis using various statistical
+methods, from different gene level statistics and a wide range of gene-set
+collections. However, this stage will not be analysed in depth, as gene set
+enrichment was not performed in this thesis.
+
+One of the major strengths of iRAP is the ability to choose the tools that are
+used in each stage. This allows for a vast array of pipeline customization
+possibilities, making it easy to adapt it to a particular experiment. Below we
+will present a set of tools, integrated in iRAP, that were used during this
+thesis.
 
 \begin{figure}[!htb]
   \begin{center}
