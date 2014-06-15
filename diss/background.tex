@@ -302,21 +302,27 @@ functionality. Beyond manipulation of SAM and BAM files, this package is able to
 convert between other read alignment formats, sort and merge alignments and show
 them in a text-based viewer.
 
-\subsubsection*{BLAST}
-
-BLAST\footnote{\url{http://blast.ncbi.nlm.nih.gov/Blast.cgi}} is a tool,
-implemented in C++, that is used to find regions of local similarity between
-biological sequences. It uses FASTA sequences (see Section \ref{sec:formats}) as
-search input and outputs the results reports in XML, HTML or plain text. There
-are several different BLAST programs available at the moment, that can be used
-depending on our objective and type of data. BLAST is particularly useful to
-search biologic sequence databases, but can be used for other purposes, like
-identifying an unknown species or comparing common genes in two related
-species.
-
 \subsubsection*{FASTX}
 
+FASTX\footnote{\url{http://hannonlab.cshl.edu/fastx_toolkit/}} (FASTX-Toolkit)
+is a collection of command line tools for pre-processing short read files. These
+short read files can be either in FASTA or FASTQ format. FASTX is used to
+manipulate these files before the aligning stage, in order to produce better
+results. It includes tools to convert files from FASTQ to FASTA format, assess
+statistics about the reads, filter and remove sequences based on their quality,
+among others. Although the toolkit contains only command line based tools, some
+of them are already integrated in the Galaxy web based workflow manager.
+
 \subsubsection*{FastQC}
+
+FastQC\footnote{\url{http://www.bioinformatics.babraham.ac.uk/projects/fastqc/}}
+is a tool for quality control for \ngs{} data, implemented in Java. Its main
+objective is to find errors and problematic areas in this information. FastQC
+accepts FASTQ, SAM and BAM files, and is able to report results both inside the
+tool itself and by exporting HTML files. These reports contain, among other
+information, summary graphs and table that allow quick access to the data.
+FastQC can either be used as a standalone tool with its graphical interface, or
+as part of an analysis pipeline.
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
@@ -325,7 +331,8 @@ file formats. Some of these formats are developed from the ground up to satisfy
 a specific need, while others are mere contextual adaptations or specializations
 of already established formats. Below we will present a few of the most popular
 and widely spread file formats, talking about their basic structure, the types
-of data they represent and their applications.
+of data they represent and their applications. Some examples of this file
+formats can be consulted in Appendix \ref{annex:formats}.
 
 \subsubsection*{FASTA}
 
