@@ -1,1 +1,126 @@
 \chapter{iRAP Example Configuration}
+
+\begin{lstlisting}[numbers=none, breaklines=true]
+  # =============================================================================
+  # Name of the experiment. (no spaces)
+  # All files produced by irap will be placed in a folder with the given name.
+  name=myexp
+
+  # =============================================================================
+  # Name of the species.
+  species=homo_sapiens
+
+  # =============================================================================
+  # FASTA file with the reference genome.
+  reference=Homo_sapiens.GRCh37.66.dna.fa
+
+  # =============================================================================
+  # GTF file with the annotations.
+  gtf_file=Homo_sapiens.GRCh37.66.gtf
+
+  # =============================================================================
+  # iRAP options (may be provided in the command line).
+
+  # Mapper
+  # mapper=<pick one supported by iRAP>
+
+  # Quantification method
+  # quant_method=<pick one supported by iRAP>
+
+  # Differential expression method
+  # de_method=<pick one supported by iRAP>
+
+  # Gene set enrichment (GSE) analysis
+  # gse_tool=piano
+
+  # Check data (reads) quality (on|off)
+  # qual_filtering=on
+
+  # Trim all reads to the minimum read size after quality trimming (y|n)
+  # (only applicable if qual_filtering is on)
+  # trim_reads=y
+
+  # Minimum base quality accepted (default is 10)
+  # min_read_quality=10
+
+  # Contamination check (cont_index parameter).  Reads that likely originate from
+  # organisms other than the one under study can be discarded during
+  # pre-processment of the reads. This is done by aligning the reads to the
+  # genomes of organisms that might be a source of contamination and discard
+  # those that map with a high degree of fidelity. By default iRAP will check if
+  # the data is contaminated by e-coli. An example to create a contamination
+  # "database" is provided in the examples/ex_add2contaminationDB.sh script. The
+  # value of the parameter should be the file name prefix of the bowtie index
+  # files.
+
+  # Disable contamination check
+  # cont_index=no
+
+  # Default value
+  # cont_index=$(data_dir)/contamination/e_coli
+
+  ###########################################
+  # Miscellanious options
+
+  # Number of threads that may be used by iRAP
+  # max_threads=1
+
+  # Exon level quantification (y|n)
+  # exon_quant=y
+
+  # Transcript level quantification (y|n)
+  # transcript_quant=y
+
+  # =============================================================================
+  # Full or relative path to the directory where all the data can be found.
+  data_dir=data
+
+  # =============================================================================
+  # Only necessary if you intend to perform Differential Expression analysis.
+
+  # Contrasts
+  contrasts=purpleVsPink purpleVsGrey
+
+  # Definition of each constrast
+  purlpleVsPink=Purple Pink
+  purlpleVsGrey=Purple Grey
+
+  # Groups definition
+  Purlple=myLib1 myLib2
+  Pink=myLib3
+  Grey=myLib4
+
+  # Technical replicates
+  technical.replicates="myLib1,myLib2;myLib3;mylib4"
+
+  # =============================================================================
+  # Data
+  # *_rs      => read size
+  # *_qual    => quality encoding (33|64)
+  # *_sd      => standard deviation
+  # *_ins     => insert size
+
+  myLib1=f1.fastq
+  myLib1_rs=75
+  myLib1_qual=33
+
+  myLib2=f2.fastq
+  myLib2_rs=75
+  myLib2_qual=33
+
+  myLib3=f3_1.fastq f3_2.fastq
+  myLib3_rs=50
+  myLib3_qual=33
+  myLib3_ins=350
+  myLib3_sd=60
+
+  myLib4=f4_1.fastq f4_2.fastq
+  myLib4_rs=50
+  myLib4_qual=33
+  myLib4_ins=350
+  myLib4_sd=60
+
+  # List the names of your single-end (se) and paired (pe) libraries
+  se=myLib1 myLib2
+  pe=myLib3 myLib4
+\end{lstlisting}
