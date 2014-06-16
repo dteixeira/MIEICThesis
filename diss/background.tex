@@ -497,10 +497,10 @@ their initial relation, both formats continue to be developed individually.
 
 \section{Data Mining}\label{sec:mlearning}
 
-\begin{Notes}
-- Still relevant, don't change.\\
-- Important part is now clustering, not classification.
-\end{Notes}
+%\begin{Notes}
+%- Still relevant, don't change.\\
+%- Important part is now clustering, not classification.
+%\end{Notes}
 
 Data mining is the process of \qt{\textit{extracting or \qt{mining} knowledge
 from large amounts of data}} \cite[p. 5]{han2006data}. As such, it consists of a
@@ -515,8 +515,8 @@ information systems, to produce meaningful knowledge.
 
 Because of their large quantities of input data, data mining tasks are usually
 totally, or at least partially, automated. As such, there are several algorithms
-for these tasks and tools that implements such algorithms, as presented in
-Section \ref{sec:minalgo} and Section \ref{sec:mintools}, respectively.
+for these tasks and tools that implement such algorithms, as presented in
+Section \ref{sec:clusteralgo} and Section \ref{sec:clustertool}, respectively.
 
 We can divide data mining into main types: descriptive data mining and
 predictive data mining \cite{Fayyad1996}. Descriptive data mining is focused on
@@ -525,7 +525,7 @@ future values, it concerns the intrinsic structure, relations and
 interconnectedness of the data being analyzed, presenting its interesting
 characteristics without having any predefined target. On the other hand,
 predictive data mining is used to predict explicit values, based on patterns
-determined from the dataset. With predictive data mining we try to build models
+determined from the data set. With predictive data mining we try to build models
 using known data and use those models as a base to predict future behavior.
 
 As we're seeing, data mining does not represent a single type problem. In fact
@@ -537,18 +537,18 @@ method. A brief review of the most common methods is given below.
 
   \item[Classification]
   is a method that tries to generalize the already known structure of a
-  dataset, so that it applies to new datasets. In other words, with
+  data set, so that it applies to new data sets. In other words, with
   classification we try to learn a function that is capable of mapping our data
   into predefined classes.
 
   \item[Regression]
   tries to learn a function that models relationships between variables in the
-  dataset. That function can latter be used to find real value predictions of
-  future behavior of the same or similar datasets.
+  data set. That function can latter be used to find real value predictions of
+  future behavior of the same or similar data sets.
 
   \item[Clustering]
   consists in identifying a finite set of categories or clusters of similar
-  values, to describe the dataset. As such, it is used without prior knowledge
+  values, to describe the data set. As such, it is used without prior knowledge
   about data structure.
 
   \item[Summarization]
@@ -568,7 +568,14 @@ method. A brief review of the most common methods is given below.
 
 \end{description}
 
-\subsection{Data Mining Algorithms}\label{sec:minalgo}
+Note that due to the nature of the work of this thesis we will focus on
+clustering analysis techniques. As such, the following sections will contain a
+more in depth review of these methods, along with descriptions of the used
+algorithms and tools.
+
+\subsection{Clustering Techniques}\label{sec:clustertech}
+
+\subsection{Clustering Algorithms}\label{sec:clusteralgo}
 
 \begin{Notes}
 - Focus is now on clustering algorithms.
@@ -977,7 +984,7 @@ internal analysis.\\
 %also increases and at a value of AUC equal to $1.0$ the model is able to
 %perfectly separate both groups.
 
-\subsection{Data Mining Tools}\label{sec:mintools}
+\subsection{Clustering Tools}\label{sec:clustertool}
 
 Except in rare cases of very specific problems, it typically makes no sense for
 someone to implement any data mining algorithm that they might need. In fact,
@@ -1093,10 +1100,10 @@ that serve as base of the thesis. We also reviewed the concepts on RNA-Seq and
 data mining and presented short analyses of concrete tools that will likely be
 used during the project.
 
-At this moment we do not possess all the necessary information about the dataset
-that will be used in the data mining phase of the project. We are unable, at the
-present, to determine the nature of our data, which means that we cannot predict
-whether it could be modeled by classification algorithms. As such, we presented
-ILP as an alternative approach for this situation. In case ILP techniques become
-in fact necessary, further work will include a more profound and complete
-revision.
+At this moment we do not possess all the necessary information about the data
+set that will be used in the data mining phase of the project. We are unable, at
+the present, to determine the nature of our data, which means that we cannot
+predict whether it could be modeled by classification algorithms. As such, we
+presented ILP as an alternative approach for this situation. In case ILP
+techniques become in fact necessary, further work will include a more profound
+and complete revision.
