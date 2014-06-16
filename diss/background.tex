@@ -597,13 +597,82 @@ grid-based methods; and model-based methods \cite{han2006data}.
 
 \subsubsection*{Partitioning Methods}
 
+Partitioning methods are based around the construction of partitions of the data
+set. Each one of the constructed partitions represents a data cluster. Given a
+dataset with $n$ elements, and a number $k$ of clusters, the correct application
+of these methods must verify two conditions: (1) each partition must contain at
+least one object ($k \leq n$), and (2) a single object of the data set must only
+belong to one partition \cite{han2006data}.
+
+Given a number $k$ of clusters (typically chosen \emph{a priori}), an iterative
+relocation is used in order to successively reclassify objects and hopefully
+improving their clustering \cite{DBLP:journals/corr/abs-1205-1117}. These
+methods try to maximize cohesion between objects in the same partition, while
+assuring that clusters are as distant as possible between themselves. In other
+words, the elements within a partition should be as similar or \qt{close} as
+possible between them, while being as different as possible from elements in
+other groups.
+
+Achieving the optimal partitioning would require the exhaustive enumeration and
+combination of all possible clusters. This is, of course, impractical and even
+unfeasible in some situations. As such, most partitioning methods adopt some
+sort of heuristic evaluation of their clusters' quality. For example, the
+\emph{k-means} algorithm uses the mean value of the objects in a cluster to
+represent the same cluster; the \emph{k-medoids} algorithm, which is
+centroid based, used an object that is roughly at the center of the cluster to
+represent it. Typically these methods work well with \qt{spherical} clusters,
+but may falter if clusters have more complex shapes (\qt{concave} shaped
+clusters, for example).
+
 \subsubsection*{Hierarchical Methods}
+
+These methods create an hierarchical division between objects in the data set.
+This hierarchy is represented as a tree structure. There are two strategies for
+hierarchical analysis, the \emph{divisive} strategy and the \emph{agglomerative}
+strategy \cite{han2006data}. The \emph{divisive} strategy consists of putting
+all objects in the same cluster and then divide them in multiple clusters, based
+on their distance. This process is repeated iteratively, until every object is
+in its own cluster. Inversely, the \emph{agglomerative} strategy starts by
+putting each object in its own clustering, and then iteratively merges clusters
+until all objects are part of one cluster.
+
+One notable weak point of hierarchical methods is that calculated results are
+irreversible, that is, once an objects is attributed to a cluster, that result
+will not be evaluated again. This may lead to incorrect labeling of some
+objects. These problems can be minimized by pre-processing the data set. Note
+that this single pass evaluation gives hierarchical methods good computational
+performance.
 
 \subsubsection*{Density-based Methods}
 
+Unlike the previous methods that rely on the notion of \emph{distance} between
+objects, density-based methods are based on the notion of \emph{cluster density}
+\cite{han2006data}. The basic idea of these methods is to keep growing a given
+cluster while the number of objects in its vicinity (or \emph{density}) exceeds
+a certain user defined threshold. Density-based methods are particularly useful
+to discover clusters with irregular shapes. However, algorithms implementing
+these kind of analysis, like DBSCAN, are usually very computationally heavy,
+both in terms of processing power and memory usage (although optimizations
+exist).
+
 \subsubsection*{Grid-based Methods}
 
+Grid-based methods transform the data set object space into a finite number of
+cells, forming a grid structure
+\cite{han2006data,DBLP:journals/corr/abs-1205-1117}. All clustering operations
+are then conducted using the grid representation of the data set. Algorithms
+that implement this strategy are usually high-performance, as execution times
+are dependent on the number of cells in each dimension of the grid, rather than
+on the number of objects in the data set.
+
 \subsubsection*{Model-based Methods}
+
+Model-based methods work by hypothesizing a mathematical model for each cluster
+and then find the objects that best fit those models
+\cite{DBLP:journals/corr/abs-1205-1117}. These methods typically follow the
+assumption that objects are distributed by clusters according to an underlying
+statistical probability. This also makes it possible for the number of clusters
+to be automatically determined, based on such statistics \cite{han2006data}.
 
 \subsection{Clustering Algorithms}\label{sec:clusteralgo}
 
