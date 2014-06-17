@@ -730,6 +730,75 @@ pre classified data.\\
 - Describe three internal evaluation methods.\\
 \end{Notes}
 
+Most clustering methods' goal is to achieve high similarity between objects in
+the same cluster, while maintaining the dissimilarity between other clusters
+\cite{Manning:2008:IIR:1394399}. This is called an \emph{internal evaluation
+criterion}, as it is only dependent on the clustered data itself. However, high
+internal evaluation scores do not necessarily translate to good effectiveness in
+a real application.
+
+To provide a better judgement of clustering results we may use \emph{external
+criteria} \cite{Manning:2008:IIR:1394399}. Such criteria act as a surrogate for
+the judgement of a human field expert. As such, they must use a set of data
+outside the clustering data set, that was pre-classified by an expert. This set
+of data is considered a golden standard, that is, the best possible outcome for
+the clustering analysis, under reasonable conditions.
+
+Note that in the specific case of this thesis no pre-classified data set was
+available. As such, we focused our assessments purely on internal evaluation
+methods. Despite this lack of automated external evaluation, our results were
+evaluated by expert in this field, as explained in Chapter \ref{chap:casestudy}.
+
+\subsubsection*{Silhouette Coefficient}
+
+The silhouette coefficient is a direct representation of the \emph{intra-cluster
+similarity, inter-cluster dissimilarity} concept. In other words, the silhouette
+coefficient improves as the cohesion between elements in the same group and the
+farthest the distance from that particular group to all the other groups
+\cite{Rousseeuw198753}. The silhouette coefficient is computed using the formula
+\begin{equation}
+  \centering
+  \label{eq:silh}
+  s(i) = \left\{\begin{array}{lcl}
+  1 - \frac{a(i)}{b(i)}     & \quad \text{if}\ a(i) < b(i), \\
+  0                         &  \quad \text{if}\ a(i) = b(i), \\
+  \frac{b(i)}{a(i)} - 1     &  \quad \text{if}\ a(i) > b(i),
+  \end{array}\right.
+\end{equation}
+where $a(i)$ be the average dissimilarity between $i$ and all other objects in
+the same cluster; and $b(i)$ be the lowest average dissimilarity between $i$ and
+any other cluster to which $i$ does not belong. The higher the value of $s(i)$,
+the more appropriately clustered the data point is. Inversely, low silhouette
+values are the result of unfitting clustering. The average $s(i)$ of a single
+cluster can be used to measure how tightly all its data points are grouped. The
+average $s(i)$ over the entire data set can be used to measure how appropriately
+the data has been clustered.
+
+The silhouette coefficient can also be used to provide a visual representation
+of the clustering results, as dendograms do for hierarchical clustering
+analysis (Figure \ref{fig:sil}). This plot combines silhouettes widths for all
+objects in the data set, the average silhouette width for each cluster and the
+silhouette of the complete data set.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=1.0\textwidth]{sil}
+    \caption[Example of a silhouette plot]{
+      Example of a silhouette plot, using the PAM algorithm. It represents the
+      silhouettes of every objects in the data set, as well as the average
+      silhouette for each cluster ($k = 4$) and the average silhouette for the
+      complete data set.
+    }
+    \label{fig:sil}
+  \end{center}
+\end{figure}
+
+Other than that, the average silhouette of the clustering results may be used to
+determine the best number of clusters. This is done by repeatedly executing the
+analysis with different $k$ values, between a specified range. The chosen $k$
+value is the one that produces the best average silhouette.
+
 \subsection{Common Distance Measures}\label{sec:clusterdist}
 
 Many clustering algorithms rely on the notion of \emph{distance} between objects
@@ -802,7 +871,7 @@ For binary attributes, the Jaccard coefficient (similarity) is computed as
 \begin{equation}
   \centering
   \label{eq:jacccoefbin}
-  sim_{xy} = \frac{q}{q + r + s}
+  sim(x, y) = \frac{q}{q + r + s}
 \end{equation}
 where $q$ is the number of attributes that are true for both objects; $r$ is the
 number of attributes that are true for object $x$ and false for object $y$; and
@@ -815,7 +884,7 @@ obtained directly from this coefficient, as shown in Equation
 \begin{equation}
   \centering
   \label{eq:jaccdistbin}
-  dist_{xy} = 1 - sim_{xy}
+  dist(x, y) = 1 - sim(x, y)
 \end{equation}
 In this representation a value of 0 is given to two objects that are close,
 while the value 1 is attributed to distant objects.
@@ -828,7 +897,7 @@ the same way than between binary attributes.
 \begin{equation}
   \centering
   \label{eq:jacccoefset}
-  sim_{xy} = \frac{\left | x \cap y \right |}{\left | x \cup y \right |}
+  sim(x, y) = \frac{\left | x \cap y \right |}{\left | x \cup y \right |}
 \end{equation}
 
 \subsection{Clustering Tools}\label{sec:clustertool}
