@@ -326,7 +326,7 @@ typically the ones produced by TopHat, outputting GTF files as a result.
 \paragraph{CummeRbund}
 
 Lastly, CummeRbund\footnote{\url{http://compbio.mit.edu/cummeRbund/}} is an R
-package (see Section \ref{sec:mintools}) designed to help the visualization and
+package (see Section \ref{sec:clustertool}) designed to help the visualization and
 analysis of Cufflinks' \rnaseq{} output. As such, it is not directly involved in
 the trascriptome alignment process. It takes the various output files from
 Cufflinks and uses them to build a SQLite database describing appropriate
@@ -361,7 +361,7 @@ stage.
 
 \subsubsection*{DESeq}
 
-DESeq in an R package (see Section \ref{sec:mintools}), included in the
+DESeq in an R package (see Section \ref{sec:clustertool}), included in the
 Bioconductor super package \cite{20979621}. DESeq takes count data generated
 from RNA-Seq analysis assays. As count data is discrete and skewed, it is not
 well approximated by a normal distribution. DESeq solves this problem by
@@ -371,7 +371,7 @@ expression.
 
 \subsubsection*{edgeR}
 
-edgeR in an R package (see Section \ref{sec:mintools}), included in the
+edgeR in an R package (see Section \ref{sec:clustertool}), included in the
 Bioconductor super package \cite{robinson2010edger}. It provides methods for the
 statistical analysis of count data from comparative experiments on next
 generation sequencing platforms, among which is RNA-Seq, the most common source
@@ -676,21 +676,55 @@ to be automatically determined, based on such statistics \cite{han2006data}.
 
 \subsection{Clustering Algorithms}\label{sec:clusteralgo}
 
-\begin{Notes}
-- Describe used algorithms.\\
-\end{Notes}
-
 Below we present the clustering algorithms that were used during the progress of
 this thesis. These methods were chosen based on their suitability for the tasks
 at hand, as will be described in Chapter \ref{chap:implementation}.
 
 \subsubsection*{$k$-Medoids}
 
-\subsubsection*{Ward's Hierarchical Clustering}
+The $k$-medoids specification appeared as an evolution of the $k$-means
+algorithm. As $k$-means uses the mean value of the objects of a cluster to
+determine its center, it is sensitive to outliers: an object with a large,
+disproportional value might skew the results. $k$-medoids mitigates this problem
+by using medoids, picking a specific object of the cluster as its \qt{center}
+\cite{han2006data}. Medoids are chosen randomly at the beginning. This means
+that the algorithm may produce different results depending on the starting
+objects (it does not reach an optimal solution). The remaining objects are then
+clustered with the medoid to which they are most similar.
 
-\cite{murtagh2011ward}
+The most common implementation of $k$-medoids is the Partitioning Around
+Medoids (PAM) algorithm. It works in the following way:
 
-\subsubsection*{DBSCAN}
+\begin{tabular}{l l}
+  (1) & arbitrarily choose k objects in D as the initial representative objects or seeds;\\
+  (2) & \textbf{repeat}\\
+  (3) & \hspace*{0.5cm}assign each remaining object to the cluster with the nearest representative object;\\
+  (4) & \hspace*{0.5cm}randomly select a non-representative object, $o_{random}$;\\
+  (5) & \hspace*{0.5cm}compute the total cost, $S$, of swapping representative
+  object, $o_{j}$, with $o_{random}$;\\
+  (6) & \hspace*{0.5cm}if $S < 0$ then swap $o_{j}$ with $o_{random}$ to form
+  the new set of $k$ representative objects;\\
+  (7) & \textbf{until no change}.\\
+\end{tabular}
+
+\subsubsection*{Average Linkage Hierarchical Clustering}
+
+Average linkage is a method for calculating distance between clusters in the
+standard hierarchical clustering analysis. In order to decide which clusters
+should be combined or divided, in agglomerative and divisive clustering
+respectively, we need a measure of dissimilarity between those clusters. In the
+average linkage method this dissimilarity is computed based on the average
+distance between all elements in both clusters. The average is calculated over
+all pairs of objects composed by one object from the first cluster and one
+object from the second. The linkage function is therefore defined as
+\begin{equation}
+  \centering
+  \label{eq:linkage}
+  D(X, Y) = \frac{1}{N_{X} \times N_{Y}}\sum_{i=1}^{N_{X}}\sum_{j=1}^{N_{Y}}d(x_{i}, y_{i}), \quad x_{i} \in X, y_{j} \in Y 
+\end{equation}
+where $X$ and $Y$ are two clusters; $N_{X}$ and $N_{Y}$ and the number of
+elements in clusters $X$ and $Y$, respectively; and $d(x_{i}, y_{j})$ is the
+distance between objects $x \in X$ and $y \in Y$.
 
 \subsubsection*{Inductive Logic Programming}
 
@@ -722,13 +756,6 @@ it comes to computational resource consumption and run for long periods of time
 \cite{fonseca2003implementation}.
 
 \subsection{Clustering Evaluation and Assessment}\label{sec:clustereval}
-
-\begin{Notes}
-- Describe the two types of evaluation.\\
-- Describe that we will only worry about internal evaluation, as we don't have
-pre classified data.\\
-- Describe three internal evaluation methods.\\
-\end{Notes}
 
 Most clustering methods' goal is to achieve high similarity between objects in
 the same cluster, while maintaining the dissimilarity between other clusters
@@ -1004,19 +1031,8 @@ oriented applications, including FASTA, FASTQ, BAM and GFF.
 
 \section{Chapter Conclusions}
 
-\begin{Notes}
-- Remove the uncertainty part, talk about what was done.\\
-\end{Notes}
-
 In this chapter we gave a brief introduction of the molecular biology concepts
 that serve as base of the thesis. We also reviewed the concepts on RNA-Seq and
-data mining and presented short analyses of concrete tools that will likely be
-used during the project.
-
-At this moment we do not possess all the necessary information about the data
-set that will be used in the data mining phase of the project. We are unable, at
-the present, to determine the nature of our data, which means that we cannot
-predict whether it could be modeled by classification algorithms. As such, we
-presented ILP as an alternative approach for this situation. In case ILP
-techniques become in fact necessary, further work will include a more profound
-and complete revision.
+data mining and presented short analyses of concrete tools and algorithms that
+were used during this thesis. These concepts will be revisited in the next
+chapters, as needed.
