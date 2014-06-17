@@ -677,9 +677,12 @@ to be automatically determined, based on such statistics \cite{han2006data}.
 \subsection{Clustering Algorithms}\label{sec:clusteralgo}
 
 \begin{Notes}
-- Start by stating why only clustering is referred.\\
 - Describe used algorithms.\\
 \end{Notes}
+
+Below we present the clustering algorithms that were used during the progress of
+this thesis. These methods were chosen based on their suitability for the tasks
+at hand, as will be described in Chapter \ref{chap:implementation}.
 
 \subsubsection*{$k$-Medoids}
 
@@ -720,6 +723,114 @@ it comes to computational resource consumption and run for long periods of time
 
 \subsection{Clustering Evaluation and Assessment}\label{sec:clustereval}
 
+\begin{Notes}
+- Describe the two types of evaluation.\\
+- Describe that we will only worry about internal evaluation, as we don't have
+pre classified data.\\
+- Describe three internal evaluation methods.\\
+\end{Notes}
+
+\subsection{Common Distance Measures}\label{sec:clusterdist}
+
+Many clustering algorithms rely on the notion of \emph{distance} between objects
+in the data set. These distances are used as a measure of
+similarity/dissimilarity between those objects. Typically, objects that are
+close to each other are considered similar, as opposed to objects that are far
+away from each other and therefore considered different. Below we will present
+some common types of distance measure that are used in clustering methods.
+
+\subsubsection*{Euclidean Distance}
+
+Euclidean distance is one the most common distance measures. It represents the
+geometric distance between two points, in a $n$-dimensional space
+\cite{DBLP:journals/corr/abs-1205-1117}. Euclidean distance can be formulated as
+shown in Equation \ref{eq:eucl} (for $n$-dimensions).
+\begin{equation}
+  \centering
+  \label{eq:eucl}
+  d(x, y) = \sqrt{\sum_{i = 1}^{n}\left | x_{i}  - y_{i}\right |^{2}}
+\end{equation}
+
+\paragraph{Squared Euclidean Distance}
+
+The squared Euclidean distance is a simple variation of the stadard distance,
+obtained by squaring it (Equation \ref{eq:sqeucl}). It is used when there is a
+need to attribute progressively greater weight to objects that are far apart
+from each other.
+\begin{equation}
+  \centering
+  \label{eq:sqeucl}
+  d(x, y) = \left (\sqrt{\sum_{i = 1}^{n}\left | x_{i}  - y_{i}\right |^{2}} \right)^{2} = \sum_{i = 1}^{n}\left | x_{i}  - y_{i}\right |^{2}
+\end{equation}
+
+\subsubsection*{Manhattan Distance}
+
+The Manhattan distance is between two objects is sum of the differences between
+each of their components. In other words, it is equivalent to the distance
+between the two objects, if a $n$-dimensional grid-like path was followed
+\cite{DBLP:journals/corr/abs-1205-1117}. It is defined as shown in Equation
+\ref{eq:manhattan}.
+\begin{equation}
+  \centering
+  \label{eq:manhattan}
+  d(x, y) = \sum_{i = 1}^{n}\left | x_{i}  - y_{i}\right |
+\end{equation}
+
+\subsubsection*{Chebychev Distance}
+
+The Chebychev distance if less common than the previously mentioned distances.
+The Chebychev distance between two objects is defined as the maximum distance
+between components of the objects (Equation \ref{eq:chev}). Is is useful in
+situation where two object must necessarily be considered different if one of
+their components is different, as the use of the maximum value removes the
+dampening factors of other (closer) components.
+\begin{equation}
+  \centering
+  \label{eq:chev}
+  d(x, y) = max \left \{ \left | x_{i}  - y_{i} \right | \right \}
+\end{equation}
+
+\subsubsection*{Jaccard Distance}
+
+The Jaccard distance is a measure of dissimilarity between two objects. It is
+related to the Jaccard coefficient, a similarity measure. These measures are
+applicable to binary and non-binary (set) data. In these cases, a simple
+geometric distance, like the Euclidean distance, might not accurately represent
+the distance similarity (or dissimilarity) between two objects.
+
+For binary attributes, the Jaccard coefficient (similarity) is computed as
+\begin{equation}
+  \centering
+  \label{eq:jacccoefbin}
+  sim_{xy} = \frac{q}{q + r + s}
+\end{equation}
+where $q$ is the number of attributes that are true for both objects; $r$ is the
+number of attributes that are true for object $x$ and false for object $y$; and
+$s$ is the number of attributes that are false for object $x$ and true for
+object $y$. Note that by definition the similarity coefficient is a value
+between 0 and 1, where 0 indicates that the objects are completely different,
+while 1 indicates that the objects are exactly equal. A distance measure can be
+obtained directly from this coefficient, as shown in Equation
+\ref{eq:jaccdistbin}.
+\begin{equation}
+  \centering
+  \label{eq:jaccdistbin}
+  dist_{xy} = 1 - sim_{xy}
+\end{equation}
+In this representation a value of 0 is given to two objects that are close,
+while the value 1 is attributed to distant objects.
+
+Similarly, the Jaccard coefficient and distance can be computed for sets. This
+can be useful to determine distance between to objects whose attributes contain
+nominal values. The Jaccard coefficient for sets is calculated as shown in
+Equation \ref{eq:jacccoefset}, while the distance between sets is calculated in
+the same way than between binary attributes.
+\begin{equation}
+  \centering
+  \label{eq:jacccoefset}
+  sim_{xy} = \frac{\left | x \cap y \right |}{\left | x \cup y \right |}
+\end{equation}
+
 \subsection{Clustering Tools}\label{sec:clustertool}
 
 Except in rare cases of very specific problems, it typically makes no sense for
@@ -728,15 +839,11 @@ today we have lots of data mining tools (many of which are free), that already
 implement many of those algorithms. These tools are usually customizable, making
 it easy to adapt them to most problems. Below we'll briefly review some of the
 most popular data mining tools, that apply to the specific needs of this thesis.
+Note that some of these tools, namely RapidMiner and Weka, were only used in the
+testing stages of the implementation. As such, they don't interact with the
+finished systems.
 
 \subsubsection*{RapidMiner}
-
-\begin{Notes}
-- Still relevant.\\
-- Refer that RapidMiner and Weka were only used for testing purposes, and are
-note part of the final solutions.\\
-- Refer other relevant R packages.\\
-\end{Notes}
 
 RapidMiner\footnote{\url{http://www.rapidminer.com/}} is a complete solution for
 data mining problems. it is available as a standalone GUI based application, as
@@ -821,9 +928,10 @@ in the context of molecular biology \cite{lmucs-papers:Leisch:2002}. It is
 primarily based on R. It is under active development, with two stable releases
 each year. Counting with more than seven hundred different packages, it is the
 most comprehensive set of genomic data analysis tools available for the R
-programming language. It also provides a set of tools to read and manipulate
-several of the most common file formats used in molecular biology oriented
-applications, including FASTA, FASTQ, BAM and GFF.
+programming language. It contains many of the tools that are part of most open
+source biological analysis pipelines. It also provides a set of tools to read
+and manipulate several of the most common file formats used in molecular biology
+oriented applications, including FASTA, FASTQ, BAM and GFF.
 
 \section{Chapter Conclusions}
 
