@@ -6,7 +6,7 @@
 %- Change transcriptome assembly to read alignment.\\
 %\end{Notes}
 
-In this chapter we will begin by making a more in depth presentation of the
+In this chapter we will begin by making a more in-depth presentation of the
 process of gene expression. This will be followed by a literature and state of
 the art review in the fields of read alignment, differential expression analysis
 and data mining. We will present the tools used in the development of the
@@ -38,8 +38,8 @@ itself is composed by two main stages, transcription and translation
 Transcription is the stage at which genetic data in the form of \dna{} is used
 to synthesize \rna{}, being this the process that concerns the thesis' main
 question. Several different types of \rna{} are produced by this process,
-including mRNA (which specifies the sequences of amino acids that form a
-protein), rRNA and tRNA, both later used in the translation stage. Simplifying
+including \emph{mRNA} (which specifies the sequences of amino acids that form a
+protein), \emph{rRNA} and \emph{tRNA}, both later used in the translation stage. Simplifying
 a gene's structure, it can be seen as composed by two types of sequences,
 introns and exons, as seen in Figure \ref{fig:intron_exon}.
 
@@ -230,8 +230,8 @@ A typical RNA-Seq analysis pipeline is composed by six essential stages
 Note that this is only a generic conception of a RNA-Seq analysis pipeline. In
 practice new stages can be added and other can be removed, to better suit the
 experiment at hand and the available data. In the given example (Figure
-\ref{fig:rnaseq}) there is an additional stage, gene model parsing, that is only
-applied when the read are aligned against an annotated genome.
+\ref{fig:rnaseq}) there is an additional stage, \emph{gene model parsing}, that
+is only applied when the read are aligned against an annotated genome.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -260,7 +260,7 @@ user request. The gene set enrichment stage (Figure \ref{fig:irap}, in dashed
 line) is also optional. This stage uses Piano \cite{varemo01042013}, an R
 package capable of conducting gene set analysis using various statistical
 methods, from different gene level statistics and a wide range of gene-set
-collections. However, this stage will not be analysed in depth, as gene set
+collections. However, this stage will not be analysed in-depth, as gene set
 enrichment was not performed in this thesis.
 
 One of the major strengths of iRAP is the ability to choose the tools that are
@@ -292,7 +292,7 @@ described below).
 
 The Tuxedo suite is a free, open-source collection of applications that has been
 widely adopted as analysis toolset for fast alignment of short reads. It is
-composed by four separate tools, Bowtie, TopHat, Cufflinks and CummRbund,
+composed by four separate tools (Bowtie, TopHat, Cufflinks and CummRbund)
 briefly reviewed below. These tools are extensively used for \rnaseq{} analysis.
 Although the applications are made for command line execution, there are several
 workflow managers, like Galaxy\footnote{\url{http://galaxyproject.org/}}, that
@@ -340,7 +340,7 @@ HTSeq is a programming framework used for processing data resulting from next
 generation sequencing methods \cite{htseq}, developed in Python. While many
 tools can efficiently align reads, sometimes data needs to be manipulated before
 being passed to those tools. This data can either be badly formated (or
-\qt{dirty}) or simply in a format different from the one that is needed. The
+\qt{dirty}), or simply in a format different from the one that is needed. The
 latter is a particularly common problem when trying to pass the results of one
 tool to the one that succeeds it in the pipeline. HTSeq is useful to easily
 create scripts that accomplish this task, acting as a \qt{glue} between tools.
@@ -356,8 +356,7 @@ gene's exons.
 \subsection{Differential Expression Analysis Tools}
 
 Below we describe the tools that were used for differential expression analysis.
-These tools are integrated in the iRAP pipeline, and make are used in its fourth
-stage.
+These tools are integrated in the iRAP pipeline, being used in its fourth stage.
 
 \subsubsection*{DESeq}
 
@@ -413,7 +412,7 @@ of them are already integrated in the Galaxy web based workflow manager.
 
 FastQC\footnote{\url{http://www.bioinformatics.babraham.ac.uk/projects/fastqc/}}
 is a tool for quality control for \ngs{} data, implemented in Java. Its main
-objective is to find errors and problematic areas in this information. FastQC
+objective is to find errors and problematic areas in \ngs{} read data. FastQC
 accepts FASTQ, SAM and BAM files, and is able to report results both inside the
 tool itself and by exporting HTML files. These reports contain, among other
 information, summary graphs and table that allow quick access to the data.
@@ -438,8 +437,8 @@ is a simple format, that can be used to easily store data represented by
 character sequences, like nucleotide (\dna, \rna) or amino acid (protein)
 sequences. This file format is widely use to store sequencing reads, \dna/\rna{}
 sequences and other character sequences in database systems. Its simplicity
-makes it extremely easy to manipulate and parse, presenting also an attractive
-solution for data transfer between different tools.
+makes it extremely easy to manipulate and parse, presenting itself as an
+attractive solution for data transfer between different tools.
 
 \subsubsection*{FASTQ}
 
@@ -518,10 +517,10 @@ totally, or at least partially, automated. As such, there are several algorithms
 for these tasks and tools that implement such algorithms, as presented in
 Section \ref{sec:clusteralgo} and Section \ref{sec:clustertool}, respectively.
 
-We can divide data mining into main types: descriptive data mining and
-predictive data mining \cite{Fayyad1996}. Descriptive data mining is focused on
-finding the underlying structure of a given set of data. Instead of predicting
-future values, it concerns the intrinsic structure, relations and
+We can divide data mining into main types: \emph{descriptive data mining} and
+\emph{predictive data mining} \cite{Fayyad1996}. Descriptive data mining is
+focused on finding the underlying structure of a given set of data. Instead of
+predicting future values, it concerns the intrinsic structure, relations and
 interconnectedness of the data being analyzed, presenting its interesting
 characteristics without having any predefined target. On the other hand,
 predictive data mining is used to predict explicit values, based on patterns
@@ -570,12 +569,12 @@ method. A brief review of the most common methods is given below.
 
 Note that due to the nature of the work of this thesis we will focus on
 clustering analysis techniques. As such, the following sections will contain a
-more in depth review of these methods, along with descriptions of the used
+more in-depth review of these methods, along with descriptions of the used
 algorithms and tools.
 
 \subsection{Clustering Techniques}\label{sec:clustertech}
 
-As explained above, clustering is the process of grouping data into classes or
+As explained above, clustering is the process of grouping data into
 \emph{clusters}, in such a way that objects inside a cluster are very similar to
 each other, while being as different as possible from objects in other clusters
 \cite{han2006data}. These similarities (and dissimilarities) are assessed based
@@ -592,17 +591,21 @@ defined}} \cite{Estivill-Castro:2002:WSM:568574.568575}, it needs to adapt to
 the problem at hand. This multitude of different interpretations of the cluster
 notion led to the appearance of many different clustering methods and
 algorithms. There are five major categories in which we can classify clustering
-methods: partitioning methods; hierarchical methods; density-based methods;
-grid-based methods; and model-based methods \cite{han2006data}.
+methods: \emph{partitioning methods}; \emph{hierarchical methods};
+\emph{density-based methods}; \emph{grid-based methods}; and \emph{model-based
+methods} \cite{han2006data}.
 
 \subsubsection*{Partitioning Methods}
 
 Partitioning methods are based around the construction of partitions of the data
 set. Each one of the constructed partitions represents a data cluster. Given a
 dataset with $n$ elements, and a number $k$ of clusters, the correct application
-of these methods must verify two conditions: (1) each partition must contain at
-least one object ($k \leq n$), and (2) a single object of the data set must only
-belong to one partition \cite{han2006data}.
+of these methods must verify two conditions \cite{han2006data}:\\
+
+\begin{tabular}{l l}
+  (1) & each partition must contain at least one object ($k \leq n$);\\
+  (2) & a single object of the data set must only belong to one partition.\\
+\end{tabular}\\
 
 Given a number $k$ of clusters (typically chosen \emph{a priori}), an iterative
 relocation is used in order to successively reclassify objects and hopefully
@@ -637,7 +640,7 @@ putting each object in its own clustering, and then iteratively merges clusters
 until all objects are part of one cluster.
 
 One notable weak point of hierarchical methods is that calculated results are
-irreversible, that is, once an objects is attributed to a cluster, that result
+irreversible; that is, once an objects is attributed to a cluster, that result
 will not be evaluated again. This may lead to incorrect labeling of some
 objects. These problems can be minimized by pre-processing the data set. Note
 that this single pass evaluation gives hierarchical methods good computational
@@ -650,10 +653,10 @@ objects, density-based methods are based on the notion of \emph{cluster density}
 \cite{han2006data}. The basic idea of these methods is to keep growing a given
 cluster while the number of objects in its vicinity (or \emph{density}) exceeds
 a certain user defined threshold. Density-based methods are particularly useful
-to discover clusters with irregular shapes. However, algorithms implementing
-these kind of analysis, like DBSCAN, are usually very computationally heavy,
-both in terms of processing power and memory usage (although optimizations
-exist).
+to discover clusters with irregular shapes. It should be noted that algorithms
+implementing these kind of analysis, like DBSCAN, are usually very
+computationally heavy, both in terms of processing power and memory usage
+(although optimizations exist).
 
 \subsubsection*{Grid-based Methods}
 
@@ -684,28 +687,42 @@ at hand, as will be described in Chapter \ref{chap:implementation}.
 
 The $k$-medoids specification appeared as an evolution of the $k$-means
 algorithm. As $k$-means uses the mean value of the objects of a cluster to
-determine its center, it is sensitive to outliers: an object with a large,
-disproportional value might skew the results. $k$-medoids mitigates this problem
-by using medoids, picking a specific object of the cluster as its \qt{center}
+determine its center, it is sensitive to outliers (objects that deviate
+considerably from the data set average): an object with a large, disproportional
+value might skew the results. $k$-medoids mitigates this problem by using
+medoids, picking a specific object of the cluster as its \qt{center}
 \cite{han2006data}. Medoids are chosen randomly at the beginning. This means
 that the algorithm may produce different results depending on the starting
 objects (it does not reach an optimal solution). The remaining objects are then
 clustered with the medoid to which they are most similar.
 
 The most common implementation of $k$-medoids is the Partitioning Around
-Medoids (PAM) algorithm. It works in the following way:
+Medoids (PAM) algorithm (see Algorithm \ref{alg:pam}).
 
-\begin{tabular}{l l}
-  (1) & arbitrarily choose k objects in D as the initial representative objects or seeds;\\
-  (2) & \textbf{repeat}\\
-  (3) & \hspace*{0.5cm}assign each remaining object to the cluster with the nearest representative object;\\
-  (4) & \hspace*{0.5cm}randomly select a non-representative object, $o_{random}$;\\
-  (5) & \hspace*{0.5cm}compute the total cost, $S$, of swapping representative
-  object, $o_{j}$, with $o_{random}$;\\
-  (6) & \hspace*{0.5cm}if $S < 0$ then swap $o_{j}$ with $o_{random}$ to form
-  the new set of $k$ representative objects;\\
-  (7) & \textbf{until no change}.\\
-\end{tabular}
+\begin{algorithm}
+  \LinesNumbered
+  \SetNlSty{texttt}{(}{)}
+  \KwData{$k$, the number of clusters; $D$, a data set containing $n$ objects.}
+  \KwResult{A set of $k$ clusters.}
+  \BlankLine
+
+  \Repeat{no change}{
+    assign each remaining object to the cluster with the nearest representative
+    object\;
+    randomly select a non-representative object, $o_{random}$\;
+    compute the total cost, $S$, of swapping representative object, $o_{j}$,
+    with $o_{random}$\;
+    if $S < 0$ then swap $o_{j}$ with $o_{random}$ to form the new set of $k$
+    representative objects\;
+  }
+  \BlankLine
+
+  \caption[Partitioning Around Medoids (PAM) algorithm]{
+    Partitioning Around Medoids (PAM) algorithm, a $k$-medoids implementation
+    for partitioning based on medoid or central objects.
+  }
+  \label{alg:pam}
+\end{algorithm}
 
 \subsubsection*{Average Linkage Hierarchical Clustering}
 
@@ -730,8 +747,8 @@ distance between objects $x \in X$ and $y \in Y$.
 
 ILP is a subfield of machine learning that uses first order logic to represent
 both data and models \cite{Lavrac1998}. ILP induces hypotheses (models) from
-examples and background knowledge. Examples are of two types: instances of the
-concept to be \qt{learned} and non-instances of the concept. Background
+examples and background knowledge. The examples may be of two types: instances
+of the concept to be \qt{learned} and non-instances of the concept. Background
 knowledge is a set of predicates encoding all information that the experts find
 useful to construct the models. ILP might be used to tackle several machine
 learning and data mining problems, like classification, regression and
@@ -757,24 +774,24 @@ it comes to computational resource consumption and run for long periods of time
 
 \subsection{Clustering Evaluation and Assessment}\label{sec:clustereval}
 
-Most clustering methods' goal is to achieve high similarity between objects in
-the same cluster, while maintaining the dissimilarity between other clusters
-\cite{Manning:2008:IIR:1394399}. This is called an \emph{internal evaluation
-criterion}, as it is only dependent on the clustered data itself. However, high
-internal evaluation scores do not necessarily translate to good effectiveness in
-a real application.
+The goal of Most clustering methods is to achieve high similarity between
+objects in the same cluster, while maintaining the dissimilarity between other
+clusters \cite{Manning:2008:IIR:1394399}. This is called an \emph{internal
+evaluation criterion}, as it is only dependent on the clustered data itself.
+However, high internal evaluation scores do not necessarily translate to good
+effectiveness in a real application.
 
 To provide a better judgement of clustering results we may use \emph{external
 criteria} \cite{Manning:2008:IIR:1394399}. Such criteria act as a surrogate for
 the judgement of a human field expert. As such, they must use a set of data
 outside the clustering data set, that was pre-classified by an expert. This set
-of data is considered a golden standard, that is, the best possible outcome for
+of data is considered a \emph{golden standard}, that is, the best possible outcome for
 the clustering analysis, under reasonable conditions.
 
 Note that in the specific case of this thesis no pre-classified data set was
 available. As such, we focused our assessments purely on internal evaluation
 methods. Despite this lack of automated external evaluation, our results were
-evaluated by expert in this field, as explained in Chapter \ref{chap:casestudy}.
+evaluated by experts in this field, as explained in Chapter \ref{chap:casestudy}.
 
 \subsubsection*{Silhouette Coefficient}
 
@@ -810,7 +827,7 @@ silhouette of the complete data set.
 \begin{figure}[!htb]
   \begin{center}
     \leavevmode
-    \includegraphics[width=1.0\textwidth]{sil}
+    \includegraphics[width=0.9\textwidth]{sil}
     \caption[Example of a silhouette plot]{
       Example of a silhouette plot, using the PAM algorithm. It represents the
       silhouettes of every objects in the data set, as well as the average
