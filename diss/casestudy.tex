@@ -46,46 +46,46 @@ referenced as \emph{machine1} and \emph{machine2}, as shown in Table
 \subsection{Analysis Data Set}
 
 The analysis data set is comprised by twenty three gene identifiers, from the
-\emph{RhoGTPase} family. RhoGTPases comprise a family of molecular switches that
-control signal transduction pathways that link cell surface receptors to a
-variety of intracellular responses. In this particular case the genes are
-related to the species \emph{Rattus norvegicus}, commonly known as \emph{norway
-rat}. \emph{Rattus norvegicus} is a model organism: a \qt{simple}, non-human
-organism that is extensively studied, with the expectation that the discoveries
-made for that particular organism are useful to understand different organisms
-\cite{fields2005cell}. Other examples of model organisms are the \emph{E. coli}
-bacteria, \emph{Drosophila melanogaster} (fruit fly) and \emph{Mus musculus}
-(common mouse).  The actual genes used for our tests can be found in Table
-\ref{tab:genes}. Note that the tool only needs to receive gene identifiers, gene
-names are not currently accepted as input data.
+\emph{RhoGTPase} family. \emph{RhoGTPases} comprise a family of molecular
+switches that control signal transduction pathways that link cell surface
+receptors to a variety of intracellular responses. In this particular case the
+genes are related to the species \emph{Rattus norvegicus}, commonly known as
+\emph{norway rat}. \emph{Rattus norvegicus} is a model organism: a \qt{simple},
+non-human organism that is extensively studied, with the expectation that the
+discoveries made for that particular organism are useful to understand different
+organisms \cite{fields2005cell}. Other examples of model organisms are the
+\emph{E. coli} bacteria, \emph{Drosophila melanogaster} (fruit fly) and
+\emph{Mus musculus} (common mouse).  The actual genes used for our tests can be
+found in Table \ref{tab:genes}. Note that the tool only needs to receive gene
+identifiers, gene names are not currently accepted as input data.
 
 \begin{table}[!htb]
   \centering
-  \begin{tabular}{{l}{l}}
-    \textbf{\emph{Gene name}} & \textbf{\emph{Gene ID}}\\ \hline
-      Cdc42   & ENSRNOG00000013536\\
-      Cdc42   & ENSRNOG00000013536\\
-      Rhoj    & ENSRNOG00000021919\\
-      Rhoq    & ENSRNOG00000015415\\
-      Rhog    & ENSRNOG00000020393\\
-      Rac1    & ENSRNOG00000001068\\
-      Rac3    & ENSRNOG00000048172\\
-      Rac2    & ENSRNOG00000007350\\
-      Rhod    & ENSRNOG00000019220\\
-      Rhof    & ENSRNOG00000042607\\
-      Rhoh    & ENSRNOG00000002540\\
-      Rhou    & ENSMUSG00000039960\\
-      Rhou    & ENSMUSG00000039960\\
-      Rhoa    & ENSRNOG00000050519\\
-      Rnd1    & ENSRNOG00000013621\\
-      Rnd2    & ENSRNOG00000020698\\
-      Rnd3    & ENSRNOG00000004624\\
-      Rhob    & ENSRNOG00000021403\\
-      Rhoc    & ENSRNOG00000012630\\
-      Rhobtb1 & ENSRNOG00000000633\\
-      Rhobtb2 & ENSRNOG00000017373\\
-      Rhobtb3 & ENSRNOG00000012414\\
-      Rhov    & ENSRNOG00000013380\\
+  \begin{tabular}{{l}{l}{l}}
+    \textbf{\emph{Gene name}} & \textbf{\emph{Gene ID}} & \textbf{\emph{Transcript ID}}\\ \hline
+    Rhoj        & ENSRNOG00000021919 & ENSRNOT00000031979\\
+    Rhog        & ENSRNOG00000020393 & ENSRNOT00000027641\\
+    Rac3        & ENSRNOG00000048172 & ENSRNOT00000073886\\
+    Rac2        & ENSRNOG00000007350 & ENSRNOT00000009994\\
+    Rhod        & ENSRNOG00000019220 & ENSRNOT00000026092\\
+    Rhof        & ENSRNOG00000042607 & ENSRNOT00000064390\\
+    Rhoh        & ENSRNOG00000002540 & ENSRNOT00000003425\\
+    Rnd         & ENSRNOG00000020698 & ENSRNOT00000028089\\
+    Rhoc        & ENSRNOG00000012630 & ENSRNOT00000017254\\
+    Cdc42       & ENSRNOG00000013536 & ENSRNOT00000029025\\
+    Cdc42       & ENSRNOG00000013536 & ENSRNOT00000018118\\
+    Rhoq        & ENSRNOG00000015415 & ENSRNOT00000020822\\
+    Rac1        & ENSRNOG00000001068 & ENSRNOT00000001417\\
+    Rhou        & ENSMUSG00000039960 & ENSMUST00000136615\\
+    Rhou        & ENSMUSG00000039960 & ENSMUST00000045487\\
+    Rhoa        & ENSRNOG00000050519 & ENSRNOT00000071664\\
+    Rnd1        & ENSRNOG00000013621 & ENSRNOT00000018276\\
+    Rnd3        & ENSRNOG00000004624 & ENSRNOT00000006111\\
+    Rhob        & ENSRNOG00000021403 & ENSRNOT00000008008\\
+    Rhobtb1     & ENSRNOG00000000633 & ENSRNOT00000000784\\
+    Rhobtb2     & ENSRNOG00000017373 & ENSRNOT00000023876\\
+    Rhobtb3     & ENSRNOG00000012414 & ENSRNOT00000016838\\
+    Rhov        & ENSRNOG00000013380 & ENSRNOT00000018277\\
   \end{tabular}
 
   \caption[\emph{RhoGTPase} family genes used as data set in the case study]{
@@ -95,6 +95,118 @@ names are not currently accepted as input data.
 \end{table}
 
 \section{Analysis Results}
+
+Table \ref{tab:results} includes the relevant results for this case study. As
+expected, some RBPs are able to bind to almost all members of the
+\emph{RhoGTPase} family (for example \emph{Muscleblind-Like Splicing Regulator
+1} (MBNL1)), where others were more specific (for example \emph{Y Box Binding
+Protein 1} (YBX1)). The latter kind is more interesting to analyse, as it might
+be used to manipulate a very specific set of genes, while leaving all others
+unaltered. In this case we chose the RBP YBX1 as the base of our validation,
+both because it only interacts with only five genes and because the genes it
+interacts with are representative of the data set, in terms of biological
+classification.
+
+\begin{table}[!htb]
+  \tiny
+  \begin{tabular}{{l}{l} | {c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}}
+    & & \textbf{\emph{SNRPA}} & \textbf{\emph{ELAVL2}} & \textbf{\emph{HNRNPA1}} & \textbf{\emph{NONO}} & \textbf{\emph{PABPC1}} & \textbf{\emph{ZRANB2}} & \textbf{\emph{RBMY1A1}} & \textbf{\emph{FUS}} & \textbf{\emph{PUM2}} & \textbf{\emph{SFRS9}} & \textbf{\emph{MBNL1}} & \textbf{\emph{EIF4B}}\\ \hline
+    \parbox[t]{2mm}{\multirow{9}{*}{\rotatebox[origin=c]{90}{\emph{Cluster 1}}}}
+    & \textbf{\emph{Rhoj}} &  &  &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhog}} &  &  &  & $\times$ & $\times$ &  & $\times$ &  &  & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rac3}} &  &  & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rac2}} &  &  &  & $\times$ & $\times$ &  & $\times$ & $\times$ &  &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rhod}} &  &  & $\times$ &  & $\times$ &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhof}} &  &  &  & $\times$ & $\times$ &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhoh}} &  &  &  &  &  &  & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rnd2}} &  &  &  & $\times$ &  &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhoc}} & $\times$ &  & $\times$ & $\times$ &  &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\ \\ \hline \\
+    \parbox[t]{2mm}{\multirow{14}{*}{\rotatebox[origin=c]{90}{\emph{Cluster 2}}}}
+    & \textbf{\emph{Cdc42}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Cdc42}} &  & $\times$ &  & $\times$ &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhoq}} & $\times$ &  &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rac1}} & $\times$ &  &  &  & $\times$ &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhou}} &  &  &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rhou}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhoa}} &  & $\times$ &  &  & $\times$ &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rnd1}} &  &  &  & $\times$ & $\times$ &  &  & $\times$ &  & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rnd3}} &  & $\times$ &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhob}} & $\times$ & $\times$ &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhobtb1}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhobtb2}} &  &  &  & $\times$ &  &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhobtb3}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhov}} &  &  &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+  \end{tabular}
+
+  \vspace{0.6cm}
+
+  \begin{tabular}{{l}{l} | {c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}}
+    & & \textbf{\emph{EIF4B}} & \textbf{\emph{KHSRP}} & \textbf{\emph{YTHDC1}} & \textbf{\emph{VTS1}} & \textbf{\emph{RBMX}} & \textbf{\emph{KHDRBS3}} & \textbf{\emph{SFRS1}} & \textbf{\emph{ELAVL1}} & \textbf{\emph{SFRS13A}} & \textbf{\emph{SFRS7}} & \textbf{\emph{A2BP1}} & \textbf{\emph{QKI}}\\ \hline
+    \parbox[t]{2mm}{\multirow{9}{*}{\rotatebox[origin=c]{90}{\emph{Cluster 1}}}}
+    & \textbf{\emph{Rhoj}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rhog}} & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & $\times$\\
+    & \textbf{\emph{Rac3}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rac2}} & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & \\
+    & \textbf{\emph{Rhod}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rhof}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & $\times$\\
+    & \textbf{\emph{Rhoh}} & $\times$ & $\times$ &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & \\
+    & \textbf{\emph{Rnd2}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\
+    & \textbf{\emph{Rhoc}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\ \\ \hline \\
+    \parbox[t]{2mm}{\multirow{14}{*}{\rotatebox[origin=c]{90}{\emph{Cluster 2}}}}
+    & \textbf{\emph{Cdc42}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Cdc42}} & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rhoq}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rac1}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & $\times$\\
+    & \textbf{\emph{Rhou}} &  &  &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rhou}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\
+    & \textbf{\emph{Rhoa}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & $\times$\\
+    & \textbf{\emph{Rnd1}} & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\
+    & \textbf{\emph{Rnd3}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\
+    & \textbf{\emph{Rhob}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & \\
+    & \textbf{\emph{Rhobtb1}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\
+    & \textbf{\emph{Rhobtb2}} & $\times$ & $\times$ &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ &  &  & \\
+    & \textbf{\emph{Rhobtb3}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
+    & \textbf{\emph{Rhov}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & \\
+  \end{tabular}
+
+  \vspace{0.6cm}
+
+  \begin{tabular}{{l}{l} | {c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}}
+    & & \textbf{\emph{QKI}} & \textbf{\emph{SUS}} & \textbf{\emph{YBX2-A}} & \textbf{\emph{PSI}} & \textbf{\emph{SAP-49}} & \textbf{\emph{ACO1}} & \textbf{\emph{YBX1}} & \textbf{\emph{SFRS2}} & \textbf{\emph{ZFP36}} & \textbf{\emph{RBM4}} & \textbf{\emph{PTBP1}}\\ \hline
+    \parbox[t]{2mm}{\multirow{9}{*}{\rotatebox[origin=c]{90}{\emph{Cluster 1}}}}
+    & \textbf{\emph{Rhoj}} & $\times$ &  & $\times$ &  & $\times$ &  & $\times$ & $\times$ &  &  & \\
+    & \textbf{\emph{Rhog}} & $\times$ &  &  &  &  & $\times$ &  &  &  &  & \\
+    & \textbf{\emph{Rac3}} & $\times$ &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rac2}} &  &  & $\times$ &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rhod}} & $\times$ &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rhof}} & $\times$ &  &  &  &  & $\times$ &  & $\times$ &  & $\times$ & \\
+    & \textbf{\emph{Rhoh}} &  &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rnd2}} &  &  &  &  &  & $\times$ &  & $\times$ &  &  & \\
+    & \textbf{\emph{Rhoc}} &  &  &  &  &  &  &  &  &  &  & \\ \\ \hline \\
+    \parbox[t]{2mm}{\multirow{14}{*}{\rotatebox[origin=c]{90}{\emph{Cluster 2}}}}
+    & \textbf{\emph{Cdc42}} & $\times$ &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Cdc42}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  &  & \\
+    & \textbf{\emph{Rhoq}} & $\times$ &  & $\times$ &  & $\times$ & $\times$ &  &  & $\times$ & $\times$ & \\
+    & \textbf{\emph{Rac1}} & $\times$ &  & $\times$ &  & $\times$ & $\times$ &  &  &  & $\times$ & \\
+    & \textbf{\emph{Rhou}} &  &  &  &  &  &  &  &  &  &  & \\
+    & \textbf{\emph{Rhou}} &  &  & $\times$ &  & $\times$ & $\times$ &  &  & $\times$ &  & \\
+    & \textbf{\emph{Rhoa}} & $\times$ &  &  &  & $\times$ & $\times$ & $\times$ &  &  & $\times$ & \\
+    & \textbf{\emph{Rnd1}} &  &  &  &  &  & $\times$ &  &  & $\times$ &  & \\
+    & \textbf{\emph{Rnd3}} &  &  &  & $\times$ & $\times$ & $\times$ & $\times$ &  &  &  & $\times$\\
+    & \textbf{\emph{Rhob}} &  &  &  &  & $\times$ & $\times$ &  &  &  & $\times$ & \\
+    & \textbf{\emph{Rhobtb1}} &  &  &  &  &  & $\times$ & $\times$ &  &  & $\times$ & \\
+    & \textbf{\emph{Rhobtb2}} &  &  & $\times$ &  &  & $\times$ &  &  &  &  & \\
+    & \textbf{\emph{Rhobtb3}} & $\times$ &  & $\times$ &  & $\times$ & $\times$ &  & $\times$ & $\times$ &  & \\
+    & \textbf{\emph{Rhov}} &  &  &  &  & $\times$ & $\times$ &  &  &  &  & \\
+  \end{tabular}
+
+  \caption[Case study results generated by PBS Finder]{
+    Case study results generated by PBS Finder. This table includes information
+    about which RBPs bind with each gene, as well as about the gene clusters
+    that were generated.
+  }
+  \label{tab:results}
+\end{table}
 
 \section{Result Validation}\label{sec:caseval}
 
@@ -178,7 +290,7 @@ average time that the tool takes to analyse the same data set.
 
 The consulted molecular biology expert estimated that, on average, it would take
 thirty minutes to analyse a single gene. This means that an expert would need an
-average of eleven and a half hours ($30 minutes \times 23 genes$) to process the
+average of eleven and a half hours ($30\ minutes \times 23\ genes$) to process the
 entire case study data set.
 
 On the other hand, the automated tool takes a shorter amount of time to conduct
@@ -217,3 +329,10 @@ information collection and analysis.
 \end{table}
 
 \section{Chapter Conclusions}
+
+Through this case study we have shown that PBS Finder produces relevant and
+correct results for large-scale analysis of RBPs using data from \ngs{}
+techniques. We have also shown that our tool significantly facilitates the work
+of the biologist, by making analysis of this data easier and quicker. As such,
+we consider PBS Finder a tool of great value for studying RNA biology.
+
