@@ -168,6 +168,10 @@ is read alignment and differential expression analysis.
 
 \subsection{Relevant Standard File Formats}\label{sec:formats}
 
+\begin{Notes}
+- Describe the types of data present in each file type.\\
+\end{Notes}
+
 As expected, the great diversity of RNA-Seq tools brings with it a wealth of
 file formats. Some of these formats are developed from the ground up to satisfy
 a specific need, while others are mere contextual adaptations or specializations
@@ -329,23 +333,22 @@ is only applied when the read are aligned against an annotated genome.
   \end{center}
 \end{figure}
 
-
 \subsubsection*{iRAP}
 
 iRAP\footnote{\url{https://code.google.com/p/irap/}} is a RNA-Seq analysis
-pipeline. It implements a workflow similar to the one described above, albeit
-with some differences (see Figure \ref{fig:irap}). iRAP also allows some stages
-of the analysis to be skipped. Differential expression analysis is one such
-stage. This particular analysis will only be performed at user request. The gene
-set enrichment stage (Figure \ref{fig:irap}, in dashed line) is also optional.
-This stage uses Piano \cite{varemo01042013}, an R package capable of conducting
-gene set analysis using various statistical methods, from different gene level
-statistics and a wide range of gene-set collections. However, this stage will
-not be analysed in-depth, as gene set enrichment was not performed in this
-thesis.
+pipeline \cite{irap}. It implements a workflow similar to the one described
+above, albeit with some differences (see Figure \ref{fig:irap}). iRAP also
+allows some stages of the analysis to be skipped. Differential expression
+analysis is one such stage. This particular analysis will only be performed at
+user request. The gene set enrichment stage (Figure \ref{fig:irap}, in dashed
+line) is also optional. This stage uses Piano \cite{varemo01042013}, an R
+package capable of conducting gene set analysis using various statistical
+methods, from different gene level statistics and a wide range of gene-set
+collections. However, this stage will not be analysed in-depth, as gene set
+enrichment was not performed in this thesis.
 
 One of the major strengths of iRAP is the ability to choose the tools that are
-used in each stage. This allows for a vast array of pipeline customization
+used in each stage \cite{irap}. This allows for a vast array of pipeline customization
 possibilities, making it easy to adapt to a particular experiment. Below we will
 present a set of tools, integrated in iRAP, that were used during this thesis.
 

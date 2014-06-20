@@ -5,7 +5,11 @@ if [[ "$#" -eq 1 ]]; then
   if [[ "$1" =~ s|S ]]; then
     # Remove existent PDF file.
     rm report.pdf 2> /dev/null
-    make report._show
+    make report
+    makeglossaries report
+    make report
+    cp report.pdf view.pdf
+    open view.pdf
   elif [[ "$1" =~ m|M ]]; then
     # Make a copy of the PDF file.
     if [ "$(uname)" == "Darwin" ]; then
@@ -21,6 +25,9 @@ else
   # Remove existent PDF file.
   rm report.pdf 2> /dev/null
   make report
+  makeglossaries report
+  make report
+  cp report.pdf view.pdf
 fi
 
 # Clean compilation files.

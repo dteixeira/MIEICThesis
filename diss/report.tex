@@ -28,6 +28,15 @@
 %\usepackage{float}
 \usepackage{algorithm2e}
 \usepackage{amsmath}
+\usepackage{hyperref}
+
+%% Macros file
+\include{mymacros}
+
+% Glossary
+\usepackage[toc,acronym]{glossaries}
+\makeglossaries
+\include{glossary}
 
 %% Include color package
 \usepackage{color}
@@ -88,9 +97,6 @@ language=C,                        % choose the language of the code
 %% Path to the figures directory
 \graphicspath{{figures/}}
 
-%% Macros file
-\include{mymacros}
-
 %%========================================
 %% Start of document
 %%========================================
@@ -143,12 +149,17 @@ language=C,                        % choose the language of the code
   \pdfbookmark[0]{List of Algorithms}{algorithms}
   \listofalgorithms
   \include{abbrevs_en}  % the list of abbreviations used
+  \printglossary[type=acronym]
 \end{Prolog}
 
 %%----------------------------------------
 %% Body
 %%----------------------------------------
 \StartBody
+
+\begin{Notes}
+- Add glossary and abbreviations.\\
+\end{Notes}
 
 \include{intro}
 \include{background}
@@ -163,9 +174,12 @@ language=C,                        % choose the language of the code
 %% Bibliography
 \PrintBib{myrefs}
 
+%% Glossary
+\printglossary[type=main]
+
 %% Appendix
 \appendix
-\include{glossary}
+%\include{glossary}
 \include{irapconfig}
 \include{formats}
 
