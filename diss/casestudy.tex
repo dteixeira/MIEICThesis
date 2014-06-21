@@ -328,6 +328,32 @@ information collection and analysis.
   \label{tab:perf}
 \end{table}
 
+Table \ref{tab:stress} contains the stress test results of both machines,
+compared to the estimated work time needed by an expert. In this case stress
+tests where executed with one hundred, five hundred and nine hundred gene
+identifiers. Even the slowest test can be completed by the machine with less
+performance (\emph{machine2}) in under three hours. That same effort would take
+an expert approximately four hundred and fifty hours, which amounts to two and a
+half weeks on a twenty four hour working day, and to just under two months in
+normal working conditions (eight hours per day).
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {l}{l}{l}}
+    & \textbf{\emph{machine1}} & \textbf{\emph{machine2}} & \textbf{\emph{Manual method}} \\ \hline
+    \textbf{\emph{100 IDs}}   & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
+    \textbf{\emph{500 IDs}}   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
+    \textbf{\emph{900 IDs}}   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\
+  \end{tabular}
+
+  \caption[Result comparison between manual analysis and both test machines]{
+    Result comparison between manual analysis and both test machines.
+  }
+  \label{tab:stress}
+\end{table}
+
+
+
 \section{Chapter Conclusions}
 
 Through this case study we have shown that PBS Finder produces relevant and
