@@ -754,9 +754,9 @@ distance between objects $x \in X$ and $y \in Y$.
 \subsubsection*{Inductive Logic Programming}
 
 ILP is a subfield of machine learning that uses first order logic to represent
-both data and models \cite{Lavrac1998}. ILP induces hypotheses (models) from
+both data and models \cite{Lavrac1998}. ILP infers hypotheses (models) from
 examples and background knowledge. The examples may be of two types: instances
-of the concept to be \qt{learned} and non-instances of the concept. Background
+of the concept to be \qt{learned}, and non-instances of the concept. Background
 knowledge is a set of predicates encoding all information that the experts find
 useful to construct the models. ILP might be used to tackle several machine
 learning and data mining problems, like classification, regression and
@@ -782,7 +782,7 @@ it comes to computational resource consumption and run for long periods of time
 
 \subsection{Clustering Evaluation and Assessment}\label{sec:clustereval}
 
-The goal of Most clustering methods is to achieve high similarity between
+The goal of most clustering methods is to achieve high similarity between
 objects in the same cluster, while maintaining the dissimilarity between other
 clusters \cite{Manning:2008:IIR:1394399}. This is called an \emph{internal
 evaluation criterion}, as it is only dependent on the clustered data itself.
@@ -804,7 +804,7 @@ evaluated by experts in this field, as explained in Chapter \ref{chap:casestudy}
 \subsubsection*{Silhouette Coefficient}
 
 The silhouette coefficient is a direct representation of the \emph{intra-cluster
-similarity, inter-cluster dissimilarity} concept. In other words, the silhouette
+similarity and inter-cluster dissimilarity} concept. In other words, the silhouette
 coefficient improves as the cohesion between elements in the same group and the
 farthest the distance from that particular group to all the other groups
 \cite{Rousseeuw198753}. The silhouette coefficient is computed using the formula
@@ -817,8 +817,8 @@ farthest the distance from that particular group to all the other groups
   \frac{b(i)}{a(i)} - 1     &  \quad \text{if}\ a(i) > b(i),
   \end{array}\right.
 \end{equation}
-where $a(i)$ be the average dissimilarity between $i$ and all other objects in
-the same cluster; and $b(i)$ be the lowest average dissimilarity between $i$ and
+where $a(i)$ is the average dissimilarity between $i$ and all other objects in
+the same cluster; and $b(i)$ is the lowest average dissimilarity between $i$ and
 any other cluster to which $i$ does not belong. The higher the value of $s(i)$,
 the more appropriately clustered the data point is. Inversely, low silhouette
 values are the result of unfitting clustering. The average $s(i)$ of a single
@@ -829,7 +829,7 @@ the data has been clustered.
 The silhouette coefficient can also be used to provide a visual representation
 of the clustering results, as dendograms do for hierarchical clustering
 analysis (Figure \ref{fig:sil}). This plot combines silhouettes widths for all
-objects in the data set, the average silhouette width for each cluster and the
+objects in the data set, the average silhouette width for each cluster, and the
 silhouette of the complete data set.
 
 \begin{figure}[!htb]

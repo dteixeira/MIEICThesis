@@ -145,29 +145,101 @@ the final combined results it must obey two constraints:
 %- Briefly describe ERDA ILP analysis (and say it failed).\\
 %\end{Notes}
 
+The main objective of this system is to transform a complex, manually performed
+analysis, into an automated workflow. The platform should require as little
+information as possible from the user, inferring analysis parameters whenever
+possible. It should also be able to automatically group genes (and proteins), to
+reveal implied relationships between them, that might be useful to experts. This
+platform was named Protein Binding Site Finder (PBS Finder) and shall henceforth
+be referred to by that name.
+
 \subsection{Experimental Data}
 
-\subsection{Analysis Workflow}
+The only data PBS Finder collects from the user is a list of gene (or
+transcript) identifiers that should be analysed. These identifiers can be in one
+of five different formats: \emph{Ensembl Gene}, \emph{Ensembl Transcript},
+\emph{Entrez}, \emph{RefSeq} and \emph{GenBank} \ref{tab:examples}. Users can
+submit jobs with any combination of the previous types and use identifiers from
+multiple species.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {l}{l}}
+    \textbf{\emph{Ensembl Gene}}        & ENSG00000224274 & ENSRNOG00000013536\\
+    \textbf{\emph{Ensembl Transcript}}  & ENST00000003156 & ENSRNOT00000117589\\
+    \textbf{\emph{Entrez}}              & 11245           & 66850\\
+    \textbf{\emph{RefSeq}}              & NM\_001107622.1 & NM\_031098.1\\
+    \textbf{\emph{GenBank}}             & U49845          & C35522\\
+  \end{tabular}
+
+  \caption[Examples of identifiers accepted by PBS Finder] {
+    Examples of identifiers accepted by PBS Finder.
+  }
+  \label{tab:examples}
+\end{table}
+
+While PBS Finder is accepts all these kinds of identifiers, internally the
+analysis can only be started with \emph{Ensembl Gene} or \emph{Entrez}
+identifiers, that map to Ensembl's and NCBI's pages, respectively. As such, the
+identifiers must be first separated into different groups and converted. This
+conversion is reviewed with more detail in Section \ref{sec:pbsworkflow}.
+
+\subsection{User Information Management}
+
+In order to use PBS Finder a new user must create an account, providing their
+name and email, and choosing their authentication password. The account system
+was implemented so that jobs could be associated with their creator in a cross
+browser/system manner, in contrast with a typical cookie-based\footnote{Modern
+websites sometimes need to save information about the user, for example
+credentials. This data can be saved in the client machine, through the use of a
+web browser cookie.} data persistence. This allows each user to list their own
+jobs. Despite jobs being only directly accessible by their owner (creator), no
+effort was made to deny users access to each other's jobs through the job's URL.
+We believe that sharing results is an essential part of the investigation
+process.
+
+To create a new job the user provides a job description and an identifier list.
+The identifier list is a newline-separated list of unique identifiers for
+genetic information databases. In the current version acceptable types of
+identifiers include Ensembl (both Gene and Transcript), Entrez, RefSeq and
+GenBank. Users can submit jobs with any combination of the previous types and
+use identifiers from multiple species. Upon job creation, users can choose to be
+notified by email when the job finishes.
+
+\subsection{Analysis Workflow}\label{sec:pbsworkflow}
+
+PBS Finder is based around a three stage analysis model \ref{fig:workflow2}:
+\emph{base analysis}, \emph{data set enrichment} and \emph{clustering analysis}.
 
 \begin{figure}[!htb]
   \begin{center}
     \leavevmode
-    \includegraphics[width=0.75\textwidth]{workflow}
-    \caption[PBS Finder workflow]{
-      PBS Finder workflow. Note that error paths were not represented for
-      simplicity. However, every component implements health checks, that may
-      stop the entire analysis if the minimum requirements for success are not
-      met.
+    \includegraphics[width=0.75\textwidth]{workflow2}
+    \caption[Simplified PBS Finder workflow]{
+      Simplified PBS Finder workflow.
     }
-    \label{fig:workflow}
+    \label{fig:workflow2}
   \end{center}
 \end{figure}
 
-\subsection{Data Set Enrichment}
+Base analysis comprises data set filtering, retrieval of basic gene and
+transcript information and finding RBPs. The first released version of the
+platform implemented only this stage of the analysis. It contains all the
+information that is necessary to answer one of the base thesis problems.
+However, further stages build on top of this information, bringing a more
+valuable set of results to biologists.
 
-\subsection{Clustering Analysis}
+In the enrichment stage additional information about every protein is retrieved.
+This information is obtained from UniProt, a web platform for curated protein
+information. This stage was implemented in the second release of the platform.
 
-\subsubsection*{ILP Clustering}
+The clustering stage takes all the information collected in the previous stages
+and uses it to perform clustering analysis. There are two types of clustering
+analysis performed: \emph{clustering using RBP presence} and \emph{clustering
+using RBP attributes}. The objective of this analysis is to uncover implicit
+relationships in the collected data, that may be of use to biologists.
+
+These stages are described in more detail in Chapter \ref{chap:implementation}.
 
 \section{Tool Integration}
 

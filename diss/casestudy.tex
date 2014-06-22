@@ -5,16 +5,16 @@
 In this chapter we present a case study that was used as a proof of concept for
 the developed system. We characterize the experimental environment, the used
 data set and the obtained results. We also compare this method with the previous
-manual analysis method.
+method, manual analysis.
 
 \section{Case Study Setup}
 
 This case study is aimed only at the RBP analysis tool (PBS Finder). The reason
-behind this is that it was not possible to acquire a test data set in sufficient
+for this is that it was not possible to acquire a test data set in sufficient
 time. It was also not possible to have an expert validate those results in the
 available time. Moreover, the available case study data set was produced by IBMC
 experts. The same experts then validated the obtained results experimentally.
-perts. The same experts then validated the obtained results experimentally.
+The same experts then validated the obtained results experimentally.
 
 \section{Experimental Environment}
 
@@ -57,7 +57,7 @@ organisms \cite{fields2005cell}. Other examples of model organisms are the
 \emph{E. coli} bacteria, \emph{Drosophila melanogaster} (fruit fly) and
 \emph{Mus musculus} (common mouse).  The actual genes used for our tests can be
 found in Table \ref{tab:genes}. Note that the tool only needs to receive gene
-identifiers, gene names are not currently accepted as input data.
+identifiers; gene names are not currently accepted as input data.
 
 \begin{table}[!htb]
   \centering
@@ -210,10 +210,10 @@ classification.
 
 \section{Result Validation}\label{sec:caseval}
 
-Result validation was conducted in two different fronts, \emph{collected data
-completeness and correction} and \emph{biological results evaluation}.
+Result validation was conducted in two different fronts: \emph{collected data
+completeness and correction}, and \emph{biological results evaluation}.
 
-Completeness and correction analysis were conducted, both manually and
+Completeness and correction analysis were conducted both manually and
 automatically during the development of the tool. In some cases it was possible
 to automate these validations using \emph{unit testing}\footnote{Unit testing is
 a software testing method that focus on testing individual units of a developed
@@ -298,7 +298,7 @@ the analysis of the same data set. In order to assess the actual amount of time
 the tool took to analyse the entire data set we ran twenty sequential
 experiences, ten for each of the experimental environments. Table \ref{tab:perf}
 depicts the duration of each one of those experiments, as well as their average
-duration. As expected, an automated tools widely outperforms a human expert in
+duration. As expected, an automated tool widely outperforms a human expert in
 information collection and analysis.
 
 \begin{table}[!htb]
@@ -330,7 +330,7 @@ information collection and analysis.
 
 Table \ref{tab:stress} contains the stress test results of both machines,
 compared to the estimated work time needed by an expert. In this case stress
-tests where executed with one hundred, five hundred and nine hundred gene
+tests were executed with one hundred, five hundred and nine hundred gene
 identifiers. Even the slowest test can be completed by the machine with less
 performance (\emph{machine2}) in under three hours. That same effort would take
 an expert approximately four hundred and fifty hours, which amounts to two and a
