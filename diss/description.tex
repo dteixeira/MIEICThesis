@@ -2,19 +2,204 @@
 
 \section*{}
 
-\begin{Notes}
-- Talk about iRAP and how the web interface for analysis.\\
-- Talk about PBS Finder, how it is standalone and it's web interface.\\
-- Talk about integration of both tools, and the idealized complete system (a
-diagram would be nice :) ).\\
-\end{Notes}
+In this chapter we present the designed solution. The main objectives of the
+design are reviewed, along with the most important choices that were made. Both
+major components of the developed solution are described in detail, as well as
+their envisioned integration process.
 
 \section{Overview}
 
+%\begin{Notes}
+%- Problem divided into two subproblems.\\
+%- Both problems solvable independently.\\
+%- Availability, scalability, etc.\\
+%\end{Notes}
+
+As discussed, from a purely biological standpoint, this thesis has two major
+objectives: perform differential expression analysis of RNA-Seq data and
+discover and characterize RBPs related to groups of genes. While both objectives
+are important for our particular domain problem, they present different problems
+and require different approaches. Furthermore, both parts of the problem are
+relevant by themselves.
+
+Splitting the domain problem into two objectives led to the first important
+design decision. It was decided that the software solutions to both problems
+would be implemented independently and, at a later stage, integrated with each
+other, to form the complete system. This would also allow both tools to be used
+separately, leading to a wider array of possibility in terms of future uses.
+
+Designing software solutions with high performance, scalability and
+extensibility is also a major concern. A software solution should be able to
+quickly and efficiently fulfil a user's requests, while dealing with a large
+number of simultaneous users. It should allow new features to be easily added,
+in order to better respond to the users' needs. If these requirements are not
+met, the solution is at risk of being abandoned by its users, becoming therefore
+useless. The software solutions presented in this thesis were designed with
+these questions in mind, as is further discussed in Chapter
+\ref{chap:implementation}.
+
 \section{Gene Expression Analysis Pipeline}
+
+%\begin{Notes}
+%- Uses iRAP as a base pipeline.\\
+%- Show analysis workflow (diagram).\\
+%- Simple graphical configuration with best settings inferring and advanced
+%mode.\\
+%- Standard data always available, with possibility of user upload.\\
+%- User data sent by link or direct upload.\\
+%- Results from different differential expression tools are combined.\\
+%\end{Notes}
+
+The gene expression analysis pipeline uses iRAP as its foundation. As discussed
+before, iRAP provides begin-to-end gene RNA-Seq data analysis. However, while
+iRAP is a tool aimed at a broad group of users, both beginners and advanced
+users, it is still a command line tool, with many configuration settings. This
+technological barrier may drive away some more inexperienced users. One of the
+objectives of this part of the work was to make it a simpler and more
+straightforward process, accessible to any user with basic computer literacy.
+Another objective was combining results of several different tools, hopefully
+improving those results. Note that some of the features described below were not
+implemented, due to time constraints. As such, those features are presented as
+future work.
+
+\subsection{Analysis Configuration}
+
+iRAP is configured with an experience configuration file (see Appendix
+\ref{appendix:irapconfig}). This file must define the name of the species being
+analysed, the reference and read data files, the tools to use for the analysis,
+read libraries, etc.. Although many of these configurations are difficult to
+infer and automatically define, it is possible to create a more user friendly
+way to configure the experiments. This is accomplished through a web form. This
+web form has two different views: the \emph{normal view} allows users to
+configure only the essential settings of the experiment, those that cannot be
+inferred; the \emph{advanced view} allows more experienced users to tweak every
+configuration.
+
+\subsection{Experimental Data Management}
+
+Gene expression analysis with iRAP requires two sets of files, \emph{reference
+files} and \emph{read data files}.
+
+Reference files are both the reference genome, in FASTA format and its
+annotations, in GTF or GFF formats. These files are automatically obtained from
+Ensembl's FTP endpoint. The current release (75) contains information about a
+total of sixty six species. The tool automatically checks if a new release is
+available and in that case downloads and substitutes the files. In the
+experiment configuration users need only to indicate which species they are
+analysing, and the correct files will be automatically passed to iRAP.
+
+Read data files contain the reads obtained through sequencing, in FASTQ formats.
+The user needs to upload these files. One file must be provided for each library
+the user wants to analyse, and should be compressed. As some of these files can
+be quite large, users also have the possibility to provide a link to those
+files. If a link is provided, the files will be download before the analysis
+starts.
+
+\subsection{Analysis Workflow}
+
+Once both the configuration file and the required data files the analysis
+process can begin. The analysis process starts by passing those files to iRAP
+(Figure \ref{fig:tool1}). Note that this first version of the configuration file
+is altered in such a way that the analysis will stop immediately after the
+quantification step (see Section \ref{sec:irap}).
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[]{tool1}
+    \caption[Gene expression analysis pipeline workflow]{
+      Gene expression analysis pipeline workflow.
+    }
+    \label{fig:tool1}
+  \end{center}
+\end{figure}
+
+The next step is to sequentially execute differential expression analysis with
+the chosen tools, in this case with DESeq and edgeR. The resulting files are
+kept until all tools are executed. Note that there is no need for the analysis
+process to start from the beginning every time a new tool is used, as iRAP can
+(in most cases) reuse the results produced up until the point where a new tool
+is introduced. After all tools are executed their results must be combined, into
+a final list of gene identifiers. In order for a gene identifier to appear in
+the final combined results it must obey two constraints:
+
+\begin{table}[H]
+  \begin{tabular}{l p{0.92\textwidth}}
+    $(1)$ & the gene identifier must be present in all files;\\
+    $(2)$ & the average \emph{pvalue} for that gene must be inferior to a
+    maximum threshold in all files ($0.05$ by default).\\
+  \end{tabular}
+\end{table}
 
 \section{RNA Binding Protein Analysis Web Platform}
 
+%\begin{Notes}
+%- Present the name!\\
+%- Minimal user input, infer most information.\\
+%- Show analysis workflow (diagram).\\
+%- Present standard RBP information.\\
+%- Data set enrichment: show transcripts, proteins and their information
+%(describe all info).\\
+%- Two different types of clustering analysis, based on the used data and
+%clustering criteria (describe algorithms, selection, etc.).\\
+%- Briefly describe ERDA ILP analysis (and say it failed).\\
+%\end{Notes}
+
+\subsection{Experimental Data}
+
+\subsection{Analysis Workflow}
+
+\begin{figure}[!htb]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=0.75\textwidth]{workflow}
+    \caption[PBS Finder workflow]{
+      PBS Finder workflow. Note that error paths were not represented for
+      simplicity. However, every component implements health checks, that may
+      stop the entire analysis if the minimum requirements for success are not
+      met.
+    }
+    \label{fig:workflow}
+  \end{center}
+\end{figure}
+
+\subsection{Data Set Enrichment}
+
+\subsection{Clustering Analysis}
+
+\subsubsection*{ILP Clustering}
+
 \section{Tool Integration}
 
+%\begin{Notes}
+%- Complex pipeline with both tools.\\
+%- Result reporting at each component.\\
+%- Combined result reporting at the end.\\
+%- Show integration diagram.\\
+%\end{Notes}
+
+In the designed solution both tools should be able to integrate, so that a user
+could perform the complete analysis creating a unique analysis job. This would
+be accomplished by using the interface of the RNA-Seq analysis pipeline as the
+master (or main) interface for job creation. When the analysis completes the
+pipeline presents the preliminary results to the user and automatically launches
+a PBS Finder analysis for the result gene identifier list. At this point the
+RNA-Seq pipeline's interface should include a direct link to the created job in
+PBS Finder. That link can then be used by the user to view the results of the
+RBP localization analysis. Note that, while both tools are now integrated, the
+results of both analyses are independent. As such, they can be
+consulted/reviewed independently from each other, as if both had run separately.
+
 \section{Chapter Conclusions}
+
+%\begin{Notes}
+%- Generic chapter conclusion.\\
+%- Introduce next chapter of implementation details.\\
+%\end{Notes}
+
+In this chapter we reviewed the most important details about the designed of the
+proposed software solution (implementation details are described in Chapter
+\ref{chap:implementation}). We presented the modular, two subsystem model, that
+allows both tools to be used as standalone products, increasing the number of
+their possible uses. Lastly, we talked about the general details of the
+workflows of both tools, as well as the integration of those workflows.
