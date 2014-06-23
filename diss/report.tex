@@ -26,7 +26,7 @@
 %\usepackage[lofdepth,lotdepth]{subfig}
 %\usepackage{graphicx}
 \usepackage{float}
-\usepackage{algorithm2e}
+\usepackage[algochapter]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{hyperref}
 
@@ -37,9 +37,10 @@
 \usepackage{array,multirow}
 \usepackage{longtable}
 \usepackage{tabu}
-\usepackage[toc,acronym]{glossaries}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
 \makeglossaries
 \include{glossary}
+\include{abbrevs_en}
 
 %% Include color package
 \usepackage{color}
@@ -155,7 +156,6 @@ language=C,                        % choose the language of the code
   \listoftables
   \pdfbookmark[0]{List of Algorithms}{algorithms}
   \listofalgorithms
-  \include{abbrevs_en}  % the list of abbreviations used
   \printglossary[type=acronym]
 \end{Prolog}
 
@@ -164,9 +164,9 @@ language=C,                        % choose the language of the code
 %%----------------------------------------
 \StartBody
 
-\begin{Notes}
-- Add glossary and abbreviations.\\
-\end{Notes}
+%\begin{Notes}
+%- Add glossary and abbreviations.\\
+%\end{Notes}
 
 \include{intro}
 \include{background}
@@ -182,6 +182,8 @@ language=C,                        % choose the language of the code
 \PrintBib{myrefs}
 
 %% Glossary
+\glsaddall
+\glossarystyle{altlist}
 \printglossary[type=main]
 
 %% Appendix

@@ -141,9 +141,9 @@ particular type of data were used.
 
 \subsection{\Trans{} Assembly}\label{sec:transassembly}
 
-\begin{Notes}
-- Check microarrays sentence.\\
-\end{Notes}
+%\begin{Notes}
+%- Check microarrays sentence.\\
+%\end{Notes}
 
 \Trans{} assembly is the process by which experimentally obtained RNA data reads
 can be organized and merged together in a partial or complete \trans. As stated
@@ -183,32 +183,34 @@ formats can be consulted in Appendix \ref{annex:formats}.
 \subsubsection*{FASTA}
 
 FASTA is the standard line and character sequence format used by NCBI
-\cite{ncbi:fasta}, using this last organization's character code conventions. It
-is a simple format, that can be used to easily store data represented by
-character sequences, like nucleotide (\dna, \rna) or amino acid (protein)
-sequences. This file format is widely use to store sequencing reads, \dna/\rna{}
-sequences and other character sequences in database systems. Its simplicity
-makes it extremely easy to manipulate and parse, presenting itself as an
-attractive solution for data transfer between different tools.
+\cite{ncbi:fasta}, using this last organization's character code conventions
+(see Appendix \ref{annex:fasta}). It is a simple format, that can be used to
+easily store data represented by character sequences, like nucleotide (\dna,
+\rna) or amino acid (protein) sequences. This file format is widely use to store
+sequencing reads, \dna/\rna{} sequences and other character sequences in
+database systems. Its simplicity makes it extremely easy to manipulate and
+parse, presenting itself as an attractive solution for data transfer between
+different tools.
 
 \subsubsection*{FASTQ}
 
 FASTQ is used to store character sequences, typically nucleotide sequences
-\cite{Cock2010}. It is quite similar to the standard FASTA format, in respect to
-the manner in which character sequences are represented. However, for every
-sequence, there is a second sequence of equal length, representing the quality
-scores of the original sequence. These quality scores are also represented as
-single characters, taking values between and including ASCII-33 to ASCII-126. It
-is typically used in the same situations as the FASTA format, when quality
-scores are available/relevant.
+\cite{Cock2010} (see Appendix \ref{annex:fastq}). It is quite similar to the
+standard FASTA format, in respect to the manner in which character sequences are
+represented. However, for every sequence, there is a second sequence of equal
+length, representing the quality scores of the original sequence. These quality
+scores are also represented as single characters, taking values between and
+including ASCII-33 to ASCII-126. It is typically used in the same situations as
+the FASTA format, when quality scores are available/relevant.
 
 \subsubsection*{SAM and BAM}
 
 The SAM format is a text format for storing sequence alignment data
-\cite{genome:sam}. It is widely used to store mapping information between
-sequencing reads and a given reference genome. This sort of information is
-typically the product of sequencing alignment tools, that consume sequencing
-reads from FASTQ files and align them with a reference genome.
+\cite{genome:sam} (see Appendix \ref{annex:sam}). It is widely used to store
+mapping information between sequencing reads and a given reference genome. This
+sort of information is typically the product of sequencing alignment tools, that
+consume sequencing reads from FASTQ files and align them with a reference
+genome.
 
 The BAM format contains exactly the same information as the SAM format and the
 same rules apply for both formats. The difference between both formats lies in
@@ -219,33 +221,32 @@ data.
 
 \subsubsection*{VCF}
 
-VCF is a text file format used to store gene sequence variants \cite{smith13}.
-In the past few years, as larger and larger genome sequencing projects became
-more common (like the 1000 Genomes Project\footnote{The 1000 Genomes Project,
-started back in 2008, is an international effort to establish the most
-comprehensive catalogue to date of human genetic variations.}), storing such
-large amounts of information became a serious concern. To address these concerns
-the VCF format was created. Instead of storing the complete genome, VCF stores
-only the variations (and their respective positions) of newly sequenced genomes
-relatively to a known reference genome, typically in a compressed text file. As
-such, it is a format often used when building genome databases.
+VCF is a text file format used to store gene sequence variants \cite{smith13}
+(see Appendix \ref{annex:vcf}). In the past few years, as larger and larger
+genome sequencing projects became more common (like the 1000 Genomes
+Project\footnote{The 1000 Genomes Project, started back in 2008, is an
+international effort to establish the most comprehensive catalogue to date of
+human genetic variations.}), storing such large amounts of information became a
+serious concern. To address these concerns the VCF format was created. Instead
+of storing the complete genome, VCF stores only the variations (and their
+respective positions) of newly sequenced genomes relatively to a known reference
+genome, typically in a compressed text file. As such, it is a format often used
+when building genome databases.
 
 \subsubsection*{GFF and GTF}
 
-GFF is a text based file format to store gene features \cite{sanger11}. Many
-genome assembly tools execute this process in two separate steps: feature
-detection for identification of specific regions (exons, introns, etc.) and
-genome assembly, using those features as reference. However, it is beneficial to
-decouple these two steps, using different and more efficient tools for each. As
-such, the GFF format emerged as a protocol for feature information transfer
-between tools.
+GFF is a text based file format to store gene features \cite{sanger11} (see
+Appendix \ref{annex:gff}). Many genome assembly tools execute this process in
+two separate steps: feature detection for identification of specific regions
+(exons, introns, etc.) and genome assembly, using those features as reference.
+However, it is beneficial to decouple these two steps, using different and more
+efficient tools for each. As such, the GFF format emerged as a protocol for
+feature information transfer between tools.
 
 The GTF format is similar to the GFF format, in which it is based. It is also
 used in similar situations. However, GTF builds on top of GFF, defining
 additional conventions, specific to the domain of genetic information. Despite
 their initial relation, both formats continue to be developed individually.
-
-
 
 \section{RNA-Seq Analysis}
 
