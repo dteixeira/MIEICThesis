@@ -249,33 +249,156 @@ share exactly the same RBPs between them.
 
 \subsubsection*{Setup Variation}
 
+To produce the final results multiple clustering experiments are attempted. Due
+to the small amount of time that the chosen clustering algorithms need to run it
+is possible to execute a large number of attempts and then choose only the best
+results. Each attempt is a variation of the analysis parameters, being that each
+possible value for a parameter is combined with every value for the remaining
+parameters, giving rise to a large number of experiments. When clustering by RBP
+presence the variable parameters are: clustering algorithm (either hierarchical
+clustering or partitioning around medoids); number of clusters (between two and
+ten); and distance matrix representation (either using a strictly binary matrix
+or a Jaccard distance matrix). While clustering by RBP information the same
+variable attributes apply. However, the decision about what RBP information is
+used for their comparison is also variable, from a minimum of two information
+fields. For example, in a particular clustering attempt only information about
+the RBPs' pathways and related tissues may be used, while another attempt may
+use all available information.
+
 \subsubsection*{Result Selection}
+
+With the large number of results obtained from all the clustering attempts, it
+is not reasonable to expect a user to manually chose the ones that are most
+interesting. As such, internal evaluation techniques for clustering are coupled
+with rules that define minimum acceptance criteria for results, narrowing the
+result space to only one for each type of clustering. Algorithm
+\ref{algo:secsel} represents the method used for result selection.
+
+\begin{algorithm}
+  \LinesNumbered
+  \SetNlSty{texttt}{(}{)}
+
+  sort clustering results by average silhouette (descending)\;
+  filter clustering results with clusters with less than 8\% of data set objects\;
+  abundance\_frequency = 0.90\;
+  \While{abundance\_frequency $\geq$ 0.50}{
+    \ForEach{clustering result}{
+      classify as abundant any attribute with frequency $\geq$ abundance\_frequency\;
+      remove abundant attributes that appear in multiple clusters\;
+      \uIf{at least one unique abundant attribute exists for each cluster}{
+        select cluster\;
+        break loop\;
+      }
+      \Else{
+        abundance\_frequency = abundance\_frequency - 0.05\;
+      }
+    }
+  }
+  \uIf{a cluster was selected} {
+    return selected cluster\;
+  }
+  \Else{
+    return cluster with highest average silhouette\;
+  }
+
+  \caption[Selection of best clustering results]{
+    Selection of best clustering results.
+  }
+  \label{algo:secsel}
+\end{algorithm}
 
 \subsubsection*{ILP Clustering}
 
+Clustering using ILP techniques was also attempted. The main objective of this
+approach was to uncover more information about about the implicit relationships
+present in the data sets. While conventional clustering methods present only the
+data set objects grouped in clusters, with ILP it is possible to understand
+exactly what rules were used to form those clusters.
+
+The devised approach had two steps. First, the results for each new job would be
+represented in the form of Prolog clauses. Second, those clauses would be used
+as data set for the ERDA clustering system, running on top of YAP Prolog.
+However, due to problems with the available tools, this approach could not be
+included in the final version of PBS Finder.
+
 \subsection{Web Interface}
 
-\begin{Notes}
-- Talk about all information available in each view.\\
-- Talk about the types of results to export.\\
-- Talk about GridFS, and the need of pre generate results files to minimize long
-loading times.\\
-\end{Notes}
+%\begin{Notes}
+%- Talk about all information available in each view.\\
+%- Talk about the types of results to export.\\
+%- Talk about GridFS, and the need of pre generate results files to minimize long
+%loading times.\\
+%\end{Notes}
 
 \subsubsection*{Job View}
 
+Job view, also known as main view, is the default projection of a job's results
+(Figure \ref{fig:job_view}). It gives the user a matrix that matches every gene (and
+transcript) in the data set with their corresponding binding proteins, as well
+as an histogram of the genes (a bar chart of the counting of genes with which
+each RBP binds). This matrix also contains two columns that give information
+about how the genes were grouped, based on the two distinct clustering
+techniques. In addition to this information,
+clicking any group of genes will give the user a list of all the characteristics
+that differentiate that particular group from all the others.
+
 \subsubsection*{Transcript View}
+
+The transcript view (Figure \ref{fig:trans_view}) offers more detailed
+information about the transcript's binding proteins, giving for each protein the
+base pairs that compose the binding site (and its start and stop positions) and
+a percentage score of the match's quality. A maximum of three different genetic
+sequences (5’ UTR, 3’ UTR and 3’ UTR downstream) are also displayed, depending
+on their availability. Whenever possible, related links to other platforms are
+presented (Ensembl, NCBI and UniProt). Like the job view, it also contains
+clustering information, but in this case only one column, that shows how the
+RBPs related to that specific transcript were grouped. Also similarly to the job
+view, users can click any group to obtain relevant information about the
+defining characteristics of that particular group.
 
 \subsubsection*{Protein View}
 
+The protein view (Figure \ref{fig:prot_view}) displays relevant classification
+information for every RBP (when available). This information includes the
+protein's name, links to other platforms (UniProt, KEGG, Gene3D, etc.), tissues
+in which the protein might be expressed, its related ontologies and the pathways
+in which the protein participates. Each pathway is coupled with a link to the
+corresponding KEGG pathway browser page.
+
 \subsubsection*{Results Exporting}
 
-\section{Deployment}
+Besides browsing, users can download their results as text files. Three
+different types of data projections of the results are provided: \emph{RBP
+data}, \emph{protein data} and the \emph{complete data set}. RBP data can be
+downloaded in either comma-separated values (CSV) or tab-separated values (TSV)
+format. This file gives the user a match matrix of binding proteins, similar to
+the one in the job results view, as well as species, gene and transcript
+information. Protein data can also be downloaded in both CSV and TSV formats. It
+gives a more complete view of the results, including species, gene, transcript
+and protein identifiers and additional protein information (keywords, related
+tissues, ontologies, etc.). Finally, the complete data set consists of a Prolog
+predicate representation of the job results. This is the same representation of
+the results that was created with the usage of ILP clustering techniques in
+mind. While it was not possible to use those techniques, the produced data set
+representation might still be of use to researchers.
 
-\begin{Notes}
-- Talk about tested deployment platforms.\\
-- Talk about system requirements.\\
-\end{Notes}
+While in most cases these data representation conversion are apparently
+instantaneous, for large data sets they may take an additional amount of time.
+This would cause the web application to seemingly block if the user tried to
+download one of those files. To solve this problem all files are generated
+during the analysis process, then stored in the web application's MongoDB
+instance through GridFS\footnote{GridFS is a functionality integrated in MongoDB
+that allows a simple file system to be simulated inside a database. Files are
+divided into small chunks and those chunks are stored as regular MongoDB
+documents.}. This allows those files to be downloaded instantly, as they need
+only to be generated once.
+
+%\section{Deployment}
+
+%\begin{Notes}
+%- Talk about tested deployment platforms.\\
+%- Talk about system requirements.\\
+%\end{Notes}
 
 \section{Chapter Conclusions}
 
