@@ -2,23 +2,32 @@
 
 \section*{}
 
-\begin{Notes}
-- Talk about iRAP configuration, the result combination tool and more.\\
-- Talk about PBS Finder configuration, requisites and analysis flow (show that analysis flow diagram).\\
-- Talk about platform extensibility, deployment alternatives and more.\\
-\end{Notes}
+In this chapter we will talk about some specific details of the implementation
+of the designed solution. We will also review some of the used technologies, and
+provide the reasoning behind their choice, where relevant.
+
+%\begin{Notes}
+%- Talk about iRAP configuration, the result combination tool and more.\\
+%- Talk about PBS Finder configuration, requisites and analysis flow (show that analysis flow diagram).\\
+%- Talk about platform extensibility, deployment alternatives and more.\\
+%\end{Notes}
 
 \section{Gene Expression Analysis Pipeline}
 
-\begin{Notes}
-- Describe platforms and minimum requirements.\\
-- Describe iRAP deployment.\\
-- Describe result combinator usage.\\
-\end{Notes}
+%\begin{Notes}
+%- Describe platforms and minimum requirements.\\
+%- Describe iRAP deployment.\\
+%- Describe result combinator usage.\\
+%\end{Notes}
+
+Due to time constraints the gene expression analysis pipeline could not be fully
+finished. However, both the iRAP pipeline and result combining program were
+completed and functional. As these particular components were already described
+in the previous chapter, they will not be mentioned again.
 
 \section{RNA Binding Protein Analysis Web Platform}
 
-\subsection{Application Architecture}
+%\subsection{Application Architecture}
 
 %\begin{Notes}
 %- Client-server architecture.\\
@@ -39,7 +48,7 @@ request to the server, including the data set given by the user. The server then
 processes the request and reports the results back to the web interface, that
 presents them to the user.
 
-\subsubsection*{Web Interface}
+\subsection{Web Interface}
 
 PBS Finder's web application interface is written in Ruby, using the
 Padrino\footnote{\url{http://www.padrinorb.com}} framework. Padrino is a web
@@ -58,7 +67,7 @@ information integrity, etc.), in order to achieve higher performance and
 scalability. NoSQL databases are most effective when the saved records are large
 but loosely structured information collections.
 
-\subsubsection*{Analysis Server}
+\subsection{Analysis Server}
 
 The analysis server is responsible for managing analysis request sent by the web
 interface. The server is implemented on top of Distributed Ruby (dRuby), a
@@ -161,9 +170,86 @@ which will be described in detail below.
 
 \subsection{Base Analysis}
 
+The first step in the pipeline is to prepare the gene identifiers for further
+analysis. These identifiers can be have five different notations, as described
+in Section \ref{sec:descworkflow}. As such, identifiers are separated according
+to their potential notation type in those five groups. However, some of those
+identifiers may be invalid, despite appearing to fit one of the possible
+notations. It is assumed that if an identifiers is valid, it can at least be
+converted to either \emph{Ensembl Gene} or \emph{Entrez} notation. This
+conversion is done using bioDBnet's \cite{Mudunuri15022009} identifier
+conversion service. \emph{Entrez} conversion is only attempted if \emph{Ensembl
+Gene} conversion is not available. While none of those platforms are preferred
+above the other, converting as many identifiers as possible to one convention
+helps to maintain data set coherence.
+
+Once only two lists remain, one with \emph{Ensembl Gene} identifiers and the
+other with \emph{Entrez} identifiers, information about those genes' transcripts
+must be collected. This information includes the transcript's name, its
+identifier, and its relevant genetic sequences. This information is collected
+using their respective platform (Ensembl or NCBI).
+
+The transcript sequences are then used to retrieve the related RBPs using RBPDB,
+an online RNA binding protein database \cite{Cook01012011}. For each sequence
+RBPDB finds every possible RBP, along with its name, location and binding
+sequence. This information is sufficient to answer one of this thesis' problems.
+However, it will be enriched and further analysed, bringing greater benefits to
+researchers.
+
 \subsection{Data Set Enrichment}
 
+Given the RBP names obtained in the base analysis stage, a query is made to
+UniProt in order to obtain their respective accession identifiers. These are
+used internally by UniProt to refer to specific proteins. With the accession
+identifiers, the pages for each RBPs can be retrieved and analyzed individually.
+These pages contain information about their respective RBPs, including keywords,
+related tissues and information about the protein's ontologies (cellular
+components, molecular functions and biological processes).
+
+The information collected from UniProt may also contains links to the KEGG web
+platform. Among other useful information, KEGG contains information about
+protein pathways. A pathway is a sequence of actions, related to specific
+molecules, that produce certain changes within a cell, when performed. This
+information is crucial to understand the function of RBPs. As such, it is
+collected for further analysis.
+
 \subsection{Clustering Analysis}
+
+The last stage of the workflow is clustering analysis. Two different types of
+clustering approaches were conceived: \emph{clustering by RBP presence} and
+\emph{clustering by RBP information}. Note that this analysis will not be
+performed if the quantity of available data is below certain thresholds
+(typically the tool will not analyse data sets that have less than ten genes
+and/or ten RBPs).
+
+\subsubsection*{Clustering by RBP Presence}
+
+In the first case, the clustering analysis is only conducted at the gene level.
+Two genes are similar if they are associated with the same RBPs. Inversely, two
+genes that do not have any (or few) RBPs in common are considered \qt{distant}. The
+tool makes an additional step in order to determine which RBPs are common in one
+particular group, while being absent in all the other groups. This information
+allows researchers to easily determine which RBPs can be used to interact with a
+particular group of genes, while not affecting the others.
+
+\subsubsection*{Clustering by RBP Information}
+
+In the second case the clustering process has two phases. In the first phase
+RBPs are grouped based on their similarity. Similarity is computed using a set
+of attributes that include (depending on availability): pathways; tissues where
+the RBP is expressed; keywords describing their main functions; and other
+relevant information such as ontologies (biological processes, molecular
+function and cellular components). The tool compiles a list of defining features
+for each group (to later present to the user). However, in this case the RBP
+groups will be used to group similar genes. Unlike the previous method,
+similarity between genes is not only measured in how many RBPs they have in
+common. In this case any two genes may be considered similar if both are related
+to RBPs that were grouped together in the previous step, even if they do not
+share exactly the same RBPs between them.
+
+\subsubsection*{Setup Variation}
+
+\subsubsection*{Result Selection}
 
 \subsubsection*{ILP Clustering}
 
