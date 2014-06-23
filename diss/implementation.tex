@@ -10,18 +10,145 @@
 
 \section{Gene Expression Analysis Pipeline}
 
+\begin{Notes}
+- Describe platforms and minimum requirements.\\
+- Describe iRAP deployment.\\
+- Describe result combinator usage.\\
+\end{Notes}
+
 \section{RNA Binding Protein Analysis Web Platform}
 
-\subsection{Application Structure}
+\subsection{Application Architecture}
 
-\subsubsection*{Configuration}
+%\begin{Notes}
+%- Client-server architecture.\\
+%- Web app is responsible for user and job management, viewing information, etc.
+%(uses Padrino + MongoDB).\\
+%- Worker server is responsible for analysis.\\
+%- Server uses DRb, spawns a new thread for every analysis request it receives
+%(show algorithm).\\
+%- Server is agnostic to the analyser being executed, it just dynamically
+%instantiates a analyser requested by the web app.\\
+%\end{Notes}
+
+PBS Finder is implemented in two parts, following a client-server architecture:
+the \emph{web interface} and the \emph{analysis server}. In this case the web
+interface is the client and the analysis server is the server. This means that,
+whenever a user submits an analysis job, the web interface sends an analysis
+request to the server, including the data set given by the user. The server then
+processes the request and reports the results back to the web interface, that
+presents them to the user.
+
+\subsubsection*{Web Interface}
+
+PBS Finder's web application interface is written in Ruby, using the
+Padrino\footnote{\url{http://www.padrinorb.com}} framework. Padrino is a web
+framework built on top of the Sinatra\footnote{\url{http://www.sinatrarb.com}}
+web library. Padrino allows the creation of web applications that use Ruby to
+define their back-office logic.
+
+User and job data is persisted in a database. In this case the
+MongoDB\footnote{\url{http://www.mongodb.org}} database system was chosen.
+MongoDB is a document based, NoSQL database. While widely adopted relational
+database management system store information in large rely on large data banks
+and relational calculus, NoSQL databases store information in the form of files
+\cite{strauch2011nosql}. NoSQL databases sacrifice the possibility to use some
+complex mechanisms of classical relational (structured queries, enforced
+information integrity, etc.), in order to achieve higher performance and
+scalability. NoSQL databases are most effective when the saved records are large
+but loosely structured information collections.
+
+\subsubsection*{Analysis Server}
+
+The analysis server is responsible for managing analysis request sent by the web
+interface. The server is implemented on top of Distributed Ruby (dRuby), a
+distributed object system for Ruby. dRuby allows methods and behaviours to be
+invoked on an object that exists in a different process or even in a different
+computer, using a network connection. To the client it seems like the object is
+local, as it can be used as any other object. The server uses a master
+distributed object to receive analysis requests from the web interface.
+
+The server launches each job concurrently. This behaviour allows the server to
+run multiple analyses at the same time. Note that the server is not bound to a
+single type of analysis, it can perform any type of analysis, as long as a valid
+implementation is available. The only two constraints to create a new type of
+analysis are that the analysis workflow must be encapsulated inside an
+instantiable class, and that class must implement a simple set of methods that
+allows the server to control it.
+
+Algorithm \ref{algo:server} represents the behaviour of the server when a new
+request arrives. The first step is to determine if the requested analysis method
+is available. If it is, the respective class is instantiated, and the analysis
+data set (and other relevant information) are passed to it. Note that at the
+same time the server creates a file with a copy of all the parameters of that
+particular request. If for some reason the server stops working, analyses that
+were running at that time will be automatically restarted once the server is
+available again. After the object that will be responsible for the analysis is
+created, the server creates and starts a new thread for it. The server also
+saves an indication that that particular analysis is being executed.
+
+\begin{algorithm}
+  \LinesNumbered
+  \SetNlSty{texttt}{(}{)}
+
+  receive request\;
+  \uIf{request.analysis\_method is available}{
+    instantiate request.analysis\_method with request.parameters\;
+    save request.parameters to disk\;
+    run the analysis in a new thread\;
+    \uIf{success}{
+      report results\;
+    }
+    \Else{
+     report error\;
+    }
+    delete request.parameters from disk\;
+  }
+  \Else {
+    report error\;
+  }
+  \BlankLine
+
+  \caption[Processing a new analysis request from the web interface]{
+    Processing a new analysis request from the web interface.
+  }
+  \label{algo:server}
+\end{algorithm}
+
+Once the analysis is complete the server is notified, its results are
+communicated to the web interface. The server is also notified and eliminates
+both the indication from its internal list and the file with the analysis'
+parameters.
+
+%\begin{Notes}
+%- Configuration is based on external files.\\
+%- While almost everything is configurable, only the clustering settings need to
+%be messed with.\\
+%\end{Notes}
 
 \subsection{Analysis Workflow}
+
+%\begin{Notes}
+%- Present image.\\
+%- Describe each part of the analysis and enrichment in detail, including used
+%platforms.\\
+%- Describe both types of clustering.\\
+%- Describe the generation and application of all the clustering techniques.\\
+%- Described how the best results are selected for each type of clustering (show
+%algorithm).\\
+%- Refer ILP and ERDA.\\
+%- Tell how we couldn't get ERDA to work.\\
+%\end{Notes}
+
+A detailed overview of the RBP analysis workflow can be seen in Figure
+\ref{fig:workflow}. This workflow is composed by three main stages: \emph{base
+analysis}, \emph{data set enrichment} and \emph{clustering analysis}, all of
+which will be described in detail below.
 
 \begin{figure}[!htb]
   \begin{center}
     \leavevmode
-    \includegraphics[width=0.75\textwidth]{workflow}
+    \includegraphics[width=0.73\textwidth]{workflow}
     \caption[PBS Finder workflow]{
       PBS Finder workflow. Note that error paths were not represented for
       simplicity. However, every component implements health checks, that may
@@ -32,6 +159,8 @@
   \end{center}
 \end{figure}
 
+\subsection{Base Analysis}
+
 \subsection{Data Set Enrichment}
 
 \subsection{Clustering Analysis}
@@ -39,6 +168,13 @@
 \subsubsection*{ILP Clustering}
 
 \subsection{Web Interface}
+
+\begin{Notes}
+- Talk about all information available in each view.\\
+- Talk about the types of results to export.\\
+- Talk about GridFS, and the need of pre generate results files to minimize long
+loading times.\\
+\end{Notes}
 
 \subsubsection*{Job View}
 
@@ -50,5 +186,18 @@
 
 \section{Deployment}
 
+\begin{Notes}
+- Talk about tested deployment platforms.\\
+- Talk about system requirements.\\
+\end{Notes}
+
 \section{Chapter Conclusions}
 
+%\begin{Notes}
+%- Generic chapter conclusion.\\
+%\end{Notes}
+
+In this chapter we presented a concrete approach to the development of the
+proposed solutions. We reviewed their most important features and implementation
+choices. Further examples of their usage is available through a case study in
+Chapter \ref{chap:casestudy} (the case study applies only to PBS Finder).

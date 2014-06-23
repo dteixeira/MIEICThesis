@@ -3,9 +3,9 @@
 \section*{}
 
 In this chapter we present the designed solution. The main objectives of the
-design are reviewed, along with the most important choices that were made. Both
-major components of the developed solution are described in detail, as well as
-their envisioned integration process.
+solution's design are reviewed, along with the most important choices that were
+made. Both major components of the developed solution and their envisioned
+integration process are described in detail.
 
 \section{Overview}
 
@@ -16,7 +16,7 @@ their envisioned integration process.
 %\end{Notes}
 
 As discussed, from a purely biological standpoint, this thesis has two major
-objectives: perform differential expression analysis of RNA-Seq data and
+objectives: to perform differential expression analysis of RNA-Seq data and to
 discover and characterize RBPs related to groups of genes. While both objectives
 are important for our particular domain problem, they present different problems
 and require different approaches. Furthermore, both parts of the problem are
@@ -56,9 +56,9 @@ iRAP is a tool aimed at a broad group of users, both beginners and advanced
 users, it is still a command line tool, with many configuration settings. This
 technological barrier may drive away some more inexperienced users. One of the
 objectives of this part of the work was to make it a simpler and more
-straightforward process, accessible to any user with basic computer literacy.
-Another objective was combining results of several different tools, hopefully
-improving those results. Note that some of the features described below were not
+straightforward process, accessible to any user with basic computer literacy;
+another was to combine results of several different tools, hopefully improving
+those results. Note that some of the features described below were not
 implemented, due to time constraints. As such, those features are presented as
 future work.
 
@@ -80,28 +80,28 @@ configuration.
 Gene expression analysis with iRAP requires two sets of files, \emph{reference
 files} and \emph{read data files}.
 
-Reference files are both the reference genome, in FASTA format and its
-annotations, in GTF or GFF formats. These files are automatically obtained from
-Ensembl's FTP endpoint. The current release (75) contains information about a
-total of sixty six species. The tool automatically checks if a new release is
-available and in that case downloads and substitutes the files. In the
-experiment configuration users need only to indicate which species they are
-analysing, and the correct files will be automatically passed to iRAP.
+Reference files are both the reference genome (in FASTA format) and its
+annotations (in GTF or GFF formats). These files are automatically obtained from
+Ensembl's FTP endpoint. The current release contains information of a total of
+sixty six species. The tool automatically checks if a new release is available,
+and in that case downloads and substitutes the files. In the experiment
+configuration users need only to indicate which species they are analysing, and
+the correct files will be automatically passed to iRAP.
 
 Read data files contain the reads obtained through sequencing, in FASTQ formats.
 The user needs to upload these files. One file must be provided for each library
 the user wants to analyse, and should be compressed. As some of these files can
 be quite large, users also have the possibility to provide a link to those
-files. If a link is provided, the files will be download before the analysis
+files. If a link is provided, the files will be downloaded before the analysis
 starts.
 
 \subsection{Analysis Workflow}
 
-Once both the configuration file and the required data files the analysis
-process can begin. The analysis process starts by passing those files to iRAP
-(Figure \ref{fig:tool1}). Note that this first version of the configuration file
-is altered in such a way that the analysis will stop immediately after the
-quantification step (see Section \ref{sec:irap}).
+Once both the configuration file and the required data files are ready, the
+analysis process can begin. The analysis process starts by passing those files
+to iRAP (Figure \ref{fig:tool1}). Note that this first version of the
+configuration file is altered in such a way that the analysis will stop
+immediately after the quantification step (see Section \ref{sec:irap}).
 
 \begin{figure}[!htb]
   \begin{center}
@@ -115,11 +115,11 @@ quantification step (see Section \ref{sec:irap}).
 \end{figure}
 
 The next step is to sequentially execute differential expression analysis with
-the chosen tools, in this case with DESeq and edgeR. The resulting files are
-kept until all tools are executed. Note that there is no need for the analysis
+the chosen tools, in this case DESeq and edgeR. The resulting files are kept
+until all tools are executed. Note that there is no need for the analysis
 process to start from the beginning every time a new tool is used, as iRAP can
 (in most cases) reuse the results produced up until the point where a new tool
-is introduced. After all tools are executed their results must be combined, into
+is introduced. After all tools are executed, their results must be combined into
 a final list of gene identifiers. In order for a gene identifier to appear in
 the final combined results it must obey two constraints:
 
@@ -149,7 +149,7 @@ The main objective of this system is to transform a complex, manually performed
 analysis, into an automated workflow. The platform should require as little
 information as possible from the user, inferring analysis parameters whenever
 possible. It should also be able to automatically group genes (and proteins), to
-reveal implied relationships between them, that might be useful to experts. This
+reveal implied relationships between them that might be useful to experts. This
 platform was named Protein Binding Site Finder (PBS Finder) and shall henceforth
 be referred to by that name.
 
@@ -178,7 +178,7 @@ multiple species.
   \label{tab:examples}
 \end{table}
 
-While PBS Finder is accepts all these kinds of identifiers, internally the
+While PBS Finder can accept all these kinds of identifiers, internally the
 analysis can only be started with \emph{Ensembl Gene} or \emph{Entrez}
 identifiers, that map to Ensembl's and NCBI's pages, respectively. As such, the
 identifiers must be first separated into different groups and converted. This
@@ -199,12 +199,12 @@ We believe that sharing results is an essential part of the investigation
 process.
 
 To create a new job the user provides a job description and an identifier list.
-The identifier list is a newline-separated list of unique identifiers for
-genetic information databases. In the current version acceptable types of
-identifiers include Ensembl (both Gene and Transcript), Entrez, RefSeq and
-GenBank. Users can submit jobs with any combination of the previous types and
-use identifiers from multiple species. Upon job creation, users can choose to be
-notified by email when the job finishes.
+The identifier list is a newline-separated list (a single entry per line) of
+unique identifiers for genetic information databases. In the current version
+acceptable types of identifiers include Ensembl (both Gene and Transcript),
+Entrez, RefSeq and GenBank. Users can submit jobs with any combination of the
+previous types and use identifiers from multiple species. Upon job creation,
+users can choose to be notified by email when the job finishes.
 
 \subsection{Analysis Workflow}\label{sec:pbsworkflow}
 
@@ -253,7 +253,7 @@ These stages are described in more detail in Chapter \ref{chap:implementation}.
 In the designed solution both tools should be able to integrate, so that a user
 could perform the complete analysis creating a unique analysis job. This would
 be accomplished by using the interface of the RNA-Seq analysis pipeline as the
-master (or main) interface for job creation. When the analysis completes the
+master (or main) interface for job creation. When the analysis completes, the
 pipeline presents the preliminary results to the user and automatically launches
 a PBS Finder analysis for the result gene identifier list. At this point the
 RNA-Seq pipeline's interface should include a direct link to the created job in
