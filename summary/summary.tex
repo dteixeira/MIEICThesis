@@ -1,0 +1,229 @@
+%-----------------------------------------------
+% Template para criação de resumos de projectos/dissertação
+% jlopes AT fe.up.pt,   Fri Jul  3 11:08:59 2009
+%-----------------------------------------------
+
+\documentclass[9pt,a4paper]{extarticle}
+
+%% English version: comment first, uncomment second
+%\usepackage[portuguese]{babel}  % Portuguese
+\usepackage[english]{babel}     % English
+\usepackage{graphicx}           % images .png or .pdf w/ pdflatex OR .eps w/ latex
+\usepackage{times}              % use Times type-1 fonts
+\usepackage[utf8]{inputenc}     % 8 bits using UTF-8
+\usepackage{url}                % URLs
+\usepackage{multicol}           % twocolumn, etc
+\usepackage{float}              % improve figures & tables floating
+\usepackage[tableposition=top]{caption} % captions
+%% English version: comment first (maybe)
+\usepackage{indentfirst}        % portuguese standard for paragraphs
+%\usepackage{parskip}
+
+%% page layout
+\usepackage[a4paper,margin=30mm,noheadfoot]{geometry}
+
+%% space between columns
+\columnsep 12mm
+
+%% headers & footers
+\pagestyle{empty}
+
+%% figure & table caption
+\captionsetup{figurename=Fig.,tablename=Tab.,labelsep=endash,font=bf,skip=.5\baselineskip}
+
+%% heading
+\makeatletter
+\renewcommand*{\@seccntformat}[1]{%
+  \csname the#1\endcsname.\quad
+}
+\makeatother
+
+%% avoid widows and orphans
+\clubpenalty=300
+\widowpenalty=300
+
+%% Path to the figures directory
+\graphicspath{{figures/}}
+
+\begin{document}
+
+\title{\vspace*{-8mm}\textbf{\textsc{A Computational Platform\\for Gene Expression Analysis}}}
+\author{\emph{Diogo André Rocha Teixeira}\\[2mm]
+  \small{Dissertation conducted under the supervision of \emph{Prof. Rui Camacho} and co-supervision of \emph{Nuno Fonseca}}\\
+\small{at \emph{Faculdade de Engenharia da Universidade do Porto}}}
+\date{}
+\maketitle
+%no page number 
+\thispagestyle{empty}
+
+\vspace*{-4mm}\noindent\rule{\textwidth}{0.4pt}\vspace*{4mm}
+
+\begin{multicols}{2}
+
+\section{Context} \label{sec:context}
+
+Molecular biology is a branch of biology that studies biological activities of
+living beings, at a molecular level. The grounds for this field of study were
+set in the early 1930s, although it only emerged in its modern form in the
+1960s, with the discovery of the structure of DNA. Among the processes studied
+by this branch of biology is gene expression. Gene expression is the process by
+which DNA molecules are transformed into useful genetic products, typically
+proteins, which are essential for living organisms. This knowledge is not only
+important in fields like evolutionary or molecular biology, but has crucial
+applications in fields such as medicine. One example of such an application is
+the usage of gene expression analysis in the diagnosis and treatment of cancer
+patients \cite{Pusztai01062003}.
+
+With the advent of \textit{Next Generation Sequencing} (NGS) techniques,
+researchers have at their disposal huge amounts of sequencing data, that is not
+only cheaper and faster to produce, but also more commonly available. This data
+can then be used to obtain relevant information about organisms' gene
+expression. But, as the cost of sequencing genomes was reduced, the cost of
+processing such information was increased. NGS techniques tend to produce much
+smaller reads\footnote{A \textit{read} is a single fragment of a
+genome/transcriptome, obtained through sequencing techniques.} than previously
+used techniques, presenting a more challenging problem, from a computational
+standpoint \cite{Wolf2013}.
+
+\section{Domain Problem} \label{sec:problem}
+
+Despite its great advancements in the past decades, molecular biology is still a
+relatively new subject and, as such, there are still some unknowns and partial
+knowledge in this area. In respect to gene expression, some mechanisms of this
+intricate process are yet to be fully understood. One such mechanism is the one
+that regulates the transcription speed into RNA. One of the objectives of this
+thesis is to understand how the final sequences of a gene's exons are
+responsible for the speed at which the exons themselves are transcribed. The
+other objective is to understand how RNA-binding protein (RBP) manipulation can
+be used to better understand an organism's gene expression. These are, however,
+complex tasks that can be further decomposed in the three main problems that
+will be addressed in the thesis, namely:
+
+  \textbf{Sequencing read alignment against a reference genome and differential
+  expression analysis between samples of different individuals} (of the same
+  species). This is effectively one of the most complex problems addressed in
+  the thesis. We will use data obtained through a sequencing method called RNA
+  Sequencing\footnote{RNA Sequenceing (RNA-Seq) is also referred to as
+  \textit{Whole Transcriptome Shotgun Sequencing}, or WTSS.}.
+
+  \textbf{Gene enrichment and RBP analysis}. This part of the work aims to
+  collect as much relevant information as possible about the particular genes
+  being studied at the time, to help biologists to better understand their
+  function. RBP knowledge is particularly important for gene manipulation and a
+  very useful tool for better understanding gene expression.
+
+  \textbf{Further analysis of the produced data, using machine learning
+  techniques for data mining, specifically for clustering analysis}. These
+  techniques will be employed in an effort to give biologists more relevant
+  information about gene expression, uncovering possible relationships in the
+  retrieved information.
+
+Solving these problems requires the use of computational tools. As such, the
+development of a computer system (or multiple systems) to tackle these problems
+emerges as a secondary objective of the thesis.
+
+\section{Motivation and Objectives} \label{sec:motivation}
+
+Gene expression analysis is essential for modern day molecular biology. Among
+many of the possible applications of this information, we can highlight: better
+classification and diagnosis of diseases, assessing how cells react to a
+specific treatment, and others.
+
+While nowadays powerful computational tools exist to target almost any biology
+problem, many of those tools require a very specific set of technical skills and
+have a steep learning curve. Possibly the most important motivation behind this
+thesis, and ultimately its main objective, is to provide researchers with
+powerful yet simple and user friendly tools. This means developing a system
+simple enough that any user can learn to operate it in a short period of time
+with minimal effort, but sufficiently advanced to suit the user's research
+needs.
+
+Another typical problem that biology researchers face nowadays is information
+dispersion and the repetitive and lengthy task of compiling that information.
+Researchers frequently have to manually join information originating from a
+multitude of different platforms, which use inconsistent formats and notations.
+Our second objective is therefore to provide a system that is able to take this
+burden off the user, making the process faster and simpler.
+
+\section{Project} \label{sec:project}
+
+The project itself revolves around the development of a prototype computer
+system, capable of solving the aforementioned problems. Due to the complexity
+of the complete system, its development followed a modular organization. The
+envisioned system architecture is divided into three major components.
+
+  \textbf{The differential expression analysis pipeline}
+  is responsible for aligning reads against a reference genome and compare
+  contrasts between different samples. The pipeline is based on the preexisting
+  iRAP pipeline. The pipeline's capabilities are further enhanced with both job
+  configuration automation and differential expression results consolidation
+  (combining results from multiple differential expression tools).
+
+  \textbf{The RNA-binding protein analysis workflow}
+  aggregates information about RBPs from multiple biologic web databases
+  (Ensembl, NCBI, UniProt, etc.) and organizes it in ways that are useful to
+  biology researchers. Moreover, this information is clustered using data mining
+  techniques, in order to reveal groups of genes and RBPs that may hold biologic
+  relevance.
+
+  \textbf{The web platform}
+  is responsible for storing and managing genetic data, coordinating interaction
+  between the other components of the system and providing a web interface for
+  user interaction. This component is based mainly on typical web technologies,
+  that is, a document based database for data storage (MongoDB), a web framework
+  for business logic implementation (Padrino) and web markup and styling
+  languages for interface implementation (HTML, CSS).
+
+\section{Case Study}
+
+A case study was conducted, in collaboration with IBMC (\emph{Instituto de
+Biologia Molecular e Celular}) experts. The studied data set was composed by
+twenty three genes from \emph{RhoGTPase} family, from \emph{Rattus norvegicus}
+(commonly known \emph{norway rat}).
+
+The obtained results were validated both in terms of their ... and their
+biological correction and relevance. The biological validation was also
+performed by IBMC experts. We concluded that the developed tool could mimic the
+same results an expert would obtain, in a fraction of the time (see Tab.
+\ref{tab:stress}) and providing much more useful information.
+
+\begin{table}[H]
+  \centering
+  \caption{Result time comparison between manual analysis (done by an expert) and both test machines.}
+  \begin{tabular}{l|lll}
+    & \textbf{machine1} & \textbf{machine2} & \textbf{Expert} \\ \hline
+    \textbf{100 IDs}   & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
+    \textbf{500 IDs}   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
+    \textbf{900 IDs}   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\
+  \end{tabular}
+  \label{tab:stress}
+\end{table}
+
+\section{Conclusions}
+
+Our objectives, in terms of studying the problem at hand and developing a
+solution to it, were completely fulfilled. The proposed solution corresponds to
+all of our expectations. However, as previously discussed, the implementation of
+the RNA-Seq data analysis pipeline system was not completed, due to time
+constraints. As such, our objective of prototyping and testing the complete
+system could not be completely achieved.
+
+\section{Future Work}
+
+The obvious continuation of the proposed work would be to finish the
+implementation and integration of the RNA-Seq data analysis pipeline. This would
+allow our solution to work as designed, integrating the complete analysis
+pipeline, from sequencing data to gene clustering and result visualization.
+Furthermore, it would be interesting to study the developed tools in terms of
+performance, under large volumes of information and requests. Whilst the tools
+were developed taking in consideration their performance, making them available
+in a large scale would take another kind of infrastructure.
+
+%%English version: comment first, uncomment second
+%\bibliographystyle{unsrt-pt}  % numeric, unsorted refs
+\bibliographystyle{unsrt}  % numeric, unsorted refs
+\bibliography{refs}
+
+\end{multicols}
+
+\end{document}
