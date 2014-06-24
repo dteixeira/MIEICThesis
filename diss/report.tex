@@ -37,7 +37,7 @@
 \usepackage{array,multirow}
 \usepackage{longtable}
 \usepackage{tabu}
-\usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage[acronym,nonumberlist]{glossaries}
 \makeglossaries
 \include{glossary}
 \include{abbrevs_en}
@@ -117,7 +117,7 @@ language=C,                        % choose the language of the code
 \author{Diogo André Rocha Teixeira}
 
 %% Uncomment next line for date of submission
-%\thesisdate{July 31, 2008}
+\thesisdate{June 23, 2014}
 
 %%Uncomment next line for copyright text if used
 %\copyrightnotice{Name of the Author, 2008}
@@ -156,7 +156,7 @@ language=C,                        % choose the language of the code
   \listoftables
   \pdfbookmark[0]{List of Algorithms}{algorithms}
   \listofalgorithms
-  \printglossary[type=acronym]
+  \printglossary[type=acronym,title=Abbreviations]
 \end{Prolog}
 
 %%----------------------------------------
@@ -184,6 +184,7 @@ language=C,                        % choose the language of the code
 %% Glossary
 \glsaddall
 \glossarystyle{altlist}
+\addcontentsline{toc}{chapter}{Glossary}
 \printglossary[type=main]
 
 %% Appendix
