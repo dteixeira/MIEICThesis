@@ -353,6 +353,12 @@ used in each stage \cite{irap}. This allows for a vast array of pipeline customi
 possibilities, making it easy to adapt to a particular experiment. Below we will
 present a set of tools, integrated in iRAP, that were used during this thesis.
 
+iRAP requires is a minimum set of user provided information to perform RNA-Seq
+analysis: the \emph{annotated reference genome} and the \emph{raw reads}, as
+previously mentioned. Note that the reads are organized in libraries. A library,
+in this case a cDNA library, is a collection of cDNA fragments that together
+constitute a portion of the transcriptome.
+
 \begin{figure}[!htb]
   \begin{center}
     \leavevmode
@@ -444,21 +450,21 @@ These tools are integrated in the iRAP pipeline, are used in its fourth stage.
 
 \subsubsection*{DESeq}
 
-DESeq is available in an R package (see Section \ref{sec:clustertool}), included
-in the Bioconductor super package \cite{20979621}. DESeq takes count data
-generated from RNA-Seq analysis assays. As count data is discrete and skewed, it
-is not well approximated by a normal distribution. DESeq solves this problem by
-applying a test based on the negative binomial distribution, which can reflect
-these properties. This method has a much higher power to detect differential
-expression.
+DESeq \cite{20979621} is available in an R package (see Section
+\ref{sec:clustertool}), included in the Bioconductor super package. DESeq takes
+count data generated from RNA-Seq analysis assays. As count data is discrete and
+skewed, it is not well approximated by a normal distribution. DESeq solves this
+problem by applying a test based on the negative binomial distribution, which
+can reflect these properties. This method has a much higher power to detect
+differential expression.
 
 \subsubsection*{edgeR}
 
-edgeR is available in an R package (see Section \ref{sec:clustertool}), included
-in the Bioconductor super package \cite{robinson2010edger}. It provides methods
-for the statistical analysis of count data from comparative experiments on next
-generation sequencing platforms, among which is RNA-Seq, the most common source
-of data used with edgeR. It has many characteristics in common with the
+edgeR \cite{robinson2010edger} is available in an R package (see Section
+\ref{sec:clustertool}), included in the Bioconductor super package. It provides
+methods for the statistical analysis of count data from comparative experiments
+on next generation sequencing platforms, among which is RNA-Seq, the most common
+source of data used with edgeR. It has many characteristics in common with the
 previously mentioned DESeq, as it also uses negative binomial models (among
 others) to distinguish biological from technical variation. Later we describe
 how both tools can be used together to produce better results.
@@ -536,15 +542,15 @@ predictive data mining is used to predict explicit values, based on patterns
 determined from the data set. With predictive data mining we try to build models
 using known data and use those models as a base to predict future behavior.
 
-As we're seeing, data mining does not represent a single type problem. In fact
+As we can see, data mining does not represent a single type problem. In fact
 there are several different types of problems that can be addressed by data
 mining techniques. Each of these problems may require a different data mining
-method. A brief review of the most common methods is given below.
+method. A brief review of the most common type of problems is given below.
 
 \begin{description}
 
   \item[Classification]
-  is a method that tries to generalize the already known structure of a
+  is a type of problem that tries to generalize the already known structure of a
   data set, so that it applies to new data sets. In other words, with
   classification we try to learn a function that is capable of mapping our data
   into predefined classes.
@@ -552,12 +558,12 @@ method. A brief review of the most common methods is given below.
   \item[Regression]
   tries to learn a function that models relationships between variables in the
   data set. That function can latter be used to find real value predictions of
-  future behavior of the same or similar data sets.
+  future behavior of data sets originated from the same population.
 
   \item[Clustering]
   consists in identifying a finite set of categories or clusters of similar
   values, to describe the data set. As such, it is used without prior knowledge
-  about data structure.
+  about the data structure.
 
   \item[Summarization]
   provides a more compact representation of a subset of data, in a way that the
@@ -577,8 +583,8 @@ method. A brief review of the most common methods is given below.
 \end{description}
 
 Note that due to the nature of the work of this thesis we will focus on
-clustering analysis techniques. As such, the following sections will contain a
-more in-depth review of these methods, along with descriptions of the used
+clustering analysis techniques and, as such, the following sections will contain
+a more in-depth review of these methods, along with descriptions of the used
 algorithms and tools.
 
 \subsection{Clustering Techniques}\label{sec:clustertech}
@@ -587,33 +593,34 @@ As explained above, clustering is the process of grouping data into
 \emph{clusters}, in such a way that objects inside a cluster are very similar to
 each other, while being as different as possible from objects in other clusters
 \cite{han2006data}. These similarities (and dissimilarities) are assessed based
-on the attributes of each object using a comparison method, often times a
-distance function. Clustering is used in situations where the classes contained
-in the data set are unknown, either because they are difficult to determine or
-because such an assessment would be too costly.
+on the attributes of each object using a comparison method, often a distance
+function. Clustering is used in situations where the classes contained in the
+data set are unknown, either because they are difficult to determine or because
+such an assessment would be too costly or we known little about the domain and
+want to do a prospective study.
 
 However, data clustering as a process is highly dependent on the data being
 analysed. For example, while some data sets can be easily clustered using
 \qt{spherical} clusters, other can only be represented by \qt{concave} clusters.
-In other words, \qt{\emph{the notion of \qt{cluster} cannot be precisely
-defined}} \cite{Estivill-Castro:2002:WSM:568574.568575}, it needs to adapt to
-the problem at hand. This multitude of different interpretations of the cluster
-notion led to the appearance of many different clustering methods and
-algorithms. There are five major categories in which we can classify clustering
-methods: \emph{partitioning methods}; \emph{hierarchical methods};
+In other words, there is no global technique to group similar objects, it needs
+to adapt to the problem at hand. This multitude of different interpretations of
+the cluster notion led to the appearance of many different clustering methods
+and algorithms. There are five major categories in which we can classify
+clustering methods: \emph{partitioning methods}; \emph{hierarchical methods};
 \emph{density-based methods}; \emph{grid-based methods}; and \emph{model-based
 methods} \cite{han2006data}.
 
 \subsubsection*{Partitioning Methods}
 
-Partitioning methods are based around the construction of partitions of the data
-set. Each one of the constructed partitions represents a data cluster. Given a
-dataset with $n$ elements, and a number $k$ of clusters, the correct application
-of these methods must verify two conditions \cite{han2006data}:\\
+Partitioning methods are based around the construction of partitions of the
+whole data set. Each one of the constructed partitions represents a data
+cluster. Given a dataset with $n$ elements, and a number $k$ of clusters, the
+correct application of these methods must verify two conditions
+\cite{han2006data}:\\
 
 \begin{tabular}{l l}
-  (1) & each partition must contain at least one object ($k \leq n$);\\
-  (2) & a single object of the data set must only belong to one partition.\\
+  (1) & each cluster must contain at least one object ($k \leq n$);\\
+  (2) & a single object of the data set must only belong to one cluster.\\
 \end{tabular}\\
 
 Given a number $k$ of clusters (typically chosen \emph{a priori}), an iterative
@@ -631,14 +638,14 @@ unfeasible in some situations. As such, most partitioning methods adopt some
 sort of heuristic evaluation of their clusters' quality. For example, the
 \emph{k-means} algorithm uses the mean value of the objects in a cluster to
 represent the same cluster; the \emph{k-medoids} algorithm, which is
-centroid based, used an object that is roughly at the center of the cluster to
+centroid based, uses an object that is roughly at the center of the cluster to
 represent it. Typically these methods work well with \qt{spherical} clusters,
 but may falter if clusters have more complex shapes (\qt{concave} shaped
 clusters, for example).
 
 \subsubsection*{Hierarchical Methods}
 
-These methods create an hierarchical division between objects in the data set.
+These methods create an hierarchical division among objects in the data set.
 This hierarchy is represented as a tree structure. There are two strategies for
 hierarchical analysis, the \emph{divisive} strategy and the \emph{agglomerative}
 strategy \cite{han2006data}. The \emph{divisive} strategy consists of putting
@@ -663,8 +670,9 @@ objects, density-based methods are based on the notion of \emph{cluster density}
 cluster while the number of objects in its vicinity (or \emph{density}) exceeds
 a certain user defined threshold. Density-based methods are particularly useful
 to discover clusters with irregular shapes. It should be noted that algorithms
-implementing these kind of analysis, like DBSCAN, are usually very
-computationally heavy, both in terms of processing power and memory usage
+implementing these kind of analysis, like DBSCAN \cite{Ester96adensity-based},
+are usually very computationally heavy, both in terms of processing power and
+memory usage
 (although optimizations exist).
 
 \subsubsection*{Grid-based Methods}
@@ -711,7 +719,7 @@ Medoids (PAM) algorithm (see Algorithm \ref{alg:pam}).
 \begin{algorithm}
   \LinesNumbered
   \SetNlSty{texttt}{(}{)}
-  \KwData{$k$, the number of clusters; $D$, a data set containing $n$ objects.}
+  \KwIn{$k$, the number of clusters; $D$, a data set containing $n$ objects.}
   \KwResult{A set of $k$ clusters.}
   \BlankLine
 
@@ -755,13 +763,14 @@ distance between objects $x \in X$ and $y \in Y$.
 \subsubsection*{Inductive Logic Programming}
 
 ILP is a subfield of machine learning that uses first order logic to represent
-both data and models \cite{Lavrac1998}. ILP infers hypotheses (models) from
-examples and background knowledge. The examples may be of two types: instances
-of the concept to be \qt{learned}, and non-instances of the concept. Background
-knowledge is a set of predicates encoding all information that the experts find
-useful to construct the models. ILP might be used to tackle several machine
-learning and data mining problems, like classification, regression and
-clustering.
+both data and models \cite{Lavrac1998,muggletonilp}. ILP infers hypotheses
+(models) from examples and background knowledge. The examples may be of two
+types: instances of the concept to be \qt{learned} (positive examples), and
+non-instances of the concept (negative examples). Background knowledge is a set
+of predicates encoding all information that the experts find useful to construct
+the models. ILP might be used to tackle several machine learning and data mining
+problems, like classification, regression, clustering and association rules
+discovery.
 
 The first and most important motivation for ILP systems is that they overcome
 the representation limitations of attribute-value learning systems, such as the
@@ -774,12 +783,15 @@ hypotheses are understandable and interpretable by humans, being therefore
 useful to explain the phenomenons that produce the data. This representation
 also means that background knowledge can be represented and employed in the
 induction process, in contrast to attribute-value models, where this information
-is difficult to represent.
+is difficult to represent. The expressive power of first-order logic enable an
+easy representation of data with complex structure, and the encoding of complex
+models that may combine numerical computation and relational information.
 
 Despite these advantages, ILP cannot be applied indiscriminately to any
 clustering or classification problems. ILP systems are typically very heavy when
 it comes to computational resource consumption and run for long periods of time
-\cite{fonseca2003implementation}.
+\cite{fonseca2003implementation}. To ameliorate this situation there has been
+significant progress in parallel execution of ILP systems.
 
 \subsection{Clustering Evaluation and Assessment}\label{sec:clustereval}
 
@@ -859,13 +871,13 @@ in the data set. These distances are used as a measure of
 similarity/dissimilarity between those objects. Typically, objects that are
 close to each other are considered similar, as opposed to objects that are far
 away from each other and therefore considered different. Below we will present
-some common types of distance measure that are used in clustering methods.
+some common types of distance measures that are used in clustering methods.
 
 \subsubsection*{Euclidean Distance}
 
 Euclidean distance is one the most common distance measures. It represents the
 geometric distance between two points, in a $n$-dimensional space
-\cite{DBLP:journals/corr/abs-1205-1117}. Euclidean distance can be formulated as
+\cite{DBLP:journals/corr/abs-1205-1117}. Euclidean distance can be defined as
 shown in Equation \ref{eq:eucl} (for $n$-dimensions).
 \begin{equation}
   \centering
@@ -887,7 +899,7 @@ from each other.
 
 \subsubsection*{Manhattan Distance}
 
-The Manhattan distance is between two objects is sum of the differences between
+The Manhattan distance between two objects is the sum of the differences between
 each of their components. In other words, it is equivalent to the distance
 between the two objects, if a $n$-dimensional grid-like path was followed
 \cite{DBLP:journals/corr/abs-1205-1117}. It is defined as shown in Equation
@@ -900,10 +912,10 @@ between the two objects, if a $n$-dimensional grid-like path was followed
 
 \subsubsection*{Chebychev Distance}
 
-The Chebychev distance if less common than the previously mentioned distances.
+The Chebychev distance is less common than the previously mentioned distances.
 The Chebychev distance between two objects is defined as the maximum distance
 between components of the objects (Equation \ref{eq:chev}). Is is useful in
-situation where two object must necessarily be considered different if one of
+situations where two object must necessarily be considered different if one of
 their components is different, as the use of the maximum value removes the
 dampening factors of other (closer) components.
 \begin{equation}
@@ -916,9 +928,9 @@ dampening factors of other (closer) components.
 
 The Jaccard distance is a measure of dissimilarity between two objects. It is
 related to the Jaccard coefficient, a similarity measure. These measures are
-applicable to binary and non-binary (set) data. In these cases, a simple
-geometric distance, like the Euclidean distance, might not accurately represent
-the distance similarity (or dissimilarity) between two objects.
+applicable to binary and non-binary data. In these cases, a simple geometric
+distance, like the Euclidean distance, might not accurately represent the
+distance similarity (or dissimilarity) between the two objects.
 
 For binary attributes, the Jaccard coefficient (similarity) is computed as
 \begin{equation}
@@ -960,25 +972,25 @@ someone to implement any data mining algorithm that they might need. In fact,
 today we have lots of data mining tools (many of which are free), that already
 implement many of those algorithms. These tools are usually customizable, making
 it easy to adapt them to most problems. Below we'll briefly review some of the
-most popular data mining tools, that apply to the specific needs of this thesis.
-Note that some of these tools, namely RapidMiner and Weka, were only used in the
-testing stages of the implementation. As such, they don't interact with the
-finished systems.
+most popular data mining tools, applicable to the specific needs of this thesis.
+Note that some of these tools, namely RapidMiner and Weka, were only used for
+testing purposes during the development of the project. As such, they are not
+part of the final prototype.
 
 \subsubsection*{RapidMiner}
 
-RapidMiner\footnote{\url{http://www.rapidminer.com/}} is a complete solution for
-data mining problems. it is available as a standalone GUI based application, as
-seen in Figure \ref{fig:rapidminer}. It is a commercial application, although
-its core and earlier versions are distributed under an open source license and
-it offers a free version, beyond its multiple paid versions. Being one of the
-most popular data mining tools used today, its applications span several
-domains, including education, training, industrial and personal applications,
-among others. Its functionality can also be easily extended through the use of
+RapidMiner \cite{rapidminer} is a complete solution for data mining problems. it
+is available as a standalone GUI based application, as seen in Figure
+\ref{fig:rapidminer}. It is a commercial application, although its core and
+earlier versions are distributed under an open source license and it offers a
+free version, beyond its multiple paid versions. Being one of the most popular
+data mining tools used today, its applications span several domains, including
+education, training, industrial and personal applications, among others. Its
+functionality can also be easily extended through the use of
 plugins\footnote{Plugin is a software module that adds new functionality to an
 existing software application. Plugins are typically dependent on the platform
-they extend and can't be used as standalone tools.}, reflecting in an increased
-value for this tool. One such example in the area of bioinformatics is the
+they extend and can't be used as standalone tools.}, reflecting an increased
+value for this tool. One of such example in the area of bioinformatics is the
 integration plugin between RapidMiner and the
 Taverna\footnote{\url{http://www.taverna.org.uk/}} open source workflow
 management system \cite{Jupp2011}.
@@ -994,19 +1006,19 @@ management system \cite{Jupp2011}.
 
 \subsubsection*{Weka}
 
-Weka\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is an open source tool that
-collects several machine learning algorithms and allows its user to easily apply
-those algorithms to data mining tasks \cite{Hall}. Created at the University of
-Waikato, New Zeland in 1997 (the current version was completely rewritten in
-1997, despite the first iteration of the tool being developed as early as 1993),
-it is still in active development to date. Weka supports several common data
-mining tasks, like data preprocessing, classification, clustering, regression
-and data visualization. it is core libraries are written in Java and allow for an
-easy integration of its data mining algorithms in pre existing code and
-applications. Other than that, Weka can be used directly through a command
-line/terminal or through one of its multiple GUIs (Figure \ref{fig:weka}). Its
-simple API and well structure architecture allow it to be easily extended by
-users, should they need new functionalities.
+Weka \cite{Hall} is an open source tool that implements several machine learning
+algorithms and allows its user to easily apply those algorithms to data mining
+tasks. Created at the University of Waikato, New Zeland in 1997\footnote{The
+current version was completely rewritten in 1997, despite the first iteration of
+the tool being developed as early as 1993.}, it is still in active development
+to date. Weka supports several common data mining tasks, like data
+preprocessing, classification, clustering, regression and data visualization.
+Its core libraries are written in Java and allow for an easy integration of its
+data mining algorithms in pre existing code and applications. Other than that,
+Weka can be used directly through a command line/terminal or through one of its
+multiple GUIs (Figure \ref{fig:weka}). Its simple API and well structure
+architecture allow it to be easily extended by users, should they need new
+functionalities.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -1019,20 +1031,20 @@ users, should they need new functionalities.
 
 \subsubsection*{R Language}
 
-R\footnote{\url{http://www.r-project.org/}} is a free programming language and
-software environment for statistical computing and graphics generation.
-Originally developed by Ross Ihaka and Robert Gentleman at the University of
-Auckland, New Zealand in 1993 \cite{Ihaka1998}, it is still under active
-development. R is typically used by statisticians and data miners, either for
-direct data analysis or for developing new statistical software \cite{Fox2005}.
+R \cite{Ihaka1998} is a free programming language and software environment for
+statistical computing and graphics generation. Originally developed by Ross
+Ihaka and Robert Gentleman at the University of Auckland, New Zealand in 1993,
+it is still under active development. R is typically used by statisticians and
+data miners, either for direct data analysis or for developing new statistical
+software \cite{Fox2005}.
 
 R is an implementation of the S programming language\footnote{S is an object
 oriented statistical programming language, appearing in 1976 at Bell
 Laboratories.}, borrowing some characteristics from the Scheme programming
-language. it is core is written in a combination of C, Fortran and R itself. It
-is possible directly manipulate R objects in languages like C, C++ and Java. R
-can be used directly through the command line or through several third party
-graphical user interfaces like
+language. Its core is written in a combination of C, Fortran and R itself. It is
+possible to directly manipulate R objects in languages like C, C++, Java and
+Prolog. R can be used directly through the command line or through several third
+party graphical user interfaces like
 Deducer\footnote{\url{http://www.deducer.org/pmwiki/index.php}}. There are also
 R wrappers for several scripting languages.
 
@@ -1058,7 +1070,6 @@ oriented applications, including FASTA, FASTQ, BAM and GFF.
 \section{Chapter Conclusions}
 
 In this chapter we gave a brief introduction of the molecular biology concepts
-that serve as base of the thesis. We also reviewed the concepts on RNA-Seq and
+that serve as base of the thesis. We have reviewed the concepts on RNA-Seq and
 data mining and presented short analyses of concrete tools and algorithms that
-were used during this thesis. These concepts will be revisited in the next
-chapters, as needed.
+were used during this thesis.

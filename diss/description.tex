@@ -3,9 +3,9 @@
 \section*{}
 
 In this chapter we present the designed solution. The main objectives of the
-solution's design are reviewed, along with the most important choices that were
-made. Both major components of the developed solution and their envisioned
-integration process are described in detail.
+solution's design are reviewed, along with the most important choices made. Both
+major components of the developed solution and their envisioned integration
+process are described in detail.
 
 \section{Overview}
 
@@ -26,7 +26,7 @@ Splitting the domain problem into two objectives led to the first important
 design decision. It was decided that the software solutions to both problems
 would be implemented independently and, at a later stage, integrated with each
 other, to form the complete system. This would also allow both tools to be used
-separately, leading to a wider array of possibility in terms of future uses.
+separately, leading to a wider array of possibilities in terms of future uses.
 
 Designing software solutions with high performance, scalability and
 extensibility is also a major concern. A software solution should be able to
@@ -35,7 +35,7 @@ number of simultaneous users. It should allow new features to be easily added,
 in order to better respond to the users' needs. If these requirements are not
 met, the solution is at risk of being abandoned by its users, becoming therefore
 useless. The software solutions presented in this thesis were designed with
-these questions in mind, as is further discussed in Chapter
+these goals in mind, as is further discussed in Chapter
 \ref{chap:implementation}.
 
 \section{Gene Expression Analysis Pipeline}
@@ -50,17 +50,17 @@ these questions in mind, as is further discussed in Chapter
 %- Results from different differential expression tools are combined.\\
 %\end{Notes}
 
-The gene expression analysis pipeline uses iRAP as its foundation. As discussed
-before, iRAP provides begin-to-end gene RNA-Seq data analysis. However, while
-iRAP is a tool aimed at a broad group of users, both beginners and advanced
-users, it is still a command line tool, with many configuration settings. This
-technological barrier may drive away some more inexperienced users. One of the
-objectives of this part of the work was to make it a simpler and more
-straightforward process, accessible to any user with basic computer literacy;
-another was to combine results of several different tools, hopefully improving
-those results. Note that some of the features described below were not
-implemented, due to time constraints. As such, those features are presented as
-future work.
+The gene expression analysis pipeline uses iRAP \cite{irap} as its foundation.
+As discussed before, iRAP provides begin-to-end gene RNA-Seq data analysis.
+However, while iRAP is a tool aimed at a broad group of users, both beginners
+and advanced users, it is still a command line tool, with many configuration
+settings. This technological barrier may drive away some more inexperienced
+users. One of the objectives of this part of the work was to make it a simpler
+and more straightforward process, accessible to any user with basic computer
+literacy; another was to combine results of several different tools, with the
+aim of improving those results. Note that some of the features described below
+were not implemented, due to time constraints. As such, those features are
+presented as future work.
 
 \subsection{Analysis Configuration}
 
@@ -68,7 +68,7 @@ iRAP is configured with an experience configuration file (see Appendix
 \ref{appendix:irapconfig}). This file must define the name of the species being
 analysed, the reference and read data files, the tools to use for the analysis,
 read libraries, etc.. Although many of these configurations are difficult to
-infer and automatically define, it is possible to create a more user friendly
+infer and define automatically, it is possible to create a more user friendly
 way to configure the experiments. This is accomplished through a web form. This
 web form has two different views: the \emph{normal view} allows users to
 configure only the essential settings of the experiment, those that cannot be
@@ -99,9 +99,9 @@ starts.
 
 Once both the configuration file and the required data files are ready, the
 analysis process can begin. The analysis process starts by passing those files
-to iRAP (Figure \ref{fig:tool1}). Note that this first version of the
-configuration file is altered in such a way that the analysis will stop
-immediately after the quantification step (see Section \ref{sec:irap}).
+to iRAP (Figure \ref{fig:tool1}). In this initial stage of the workflow the
+analysis will stop immediately after the quantification step (see Section
+\ref{sec:irap}).
 
 \begin{figure}[!htb]
   \begin{center}
@@ -115,21 +115,27 @@ immediately after the quantification step (see Section \ref{sec:irap}).
 \end{figure}
 
 The next step is to sequentially execute differential expression analysis with
-the chosen tools, in this case DESeq and edgeR. The resulting files are kept
-until all tools are executed. Note that there is no need for the analysis
-process to start from the beginning every time a new tool is used, as iRAP can
-(in most cases) reuse the results produced up until the point where a new tool
-is introduced. After all tools are executed, their results must be combined into
-a final list of gene identifiers. In order for a gene identifier to appear in
-the final combined results it must obey two constraints:
+the chosen tools, in this case DESeq \cite{20979621} and edgeR
+\cite{robinson2010edger}. The resulting files are kept until all tools are
+executed. Note that there is no need for the analysis process to start from the
+beginning every time a new tool is used, as iRAP can (in most cases) reuse the
+results produced up until the point where a new tool is introduced. After all
+tools are executed, their results must be combined into a final list of gene
+identifiers. In order for a gene identifier to appear in the final combined
+results it must obey two constraints:
 
+\begin{savenotes}
 \begin{table}[H]
   \begin{tabular}{l p{0.92\textwidth}}
     $(1)$ & the gene identifier must be present in all files;\\
-    $(2)$ & the average \emph{pvalue} for that gene must be inferior to a
-    maximum threshold in all files ($0.05$ by default).\\
+    $(2)$ & the average \emph{p-value}\footnote{A \emph{p-value} is used to
+    assert the significance of statistical results. It represents the
+    probability of obtaining the same as before in a new sample, given that the
+    null hypothesis is true \cite{goodman45dirty}.} for that gene must be
+    inferior to a maximum threshold in all files ($0.05$ by default).\\
   \end{tabular}
 \end{table}
+\end{savenotes}
 
 \section{RNA Binding Protein Analysis Web Platform}
 
@@ -158,9 +164,9 @@ be referred to by that name.
 The only data PBS Finder collects from the user is a list of gene (or
 transcript) identifiers that should be analysed. These identifiers can be in one
 of five different formats: \emph{Ensembl Gene}, \emph{Ensembl Transcript},
-\emph{Entrez}, \emph{RefSeq} and \emph{GenBank} \ref{tab:examples}. Users can
-submit jobs with any combination of the previous types and use identifiers from
-multiple species.
+\emph{Entrez}, \emph{RefSeq} or \emph{GenBank} ( see Table \ref{tab:examples}).
+Users can submit jobs with any combination of the previous types and use
+identifiers from multiple species.
 
 \begin{table}[!htb]
   \centering
@@ -173,7 +179,7 @@ multiple species.
   \end{tabular}
 
   \caption[Examples of identifiers accepted by PBS Finder] {
-    Examples of identifiers accepted by PBS Finder.
+    Two sets of examples of identifiers accepted by PBS Finder.
   }
   \label{tab:examples}
 \end{table}
@@ -208,8 +214,9 @@ users can choose to be notified by email when the job finishes.
 
 \subsection{Analysis Workflow}\label{sec:pbsworkflow}
 
-PBS Finder is based around a three stage analysis model \ref{fig:workflow2}:
-\emph{base analysis}, \emph{data set enrichment} and \emph{clustering analysis}.
+PBS Finder is based around a three stage analysis model (Figure
+\ref{fig:workflow2}): \emph{base analysis}, \emph{data set enrichment} and
+\emph{clustering analysis}.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -230,8 +237,10 @@ However, further stages build on top of this information, bringing a more
 valuable set of results to biologists.
 
 In the enrichment stage additional information about every protein is retrieved.
-This information is obtained from UniProt, a web platform for curated protein
-information. This stage was implemented in the second release of the platform.
+This information is obtained from
+UniProt\footnote{\url{http://www.uniprot.org}}, a web platform for curated
+protein information. This stage was implemented in the second release of the
+platform.
 
 The clustering stage takes all the information collected in the previous stages
 and uses it to perform clustering analysis. There are two types of clustering
@@ -269,7 +278,7 @@ consulted/reviewed independently from each other, as if both had run separately.
 %- Introduce next chapter of implementation details.\\
 %\end{Notes}
 
-In this chapter we reviewed the most important details about the designed of the
+In this chapter we reviewed the most important details about the design of the
 proposed software solution (implementation details are described in Chapter
 \ref{chap:implementation}). We presented the modular, two subsystem model, that
 allows both tools to be used as standalone products, increasing the number of
