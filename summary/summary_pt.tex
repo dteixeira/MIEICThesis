@@ -44,10 +44,10 @@
 
 \begin{document}
 
-\title{\vspace*{-8mm}\textbf{\textsc{Modelo de Escrita de Resumos de\\Projecto/Dissertação: um Exemplo}}}
-\author{\emph{António Manuel Silva}\\[2mm]
-\small{Projecto/Dissertação realizado sob a orientação do \emph{Prof.\ José Marco Soares}}\\
-\small{na \emph{FazSoft Lda}}}
+\title{\vspace*{-8mm}\textbf{\textsc{Uma Plataforma Computacional\\para Análise de Expressão Génica}}}
+\author{\emph{Diogo André Rocha Teixeira}\\[2mm]
+  \small{Dissertação realizada sob a orientação do \emph{Prof.\ Rui Camacho} e co-orientação de \emph{Nuno Fonseca}}\\
+\small{na \emph{Faculdade de Engenharia da Universidade do Porto}}}
 \date{}
 \maketitle
 %no page number 
@@ -57,127 +57,166 @@
 
 \begin{multicols}{2}
 
-\section{Motivação}\label{sec:motiva}
+\section{Contexto} \label{sec:context}
 
-Neste documento apresentam-se alguns conselhos e instruções para a preparação dos resumos de projecto/dissertação. 
-Pede-se aos autores o favor de, dentro do possível, cumprirem com as instruções que são dadas, assim como com a estrutura apresentada, de forma a manter-se o mesmo aspecto em todos os resumos. 
-Nas sub-secções~\ref{sec:lingua} a ~\ref{sec:number} podem encontrar-se alguns detalhes sobre a formatação do documento. 
+A biologia molecular é um ramo da biologia que estuda as atividades biológicas
+dos seres vivos, ao nível molecular. As bases para esta área de estudo foram
+criadas no início da década de 1930, embora apenas tenha emergido na sua forma
+mais moderna na década de 1960, com a descoberta da estrutura do DNA. Entre os
+processos estudados por este ramo da biologia está a expressão génica. A
+expressão génica é o processo através do qual moléculas de DNA são
+transformadas em produtos genéticos úteis, tipicamente proteínas, que são
+essenciais para os organismos vivos. Este conhecimento não é apenas importante
+em áreas como biologia molecular ou evolutiva, mas tem aplicações cruciais em
+áreas como medicina. Um exemplo de uma destas aplicações é a utilização de
+análise de expressão génica no diagnóstico e tratamento de pacientes com cancro
+\cite{Pusztai01062003}.
 
-Na secção ``Motivação'' deve ser apresentado o enquadramento do trabalho, dando ideia das necessidades que o mesmo cobre.
+Com o advento das técnicas de \textit{Next Generation Sequencing} (NGS) os
+investigadores têm à sua disposição grandes quantidades de dados de
+sequenciação, cuja produção é não só mais barata e rápida, mas também
+vulgarmente mais disponível. Estes dados podem ser usados para obter informação
+relevante sobre a expressão génica de organismos. Mas, à medida que o custo da
+sequenciação de genomas é reduzido, o custo do processamento dessa informação
+aumenta. Técnicas NGS costumam produzir \emph{reads}\footnote{Uma \emph{read} é
+um fragmento de um genoma/transcriptoma, obtido através de técnicas de
+sequenciação.} mais curtas quando comparadas com aquelas produzidas por
+técnicas anteriores, apresentando um problema mais desafiante, de ponto de
+vista computacional \cite{Wolf2013}.
 
-\section{Objectivos}\label{sec:goals}
+\section{Problema de Domínio} \label{sec:problem}
 
-A secção ``Objectivos'' deve enunciar claramente os objectivos a atingir com o trabalho de projecto/dissertação, enquadrando-os na respectiva área de actividade a que o trabalho se destina. 
-Por exemplo, este documento tem como objectivos:
-\begin{itemize}
-\item Servir de modelo/exemplo do ponto de vista da dos resumos;
-\item Apresentar o aspecto gráfico que se pretende para os resumos;
-\item Disponibilizar \emph{templates} a quem pretenda utilizar \LaTeX.
-\end{itemize}
+Despite its great advancements in the past decades, molecular biology is still a
+relatively new subject and, as such, there are still some unknowns and partial
+knowledge in this area. In respect to gene expression, some mechanisms of this
+intricate process are yet to be fully understood. One such mechanism is the one
+that regulates the transcription speed into RNA. One of the objectives of this
+thesis is to understand how the final sequences of a gene's exons are
+responsible for the speed at which the exons themselves are transcribed. The
+other objective is to understand how RNA-binding protein (RBP) manipulation can
+be used to better understand an organism's gene expression. These are, however,
+complex tasks that can be further decomposed in the three main problems that
+will be addressed in the thesis, namely:
 
-\section{Descrição do Trabalho}\label{sec:work}
+  \textbf{Sequencing read alignment against a reference genome and differential
+  expression analysis between samples of different individuals} (of the same
+  species). This is effectively one of the most complex problems addressed in
+  the thesis. We will use data obtained through a sequencing method called RNA
+  Sequencing\footnote{RNA Sequenceing (RNA-Seq) is also referred to as
+  \textit{Whole Transcriptome Shotgun Sequencing}, or WTSS.}.
 
-Na secção ``Descrição do Trabalho'' (com este ou com outro nome que se julgue mais adequado) devem ser apresentadas as principais partes do trabalho, começando pela sua estruturação. Devem ser mencionadas as tecnologias utilizadas, com referências à sua interdependência e interligação dando especial ênfase aos componentes desenvolvidos pelo estudante no âmbito do trabalho em causa.
+  \textbf{Gene enrichment and RBP analysis}. This part of the work aims to
+  collect as much relevant information as possible about the particular genes
+  being studied at the time, to help biologists to better understand their
+  function. RBP knowledge is particularly important for gene manipulation and a
+  very useful tool for better understanding gene expression.
 
-No presente documento, seguem-se 9 subsecções com instruções acerca da extensão da comunicação, margens, estilos e outras recomendações gerais acerca da elaboração da versão final dos resumos.
+  \textbf{Further analysis of the produced data, using machine learning
+  techniques for data mining, specifically for clustering analysis}. These
+  techniques will be employed in an effort to give biologists more relevant
+  information about gene expression, uncovering possible relationships in the
+  retrieved information.
 
-\subsection{Línguas Obrigatórias}\label{sec:lingua}
+Solving these problems requires the use of computational tools. As such, the
+development of a computer system (or multiple systems) to tackle these problems
+emerges as a secondary objective of the thesis.
 
-Os resumos deverão ser apresentados, em ficheiros separados, em versões portuguesa e inglesa. 
-No resumo em Português e em caso de necessidade de utilização de termos em língua Inglesa, estes deverão ser devidamente salientados pela adopção da fonte em itálico, como, por exemplo, \emph{Ray-Tracing}.
+\section{Motivação e Objetivos} \label{sec:motivation}
 
-\subsection{Cabeçalho de Identificação}
+Gene expression analysis is essential for modern day molecular biology. Among
+many of the possible applications of this information, we can highlight: better
+classification and diagnosis of diseases, assessing how cells react to a
+specific treatment, and others.
 
-O cabeçalho de identificação deve ser centrado e inicia-se com o título da comunicação, em letras maiúsculas de tamanho 12 e em negrito. 
-Seguem-se, em linhas separadas e em tamanho 9, a identificação do estudante, da empresa e dos orientadores (estes dois numa única linha). 
-Todos os quatro nomes devem ser em itálico.
+While nowadays powerful computational tools exist to target almost any biology
+problem, many of those tools require a very specific set of technical skills and
+have a steep learning curve. Possibly the most important motivation behind this
+thesis, and ultimately its main objective, is to provide researchers with
+powerful yet simple and user friendly tools. This means developing a system
+simple enough that any user can learn to operate it in a short period of time
+with minimal effort, but sufficiently advanced to suit the user's research
+needs.
 
-\subsection{Extensão do Artigo e Tipo de Letra}
+Another typical problem that biology researchers face nowadays is information
+dispersion and the repetitive and lengthy task of compiling that information.
+Researchers frequently have to manually join information originating from a
+multitude of different platforms, which use inconsistent formats and notations.
+Our second objective is therefore to provide a system that is able to take this
+burden off the user, making the process faster and simpler.
 
-Cada resumo deve ser formatado com texto a duas colunas, não devendo exceder duas páginas de formato A4. 
-\textbf{As duas colunas devem terminar sensivelmente à mesma altura}, em cada uma das páginas. 
+\section{Projeto} \label{sec:project}
 
-O tipo de letra para o texto genérico deverá ser \emph{Times New Roman} com tamanho 9 e espaçamento simples entre linhas. 
-O espaçamento entre parágrafos deverá ser estendido a 1.5 linhas (0.5 linha de espaçamento extra).
+The project itself revolves around the development of a prototype computer
+system, capable of solving the aforementioned problems. Due to the complexity
+of the complete system, its development followed a modular organization. The
+envisioned system architecture is divided into three major components.
 
-\subsection{Dimensões das Margens}
+  \textbf{The differential expression analysis pipeline}
+  is responsible for aligning reads against a reference genome and compare
+  contrasts between different samples. The pipeline is based on the preexisting
+  iRAP pipeline. The pipeline's capabilities are further enhanced with both job
+  configuration automation and differential expression results consolidation
+  (combining results from multiple differential expression tools).
 
-As margens a manter à volta do texto deverão ser as constantes na Tab.~\ref{tab:medidas}.
+  \textbf{The RNA-binding protein analysis workflow}
+  aggregates information about RBPs from multiple biologic web databases
+  (Ensembl, NCBI, UniProt, etc.) and organizes it in ways that are useful to
+  biology researchers. Moreover, this information is clustered using data mining
+  techniques, in order to reveal groups of genes and RBPs that may hold biologic
+  relevance.
+
+  \textbf{The web platform}
+  is responsible for storing and managing genetic data, coordinating interaction
+  between the other components of the system and providing a web interface for
+  user interaction. This component is based mainly on typical web technologies,
+  that is, a document based database for data storage (MongoDB), a web framework
+  for business logic implementation (Padrino) and web markup and styling
+  languages for interface implementation (HTML, CSS).
+
+\section{Caso de Estudo}
+
+A case study was conducted, in collaboration with IBMC (\emph{Instituto de
+Biologia Molecular e Celular}) experts. The studied data set was composed by
+twenty three genes from \emph{RhoGTPase} family, from \emph{Rattus norvegicus}
+(commonly known \emph{norway rat}).
+
+The obtained results were validated both in terms of their ... and their
+biological correction and relevance. The biological validation was also
+performed by IBMC experts. We concluded that the developed tool could mimic the
+same results an expert would obtain, in a fraction of the time (see Tab.
+\ref{tab:stress}) and providing much more useful information.
 
 \begin{table}[H]
   \centering
-  \caption{Margens expressas em centímetros}
-\begin{tabular}{c | c}
-	\hline
-\textbf{Espaçamento} & \textbf{Medida}\\
-	\hline
-	\hline
-        Margem Superior & 3 cm\\
-        Margem Inferior & 3 cm\\
-        Margem Esquerda & 3 cm\\
-        Margem Direita  & 3 cm\\
-        Entre Colunas   & 1.2 cm\\
-	\hline
-\end{tabular}
-  \label{tab:medidas}
+  \caption{Result time comparison between manual analysis (done by an expert) and both test machines.}
+  \begin{tabular}{l|lll}
+    & \textbf{machine1} & \textbf{machine2} & \textbf{Expert} \\ \hline
+    \textbf{100 IDs}   & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
+    \textbf{500 IDs}   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
+    \textbf{900 IDs}   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\
+  \end{tabular}
+  \label{tab:stress}
 \end{table}
 
-\subsection{Corpo do Texto}
+\section{Conclusões}
 
-Todos os títulos de secções e subsecções devem ser escritos em negrito e com um espaçamento para cima ligeiramente superior ao de um parágrafo normal. 
-Os títulos de níveis um e dois devem ter tamanhos, respectivamente, 11 e 9. 
-As ``subsubsecções'' devem ser evitadas.
+Our objectives, in terms of studying the problem at hand and developing a
+solution to it, were completely fulfilled. The proposed solution corresponds to
+all of our expectations. However, as previously discussed, the implementation of
+the RNA-Seq data analysis pipeline system was not completed, due to time
+constraints. As such, our objective of prototyping and testing the complete
+system could not be completely achieved.
 
-\subsection{Numeração das Secções}
+\section{Trabalho Futuro}
 
-As secções deverão ser numeradas com início em "1", de acordo com os níveis e subníveis respectivos, usando-se o ponto como separador.
-
-\subsection{Figuras, Equações e Quadros}
-
-As figuras e as tabelas deverão ser centradas, sempre que possível, à largura da coluna de texto em que se
-inserem (Tab.~\ref{tab:medidas} e Fig.~\ref{fig:figura}). 
-As figuras e tabelas cujas dimensões não o permitam, podem ser centradas à largura da página.
-
-\begin{figure}[H]
-\centerline{\includegraphics[scale=.6]{figura.png}}
-\caption{Esta é a legenda da figura}  
-\label{fig:figura}
-\end{figure}
-
-As legendas das figuras, a negrito, devem ser colocadas na sua parte inferior, contendo a respectiva numeração antecedida do termo \textbf{Fig.} 
-O mesmo é aplicável às tabelas, excepto que a legenda deve ser iniciada pelo termo \textbf{Tab.}\ e deve ser colocada acima da tabela respectiva. 
-Devem ser evitadas figuras ou outros elementos com cores.
-
-\begin{equation}
-  S_{L,i} = S_{L,i-1} . (1-S_{P,i-1}) = \prod_{k=0}^{i-1} (1-S_{p,k}) \label{eq:cif}
-\end{equation}
-% \begin{eqnarray}
-% S_{L,i} &=& S_{L,i-1} . (1-S_{P,i-1}) \nonumber\\
-%        &=& \prod_{k=0}^{i-1} (1-S_{p,k}) \label{eq:cif}
-% \end{eqnarray}
-
-As equações deverão conter a respectiva numeração na mesma linha de texto e à sua direita, entre parêntesis, como se mostra no exemplo da Equação~\ref{eq:cif}.
-
-As figuras deverão ser numeradas a partir do número 1 e com uma única sequência, i.e., sem reinício em cada secção. 
-O mesmo deve suceder com as equações e com as tabelas.
-
-\subsection{Numeração de Páginas}\label{sec:number}
-
-As páginas \textbf{NÃO} devem ser numeradas.
-
-\subsection{Codificação dos Caracteres}\label{sec:encomding}
-
-Este exemplo está escrito em UTF-8; para outras codificações deverá
-ser alterado \texttt{\\usepackage[utf8]\{inputenc\}}.
-
-
-\section{Conclusões}\label{sec:conclui}
-
-Espera-se que este documento possa contribuir para uma melhor qualidade dos resumos dos projectos/dissertações do MIEIC/FEUP.
-
-Documentos que não respeitem este aspecto gráfico serão liminarmente recusados, ficando os respectivos autores em falta em relação à sua entrega.
-
-Para as dissertações existem regras definidas noutro lado~\cite{kn:Mat93}.
+The obvious continuation of the proposed work would be to finish the
+implementation and integration of the RNA-Seq data analysis pipeline. This would
+allow our solution to work as designed, integrating the complete analysis
+pipeline, from sequencing data to gene clustering and result visualization.
+Furthermore, it would be interesting to study the developed tools in terms of
+performance, under large volumes of information and requests. Whilst the tools
+were developed taking in consideration their performance, making them available
+in a large scale would take another kind of infrastructure.
 
 %%English version: comment first, uncomment second
 \bibliographystyle{unsrt-pt}  % numeric, unsorted refs

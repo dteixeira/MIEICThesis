@@ -2,18 +2,18 @@
 
 # Build report.
 if [[ "$#" -eq 1 ]]; then
-  if [[ "$1" =~ s|S ]]; then
-    # Remove existent PDF file.
-    rm summary.pdf 2> /dev/null
-    make summary
-    cp summary.pdf view.pdf
-    open view.pdf
-  elif [[ "$1" =~ sp|SP ]]; then
+  if [[ "$1" =~ sp|SP ]]; then
     # Remove existent PDF file.
     rm summary_pt.pdf 2> /dev/null
     make summary_pt
     cp summary_pt.pdf view_pt.pdf
     open view_pt.pdf
+  elif [[ "$1" =~ s|S ]]; then
+    # Remove existent PDF file.
+    rm summary.pdf 2> /dev/null
+    make summary
+    cp summary.pdf view.pdf
+    open view.pdf
   elif [[ "$1" =~ p|P ]]; then
     # Remove existent PDF file.
     rm summary_pt.pdf 2> /dev/null
