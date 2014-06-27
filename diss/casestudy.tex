@@ -9,19 +9,137 @@ solutions with the previously available methods.
 
 \section{Gene Expression Analysis Pipeline}
 
+This case study is aimed at the developed gene expression pipeline, composed by
+iRAP and the differential expression results combination tool. Gene expression
+analysis is a complex task and, because of that, no definitive tool exists that
+can produce good results for every possible case. Some tools are better when
+analysing certain types of data/organisms, while other tools might have other
+strengths and weaknesses. It is difficult to an inexperienced user, as it is to
+a computer system, to determine the best tool to use in each case. The objective
+of this case study is to ascertain if the developed pipeline enhancement can
+help overcome this difficult, by combining the best results from multiple tools.
+
+\subsection{Case Study Setup}
+
+The data used in this case study was obtained from Ensembl Genomes (annotated
+reference genome) and ENA Sequence Read Archive (sequencing reads). The
+experiment itself is based on RNA-Seq experiment
+\emph{E-GEOD-48829},
+available at ArrayExpress\footnote{ArrayExpress in an online database where
+researchers can submit and search functional genomics experiments. This
+particular experience can be found at \url{http://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-48829/}.}.
+
+\subsubsection*{Analysis Data Set}
+
+As previously mentioned, the used data set was the same as in ArrayExpress
+experiment \emph{E-GEOD-48829}. This experiment studies the \emph{Escherichia
+coli} bacteria, commonly known as \emph{E. coli}. \emph{E. coli} is a model
+organism: a \qt{simple}, non-human organism that is extensively studied, with
+the expectation that the discoveries made for that particular organism are
+useful to understand different organisms \cite{fields2005cell}. Other examples
+of model organisms are \emph{Rattus norvegicus} (norway rat), \emph{Drosophila
+melanogaster} (fruit fly) and \emph{Mus musculus} (common mouse).
+
+Being extensively studied was just one of the reasons that lead to this choice
+of data set. As a single cellular organism, \emph{E. coli} is a simple organism,
+whose genome is fairly short (when compared with vertebrates, for example). This
+allows for much faster analysis times of a few hours, as opposed to the longer
+run times of larger genomes.
+
+The experiment was composed by a total of six libraries. These libraries where
+divided into two groups. These groups were used to define a contrast\footnote{In
+the context of differential expression a contrast is composed by two groups of
+libraries; these groups are compared between them, in order to uncover
+differences in their expression levels.} in the differential expression
+analysis.
+
+\subsubsection*{Experimental Environment}
+
+For this data set all tests were performed in the same machine. The machine's
+specifications can be consulted in Table \ref{tab:specs_irap}. Performance was
+not a big concern in this case study, as it is expected that iRAP may takes
+between hours and days to complete an experiment. In these experiments the
+biggest constraint is the machine's memory: older machines might not have enough
+memory to execute a complex iRAP analysis.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {l}{l}}
+    & \textbf{\emph{Machine}}\\ \hline
+    \textbf{\emph{Operative system}}    & Debian GNU/Linux Jessie/Sid\\
+    \textbf{\emph{CPU}}                 & Intel Core 2 Quad Q9400 (4 cores)\\
+    \textbf{\emph{CPU speed}}           & 2.66 GHz\\
+    \textbf{\emph{Memory}}              & 16 GiB DDR2 (800 MHz) \\ \hline
+  \end{tabular}
+
+  \caption[Specifications of the test environment used for the case study experiments]{
+    Specifications of the test environment used for the case study experiments.
+  }
+  \label{tab:specs_irap}
+\end{table}
+
+\subsubsection*{Methodology}
+
+Firstly, all information related to the experiment was download to the test
+machine (annotated reference genome and reads). A configuration file for the
+experiment was written, defining settings, libraries, groups, contrasts and any
+other information relevant to the experiment.
+
+The experiment was then executed until the quantification step; no differential
+expression analysis was performed at this point. This preliminary experiment
+used TopHat as a mapping/alignment tool and HTSeq as a quantification tool (see
+Section \ref{sec:seqtools}).
+
+Differential expression analysis was then performed using the previously
+produced quantification data. This analysis was conducted with both edgeR and
+DESeq (see Section \ref{sec:difexptools}). The total number of distinct lines in
+each result file was counted (for both tools). The next step was to remove any
+entries with high \emph{p-values} from those files, leaving only lines with a
+\emph{p-value} less or equal to 0.05. New line counts were produced for each of
+the filtered files. Finally, both files were combined in a single using the
+produced tool, and a last line count was made.
+
+\subsection{Comparison with Previous Results}
+
+The developed tool's results were compared with both the normal \qt{raw} results
+directly produced by the differential expression tools and with those same
+results, filtered by \emph{p-value}. Table \ref{tab:test_irap} shows these
+results, in terms of distinct lines per results file. Note that every line
+corresponds to a unique differentially expressed gene.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {c}{c}{c}}
+    & \textbf{\emph{Raw results}} & \textbf{\emph{Filtered results}} & \textbf{\emph{Combined results}}\\ \hline
+    \textbf{\emph{edgeR}} & 4494 & 386 & \multirow{2}{*}{191}\\
+    \textbf{\emph{DESeq}} & 4494 & 204 \\ \hline
+  \end{tabular}
+
+  \caption[Number of distinct lines resulting from differential expression analysis]{
+    Number of distinct lines resulting from differential expression analysis.
+    These results are relative to the raw results produced by the differential
+    expression tools, those same results filtered by \emph{p-value} and combined
+    with the produced tool.
+  }
+  \label{tab:test_irap}
+\end{table}
+
+This experiment demonstrates that the developed tool can in fact filter the
+results of differential expression into a smaller data set. This filtered data
+set will hopefully reveal itself more useful to researchers, eliminating
+unnecessary information and giving higher levels of confidence in the results.
+However, we have no way of comparing these results with the previous ones from a
+biological standpoint. Such assessment must be performed by expert in this
+field, which was not possible at this time.
+
 \section{RNA Binding Protein Analysis Web Platform}
 
 This case study is aimed at the RBP analysis tool (PBS Finder).
 \emph{RhoGTPases} comprise a family of molecular switches that control signal
 transduction pathways that link cell surface receptors to a variety of
 intracellular responses. In this particular case the genes are related to the
-species \emph{Rattus norvegicus}, commonly known as \emph{norway rat}.
-\emph{Rattus norvegicus} is a model organism: a \qt{simple}, non-human organism
-that is extensively studied, with the expectation that the discoveries made for
-that particular organism are useful to understand different organisms
-\cite{fields2005cell}. Other examples of model organisms are the \emph{E. coli}
-bacteria, \emph{Drosophila melanogaster} (fruit fly) and \emph{Mus musculus}
-(common mouse). This data set was produced by IBMC experts. The same experts
+well known model organism \emph{Rattus norvegicus}, commonly known as
+\emph{norway rat}. This data set was produced by IBMC experts. The same experts
 then validated the obtained results experimentally. The same experts then
 validated the obtained results experimentally.
 
@@ -40,14 +158,11 @@ instead of only in servers/computer clusters.
 
 \subsection{Case Study Setup}
 
-This case study is aimed only at the RBP analysis tool (PBS Finder). The reason
-for this is that it was not possible to acquire a test data set in sufficient
-time. It was also not possible to have an expert validate those results in the
-available time. Moreover, the available case study data set was produced by IBMC
-experts. The same experts then validated the obtained results experimentally.
-The same experts then validated the obtained results experimentally.
+The available case study data set was produced by IBMC experts. The same experts
+then validated the obtained results experimentally. The same experts then
+validated the obtained results experimentally.
 
-\subsection{Analysis Data Set}
+\subsubsection*{Analysis Data Set}
 
 The analysis data set is comprised by twenty three gene identifiers, from the
 \emph{RhoGTPase} family. The actual genes used for our tests can be found in
@@ -89,20 +204,20 @@ identifiers; gene names are not currently accepted as input data.
   \label{tab:genes}
 \end{table}
 
-\subsection{Experimental Environment}
+\subsubsection*{Experimental Environment}
 
 The testing environment was reproduced in two different machines. This machines
 differ in their hardware and operative system, but every other variable in the
 environment (internet connection speeds, machine usage, etc.) holds for both
 machines. Performance results for the case study experiment for both machines
 are given in Section \ref{sec:caseperf}. Henceforth the machines will be
-referenced as \emph{machine1} and \emph{machine2}, as shown in Table
+referenced as \emph{Machine1} and \emph{Machine2}, as shown in Table
 \ref{tab:specs}.
 
 \begin{table}[!htb]
   \centering
   \begin{tabular}{{l} | {l}{l}}
-    & \textbf{\emph{machine1}} & \textbf{\emph{machine2}}\\ \hline
+    & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}}\\ \hline
     \textbf{\emph{Operative system}}    & OS X 10.9.3                     & Debian GNU/Linux Jessie/Sid\\
     \textbf{\emph{CPU}}                 & Intel Core i7 4850HQ (4 cores)  & Intel Core 2 Quad Q9400 (4 cores)\\
     \textbf{\emph{CPU speed}}           & 2.30 GHz                        & 2.66 GHz\\
@@ -116,7 +231,7 @@ referenced as \emph{machine1} and \emph{machine2}, as shown in Table
   \label{tab:specs}
 \end{table}
 
-\subsection{Methodology}
+\subsubsection*{Methodology}
 
 In order for the experiments' execution time to depend only on the hardware of
 the machines several environment restrictions were enforced. Firstly, it was
@@ -279,11 +394,8 @@ that were identified as features of that cluster.
     cluster. This is due to the fact that proteins in \emph{Cluster 1} are
     generally abundant through the data set.
   }
-  \label{tab:perf}
+  \label{tab:differ}
 \end{table}
-
-
-
 
 \subsection{Correctness and Completeness of the Results}\label{sec:caseval}
 
@@ -381,7 +493,7 @@ information collection and analysis.
 \begin{table}[!htb]
   \centering
   \begin{tabular}{{l} | {l}{l}}
-    & \textbf{\emph{machine1}} & \textbf{\emph{machine2}}\\ \hline
+    & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}}\\ \hline
     \textbf{\emph{Experience 1}}    & $1m\ 47s$ & $6m\ 34s$\\
     \textbf{\emph{Experience 2}}    & $1m\ 58s$ & $6m\ 25s$\\
     \textbf{\emph{Experience 3}}    & $1m\ 46s$ & $6m\ 30s$\\
@@ -397,7 +509,7 @@ information collection and analysis.
 
   \caption[Execution times of the case study data set in two different environments]{
     Execution times of the case study data set in two different environments
-    (sequential experiments). Note that while \emph{machine2} has a significant
+    (sequential experiments). Note that while \emph{Machine2} has a significant
     loss in performance (due to its outdated hardware) it still achieves
     satisfactory execution times. This test also shows that it is possible to
     efficiently run PBS Finder in a home computer.
@@ -409,7 +521,7 @@ Table \ref{tab:stress} contains the stress test results of both machines,
 compared to the estimated work time needed by an expert. In this case stress
 tests were executed with one hundred, five hundred and nine hundred gene
 identifiers. Even the slowest test can be completed by the machine with less
-performance (\emph{machine2}) in under three hours. That same effort would take
+performance (\emph{Machine2}) in under three hours. That same effort would take
 an expert approximately four hundred and fifty hours, which amounts to two and a
 half weeks on a twenty four hour working day, and to just under two months in
 normal working conditions (eight hours per day).
@@ -417,7 +529,7 @@ normal working conditions (eight hours per day).
 \begin{table}[!htb]
   \centering
   \begin{tabular}{{l} | {l}{l}{l}}
-    \textbf{\emph{Number of IDs}} & \textbf{\emph{machine1}} & \textbf{\emph{machine2}} & \textbf{\emph{Manual method}} \\ \hline
+    \textbf{\emph{Number of IDs}} & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}} & \textbf{\emph{Manual method}} \\ \hline
     100  & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
     500   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
     900   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\ \hline
@@ -429,10 +541,15 @@ normal working conditions (eight hours per day).
   \label{tab:stress}
 \end{table}
 
-\subsection{Chapter Conclusions}
+\section{Chapter Conclusions}
 
-Through this case study we have shown that PBS Finder produces relevant and
-correct results for large-scale analysis of RBPs using data from \ngs{}
+The first case study has shown that that the developed tool for result
+combination can in fact produce more refined data sets. These filtered and
+combined data sets eliminate unnecessary data, and give biologists an higher
+level of confidence in the differential expression results.
+
+Through the second case study we have shown that PBS Finder produces relevant
+and correct results for large-scale analysis of RBPs using data from \ngs{}
 techniques. We have also shown that our tool significantly facilitates the work
 of the biologist, by making analysis of this data easier and quicker. As such,
 we consider PBS Finder a tool of great value for studying RNA biology.
