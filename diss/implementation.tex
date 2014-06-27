@@ -2,9 +2,9 @@
 
 \section*{}
 
-In this chapter we will talk about some specific details of the implementation
-of the designed solution. We will also review some of the used technologies, and
-provide the reasoning behind their choice, where relevant.
+In this chapter we present and discuss some specific details of the
+implementation of the designed solution. We will also review some of the used
+technologies, and provide the rational behind their choice, whenever relevant.
 
 %\begin{Notes}
 %- Talk about iRAP configuration, the result combination tool and more.\\
@@ -65,17 +65,17 @@ and relational calculus, NoSQL databases store information in the form of files
 complex mechanisms of classical relational (structured queries, enforced
 information integrity, etc.), in order to achieve higher performance and
 scalability. NoSQL databases are most effective when the saved records are large
-but loosely structured information collections.
+but are seen as loosely structured collections of information.
 
 \subsection{Analysis Server}
 
-The analysis server is responsible for managing analysis request sent by the web
-interface. The server is implemented on top of Distributed Ruby (dRuby), a
+The analysis server is responsible for managing analysis requests sent by the
+web interface. The server is implemented on top of Distributed Ruby (dRuby), a
 distributed object system for Ruby. dRuby allows methods and behaviours to be
 invoked on an object that exists in a different process or even in a different
-computer, using a network connection. To the client it seems like the object is
-local, as it can be used as any other object. The server uses a master
-distributed object to receive analysis requests from the web interface.
+computer, using a network connection. From the client's point of view it seems
+like the object is local, as it can be used as any other object. The server uses
+a master distributed object to receive analysis requests from the web interface.
 
 The server launches each job concurrently. This behaviour allows the server to
 run multiple analyses at the same time. Note that the server is not bound to a
@@ -87,13 +87,13 @@ allows the server to control it.
 
 Algorithm \ref{algo:server} represents the behaviour of the server when a new
 request arrives. The first step is to determine if the requested analysis method
-is available. If it is, the respective class is instantiated, and the analysis
-data set (and other relevant information) are passed to it. Note that at the
-same time the server creates a file with a copy of all the parameters of that
-particular request. If for some reason the server stops working, analyses that
-were running at that time will be automatically restarted once the server is
-available again. After the object that will be responsible for the analysis is
-created, the server creates and starts a new thread for it. The server also
+is available. If it is, the corresponding class is instantiated, and the
+analysis data set (and other relevant information) is passed to it. Note that
+at the same time the server creates a file with a copy of all the parameters of
+that particular request. If for some reason the server stops working, analyses
+that were running at that time will be automatically restarted once the server
+is available again. After the object that will be responsible for the analysis
+is created, the server creates and starts a new thread for it. The server also
 saves an indication that that particular analysis is being executed.
 
 \begin{algorithm}
@@ -170,31 +170,62 @@ which will be described in detail below.
 
 \subsection{Base Analysis}
 
-The first step in the pipeline is to prepare the gene identifiers for further
-analysis. These identifiers can be have five different notations, as described
-in Section \ref{sec:descworkflow}. As such, identifiers are separated according
-to their potential notation type in those five groups. However, some of those
-identifiers may be invalid, despite appearing to fit one of the possible
-notations. It is assumed that if an identifiers is valid, it can at least be
-converted to either \emph{Ensembl Gene} or \emph{Entrez} notation. This
-conversion is done using bioDBnet's \cite{Mudunuri15022009} identifier
-conversion service. \emph{Entrez} conversion is only attempted if \emph{Ensembl
-Gene} conversion is not available. While none of those platforms are preferred
-above the other, converting as many identifiers as possible to one convention
+The first step in the pipeline is to prepare the gene identifiers for the
+following analysis steps. These identifiers can be written in five different
+notations, as described in Section \ref{sec:descworkflow}. As such, identifiers
+are separated according to their potential notation type in those five groups.
+However, some of those identifiers may be invalid, despite appearing to fit in
+one of the possible notations. It is assumed that if an identifier is valid, it
+can at least be converted to either \emph{Ensembl Gene} or \emph{Entrez}
+notation. This conversion is done using bioDBnet's \cite{Mudunuri15022009}
+identifier conversion service. \emph{Entrez} conversion is only attempted if
+\emph{Ensembl Gene} conversion is not available. While none of those platforms
+are preferred, converting as many identifiers as possible to one convention
 helps to maintain data set coherence.
 
-Once only two lists remain, one with \emph{Ensembl Gene} identifiers and the
+Since only two lists remain, one with \emph{Ensembl Gene} identifiers and the
 other with \emph{Entrez} identifiers, information about those genes' transcripts
 must be collected. This information includes the transcript's name, its
 identifier, and its relevant genetic sequences. This information is collected
-using their respective platform (Ensembl or NCBI).
+using their corresponding platform (Ensembl or NCBI).
 
 The transcript sequences are then used to retrieve the related RBPs using RBPDB,
 an online RNA binding protein database \cite{Cook01012011}. For each sequence
 RBPDB finds every possible RBP, along with its name, location and binding
-sequence. This information is sufficient to answer one of this thesis' problems.
-However, it will be enriched and further analysed, bringing greater benefits to
-researchers.
+sequence. A complete list of all information retrieved for both genes and
+transcripts can be found in Table \ref{tab:info_gene}. For a specific
+transcript, if the retrieved 3’ UTR sequence is at least three hundred base
+pairs long it will be used with RBPDB. If the 3’ UTR is too short, the 3’ UTR
+downstream sequence (genomic sequence) will be used, with a fixed length of one
+thousand base pairs. If none of the above situations is possible, the 3’ UTR
+will be used as is (if it is at least one base pair long). This information is
+sufficient to answer one of this thesis' problems. However, it will be enriched
+and further analysed, bringing greater benefits to researchers.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {l}}
+    \multirow{3}{*}{\textbf{\emph{Gene}}}
+    & Transcript identifiers\\
+    & Gene name*\\
+    & Species*\\ \hline
+    \multirow{3}{*}{\textbf{\emph{Transcript}}}
+    & Protein identifiers\\
+    & Transcript name*\\
+    & Genetic sequences (3' UTR, 3' UTR downstream, 5' UTR)\\
+    & Names, locations and bind sequences of RBPs\\
+  \end{tabular}
+
+  \caption[Information retrieved for genes and transcripts in the base analysis stage]{
+    Information retrieved for genes and transcripts in the base analysis stage.
+    Information marked with \qt{*} represent optional information; it might be
+    relevant to the researcher and is therefore shown if available, but it is
+    not crucial to the analysis. On the other hand, the unmarked fields
+    represent required information, without which analysis on that particular
+    gene/transcript cannot continue.
+  }
+  \label{tab:info_gene}
+\end{table}
 
 \subsection{Data Set Enrichment}
 
@@ -211,7 +242,46 @@ platform. Among other useful information, KEGG contains information about
 protein pathways. A pathway is a sequence of actions, related to specific
 molecules, that produce certain changes within a cell, when performed. This
 information is crucial to understand the function of RBPs. As such, it is
-collected for further analysis.
+collected for further analysis (see Table \ref{tab:info_prot} for a complete
+list of all information retrieved).
+
+The first step for this phase is to use the protein names to retrieve a list of
+matching \emph{UniProt Accession} identifiers. By default PBS Finder will try to
+find a reviewed accession whose species matches the species in question. If this
+is not possible it will fallback to an unreviewed accession, from the same
+species. In case this is also not possible, it will try to find a reviewed human
+analogue accession or, as a last case, an unreviewed one. After finding the
+identifiers, the batch retrieval service is used to enrich the protein
+information. This information includes ontologies, related tissues, and
+references to external databases. From these references, KEGG identifiers in
+particular are used to retrieve information about pathways in which the RBPs are
+expressed. For each pathway, both its name and link to the KEGG pathway viewer
+are provided.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {l}}
+    \multirow{8}{*}{\textbf{\emph{Protein}}}
+    & Protein name\\
+    & UniProt identifier\\
+    & Accession species\\
+    & Related tissues*\\
+    & Keywords*\\
+    & Pathways*\\
+    & Ontologies*\\
+    & URLs to external platforms*\\
+  \end{tabular}
+
+  \caption[Information retrieved for proteins in the data set enrichment stage]{
+    Information retrieved for proteins in the data set enrichment stage.
+    Information marked with \qt{*} represent optional information; it might be
+    relevant to the researcher and is therefore shown if available, but it is
+    not crucial to the analysis. On the other hand, the unmarked fields
+    represent required information, without which analysis on that particular
+    protein cannot continue.
+  }
+  \label{tab:info_prot}
+\end{table}
 
 \subsection{Clustering Analysis}
 
@@ -310,16 +380,17 @@ result space to only one for each type of clustering. Algorithm
 \subsubsection*{ILP Clustering}
 
 Clustering using ILP techniques was also attempted. The main objective of this
-approach was to uncover more information about about the implicit relationships
+approach was to uncover more information about the implicit relationships
 present in the data sets. While conventional clustering methods present only the
 data set objects grouped in clusters, with ILP it is possible to understand
 exactly what rules were used to form those clusters.
 
 The devised approach had two steps. First, the results for each new job would be
 represented in the form of Prolog clauses. Second, those clauses would be used
-as data set for the ERDA clustering system, running on top of YAP Prolog.
-However, due to problems with the available tools, this approach could not be
-included in the final version of PBS Finder.
+as data set for the ERDA \cite{fonseca2012conceptual} clustering system, running
+on top of YAP Prolog \cite{citeulike:8884858}. However, due to problems with the
+available tools, this approach could not be included in the current version of
+PBS Finder.
 
 \subsection{Web Interface}
 
@@ -336,7 +407,7 @@ Job view, also known as main view, is the default projection of a job's results
 (Figure \ref{fig:job_view}). It gives the user a matrix that matches every gene (and
 transcript) in the data set with their corresponding binding proteins, as well
 as an histogram of the genes (a bar chart of the counting of genes with which
-each RBP binds). This matrix also contains two columns that give information
+each RBP binds). This matrix also contains two columns that provide information
 about how the genes were grouped, based on the two distinct clustering
 techniques. In addition to this information,
 clicking any group of genes will give the user a list of all the characteristics
@@ -348,13 +419,16 @@ The transcript view (Figure \ref{fig:trans_view}) offers more detailed
 information about the transcript's binding proteins, giving for each protein the
 base pairs that compose the binding site (and its start and stop positions) and
 a percentage score of the match's quality. A maximum of three different genetic
-sequences (5’ UTR, 3’ UTR and 3’ UTR downstream) are also displayed, depending
-on their availability. Whenever possible, related links to other platforms are
-presented (Ensembl, NCBI and UniProt). Like the job view, it also contains
-clustering information, but in this case only one column, that shows how the
-RBPs related to that specific transcript were grouped. Also similarly to the job
-view, users can click any group to obtain relevant information about the
-defining characteristics of that particular group.
+sequences (5’ UTR, 3’ UTR and 3’ UTR downstream\footnote{5' UTR and 3' UTR are
+non-coding regions located before the initiation codon and after the termination
+codon, respectively. While these regions are not translated to useful genetic
+products, their presence is important to regulate cellular processes.}) are also
+displayed, depending on their availability. Whenever possible, related links to
+other platforms are presented (Ensembl, NCBI and UniProt). Like the job view, it
+also contains clustering information, but in this case only one column, that
+shows how the RBPs related to that specific transcript were grouped. Also
+similarly to the job view, users can click any group to obtain relevant
+information about the defining characteristics of that particular group.
 
 \subsubsection*{Protein View}
 
@@ -365,7 +439,7 @@ in which the protein might be expressed, its related ontologies and the pathways
 in which the protein participates. Each pathway is coupled with a link to the
 corresponding KEGG pathway browser page.
 
-\subsubsection*{Results Exporting}
+\subsubsection*{Exporting the Results}
 
 Besides browsing, users can download their results as text files. Three
 different types of data projections of the results are provided: \emph{RBP
@@ -376,13 +450,13 @@ the one in the job results view, as well as species, gene and transcript
 information. Protein data can also be downloaded in both CSV and TSV formats. It
 gives a more complete view of the results, including species, gene, transcript
 and protein identifiers and additional protein information (keywords, related
-tissues, ontologies, etc.). Finally, the complete data set consists of a Prolog
-predicate representation of the job results. This is the same representation of
-the results that was created with the usage of ILP clustering techniques in
-mind. While it was not possible to use those techniques, the produced data set
-representation might still be of use to researchers.
+tissues, ontologies, etc.). Finally, the data set may be downloaded as a
+complete Prolog predicate representation of the job results. This is the same
+representation of the results that was created with the usage of ILP clustering
+techniques in mind. While it was not possible to use those techniques, the
+produced data set representation might still be of use to researchers.
 
-While in most cases these data representation conversion are apparently
+While in most cases these data representation conversions are apparently
 instantaneous, for large data sets they may take an additional amount of time.
 This would cause the web application to seemingly block if the user tried to
 download one of those files. To solve this problem all files are generated
@@ -409,4 +483,4 @@ only to be generated once.
 In this chapter we presented a concrete approach to the development of the
 proposed solutions. We reviewed their most important features and implementation
 choices. Further examples of their usage is available through a case study in
-Chapter \ref{chap:casestudy} (the case study applies only to PBS Finder).
+Chapter \ref{chap:casestudy}.
