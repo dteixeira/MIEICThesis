@@ -2,12 +2,43 @@
 
 \section*{}
 
-In this chapter we present a case study that was used as a proof of concept for
-the developed system. We characterize the experimental environment, the used
-data set and the obtained results. We also compare this method with the
-previously used expert manual analysis.
+In this chapter we present two case studies that were used as a proof of concept
+for the developed system. We characterize the experimental environment, the used
+data sets and the obtained results for both cases. We then compare the developed
+solutions with the previously available methods.
 
-\section{Case Study Setup}
+\section{Gene Expression Analysis Pipeline}
+
+\section{RNA Binding Protein Analysis Web Platform}
+
+This case study is aimed at the RBP analysis tool (PBS Finder).
+\emph{RhoGTPases} comprise a family of molecular switches that control signal
+transduction pathways that link cell surface receptors to a variety of
+intracellular responses. In this particular case the genes are related to the
+species \emph{Rattus norvegicus}, commonly known as \emph{norway rat}.
+\emph{Rattus norvegicus} is a model organism: a \qt{simple}, non-human organism
+that is extensively studied, with the expectation that the discoveries made for
+that particular organism are useful to understand different organisms
+\cite{fields2005cell}. Other examples of model organisms are the \emph{E. coli}
+bacteria, \emph{Drosophila melanogaster} (fruit fly) and \emph{Mus musculus}
+(common mouse). This data set was produced by IBMC experts. The same experts
+then validated the obtained results experimentally. The same experts then
+validated the obtained results experimentally.
+
+This experiment has three distinct goals. The first goal is to assess the
+general usefulness of PBS Finder. It is important to determine if the developed
+tool can at least reproduce the results obtained with previous methods. It is
+also relevant to assess if PBS Finder is able to provide even more relevant
+information to researchers, facilitating their work. The second goal is to
+compare PBS Finder with the existing techniques of manual analysis. One of the
+major constraints of manual analysis is the time it takes to complete; PBS
+Finder should be able to reduce the duration of the analysis. Lastly, the third
+goal is to assess the impact of differences in hardware performance in the
+overall performance of the platform. PBS Finder should be sufficiently optimized
+to be able to run in personal computers with decreased hardware performance,
+instead of only in servers/computer clusters.
+
+\subsection{Case Study Setup}
 
 This case study is aimed only at the RBP analysis tool (PBS Finder). The reason
 for this is that it was not possible to acquire a test data set in sufficient
@@ -16,47 +47,11 @@ available time. Moreover, the available case study data set was produced by IBMC
 experts. The same experts then validated the obtained results experimentally.
 The same experts then validated the obtained results experimentally.
 
-\section{Experimental Environment}
-
-The testing environment was reproduced in two different machines. This machines
-differ in their hardware and operative system, but every other variable in the
-environment (internet connection speeds, machine usage, etc.) holds for both
-machines. Performance results for the case study experiment for both machines
-are given in Section \ref{sec:caseperf}. Henceforth the machines will be
-referenced as \emph{machine1} and \emph{machine2}, as shown in Table
-\ref{tab:specs}.
-
-\begin{table}[!htb]
-  \centering
-  \begin{tabular}{{l} | {l}{l}}
-    & \textbf{\emph{machine1}} & \textbf{\emph{machine2}}\\ \hline
-    \textbf{\emph{Operative system}}    & OS X 10.9.3                     & Debian GNU/Linux Jessie/Sid\\
-    \textbf{\emph{CPU}}                 & Intel Core i7 4850HQ (4 cores)  & Intel Core 2 Quad Q9400 (4 cores)\\
-    \textbf{\emph{CPU speed}}           & 2.30 GHz                        & 2.66 GHz\\
-    \textbf{\emph{Memory}}              & 16 GiB DDR3 (1600 MHz)          & 16 GiB DDR2 (800 MHz) \\
-    \textbf{\emph{Internet connection}} & 100 Mbps                        & 100 Mbps\\
-  \end{tabular}
-
-  \caption[Specifications of the test environments used for the case study experiments]{
-    Specifications of the test environments used for the case study experiments.
-  }
-  \label{tab:specs}
-\end{table}
-
 \subsection{Analysis Data Set}
 
 The analysis data set is comprised by twenty three gene identifiers, from the
-\emph{RhoGTPase} family. \emph{RhoGTPases} comprise a family of molecular
-switches that control signal transduction pathways that link cell surface
-receptors to a variety of intracellular responses. In this particular case the
-genes are related to the species \emph{Rattus norvegicus}, commonly known as
-\emph{norway rat}. \emph{Rattus norvegicus} is a model organism: a \qt{simple},
-non-human organism that is extensively studied, with the expectation that the
-discoveries made for that particular organism are useful to understand different
-organisms \cite{fields2005cell}. Other examples of model organisms are the
-\emph{E. coli} bacteria, \emph{Drosophila melanogaster} (fruit fly) and
-\emph{Mus musculus} (common mouse).  The actual genes used for our tests can be
-found in Table \ref{tab:genes}. Note that the tool only needs to receive gene
+\emph{RhoGTPase} family. The actual genes used for our tests can be found in
+Table \ref{tab:genes}. Note that the tool only needs to receive gene
 identifiers; gene names are not currently accepted as input data.
 
 \begin{table}[!htb]
@@ -85,7 +80,7 @@ identifiers; gene names are not currently accepted as input data.
     Rhobtb1     & ENSRNOG00000000633 & ENSRNOT00000000784\\
     Rhobtb2     & ENSRNOG00000017373 & ENSRNOT00000023876\\
     Rhobtb3     & ENSRNOG00000012414 & ENSRNOT00000016838\\
-    Rhov        & ENSRNOG00000013380 & ENSRNOT00000018277\\
+    Rhov        & ENSRNOG00000013380 & ENSRNOT00000018277\\ \hline
   \end{tabular}
 
   \caption[\emph{RhoGTPase} family genes used as data set in the case study]{
@@ -94,7 +89,51 @@ identifiers; gene names are not currently accepted as input data.
   \label{tab:genes}
 \end{table}
 
-\section{Analysis Results}
+\subsection{Experimental Environment}
+
+The testing environment was reproduced in two different machines. This machines
+differ in their hardware and operative system, but every other variable in the
+environment (internet connection speeds, machine usage, etc.) holds for both
+machines. Performance results for the case study experiment for both machines
+are given in Section \ref{sec:caseperf}. Henceforth the machines will be
+referenced as \emph{machine1} and \emph{machine2}, as shown in Table
+\ref{tab:specs}.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{l} | {l}{l}}
+    & \textbf{\emph{machine1}} & \textbf{\emph{machine2}}\\ \hline
+    \textbf{\emph{Operative system}}    & OS X 10.9.3                     & Debian GNU/Linux Jessie/Sid\\
+    \textbf{\emph{CPU}}                 & Intel Core i7 4850HQ (4 cores)  & Intel Core 2 Quad Q9400 (4 cores)\\
+    \textbf{\emph{CPU speed}}           & 2.30 GHz                        & 2.66 GHz\\
+    \textbf{\emph{Memory}}              & 16 GiB DDR3 (1600 MHz)          & 16 GiB DDR2 (800 MHz) \\
+    \textbf{\emph{Internet connection}} & 100 Mbps                        & 100 Mbps\\ \hline
+  \end{tabular}
+
+  \caption[Specifications of the test environments used for the case study experiments]{
+    Specifications of the test environments used for the case study experiments.
+  }
+  \label{tab:specs}
+\end{table}
+
+\subsection{Methodology}
+
+In order for the experiments' execution time to depend only on the hardware of
+the machines several environment restrictions were enforced. Firstly, it was
+ensured that both machines were running their operative systems with the minimum
+required applications, without any parallel usage. The network connections were
+also checked to assert if they were working at equal speeds. Lastly, both
+machines were verified in order to ascertain if all needed software had equal or
+equivalent versions.
+
+Ten experiments ran on each machine. These experiments were executed
+sequentially rather than concurrently, to ensure more consistent results. Note
+that access to the tool was barred to other users during these experiments for
+the same reason. It was also ensured that the support structures of the
+platform, including databases, were only used for this set of experiments and
+reseted after each one.
+
+\subsection{Results}
 
 Table \ref{tab:results} includes the relevant results for this case study. As
 expected, some RBPs are able to bind to almost all members of the
@@ -103,7 +142,7 @@ expected, some RBPs are able to bind to almost all members of the
 Protein 1} (YBX1)). The latter kind is more interesting to analyse, as it might
 be used to manipulate a very specific set of genes, while leaving all others
 unaltered. In this case we chose the RBP YBX1 as the base of our validation,
-both because it only interacts with only five genes and because the genes it
+both because it only interacts with five genes and because the genes it
 interacts with are representative of the data set, in terms of biological
 classification.
 
@@ -135,10 +174,10 @@ classification.
     & \textbf{\emph{Rhobtb1}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
     & \textbf{\emph{Rhobtb2}} &  &  &  & $\times$ &  &  &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
     & \textbf{\emph{Rhobtb3}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
-    & \textbf{\emph{Rhov}} &  &  &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\
+    & \textbf{\emph{Rhov}} &  &  &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$\\ \hline
   \end{tabular}
 
-  \vspace{0.6cm}
+  \vspace{0.4cm}
 
   \begin{tabular}{{l}{l} | {c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}}
     & & \textbf{\emph{EIF4B}} & \textbf{\emph{KHSRP}} & \textbf{\emph{YTHDC1}} & \textbf{\emph{VTS1}} & \textbf{\emph{RBMX}} & \textbf{\emph{KHDRBS3}} & \textbf{\emph{SFRS1}} & \textbf{\emph{ELAVL1}} & \textbf{\emph{SFRS13A}} & \textbf{\emph{SFRS7}} & \textbf{\emph{A2BP1}} & \textbf{\emph{QKI}}\\ \hline
@@ -166,10 +205,10 @@ classification.
     & \textbf{\emph{Rhobtb1}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & \\
     & \textbf{\emph{Rhobtb2}} & $\times$ & $\times$ &  & $\times$ & $\times$ &  & $\times$ & $\times$ & $\times$ &  &  & \\
     & \textbf{\emph{Rhobtb3}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  & $\times$ & $\times$\\
-    & \textbf{\emph{Rhov}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & \\
+    & \textbf{\emph{Rhov}} & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &  &  & \\ \hline
   \end{tabular}
 
-  \vspace{0.6cm}
+  \vspace{0.4cm}
 
   \begin{tabular}{{l}{l} | {c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}{c}}
     & & \textbf{\emph{QKI}} & \textbf{\emph{SUS}} & \textbf{\emph{YBX2-A}} & \textbf{\emph{PSI}} & \textbf{\emph{SAP-49}} & \textbf{\emph{ACO1}} & \textbf{\emph{YBX1}} & \textbf{\emph{SFRS2}} & \textbf{\emph{ZFP36}} & \textbf{\emph{RBM4}} & \textbf{\emph{PTBP1}}\\ \hline
@@ -197,21 +236,59 @@ classification.
     & \textbf{\emph{Rhobtb1}} &  &  &  &  &  & $\times$ & $\times$ &  &  & $\times$ & \\
     & \textbf{\emph{Rhobtb2}} &  &  & $\times$ &  &  & $\times$ &  &  &  &  & \\
     & \textbf{\emph{Rhobtb3}} & $\times$ &  & $\times$ &  & $\times$ & $\times$ &  & $\times$ & $\times$ &  & \\
-    & \textbf{\emph{Rhov}} &  &  &  &  & $\times$ & $\times$ &  &  &  &  & \\
+    & \textbf{\emph{Rhov}} &  &  &  &  & $\times$ & $\times$ &  &  &  &  & \\ \hline
   \end{tabular}
 
   \caption[Case study results generated by PBS Finder]{
-    Case study results generated by PBS Finder. This table includes information
-    about which RBPs bind with each gene, as well as about the gene clusters
-    that were generated.
+    Case study results generated by PBS Finder (table divided intro three
+    sections for legibility). Each row represents a single gene from the data
+    set and each row represents an RBP with which the genes potentially bind.
+    Note that for this particular analysis the tool divided the genes into two
+    clusters, joining together genes that bind with similar proteins.
   }
   \label{tab:results}
 \end{table}
 
-\section{Result Validation}\label{sec:caseval}
+Table \ref{tab:results} shows that the tool found two clusters of genes within
+the data set. In this case the best results were obtained using average linkage
+hierarchical clustering, coupled with a binary representation of the distance
+matrix. This particular solution was chosen for having a higher average
+silhouette than other produced solutions. Table \ref{tab:differ} contains a list
+of all the proteins that were considered as defining for their clusters. Note
+that \emph{Cluster 1} contained almost exclusively proteins that were frequent
+across the data set; on the other hand, \emph{Cluster 2} contained seven RBPs
+that were identified as features of that cluster.
 
-Result validation was conducted in two different fronts: \emph{collected data
-completeness and correction}, and \emph{biological results evaluation}.
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{{c} | {l}}
+    \textbf{\emph{Cluster 1}} & \textbf{\emph{Cluster 2}}\\ \hline
+    \multirow{7}{*}{-}
+    & ZFP36 \\
+    & ELAVL2 \\
+    & ZRANB2 \\
+    & PSI \\
+    & PTBP1 \\
+    & SFRS7 \\
+    & SUS \\ \hline
+  \end{tabular}
+
+  \caption[RBPs found to characterize each cluster]{
+    RBPs found to characterize each cluster. Note that \emph{Cluster 1} does not
+    contain any RBP that can be considered as a defining feature of that
+    cluster. This is due to the fact that proteins in \emph{Cluster 1} are
+    generally abundant through the data set.
+  }
+  \label{tab:perf}
+\end{table}
+
+
+
+
+\subsection{Correctness and Completeness of the Results}\label{sec:caseval}
+
+Result checking was conducted in two different fronts: \emph{collected data
+completeness and correction}; and \emph{biological results evaluation}.
 
 Completeness and correction analysis were conducted both manually and
 automatically during the development of the tool. In some cases it was possible
@@ -234,19 +311,19 @@ obtaining this information may take several weeks. It has two main objectives:
 validating the number and type of RBPs that bind to each gene; and validate the
 adequacy of the gene clustering results.
 
-Both validation processes were conducted successfully, thus proving that the
-developed platform produces adequate results.
+Both checking processes were conducted successfully, thus improving the
+confidence that the developed platform produces adequate results.
 
-\section{Comparison with Previous Method}\label{sec:caseperf}
+\subsection{Comparison with Previous Method}\label{sec:caseperf}
 
-As with any newly developed automation tool, it is essential to assess if said
-tool is in fact an improvement when compared to the previously available
-methods. The results produced by the tool were already validated in Section
+As with any newly developed automation tool, it is essential to assess if the
+developed tool is in fact an improvement over previously available methods. The
+results produced by the tool were already determined correct in Section
 \ref{sec:caseval}. As such, the tool should now be evaluated from the user
 experience standpoint, namely, in terms of \emph{task simplification} and
 \emph{efficiency}.
 
-\subsection{Task Simplification}
+\subsubsection*{Task Simplification}
 
 Figure \ref{fig:oldvsnew} depicts how PBS Finder simplified the analysis process,
 from the user point of view. When conducting a manual analysis, the user must
@@ -281,7 +358,7 @@ information that is not available in the manual analysis: gene, transcript and
 protein information (names, additional sequences, pathways, etc.); links to
 external platforms; useful histograms; and gene and protein clustering results.
 
-\subsection{Efficiency}
+\subsubsection*{Efficiency}
 
 It is essential for the developed platform to be able to conduct the analysis in
 a timely fashion, making tool performance a major concern. As such, we compared
@@ -315,7 +392,7 @@ information collection and analysis.
     \textbf{\emph{Experience 8}}    & $1m\ 39s$ & $6m\ 11s$\\
     \textbf{\emph{Experience 9}}    & $1m\ 42s$ & $6m\ 42s$\\
     \textbf{\emph{Experience 10}}   & $1m\ 42s$ & $6m\ 52s$\\ \hline
-    \textbf{\emph{Average time}}    & $1m\ 42s$ & $6m\ 31s$\\
+    \textbf{\emph{Average time}}    & $1m\ 42s$ & $6m\ 31s$\\ \hline
   \end{tabular}
 
   \caption[Execution times of the case study data set in two different environments]{
@@ -340,19 +417,19 @@ normal working conditions (eight hours per day).
 \begin{table}[!htb]
   \centering
   \begin{tabular}{{l} | {l}{l}{l}}
-    & \textbf{\emph{machine1}} & \textbf{\emph{machine2}} & \textbf{\emph{Manual method}} \\ \hline
-    \textbf{\emph{100 IDs}}   & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
-    \textbf{\emph{500 IDs}}   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
-    \textbf{\emph{900 IDs}}   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\
+    \textbf{\emph{Number of IDs}} & \textbf{\emph{machine1}} & \textbf{\emph{machine2}} & \textbf{\emph{Manual method}} \\ \hline
+    100  & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
+    500   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
+    900   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\ \hline
   \end{tabular}
 
-  \caption[Result comparison between manual analysis and both test machines]{
-    Result comparison between manual analysis and both test machines.
+  \caption[Results comparison between manual analysis and both test machines]{
+    Results comparison between manual analysis and both test machines.
   }
   \label{tab:stress}
 \end{table}
 
-\section{Chapter Conclusions}
+\subsection{Chapter Conclusions}
 
 Through this case study we have shown that PBS Finder produces relevant and
 correct results for large-scale analysis of RBPs using data from \ngs{}
