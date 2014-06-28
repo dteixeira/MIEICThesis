@@ -97,13 +97,10 @@ is created, the server creates and starts a new thread for it. The server also
 saves an indication that that particular analysis is being executed.
 
 \begin{algorithm}
-  \LinesNumbered
-  \SetNlSty{texttt}{(}{)}
-
   receive request\;
-  \uIf{request.analysis\_method is available}{
-    instantiate request.analysis\_method with request.parameters\;
-    save request.parameters to disk\;
+  \uIf{request.analysis\_method \emph{is available}}{
+    instantiate \emph{request.analysis\_method} with \emph{request.parameters}\;
+    save \emph{request.parameters} to disk\;
     run the analysis in a new thread\;
     \uIf{success}{
       report results\;
@@ -111,7 +108,7 @@ saves an indication that that particular analysis is being executed.
     \Else{
      report error\;
     }
-    delete request.parameters from disk\;
+    delete \emph{request.parameters} from disk\;
   }
   \Else {
     report error\;
@@ -345,22 +342,19 @@ result space to only one for each type of clustering. Algorithm
 \ref{algo:secsel} represents the method used for result selection.
 
 \begin{algorithm}
-  \LinesNumbered
-  \SetNlSty{texttt}{(}{)}
-
   sort clustering results by average silhouette (descending)\;
   filter clustering results with clusters with less than 8\% of data set objects\;
-  abundance\_frequency = 0.90\;
+  \emph{abundance\_frequency} = 0.90\;
   \While{abundance\_frequency $\geq$ 0.50}{
     \ForEach{clustering result}{
-      classify as abundant any attribute with frequency $\geq$ abundance\_frequency\;
+      classify as abundant any attribute with frequency $\geq$ \emph{abundance\_frequency}\;
       remove abundant attributes that appear in multiple clusters\;
       \uIf{at least one unique abundant attribute exists for each cluster}{
         select cluster\;
         break loop\;
       }
       \Else{
-        abundance\_frequency = abundance\_frequency - 0.05\;
+        \emph{abundance\_frequency} = \emph{abundance\_frequency} $-\ 0.05$\;
       }
     }
   }
