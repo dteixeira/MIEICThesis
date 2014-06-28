@@ -129,11 +129,11 @@ Algorithm \ref{algo:combine} shows the basic process of combining the obtained
 differential expression results. First, entries in every file must be filtered
 by their \emph{p-value}\footnote{A \emph{p-value} is used to assert the
 statistical significance of results. It represents the probability of obtaining
-the same as before in a new sample, given that the null hypothesis is true
-\cite{goodman45dirty}.}, that must be inferior to a maximum threshold ($0.05$ by
-default). Then all entries in all files are compared with each other. This
-produces an intersection of all files, in other words, a list of entries that
-are present in all files.
+the same results as before in a new sample, given that the null hypothesis is
+true \cite{goodman45dirty}.}, that must be inferior to a maximum threshold
+($0.05$ by default). Then all entries in all files are compared with each other.
+This produces an intersection of all files, in other words, a list of entries
+that are present in all files.
 
 \begin{algorithm}
   \emph{genes} = empty map\;

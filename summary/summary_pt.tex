@@ -74,149 +74,147 @@ análise de expressão génica no diagnóstico e tratamento de pacientes com can
 
 Com o advento das técnicas de \textit{Next Generation Sequencing} (NGS) os
 investigadores têm à sua disposição grandes quantidades de dados de
-sequenciação, cuja produção é não só mais barata e rápida, mas também
-vulgarmente mais disponível. Estes dados podem ser usados para obter informação
-relevante sobre a expressão génica de organismos. Mas, à medida que o custo da
-sequenciação de genomas é reduzido, o custo do processamento dessa informação
-aumenta. Técnicas NGS costumam produzir \emph{reads}\footnote{Uma \emph{read} é
-um fragmento de um genoma/transcriptoma, obtido através de técnicas de
-sequenciação.} mais curtas quando comparadas com aquelas produzidas por
-técnicas anteriores, apresentando um problema mais desafiante, de ponto de
-vista computacional \cite{Wolf2013}.
+sequenciação, cuja produção é mais barata e rápida. Estes dados podem ser usados
+para obter informação relevante sobre a expressão génica de organismos. Mas, à
+medida que o custo da sequenciação de genomas é reduzido, o custo do
+processamento dessa informação aumenta. Técnicas NGS costumam produzir
+\emph{reads}\footnote{Uma \emph{read} é um fragmento de um genoma/transcriptoma,
+obtido através de técnicas de sequenciação.} mais curtas quando comparadas com
+aquelas produzidas por técnicas anteriores, apresentando um problema mais
+desafiante, de ponto de vista computacional \cite{Wolf2013}.
 
-\section{Problema de Domínio} \label{sec:problem}
+\section{Problem de Domínio} \label{sec:problem}
 
-Despite its great advancements in the past decades, molecular biology is still a
-relatively new subject and, as such, there are still some unknowns and partial
-knowledge in this area. In respect to gene expression, some mechanisms of this
-intricate process are yet to be fully understood. One such mechanism is the one
-that regulates the transcription speed into RNA. One of the objectives of this
-thesis is to understand how the final sequences of a gene's exons are
-responsible for the speed at which the exons themselves are transcribed. The
-other objective is to understand how RNA-binding protein (RBP) manipulation can
-be used to better understand an organism's gene expression. These are, however,
-complex tasks that can be further decomposed in the three main problems that
-will be addressed in the thesis, namely:
+Apesar dos grandes avanços nas últimas décadas, a biologia molecular é ainda uma
+área recente e, como tal, ainda existem muitas incógnitas e conhecimento
+parcial. Alguns dos mecanismos reguladores da expressão génica são ainda
+desconhecidos. Um destes mecanismos regula a velocidade de transcrição de RNA.
+Um dos objetivos desta dissertação é preceber de que forma é que as sequências
+finais do exões de um gene afetam a velocidade com que estes são transcritos. O
+outro objetivo é perceber de que forma a manipulação das \emph{RNA-binding
+proteins} (RBP) pode ser usada para melhor perceber a expressão génica de um
+organismo. Estas são tarefas complexas que podem ser decompostas nos três
+principais problemas que vão ser endereçados nesta dissertação.
 
-  \textbf{Sequencing read alignment against a reference genome and differential
-  expression analysis between samples of different individuals} (of the same
-  species). This is effectively one of the most complex problems addressed in
-  the thesis. We will use data obtained through a sequencing method called RNA
-  Sequencing\footnote{RNA Sequenceing (RNA-Seq) is also referred to as
-  \textit{Whole Transcriptome Shotgun Sequencing}, or WTSS.}.
+  \textbf{Alinhamento de \emph{reads} contra um genoma de referência e análise
+  da expressão diferencial entre amostras de diferentes indivíduos}. Este é o
+  problema mais complexo tratado nesta dissertação. Serão usados dados obtidos
+  através de uma técnica de sequenciação donominada \emph{RNA
+  Sequencing}.
 
-  \textbf{Gene enrichment and RBP analysis}. This part of the work aims to
-  collect as much relevant information as possible about the particular genes
-  being studied at the time, to help biologists to better understand their
-  function. RBP knowledge is particularly important for gene manipulation and a
-  very useful tool for better understanding gene expression.
+  \textbf{Enriquecimento de genes e análise de RBPs}. Esta parte do trabalho
+  tem como objetivo recolher informação relevante sobre os genes em estudo, de
+  forma a ajudar os biologistas a melhor perceber a função desses genes.
+  Informação sobre RBPs é particularmente importante para manipular genes e
+  muito útil para melhor perceber a expressão génica.
 
-  \textbf{Further analysis of the produced data, using machine learning
-  techniques for data mining, specifically for clustering analysis}. These
-  techniques will be employed in an effort to give biologists more relevant
-  information about gene expression, uncovering possible relationships in the
-  retrieved information.
+  \textbf{Análise dos dados produzidos, usando técnicas de \emph{data mining},
+  mais especificamente técnicas de \emph{clustering}}. Estas técnicas serão
+  aplicadas num esforço de dar aos biologistas mais informação relevante sobre
+  expressão génica, descobrindo possíveis relações implícitas nessa informação.
 
-Solving these problems requires the use of computational tools. As such, the
-development of a computer system (or multiple systems) to tackle these problems
-emerges as a secondary objective of the thesis.
+Resolver estes problemas requer o uso de ferramentas computacionais. Como tal,
+o desenvolvimento de um sistema informático (ou vários sistemas) para resolver
+estes problemas surge como um objetivo secundário da dissertação.
 
 \section{Motivação e Objetivos} \label{sec:motivation}
 
-Gene expression analysis is essential for modern day molecular biology. Among
-many of the possible applications of this information, we can highlight: better
-classification and diagnosis of diseases, assessing how cells react to a
-specific treatment, and others.
+A análise de expressão génica é essencial para a biologia molecular moderna.
+Entre muitas das possíveis aplicações desta informação, podemos destacar:
+melhor classificação e diagnóstico de doenças; avaliação a reação de células a
+um tratamento específico.
 
-While nowadays powerful computational tools exist to target almost any biology
-problem, many of those tools require a very specific set of technical skills and
-have a steep learning curve. Possibly the most important motivation behind this
-thesis, and ultimately its main objective, is to provide researchers with
-powerful yet simple and user friendly tools. This means developing a system
-simple enough that any user can learn to operate it in a short period of time
-with minimal effort, but sufficiently advanced to suit the user's research
-needs.
+Embora existam hoje ferramentas computacionais poderosas para resolver inúmeros
+problemas de biologia, muitas dessas ferramentas exigem um conjunto muito
+específico de competências técnicas e tem uma curva de aprendizagem íngreme.
+Assim, a motivação mais importante por trás desta dissertação é criar
+ferramentas mais fáceis de utilizar. Isto significa desenvolver um sistema
+simples, para que qualquer utilizador possa aprender a operá-lo num curto espaço
+de tempo, com pouco esforço; O sistema deve também ser suficientemente avançado
+para atender às necessidades do utilizador.
 
-Another typical problem that biology researchers face nowadays is information
-dispersion and the repetitive and lengthy task of compiling that information.
-Researchers frequently have to manually join information originating from a
-multitude of different platforms, which use inconsistent formats and notations.
-Our second objective is therefore to provide a system that is able to take this
-burden off the user, making the process faster and simpler.
+Outro problema é a dispersão da informação e a tarefa repetitiva e prolongada de
+compilar essa informação. Frequentemente é necessário juntar manualmente
+informação proveniente de um grande número de plataformas, que usam formatos e
+notações inconsistentes. O segundo objectivo é, portanto, desenvolver um sistema
+que seja capaz de realizar esta tarefa pelo utilizador, tornando o processo mais
+rápido e simples.
 
 \section{Projeto} \label{sec:project}
 
-The project itself revolves around the development of a prototype computer
-system, capable of solving the aforementioned problems. Due to the complexity
-of the complete system, its development followed a modular organization. The
-envisioned system architecture is divided into three major components.
+O projecto revolve em torno do desenvolvimento do protótipo de um sistema
+informático capaz de resolver os problemas acima mencionados. Devido à
+complexidade deste sistema, o seu desenvolvimento seguiu uma organização
+modular. O sistema foi assim dividido em três modulos.
 
-  \textbf{The differential expression analysis pipeline}
-  is responsible for aligning reads against a reference genome and compare
-  contrasts between different samples. The pipeline is based on the preexisting
-  iRAP pipeline. The pipeline's capabilities are further enhanced with both job
-  configuration automation and differential expression results consolidation
-  (combining results from multiple differential expression tools).
+  \textbf{O \emph{pipeline} de análise de expressão diferencial} é responsável
+  por alinhar \emph{reads} contra um genoma de referência, comparando depois os
+  resultados para diferentes amostras. O \emph{pipeline} é baseado na ferramenta
+  iRAP. As funcionalidades do \emph{pipeline} são ainda reforçadas com
+  ferramentas para configuração automática de experiências e consolidação de
+  resultados de expressão diferencial.
 
-  \textbf{The RNA-binding protein analysis workflow}
-  aggregates information about RBPs from multiple biologic web databases
-  (Ensembl, NCBI, UniProt, etc.) and organizes it in ways that are useful to
-  biology researchers. Moreover, this information is clustered using data mining
-  techniques, in order to reveal groups of genes and RBPs that may hold biologic
-  relevance.
+  \textbf{O fluxo de trabalho de análise de RBPs} agrega informações sobre RBPs
+  de várias plataformas biológicas (Ensembl, NCBI, UniProt, etc.), organizando
+  essa informação de maneiras que são úteis para os investigadores. Além disso,
+  esta informação é agrupada usando técnicas de \emph{data mining}, a fim de
+  revelar os grupos de genes e RBPs que podem ter relevância biológica.
 
-  \textbf{The web platform}
-  is responsible for storing and managing genetic data, coordinating interaction
-  between the other components of the system and providing a web interface for
-  user interaction. This component is based mainly on typical web technologies,
-  that is, a document based database for data storage (MongoDB), a web framework
-  for business logic implementation (Padrino) and web markup and styling
-  languages for interface implementation (HTML, CSS).
+  \textbf{A plataforma web} é responsável por armazenar e gerir dados genéticos,
+  coordenar a interação entre os outros componentes do sistema e fornecer uma
+  interface web para interação com os utilizadores.
 
 \section{Caso de Estudo}
 
-A case study was conducted, in collaboration with IBMC (\emph{Instituto de
-Biologia Molecular e Celular}) experts. The studied data set was composed by
-twenty three genes from \emph{RhoGTPase} family, from \emph{Rattus norvegicus}
-(commonly known \emph{norway rat}).
+Dois casos de estudo foram realizados a fim de avaliar a qualidade do sistema
+desenvolvido.
 
-The obtained results were validated both in terms of their ... and their
-biological correction and relevance. The biological validation was also
-performed by IBMC experts. We concluded that the developed tool could mimic the
-same results an expert would obtain, in a fraction of the time (see Tab.
-\ref{tab:stress}) and providing much more useful information.
+O primeiro caso de estudo focou as melhorias que foram desenvolvidos para o
+\emph{pipeline} de análise de expressão génica. Foi baseado numa experiência
+passada (experiência ArrayExpress \emph{E-GEOD-48829}) que estudou a bactéria
+\emph{E. coli}. O objetivo deste caso de estudo foi verificar se a ferramenta
+desenvolvida poderia ajudar a melhorar a confiança dos investigadores nos
+resultados de expressão diferencial, combinando os melhores resultados de várias
+ferramentas. Os resultados foram comparados com os resultados brutos e os
+resultados filtrados por \emph{p-value}\footnote{O \emph{p-value} é usado para
+aferir a significância estatística de resultados \cite{goodman45dirty}.}.
+Conclui-se que a ferramenta reduziu significativamente o número de genes nos
+resultados, aumentando a confiança nesses resultados, dando ao mesmo tempo um
+conjunto de genes menos extenso e portanto mais fácil de analisar em
+experiências futuras.
 
-\begin{table}[H]
-  \centering
-  \caption{Result time comparison between manual analysis (done by an expert) and both test machines.}
-  \begin{tabular}{l|lll}
-    & \textbf{machine1} & \textbf{machine2} & \textbf{Expert} \\ \hline
-    \textbf{100 IDs}   & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
-    \textbf{500 IDs}   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
-    \textbf{900 IDs}   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\
-  \end{tabular}
-  \label{tab:stress}
-\end{table}
+O segundo caso de estudo foi realizado em colaboração com especialistas do
+Instituto de Biologia Molecular e Celular (IBMC). O conjunto de dados estudado
+era composto por vinte e três genes da família \emph{RhoGTPase}, do genoma de
+\emph{Rattus norvegicus} (rato norueguês). Este caso de estudo teve três
+objetivos principais: avaliar a utilidade geral da ferramenta de análise de
+RBPs; comparar a solução desenvolvida com as já existentes; e avaliar o impacto
+do desempenho dos computadores no desempenho global da ferramenta. Os resultados
+obtidos foram verificados em termos da sua integridade,  correção e relevância
+do ponto de vista da biologia. A validação biológica foi realizada por
+especialistas IBMC. Concluiu-se que com a ferramenta desenvolvida é possível
+obter os mesmos resultados que um especialista obteria, numa fracção do tempo e
+disponibilizando mais informação útil.
 
 \section{Conclusões}
 
-Our objectives, in terms of studying the problem at hand and developing a
-solution to it, were completely fulfilled. The proposed solution corresponds to
-all of our expectations. However, as previously discussed, the implementation of
-the RNA-Seq data analysis pipeline system was not completed, due to time
-constraints. As such, our objective of prototyping and testing the complete
-system could not be completely achieved.
+Os nossos objetivos, do ponto de vista do estudo do problema e esboço de uma
+solução, foram totalmente cumpridos. A solução proposta corresponde a todas as
+nossas expectativas. No entanto a implementação do sistema de análise e
+alinhamento de dados RNA-Seq não foi totalmente concluída, devido a limitações
+de tempo. Como tal, o nosso objectivo de criar e testar um protótipo do sistema
+completo não foi atingido.
 
 \section{Trabalho Futuro}
 
-The obvious continuation of the proposed work would be to finish the
-implementation and integration of the RNA-Seq data analysis pipeline. This would
-allow our solution to work as designed, integrating the complete analysis
-pipeline, from sequencing data to gene clustering and result visualization.
-Furthermore, it would be interesting to study the developed tools in terms of
-performance, under large volumes of information and requests. Whilst the tools
-were developed taking in consideration their performance, making them available
-in a large scale would take another kind of infrastructure.
+A continuação do trabalho proposto passaria por terminar a implementação e
+integração do \emph{pipeline} de análise de dados de RNA-Seq. Isso permitiria à
+nossa solução funcionar conforme foi projetada, integrando todo o processo de
+análise. Além disso, seria interessante estudar as ferramentas desenvolvidas em
+termos de desempenho, quando usadas com grandes volumes de informação e pedidos.
+Embora as ferramentas tenham sido desenvolvidas tendo em consideração o seu
+desempenho, o seu funcionamento em larga escala necessita de outro tipo de
+infra-estrutura, que não foi considerada nesta dissertação.
 
 %%English version: comment first, uncomment second
 \bibliographystyle{unsrt-pt}  % numeric, unsorted refs

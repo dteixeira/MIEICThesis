@@ -91,7 +91,7 @@ Despite its great advancements in the past decades, molecular biology is still a
 relatively new subject and, as such, there are still some unknowns and partial
 knowledge in this area. In respect to gene expression, some mechanisms of this
 intricate process are yet to be fully understood. One such mechanism is the one
-that regulates the transcription speed into RNA. One of the objectives of this
+that regulates the transcription speed of RNA. One of the objectives of this
 thesis is to understand how the final sequences of a gene's exons are
 responsible for the speed at which the exons themselves are transcribed. The
 other objective is to understand how RNA-binding protein (RBP) manipulation can
@@ -179,35 +179,40 @@ envisioned system architecture is divided into three major components.
 Two case studies were conducted in order to assess the quality of the developed
 system.
 
-The first case study focused the enhancements that were developed for the gene
-expression analysis pipeline. It was based on a past experience (ArrayExpress
-experiment \emph{E-GEOD-48829}) that studied the \emph{E. coli} bacteria. The
-objective of this case study was to ascertain if the developed pipeline
-enhancement could help improved the researchers' confidence in differential
-expression results by combining the best results from multiple tools. The
-results were compared with both the raw results and the results filtered by
-\emph{p-value}. We concluded that the result combining tool significantly
-reduced the number of genes in the results, increasing confidence in those
-results and creating an easier to analyse data set for future experiments.
+The first case study focused on the enhancements that were developed for the
+gene expression analysis pipeline. It was based on a past experience
+(ArrayExpress experiment \emph{E-GEOD-48829}) that studied the \emph{E. coli}
+bacteria. The objective of this case study was to ascertain if the developed
+pipeline enhancement could help improve the researchers' confidence in
+differential expression results by combining the best results from multiple
+tools. The results were compared with both the raw results and the results
+filtered by \emph{p-value}\footnote{A \emph{p-value} is used to assert the
+statistical significance of results. It represents the probability of obtaining
+the same results as before in a new sample, given that the null hypothesis is
+true \cite{goodman45dirty}.}. We conclude that the result combining tool
+significantly reduced the number of genes in the results, increasing confidence
+in those results and creating an easier to analyse data set for future
+experiments.
 
 The second case study was conducted in collaboration with IBMC (\emph{Instituto
 de Biologia Molecular e Celular}) experts. The studied data set was composed by
-twenty three genes from \emph{RhoGTPase} family, from \emph{Rattus norvegicus}
-(commonly known \emph{norway rat}). This case study had three main goals: assess
-the general usefulness of the developed RBP analysis tool; comparing the
-developed solution with the existing ones; and assess the impact of different
-hardware in the overall performance of the tool. The obtained results were
-verified both in terms of their completeness and their biological correction and
-relevance. The biological validation was also performed by IBMC experts. We
-concluded that the developed tool could mimic the same results an expert would
-obtain, in a fraction of the time and providing much more useful information.
+twenty three genes from the \emph{RhoGTPase} family, from \emph{Rattus
+norvegicus} (commonly known as \emph{norway rat}). This case study had three
+main goals: assess the general usefulness of the developed RBP analysis tool;
+comparing the developed solution with the existing ones; and assess the impact
+of different hardware in the overall performance of the tool. The obtained
+results were verified both in terms of their completeness and their biological
+correction and relevance. The biological validation was also performed by IBMC
+experts. We concluded that the developed tool could mimic the same results an
+expert would obtain, in a fraction of the time and providing much more useful
+information.
 
 \section{Conclusions}
 
 Our objectives, in terms of studying the problem at hand and developing a
-solution to it, were completely fulfilled. The proposed solution corresponds to
-all of our expectations. However, as previously discussed, the implementation of
-the RNA-Seq data analysis pipeline system was not completed, due to time
+solution to the problem, were completely fulfilled. The proposed solution
+corresponds to all of our expectations. However the implementation of the
+RNA-Seq data analysis pipeline system was not completed, due to time
 constraints. As such, our objective of prototyping and testing the complete
 system could not be completely achieved.
 
