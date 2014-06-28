@@ -22,8 +22,26 @@ technologies, and provide the rational behind their choice, whenever relevant.
 
 Due to time constraints the gene expression analysis pipeline could not be fully
 finished. However, both the iRAP pipeline and result combining program were
-completed and functional. As these particular components were already described
-in the previous chapter, they will not be mentioned again.
+completed and functional.
+
+\subsection{Combining Differential Expression Results}
+
+The result combining tool was implemented in the form of a Ruby script. As a
+command line script this tool can be easily integrated with the existing iRAP
+workflow, being that iRAP is also completely executed in the command line.
+
+The results of differential expression produced by iRAP are exported as
+\emph{tab-separated values} (TSV) files. Each differential expression analysis
+tool produces a TSV file for each contrast that is analysed. These files contain
+gene identifiers and a variety of statistical properties for each identifier,
+including the \emph{p-value}.
+
+The tool takes all files from a single contrast, filters entries by
+\emph{p-value} and counts the number of times each gene identifier is found.
+Note that each file has at most one occurrence of a gene identifier. Every
+identifier that appears in all files is exported to the text file that contains
+the combined results. This file can then be used as input for the RBP analysis
+platform, obtaining further information about those genes.
 
 \section{RNA Binding Protein Analysis Web Platform}
 
