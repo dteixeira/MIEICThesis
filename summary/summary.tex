@@ -176,28 +176,31 @@ envisioned system architecture is divided into three major components.
 
 \section{Case Study}
 
-A case study was conducted, in collaboration with IBMC (\emph{Instituto de
-Biologia Molecular e Celular}) experts. The studied data set was composed by
+Two case studies were conducted in order to assess the quality of the developed
+system.
+
+The first case study focused the enhancements that were developed for the gene
+expression analysis pipeline. It was based on a past experience (ArrayExpress
+experiment \emph{E-GEOD-48829}) that studied the \emph{E. coli} bacteria. The
+objective of this case study was to ascertain if the developed pipeline
+enhancement could help improved the researchers' confidence in differential
+expression results by combining the best results from multiple tools. The
+results were compared with both the raw results and the results filtered by
+\emph{p-value}. We concluded that the result combining tool significantly
+reduced the number of genes in the results, increasing confidence in those
+results and creating an easier to analyse data set for future experiments.
+
+The second case study was conducted in collaboration with IBMC (\emph{Instituto
+de Biologia Molecular e Celular}) experts. The studied data set was composed by
 twenty three genes from \emph{RhoGTPase} family, from \emph{Rattus norvegicus}
-(commonly known \emph{norway rat}).
-
-The obtained results were validated both in terms of their ... and their
-biological correction and relevance. The biological validation was also
-performed by IBMC experts. We concluded that the developed tool could mimic the
-same results an expert would obtain, in a fraction of the time (see Tab.
-\ref{tab:stress}) and providing much more useful information.
-
-\begin{table}[H]
-  \centering
-  \caption{Result time comparison between manual analysis (done by an expert) and both test machines.}
-  \begin{tabular}{l|lll}
-    & \textbf{machine1} & \textbf{machine2} & \textbf{Expert} \\ \hline
-    \textbf{100 IDs}   & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
-    \textbf{500 IDs}   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
-    \textbf{900 IDs}   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\
-  \end{tabular}
-  \label{tab:stress}
-\end{table}
+(commonly known \emph{norway rat}). This case study had three main goals: assess
+the general usefulness of the developed RBP analysis tool; comparing the
+developed solution with the existing ones; and assess the impact of different
+hardware in the overall performance of the tool. The obtained results were
+verified both in terms of their completeness and their biological correction and
+relevance. The biological validation was also performed by IBMC experts. We
+concluded that the developed tool could mimic the same results an expert would
+obtain, in a fraction of the time and providing much more useful information.
 
 \section{Conclusions}
 
