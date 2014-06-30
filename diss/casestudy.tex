@@ -9,13 +9,13 @@ solutions with the previously available methods.
 
 \section{Gene Expression Analysis Pipeline}
 
-This case study is aimed at the developed gene expression pipeline, composed by
+This case study illustrates the developed gene expression pipeline, composed by
 iRAP and the differential expression results combination tool. Gene expression
 analysis is a complex task and, because of that, no definitive tool exists that
 can produce good results for every possible case. Some tools are better when
 analysing certain types of data/organisms, while other tools might have other
-strengths and weaknesses. It is difficult to an inexperienced user, as it is to
-a computer system, to determine the best tool to use in each case. The objective
+strengths and weaknesses. It is difficult for an inexperienced user, as it is to
+an automated tool, to determine the best tool to use in each case. The objective
 of this case study is to ascertain if the developed pipeline enhancement can
 help overcome this difficult, by combining the best results from multiple tools.
 
@@ -31,13 +31,13 @@ particular experience can be found at \url{http://www.ebi.ac.uk/arrayexpress/exp
 
 \subsubsection*{Analysis Data Set}
 
-As previously mentioned, the used data set was the same as in ArrayExpress
-experiment \emph{E-GEOD-48829}. This experiment studies the \emph{Escherichia
-coli} bacteria, commonly known as \emph{E. coli}. \emph{E. coli} is a model
-organism: a \qt{simple}, non-human organism that is extensively studied, with
-the expectation that the discoveries made for that particular organism are
-useful to understand different organisms \cite{fields2005cell}. Other examples
-of model organisms are \emph{Rattus norvegicus} (norway rat), \emph{Drosophila
+The used data set was the same as in ArrayExpress experiment
+\emph{E-GEOD-48829}. This experiment studies the \emph{Escherichia coli}
+bacteria, commonly known as \emph{E. coli}. \emph{E. coli} is a model organism:
+a \qt{simple}, non-human organism that is extensively studied, with the
+expectation that the discoveries made for that particular organism are useful to
+understand different organisms \cite{fields2005cell}. Other examples of model
+organisms are \emph{Rattus norvegicus} (norway rat), \emph{Drosophila
 melanogaster} (fruit fly) and \emph{Mus musculus} (common mouse).
 
 Being extensively studied was just one of the reasons that lead to this choice
@@ -99,7 +99,7 @@ entries with high \emph{p-values} from those files, leaving only lines with a
 the filtered files. Finally, both files were combined in a single using the
 produced tool, and a last line count was made.
 
-\subsection{Comparison with Previous Results}
+\subsection{Comparison with Previous Results}\label{sec:irap_comparison}
 
 The developed tool's results were compared with both the normal \qt{raw} results
 directly produced by the differential expression tools and with those same
@@ -129,7 +129,7 @@ results of differential expression into a smaller data set. This filtered data
 set will hopefully reveal itself more useful to researchers, eliminating
 unnecessary information and giving higher levels of confidence in the results.
 However, we have no way of comparing these results with the previous ones from a
-biological standpoint. Such assessment must be performed by expert in this
+biological standpoint. Such assessment must be performed by experts in this
 field, which was not possible at this time.
 
 \section{RNA Binding Protein Analysis Web Platform}

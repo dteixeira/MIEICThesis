@@ -9,16 +9,21 @@
 %- Talk about full automated integration between both tools.\\
 %\end{Notes}
 
-In this thesis we proposed the development of an integrated platform for RNA-Seq
-data analysis. This platform is able to perform the entirety of the analysis
+In this thesis we have proposed the development of an integrated platform for
+RNA-Seq data analysis. This platform is able to perform the entire analysis
 process, from the sequencing reads, to grouping genes by their RBPs. This means
-being able to perform read alignment, quantification and differential expression
-analysis tasks, as well as data set enrichment, RBP identification and
-clustering analysis of genes and proteins. Through two case studies we showed
-the developed prototype in action, and assessed its correctness and efficiency.
-Below we will share our thoughts on the fulfilment of the objectives of this
-thesis, and present some possibilities for any future development in our
+that is able to perform read alignment, quantification and differential
+expression analysis tasks, as well as data set enrichment, RBP identification
+and clustering analysis of genes and proteins. Through two case studies we
+showed the developed prototype in use, and assessed its correctness and
+efficiency. Below we will share our thoughts on the fulfilment of the objectives
+of this thesis, and present some possibilities for any future development in our
 solution.
+
+During this thesis we were advised by molecular biology experts from IBMC. The
+data set used in the second case study was provided by IBMC experts and the
+results obtained are currently being experimentally verified in their
+laboratory.
 
 \section{Objective Fulfilment}
 
@@ -26,8 +31,11 @@ Our objectives, in terms of studying the problem at hand and developing a
 solution to it, were completely fulfilled. The proposed solution corresponds to
 all of our expectations. However, as previously discussed, the implementation of
 the RNA-Seq data analysis pipeline system was not completed, due to time
-constraints. As such, our objective of prototyping and testing the complete
-system could not be completely achieved.
+constraints. Integration with PBS Finder's analysis pipeline was not
+accomplished. Similarly, it was also not possible to provide the RNA-Seq
+analysis pipeline's functionality through the web interface. As such, our
+objective of prototyping and testing the complete system could not be completely
+achieved.
 
 \section{Future Work}
 
@@ -35,7 +43,7 @@ The obvious continuation of the proposed work would be to finish the
 implementation and integration of the RNA-Seq data analysis pipeline. This would
 allow our solution to work as designed, integrating the complete analysis
 pipeline, from sequencing data to gene clustering and result visualization.
-Furthermore, it would be interesting to study the developed tools in terms of
+Furthermore, it would be useful to study the developed tools in terms of
 performance, under large volumes of information and requests. Whilst the tools
 were developed taking in consideration their performance, making them available
-in a large scale would take another kind of infrastructure.
+in a large scale would require another kind of infrastructure.
