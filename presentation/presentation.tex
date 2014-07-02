@@ -44,11 +44,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \makeatletter
-\setbeamertemplate{navigation symbols}{}
 \usetheme{Luebeck}
 \usecolortheme{beaver}
 \usefonttheme{serif}
 \setbeamerfont{footline}{size=\fontsize{4}{12}\selectfont}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
 \setbeamertemplate{footline}
 {%
   \leavevmode%
@@ -70,22 +71,100 @@
 
 \begin{document}
 
-  % Title slide.
-  \frame{\titlepage}
+% Title slide.
+\frame{\titlepage}
 
-  % TOC.
-  \begin{frame}
-    \frametitle{Table of Contents}
-    \tableofcontents
-  \end{frame}
+% TOC.
+\begin{frame}
+  \frametitle{Table of Contents}
+  \tableofcontents
+\end{frame}
 
-  \begin{frame}
-    \frametitle{This is the first slide}
-  \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  \begin{frame}
-    \frametitle{This is the second slide}
-    \framesubtitle{A bit more information about this}
-  \end{frame}
+\section{Introduction}
+\subsection{Domain Problem}
+\begin{frame}
+  \frametitle{Domain Problem}
+  \framesubtitle{Introduction}
+\end{frame}
+
+\subsection{Motivation and Objectives}
+\begin{frame}
+  \frametitle{Motivation and Objectives}
+  \framesubtitle{Introduction}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SOLUTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Developed Solution}
+\subsection{Overview}
+\begin{frame}
+  \frametitle{Overview}
+  \framesubtitle{Developed Solution}
+\end{frame}
+
+\subsection{RNA-Seq Analysis Pipeline}
+\begin{frame}
+  \frametitle{RNA-Seq Analysis Pipeline}
+  \framesubtitle{Developed Solution}
+\end{frame}
+
+\subsection{RBP Analysis Pipeline (PBS Finder)}
+\begin{frame}
+  \frametitle{RBP Analysis Pipeline (PBS Finder)}
+  \framesubtitle{Developed Solution}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CASE STUDIES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Case Studies}
+\subsection{RNA-Seq Analysis Pipeline}
+\begin{frame}
+  \frametitle{RNA-Seq Analysis Pipeline}
+  \framesubtitle{Case Studies}
+\end{frame}
+
+\subsection{RBP Analysis Pipeline (PBS Finder)}
+\begin{frame}
+  \frametitle{RBP Analysis Pipeline (PBS Finder)}
+  \framesubtitle{Case Studies}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONCLUSIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusions}
+\subsection{Objective Fulfilment}
+\begin{frame}
+  \frametitle{Objective Fulfilment}
+  \framesubtitle{Conclusions}
+\end{frame}
+
+\subsection{Future Work}
+\begin{frame}
+  \frametitle{Future Work}
+  \framesubtitle{Conclusions}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TOC.
+\begin{frame}
+  \frametitle{Review}
+  \tableofcontents
+\end{frame}
+
+% Title slide.
+\frame{\titlepage}
 
 \end{document}
