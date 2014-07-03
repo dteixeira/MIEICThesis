@@ -54,13 +54,13 @@
 \setbeamertemplate{footline}
 {%
   \leavevmode%
-  \hbox{\begin{beamercolorbox}[wd=.20\paperwidth,ht=3.0ex,dp=2.0ex,right,rightskip=0.2cm]{author in head/foot}%
+  \hbox{\begin{beamercolorbox}[wd=.23\paperwidth,ht=3.0ex,dp=2.0ex,center]{author in head/foot}%
       \usebeamerfont{author in head/foot}\insertshortauthor%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.68\paperwidth,ht=3.0ex,dp=2.0ex,left,leftskip=0.2cm]{title in head/foot}%
+    \begin{beamercolorbox}[wd=.65\paperwidth,ht=3.0ex,dp=2.0ex,center]{title in head/foot}%
       \usebeamerfont{title in head/foot}\insertshorttitle
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.12\paperwidth,ht=3.0ex,dp=2.0ex,left,leftskip=0.2cm]{author in head/foot}%
+    \begin{beamercolorbox}[wd=.12\paperwidth,ht=3.0ex,dp=2.0ex,center]{author in head/foot}%
       \usebeamerfont{author in head/foot} \insertframenumber{} / \inserttotalframenumber
     \end{beamercolorbox}}%
   \vskip0pt
@@ -104,15 +104,50 @@ NOTES:\\
   \frametitle{Motivation and Objectives}
   \framesubtitle{Introduction}
 
-NOTES:\\
-Motivation:\\
-- Many tools require a very technical set of skills (tools should be facilitators, not hindrances)\\
-- Some tasks need automation.\\
-- Lots of information, often scattered in multiple places.\\
-Objectives:\\
-- Build simples tools that require minimal skill.\\
-- Automate processes.\\
-- Aggregate as much relevant information as possible.\\
+\begin{columns}[<options>]
+  \begin{column}{0.45\textwidth}
+    \textcolor<5-6>{gray!40}{\textcolor<2-3>{gray!40}{\textbf{Tools are complex}\scriptsize\\
+    Tools for biological data analysis often require a very technical set of
+    skills.\\
+    \vspace{0.8cm}}}
+
+    \textcolor<6>{gray!40}{\uncover<2->{\textcolor<3-4>{gray!40}{\textbf{Tasks are repetitive}\scriptsize\\
+    Analysing high quantities of data can be repetitive, especially if executed
+    manually.\\
+    \vspace{0.8cm}}}}
+
+    \uncover<3->{\textcolor<4-5>{gray!40}{\textbf{Information is scattered}\scriptsize\\
+    Information is easy to acquire, but is often scattered through multiple
+    platforms, services and institutions.\\
+    }}
+  \end{column}
+
+  \begin{column}{0.45\textwidth}
+    \uncover<4-6>{\textcolor<5->{gray!40}{\textbf{Create simpler tools}\scriptsize\\
+    Any user should be able to use the tools, with little to no training.\\
+    \vspace{1.1cm}}}
+
+    \uncover<5-6>{\textcolor<6->{gray!40}{\textbf{Automate tasks}\scriptsize\\
+    Automated systems should perform repetitive tasks, so that users can
+    focus on their work.\\
+    \vspace{0.8cm}}}
+
+    \uncover<6>{\textbf{Gather information}\scriptsize\\
+    Information should be contextually aggregated, allowing for quick access of
+    relevant information.
+    }
+  \end{column}
+\end{columns}
+
+%NOTES:\\
+%Motivation:\\
+%- Many tools require a very technical set of skills (tools should be facilitators, not hindrances)\\
+%- Some tasks need automation.\\
+%- Lots of information, often scattered in multiple places.\\
+%Objectives:\\
+%- Build simples tools that require minimal skill.\\
+%- Automate processes.\\
+%- Aggregate as much relevant information as possible.\\
 
 \end{frame}
 
@@ -126,10 +161,25 @@ Objectives:\\
   \frametitle{Overview}
   \framesubtitle{Developed Solution}
 
-NOTES:\\
-- Two computer systems, one for each domain problem.\\
-- Both accessible through the web.\\
-- Focus on small system footprint, deployable by machine, department, institution.\\
+\begin{itemize}
+
+\item
+Two distinct problems warrant two different solutions.\\ \vspace{0.8cm}
+
+\item
+The developed system should be available anywhere, through the internet.\\ \vspace{0.8cm}
+
+\item
+The system's footprint should be small enough to allow deployment in almost any
+available hardware.
+
+\end{itemize}
+
+%NOTES:\\
+%- Two computer systems, one for each domain problem.\\
+%- Both accessible through the web.\\
+%- Focus on small system footprint, deployable by machine, department, institution.\\
+
 \end{frame}
 
 \subsection{RNA-Seq Analysis Pipeline}
@@ -220,9 +270,19 @@ NOTES:\\
   \frametitle{Future Work}
   \framesubtitle{Conclusions}
 
-NOTES:\\
-- Integrate the entire pipeline.\\
-- Study possibility of large scale deployment.\\
+\begin{itemize}
+\item
+Fully integrate the RNA-Seq analysis pipeline with the web platform (automatic
+job configuration, result visualization, etc.).\\ \vspace{1.2cm}
+
+\item
+Study the requirements for deploying the platform in large scale, and assess the
+feasibility of making it available in an internet-wide.
+\end{itemize}
+
+%NOTES:\\
+%- Integrate the entire pipeline.\\
+%- Study possibility of large scale deployment.\\
 
 \end{frame}
 
