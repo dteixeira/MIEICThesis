@@ -5,7 +5,11 @@ if [[ "$#" -eq 1 ]]; then
   if [[ "$1" =~ s|S ]]; then
     # Remove existent PDF file.
     rm presentation.pdf 2> /dev/null
-    make presentation
+    #make presentation
+    pdflatex presentation
+    bibtex presentation
+    pdflatex presentation
+    pdflatex presentation
     cp presentation.pdf view.pdf
     open view.pdf
   else
@@ -13,7 +17,11 @@ if [[ "$#" -eq 1 ]]; then
   fi
 else
   rm presentation.pdf 2> /dev/null
-  make presentation
+  #make presentation
+  pdflatex presentation
+  bibtex presentation
+  pdflatex presentation
+  pdflatex presentation
   cp presentation.pdf view.pdf
 fi
 

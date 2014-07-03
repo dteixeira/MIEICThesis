@@ -7,6 +7,8 @@
 % Languages.
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[numberedbib]{apacite}
+\usepackage{tikz}
 \selectlanguage{english}
 
 % Miscellaneous.
@@ -14,7 +16,6 @@
 
 % Path to the figures directory.
 \graphicspath{{figures/}}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TITLE SLIDE
@@ -76,7 +77,7 @@
 
 % TOC.
 \begin{frame}
-  \frametitle{Table of Contents}
+  \frametitle{Outline}
   \tableofcontents
 \end{frame}
 
@@ -89,12 +90,30 @@
 \begin{frame}
   \frametitle{Domain Problem}
   \framesubtitle{Introduction}
+
+NOTES:\\
+- Molecular biology is a new subject.\\
+- Many unknowns.\\
+- Gene expression is important...\\
+- Two areas of interest of IBMC experts: differential expression and RBPs.\\
+
 \end{frame}
 
 \subsection{Motivation and Objectives}
 \begin{frame}
   \frametitle{Motivation and Objectives}
   \framesubtitle{Introduction}
+
+NOTES:\\
+Motivation:\\
+- Many tools require a very technical set of skills (tools should be facilitators, not hindrances)\\
+- Some tasks need automation.\\
+- Lots of information, often scattered in multiple places.\\
+Objectives:\\
+- Build simples tools that require minimal skill.\\
+- Automate processes.\\
+- Aggregate as much relevant information as possible.\\
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,18 +125,49 @@
 \begin{frame}
   \frametitle{Overview}
   \framesubtitle{Developed Solution}
+
+NOTES:\\
+- Two computer systems, one for each domain problem.\\
+- Both accessible through the web.\\
+- Focus on small system footprint, deployable by machine, department, institution.\\
 \end{frame}
 
 \subsection{RNA-Seq Analysis Pipeline}
 \begin{frame}
   \frametitle{RNA-Seq Analysis Pipeline}
   \framesubtitle{Developed Solution}
+
+NOTES:\\
+- Show scheme, refer iRAP, the script and the web interface.\\
+- Refer multiple differential expression tools.\\
+- Refer user input and tool configuration.\\
+
 \end{frame}
 
 \subsection{RBP Analysis Pipeline (PBS Finder)}
 \begin{frame}
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Developed Solution}
+
+NOTES:\\
+- Show scheme, RBP finding, gene enrichment, clustering.\\
+- Refer web interface.
+- Refer that the tools is in production for several months, being extensively tested by experts.\\
+- Refer user input and tool configuration.\\
+
+\end{frame}
+
+\subsection{Integration}
+\begin{frame}
+  \frametitle{Integration}
+  \framesubtitle{Developed Solution}
+
+NOTES:\\
+- Differential expression analysis could benefit from gene enrichment.\\
+- Do we really need two separate platforms?\\
+- Joined together, user choses what analysis to perform.\\
+- Still separate viewing experiences.\\
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -129,12 +179,23 @@
 \begin{frame}
   \frametitle{RNA-Seq Analysis Pipeline}
   \framesubtitle{Case Studies}
+
+NOTES:\\
+- Refer objectives, data and experimental method.\\
+- Refer results.\\
+
 \end{frame}
 
 \subsection{RBP Analysis Pipeline (PBS Finder)}
 \begin{frame}
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Case Studies}
+
+NOTES:\\
+- Refer objectives, data and experimental method.\\
+- Refer results.\\
+- Maybe show screenshot.\\
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -146,12 +207,23 @@
 \begin{frame}
   \frametitle{Objective Fulfilment}
   \framesubtitle{Conclusions}
+
+NOTES:\\
+- All PBS Finder functionality implemented.\\
+- Differential expression analysis pipeline deployed, combination script created.\\
+- It was not possible to integrate with web platform, due to time constraints.\\
+
 \end{frame}
 
 \subsection{Future Work}
 \begin{frame}
   \frametitle{Future Work}
   \framesubtitle{Conclusions}
+
+NOTES:\\
+- Integrate the entire pipeline.\\
+- Study possibility of large scale deployment.\\
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,6 +234,13 @@
 \begin{frame}
   \frametitle{Review}
   \tableofcontents
+\end{frame}
+
+% TODO
+% Remove if no references.
+\begin{frame}{Bibliography}
+  \bibliographystyle{apacite}
+  \bibliography{myrefs}
 \end{frame}
 
 % Title slide.
