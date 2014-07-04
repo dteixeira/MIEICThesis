@@ -212,11 +212,43 @@ NOTES:\\
   \frametitle{Integration}
   \framesubtitle{Developed Solution}
 
-NOTES:\\
-- Differential expression analysis could benefit from gene enrichment.\\
-- Do we really need two separate platforms?\\
-- Joined together, user choses what analysis to perform.\\
-- Still separate viewing experiences.\\
+\only<1>{
+While focusing on aggregation and quick access to information, does it make
+sense to separate the results into two different platforms?}
+
+\only<1>{
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{integration1}
+\end{figure}}
+
+\only<2>{
+A list of differentially expressed genes is not very useful without further
+information about those genes. Does it make sense for a user to launch a new
+gene enrichment task by hand?}
+
+\only<2>{
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{integration2}
+\end{figure}}
+
+\only<3>{
+A fully integrated solution: the analysis pipelines can be used separately or
+automatically executed in sequence; result visualization for both pipelines is
+isolated.}
+
+\only<3>{
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{integration3}
+\end{figure}}
+
+%NOTES:\\
+%- Differential expression analysis could benefit from gene enrichment.\\
+%- Do we really need two separate platforms?\\
+%- Joined together, user choses what analysis to perform.\\
+%- Still separate viewing experiences.\\
 
 \end{frame}
 
@@ -277,7 +309,7 @@ job configuration, result visualization, etc.).\\ \vspace{1.2cm}
 
 \item
 Study the requirements for deploying the platform in large scale, and assess the
-feasibility of making it available in an internet-wide.
+feasibility of making it available internet-wide.
 \end{itemize}
 
 %NOTES:\\
