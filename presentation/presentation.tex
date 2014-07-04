@@ -220,9 +220,14 @@ available hardware.
 \end{frame}
 
 \subsection{RNA-Seq Analysis Pipeline}
-\begin{frame}
+\begin{frame}[allowframebreaks]
   \frametitle{RNA-Seq Analysis Pipeline}
   \framesubtitle{Developed Solution}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.65\textwidth]{tool1}
+\end{figure}
 
 NOTES:\\
 - Show scheme, refer iRAP, the script and the web interface.\\
@@ -232,9 +237,14 @@ NOTES:\\
 \end{frame}
 
 \subsection{RBP Analysis Pipeline (PBS Finder)}
-\begin{frame}
+\begin{frame}[allowframebreaks]
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Developed Solution}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.65\textwidth]{workflow2}
+\end{figure}
 
 NOTES:\\
 - Show scheme, RBP finding, gene enrichment, clustering.\\
@@ -310,10 +320,20 @@ NOTES:\\
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Case Studies}
 
-NOTES:\\
-- Refer objectives, data and experimental method.\\
-- Refer results.\\
-- Maybe show screenshot.\\
+\begin{table}[!htb]\footnotesize
+  \centering
+  \begin{tabular}{{l} | {l}{l}{l}}
+    \textbf{\emph{Number of IDs}} & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}} & \textbf{\emph{Manual method}} \\ \hline
+    100  & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
+    500   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
+    900   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\ \hline
+  \end{tabular}
+\end{table}
+
+%NOTES:\\
+%- Refer objectives, data and experimental method.\\
+%- Refer results.\\
+%- Maybe show screenshot.\\
 
 \end{frame}
 
