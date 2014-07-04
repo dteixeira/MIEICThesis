@@ -207,8 +207,7 @@ Two distinct problems warrant two different solutions.\\ \vspace{0.8cm}
 The developed system should be available anywhere, through the internet.\\ \vspace{0.8cm}
 
 \item
-The system's footprint should be small enough to allow deployment in almost any
-available hardware.
+The system should be as modular as possible, to allow future extensions.
 
 \end{itemize}
 
@@ -259,7 +258,7 @@ NOTES:\\
   \frametitle{Integration}
   \framesubtitle{Developed Solution}
 
-\only<1>{
+\only<1-2>{
 While focusing on aggregation and quick access to information, does it make
 sense to separate the results into two different platforms?}
 
@@ -269,23 +268,23 @@ sense to separate the results into two different platforms?}
   \includegraphics[width=0.8\textwidth]{integration1}
 \end{figure}}
 
-\only<2>{
+\only<3-4>{
 A list of differentially expressed genes is not very useful without further
 information about those genes. Does it make sense for a user to launch a new
 gene enrichment task by hand?}
 
-\only<2>{
+\only<2-3>{
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{integration2}
 \end{figure}}
 
-\only<3>{
+\only<5>{
 A fully integrated solution: the analysis pipelines can be used separately or
 automatically executed in sequence; result visualization for both pipelines is
 isolated.}
 
-\only<3>{
+\only<4-5>{
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{integration3}
@@ -316,24 +315,21 @@ NOTES:\\
 \end{frame}
 
 \subsection{RBP Analysis Pipeline (PBS Finder)}
-\begin{frame}
+\begin{frame}[allowframebreaks]
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Case Studies}
 
-\begin{table}[!htb]\footnotesize
+Case study results viewed in PBS Finder:\\
+\begin{figure}
   \centering
-  \begin{tabular}{{l} | {l}{l}{l}}
-    \textbf{\emph{Number of IDs}} & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}} & \textbf{\emph{Manual method}} \\ \hline
-    100  & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
-    500   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
-    900   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\ \hline
-  \end{tabular}
-\end{table}
+  \includegraphics[width=0.85\textwidth]{job_view}
+\end{figure}
 
-%NOTES:\\
-%- Refer objectives, data and experimental method.\\
-%- Refer results.\\
-%- Maybe show screenshot.\\
+NOTES:\\
+- Refer objectives, data and experimental method.\\
+- Refer results.\\
+- Show screenshot.\\
+- Show table.\\
 
 \end{frame}
 
@@ -349,16 +345,16 @@ NOTES:\\
 
 \begin{itemize}
 \item
-RBP analysis pipeline and web platform (PBS Finder) fully implemented. PBS
+RBP analysis pipeline and web platform (PBS Finder) implemented and tested. PBS
 Finder has been in production for several months; during this time it was
 thoroughly tested by IBMC experts.\\ \vspace{0.8cm}
 
 \item
-RNA-Seq analysis pipeline partially implemented (iRAP deployed and result
-joining tool implemented).\\ \vspace{0.8cm}
+RNA-Seq analysis pipeline implemented and tested (iRAP deployed and result
+consolidation tool implemented).\\ \vspace{0.8cm}
 
 \item
-Integration of both tools could not be accomplished due to time constraints.
+Integration of both tools could not be accomplished.
 \end{itemize}
 
 %NOTES:\\
