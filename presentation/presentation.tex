@@ -13,6 +13,7 @@
 
 % Miscellaneous.
 \usepackage{hyperref}
+\usepackage{array,multirow}
 
 % Path to the figures directory.
 \graphicspath{{figures/}}
@@ -396,13 +397,54 @@ isolated.}
 
 \section{Case Studies}
 \subsection{RNA-Seq Analysis Pipeline}
-\begin{frame}
+\begin{frame}[allowframebreaks]
   \frametitle{RNA-Seq Analysis Pipeline}
   \framesubtitle{Case Studies}
 
-NOTES:\\
-- Refer objectives, data and experimental method.\\
-- Refer results.\\
+%NOTES:\\
+%- Refer objectives, data and experimental method.\\
+%- Refer results.\\
+
+Objective
+\begin{itemize}
+\item
+Ascertain if combining the results of multiple tools has impact on the set of
+differentially expressed genes.
+\end{itemize}\vspace{0.8cm}
+
+Data set
+\begin{itemize}
+\item
+Reproduction of ArrayExpress experiment E-GEOD-48829 (\emph{Escherichia coli}).
+
+\item
+Reference genome obtained from Ensembl Genomes and read data obtained from ENA
+Sequence Read Archive.
+\end{itemize}
+
+\framebreak
+
+Results (number of differentially expressed genes)
+\begin{table}[!htb]\footnotesize
+  \centering
+  \begin{tabular}{{l} | {c}{c}{c}}
+    & \textbf{\emph{Raw results}} & \textbf{\emph{Filtered results}} &
+    \textbf{\emph{Combined results}}\\ \hline
+    \textbf{\emph{edgeR}} & 4494 & 386 & \multirow{2}{*}{191}\\
+    \textbf{\emph{DESeq}} & 4494 & 204 \\ \hline
+  \end{tabular}
+\end{table}\vspace{0.6cm}
+
+Conclusions
+\begin{itemize}
+\item
+Combining results impacts the final differentially expressed gene list by
+reducing its size.
+
+\item
+The combined results will hopefully give researchers an higher confidence in the
+experimental results.
+\end{itemize}
 
 \end{frame}
 
@@ -411,17 +453,64 @@ NOTES:\\
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Case Studies}
 
-Case study results viewed in PBS Finder\\
+Objectives
+\begin{itemize}
+\item
+Assess the general usefulness of PBS Finder.
+
+\item
+Compare PBS Finder with the existing techniques of manual analysis.
+
+\item
+Assess the impact of differences in hardware performance in the overall
+performance of the platform.
+\end{itemize}\vspace{0.8cm}
+
+Data set
+\begin{itemize}
+\item 23 genes from the \emph{RhoGTPase} family (\emph{Rattus norvegicus})
+provided by IBMC.
+\end{itemize}
+
+\framebreak
+
+Results (expert estimation of 30 minutes per gene analysed)
+\begin{table}[!htb]\footnotesize
+  \centering
+  \begin{tabular}{{l} | {l}{l}{l}}
+    \textbf{\emph{Number of IDs}} & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}} & \textbf{\emph{Manual method}} \\ \hline
+    100  & $9m\ 56s$          & $11m\ 1s$      & $\approx 50h$\\
+    500   & $41m\ 47s$         & $55m\ 51s$     & $\approx 250h$\\
+    900   & $1h\ 33m\ 32s$     & $2h\ 7m\ 4s$   & $\approx 450h$\\ \hline
+  \end{tabular}
+\end{table}\vspace{0.3cm}
+
+Conclusions
+\begin{itemize}
+\item
+PBS Finder can reproduce the results an expert would get.
+
+\item
+Months worth of an expert's manual work can be accomplished in a few hours.
+
+\item
+While hardware performance has a significant impact on analysis time, the
+platform achieves satisfactory performance on personal computer-level hardware.
+\end{itemize}
+
+\framebreak
+
+Results (viewed in PBS Finder)\\
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{job_view}
 \end{figure}
 
-NOTES:\\
-- Refer objectives, data and experimental method.\\
-- Refer results.\\
-- Show screenshot.\\
-- Show table.\\
+%NOTES:\\
+%- Refer objectives, data and experimental method.\\
+%- Refer results.\\
+%- Show screenshot.\\
+%- Show table.\\
 
 \end{frame}
 
