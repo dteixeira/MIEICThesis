@@ -223,15 +223,45 @@ The system should be as modular as possible, to allow future extensions.
   \frametitle{RNA-Seq Analysis Pipeline}
   \framesubtitle{Developed Solution}
 
+\begin{itemize}\small
+\item
+Uses iRAP as the analysis pipeline.
+
+\item
+Conducts multiple differential expression analyses with different tools.
+
+\item
+Combines results from multiple tools.
+\end{itemize}
+
 \begin{figure}
   \centering
   \includegraphics[width=0.65\textwidth]{tool1}
 \end{figure}
 
-NOTES:\\
-- Show scheme, refer iRAP, the script and the web interface.\\
-- Refer multiple differential expression tools.\\
-- Refer user input and tool configuration.\\
+\framebreak
+
+Additional features:
+
+\begin{itemize}
+\item
+Access to iRAP's web reports and gene browser, along with result visualization
+in the web interface.\\ \vspace{0.4cm}
+
+\item
+Synchronization with Ensembl's reference genome repositories.\\ \vspace{0.4cm}
+
+\item
+Graphical job configuration.\\ \vspace{0.4cm}
+
+\item
+Possibility to easily include other differential expression tools.
+\end{itemize}
+
+%NOTES:\\
+%- Show scheme, refer iRAP, the script and the web interface.\\
+%- Refer multiple differential expression tools.\\
+%- Refer user input and tool configuration.\\
 
 \end{frame}
 
@@ -240,16 +270,78 @@ NOTES:\\
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Developed Solution}
 
+\begin{itemize}
+\item
+Uses Ensembl and NCBI to identify gene species, obtain basic information and
+extract genetic sequences (5' UTR, 3' UTR, 3' UTR downstream).
+\end{itemize}\vspace{0.23cm}
+
 \begin{figure}
   \centering
   \includegraphics[width=0.65\textwidth]{workflow2}
 \end{figure}
 
-NOTES:\\
-- Show scheme, RBP finding, gene enrichment, clustering.\\
-- Refer web interface.
-- Refer that the tools is in production for several months, being extensively tested by experts.\\
-- Refer user input and tool configuration.\\
+\framebreak
+
+\begin{itemize}
+\item
+Uses RBPDB to discovery RNA binding proteins based on the obtained sequences.
+
+\item
+Uses UniProt to enrich the obtained results and performs clustering analysis on
+those results.
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.65\textwidth]{workflow2}
+\end{figure}
+
+\framebreak
+
+Clustering analysis:
+\begin{itemize}
+\item
+Uses $k$-medoids and hierarchical clustering, both with Jaccard and binary
+distance matrices.
+
+\item
+Executes every possible combination of clustering setups (alternates algorithms,
+distance matrices, used features, etc.).
+
+\item
+Results are filtered (acceptable solutions must have a minimum percentage of
+entries per cluster, clusters must have defining features, etc.).
+
+\item
+Solution quality internally determined based on the average silhouette.
+\end{itemize}
+
+\framebreak
+
+Additional features:
+\begin{itemize}
+\item
+User account and job management system.\\ \vspace{0.3cm}
+
+\item
+References to external platforms with relevant information based on context.\\ \vspace{0.3cm}
+
+\item
+Support for multiple identifier notations (Ensembl, Entrez, RefSeq and GenBank).\\ \vspace{0.3cm}
+
+\item
+Visualization of defining features for each cluster.\\ \vspace{0.3cm}
+
+\item
+Job completed notification system.
+\end{itemize}
+
+%NOTES:\\
+%- Show scheme, RBP finding, gene enrichment, clustering.\\
+%- Refer web interface.
+%- Refer that the tools is in production for several months, being extensively tested by experts.\\
+%- Refer user input and tool configuration.\\
 
 \end{frame}
 
@@ -319,7 +411,7 @@ NOTES:\\
   \frametitle{RBP Analysis Pipeline (PBS Finder)}
   \framesubtitle{Case Studies}
 
-Case study results viewed in PBS Finder:\\
+Case study results viewed in PBS Finder\\
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{job_view}
