@@ -1,0 +1,228 @@
+### SLIDE 1
+- Apresentação.
+
+### SLIDE 2
+- Breve outline da apresentação (ver quanto tempo demora).
+
+### SLIDE 3
+- A biologia molecular ainda é um campo de estudo jovem.
+- Existem ainda muitas incógnitas neste campo.
+- A expressão génica é um exemplo disso, novo conhecimento está constantemente a
+  surgir.
+- A expressão génica é o processo através do qual o DNA dos organismos é
+  transformado em produtos genéticos úteis.
+- Conhecer bem este processo é muito importante não só para a biologia
+  molecular, mas também para áreas como a medicina.
+- Durante o projeto fomos aconselhados por alguns especialistas do IBMC.
+- Discutindo com esses especialistas chegamos à conclusão que seria interessante
+  estudar dois problemas diferentes: análise de expressão diferential e
+  descoberta e análise de RNA binding proteins.
+
+### SLIDE 4
+- O estudo destes problemas podem ser decomposto em três grandes tarefas.
+# TODO Voltar aqui, talvez não seja necessário.
+
+### SLIDE 5
+- Também durante esta discussão de ideias com os biólogos, chegamos à conclusão
+  que existem três grandes problemas com que eles lidam diariamente.
+- Em primeiro lugar, embora existam imensas ferramentas para resolver os mais
+  diversos problemas na área da biologia molecular, muitas destas ferramentas
+  não são user friendly, e requerem conhecimentos de informática que muitas
+  vezes os biólogos não tem.
+- O segundo problema que encontramos foi o facto de muitas vezes, um pouco em
+  consequência do problema anterior, os biólogos acabam por ter de analisar
+  grandes quantidades de dados à mão.
+- O terceiro problema está relacionado com o facto de existir imensa informação
+  disponível na web, mas muitas vezes essa informação está demasiado dispersa.
+  Muitas vezes é preciso visitar várias plataformas e repositorios de informação
+  para se obter toda a informação necessária para uma determinada atividade.
+- Estes problemas estão levaram-nos a definir três grandes objetivos para o
+  trabalho realizado.
+- Em primeiro lugar queriamos criar ferramentas tão simples, que qualquer
+  utilizador com um minimo de conhecimentos informáticos fosse capaz de operar
+  sem nenhum treino prévio.
+- Em segundo lugar queriamos criar ferramentas que automatizassem tanto quanto
+  possivel os processos: o utilizador pede algo a ferramenta e não tem de voltar
+  a interagir até os resultados estarem prontos.
+- Por fim, queriamos recolher toda essa informação espalhada pela web, e
+  mostrala ao utilizador num sitio unico, conforme fosse relevante para o
+  contexto.
+
+### SLIDE 6
+# TODO Voltar aqui, talvez não seja necessário.
+
+### SLIDE 7
+- Em primeiro lugar planeamos uma plataforma web, capaz de receber reads do
+  utilizador e conduzir expressão diferencial sobre essa informação.
+- A workflow de análise tem como base o iRAP, que é uma pipeline para análise de
+  dados de RNA-Seq.
+- O iRAP foi construidos de forma modular, e permite que diferentes ferramentas
+  sejam usadas em cada passo da análise, desde a etapa de alinhamento das reads
+  contra o genoma de referencia até à etapa de análise de expressão diferencial.
+- No entanto voltamos ao problema que já tinha referido: nem todas as
+  experiencias são iguais e uma ferramenta pode ser melhor num caso e pior em
+  outro.
+- O utilizador pode não ter os conhecimentos necesários para fazer esta
+  avaliação.
+- Uma forma que arranjamos para mitigar este problema foi correr várias
+  ferramentas de análise de expressão diferencial na mesma experiencia e depois
+  combinar os resultados.
+- Nesta fase usámos duas ferramentas, o edgeR e o DESeq.
+- Para combinar resultados primeiro temos de filtra-los por p-value, deixando só
+  genes cujo p-value seja menor que 0.05.
+- Depois fazemos a intersecção dos genes resultantes de cada ferramenta. Na
+  lista final só existem genes que tenham sido encontrados por todas as
+  ferramentas.
+
+### SLIDE 8
+# TODO Voltar aqui, talvez não seja necessário.
+- Depois temos ainda outras caracteristicas, mais relacionadas com a plataforma
+  web.
+- Os utilizador tem acesso tanto aos relatórios HTML produzidos pelo iRAP como
+  aos resultados na interface web.
+- No caso de o utilizador querer fazer uma experiencia num organismo que esteja
+  disponível no Ensembl não tem de fazer upload do genoma anotado, porque a
+  ferramenta faz a sincronização com a release mais recente.
+- E sobretudo, em vez de ser necessário configurar a análise com um ficheiro de
+  configuração complexo, isto pode ser feito graficamente.
+
+### SLIDE 9
+- A outra ferramenta desenvolvida descobre RNA binding proteins, encontra
+  informação relevante sobre estas e agrupa-as.
+- Esta ferramenta recolhe informação de diversas plataformas online, como
+  Ensembl, NCBI, UniProt, RBPDB, DB2DB, etc., tanto a partir das API's
+  disponibilizadas como a partir de web scrapping.
+- O workflow da análise começa quando o utilizador passa à ferramenta uma lista
+  de identificadores de genes.
+- Esses identificadores são usados para obter informação sobre esses genes e os
+  respetivos transcritos das plataformas do Ensembl e NCBI.
+
+### SLIDE 10
+- As sequencias obtidas no passo anterior são usadas na RBPDB para encontrar
+  RBPs que se possam ligar a essas sequencias. Esta fase conclui a análise base.
+- Depois extraimos informação adicional sobre cada RBP a partir do UniProt.
+- Esta informação inclui tecidos onde as proteinas podem ser expressas, pathways
+  em que participam, processos biologicos, etc.
+- Por fim, esta informação é usada juntamente com técnicas de clustering, para
+  agrupar genes e proteinas.
+
+### SLIDE 11
+- Novamente, como nem sempre é possível antecipar o melhor método de análise
+  em situações em que a informação pode divergir muito de experiencia para
+  experiencia, optamos por combinar varios metodos, e depois avaliar qual o
+  melhor para cada situação.
+- Em primeiro lugar importa dizer que usamos k-medoids e clustering hierarquico
+  na análise, usando matrizes de distancia de jaccard e matrizes de distancia
+  binarias.
+- Além de combinarmos o metodo de clustering e as representações dos dados ainda
+  alternamos os dados usados em cada tentativa: por exemplo, numa determinada
+  tentativa podemos usar apenas informação sobre os tecidos e pathways, e na
+  seguinte podemos acrescentar informação sobre os processos biologicos.
+- Também variamos o k, ou seja o numero de clusters, entre 2 e 10.
+- Depois aplicamos varios tipos de filtros aos resultados: por exemplo, só
+  resultados em que cada cluster tenha um numero minimum de entradas e que são
+  considerados, entre outros.
+- Também identificamos as caracteristicas que definem um cluster.
+- Estas são caracteristicas muito frequentes num determinado cluster, que não
+  são frequentes em mais nenhum.
+- Numa fase inicial foram feitas experiencias com clustering com ILP, que nos
+  daria esta informação à partida.
+- No entanto devido a problemas com as ferramentas usadas fomos obrigados a
+  abandonar esta abordagem.
+- Depois sobre o conjunto de soluções possíveis escolhemos aquelas que
+  apresentam o maior valor para a silhueta média.
+
+### SLIDE 12
+# TODO Voltar aqui, talvez não seja necessário.
+
+### SLIDE 13
+- Chegando a este ponto tinhamos duas ferramentas distintas.
+- Então pensamos: se um dos nossos objetivos e desenvolver ferramentas que
+  agreguem toda a informação relevante num sitio, fara sentido termos duas
+  plataformas web distintas.
+- E assim resolvemos juntar as duas pipelines de analise sob a mesma plataforma
+  web.
+- Outro aspecto em que pensamos é que a lista de genes resultantes da expressão
+  diferencial só por si da muita informação relevante, talvez fosse util
+  enriquecer essa lista.
+- Uma vez que já tinhamos uma ferramenta capaz de o fazer resolvemos aproveitar
+  e criar um terceiro pipeline, que integre as duas ferramentas.
+- No final ficamos com um sistema totalmente integrado, em que o utilizador pode
+  escolher usar qualquer uma das ferramentas independentemente ou então em
+  simultaneo.
+
+### SLIDE 14
+- Fizemos também dois casos de estudo para comprovar o funcionamento das
+  ferramentas desenvolvidas.
+- O primeiro caso de estudo teve como alvo a ferramenta de análise de expressão
+  diferencial.
+- Devido a atrasos que existiram para obtermos a informação do IBMC, não foi
+  possivel validar estes resultados do ponto de vista biologico.
+- Assim sendo, limitamo-nos a verificar se de facto combinar os resultados de
+  varias ferramentas tinha algum impacto no resultado final.
+- Para isso reproduzimos uma experiência relativa à E. coli, disponível na
+  plataforma ArrayExpress.
+
+### SLIDE 15
+- Na fase de analise de expressão diferencial usamos o edgeR e o DESeq.
+- Comparando os resultados combinados com os resultados apenas filtrados por
+  p-value, vemos que de facto a combinação teve impacto no numero de genes
+  resultante.
+- Espera-se que estes resultados possam dar aos investigadores um maior grau de
+  confiança do que dariam resultados obtidos com apenas uma ferramenta, que
+  poderia não ser a mais indicada para o caso.
+
+### SLIDE 16
+- O segundo caso de estudo teve como alvo o PBS Finder.
+- Aqui tinhamos 3 grandes objetivos.
+- Primeiro, verificar se o PBS Finder era capaz de reproduzir os resultados de
+  um investigador.
+- Segundo, comparar a ferramenta com as técnicas de análise manual que já são
+  usadas, em termos de tempo necessário.
+- E terceiro, verificar o impacto de diferenças de hardware na performance do
+  sistema. Embora não essencial, achamos ser interessante verificar se a
+  ferramenta pode correr em ambientes de baixa performance, no caso por exemplo
+  de instituições que não tem acesso a servidores e computadores de alta
+  performance.
+- O data set usado continha 23 genes de Rattus norvegicus, e foi disponibilizado
+  pelo IBMC. Importa dizer que os resultados deste caso de estudo foram
+  validados do ponto de vista biologico por investigadores do IMBC, embora no
+  nosso trabalho apenas nos tenhamos preocupado com a avaliação do ponto de
+  vista da informática.
+
+### SLIDE 17
+- No final verificamos que fomos capazes de obter os mesmos resultados que um
+  especialista obteve atraves de uma analise manual.
+- Os nossos testes de stress ao sistema também mostraram que meses de trabalho
+  manual podiam ser comprimidos em poucas horas com a ferramenta.
+- Por fim vimos que, embora a performance do hardware tenha um impacto
+  consideravel no tempo de analise, ainda assim é possível correr a ferramenta,
+  com performance satisfatoria em hardware tipico de computadores pessoais.
+
+### SLIDE 18
+- Aqui podemos ver os resultados obtidos neste caso de estudo, na plataforma
+  web.
+- Esta é apenas a vista principal, que contém informação relativa aos genes.
+- Podemos ver um histograma que mostra quais as RBPs mais requentes no data set.
+- Depois temos a tabela que mostra não quais as RBPs que se ligam a cada gene,
+  como tambem os resultados do clustering, representados pelas colunas
+  coloridas.
+- Clicando num desses clusters é possível ver quais são as caracteristicas que
+  definem esse cluster.
+
+### SLIDE 19
+- Relativamente aos objetivos que delineamos inicialmente conseguimos cumprir
+  quase todos.
+- Ambas as plataformas foram implementadas e testadas.
+- No caso do PBS Finder conseguimos ainda que fosse testado durante vários
+  meses, uma vez que os especialistas do IBMC tem acesso à ferramenta.
+- No entanto, devido a alguns atrasos que ouveram para receber os dados
+  necessários acabou por não ser possível integrar a ferramenta de análise de
+  expressão diferencial na plataforma web.
+
+### SLIDE 20
+- Como trabalho futuro o passo mais obvio seria terminar a integração de ambas
+  as ferramentas.
+- Outro passo interessante seria estudar a possibilidade de lançar a ferramenta
+  como um serviço em grande escala, como são por exemplo os serviços do Ensembl
+  e NCBI.
