@@ -85,7 +85,7 @@
 
 \section{Introduction}
 \subsection{Domain Problem}
-\begin{frame}%[allowframebreaks]
+\begin{frame}[allowframebreaks]
   \frametitle{Domain Problem}
   \framesubtitle{Introduction}
 
@@ -99,18 +99,51 @@ Studying gene expression is crucial to understand the mechanisms that control
 living organisms.\\ \vspace{0.8cm}
 
 \item
-We focused on three different areas:
+Two problems sparked the interest of biologists:
+
 \begin{itemize}
-  \item
-  differential expression analysis;
+\item
+understanding differences in gene expression between individuals of the same
+species;
 
-  \item
-  RNA-binding protein (RBP) discovery and analysis;
-
-  \item
-  further result analysis using data mining techniques.
+\item
+understanding interactions between genes and RNA binding proteins that bind with
+them.
 \end{itemize}
 \end{itemize}
+
+\framebreak
+
+Studying these problems involves:
+
+\begin{itemize}
+\item
+being able to take sequencing reads, align them against a reference genome and
+perform differential expression analysis;\\ \vspace{0.4cm}
+
+\item
+being able to take a list of gene identifiers, cross reference them between
+multiple online platforms and discovering their potential RBPs (as well as
+additional relevant information);\\ \vspace{0.4cm}
+
+\item
+being able to uncover implicit relationships in the produced information that
+might be useful to biologists, using data mining techniques.
+\end{itemize}
+
+%\item
+%We focused on three different areas:
+%\begin{itemize}
+  %\item
+  %differential expression analysis;
+
+  %\item
+  %RNA-binding protein (RBP) discovery and analysis;
+
+  %\item
+  %further result analysis using data mining techniques.
+%\end{itemize}
+%\end{itemize}
 
 %\framebreak
 
@@ -202,13 +235,26 @@ We focused on three different areas:
 \begin{itemize}
 
 \item
-Two distinct problems warrant two different solutions.\\ \vspace{0.8cm}
+Develop two distinct pipelines: one for differential expression analysis and
+another for RBP discovery and analysis.\\ \vspace{0.8cm}
 
 \item
-The developed system should be available anywhere, through the internet.\\ \vspace{0.8cm}
+Both pipelines should be available through web platforms. These platforms should
+be able to manage user accounts, user jobs (analysis tasks), results viewing and
+exporting, etc..\\ \vspace{0.8cm}
 
 \item
-The system should be as modular as possible, to allow future extensions.
+These platforms should be able to overcome the three problems previously
+mentioned.
+
+%\item
+%Two distinct problems warrant two different solutions.\\ \vspace{0.8cm}
+
+%\item
+%The developed system should be available anywhere, through the internet.\\ \vspace{0.8cm}
+
+%\item
+%The system should be as modular as possible, to allow future extensions.
 
 \end{itemize}
 
@@ -498,13 +544,13 @@ While hardware performance has a significant impact on analysis time, the
 platform achieves satisfactory performance on personal computer-level hardware.
 \end{itemize}
 
-\framebreak
+%\framebreak
 
-Results (viewed in PBS Finder)\\
-\begin{figure}
-  \centering
-  \includegraphics[width=0.85\textwidth]{job_view}
-\end{figure}
+%Results (viewed in PBS Finder)\\
+%\begin{figure}
+  %\centering
+  %\includegraphics[width=0.85\textwidth]{job_view}
+%\end{figure}
 
 %NOTES:\\
 %- Refer objectives, data and experimental method.\\
