@@ -266,19 +266,36 @@ mentioned.
 \end{frame}
 
 \subsection{RNA-Seq Analysis Pipeline}
-\begin{frame}%[allowframebreaks]
+\begin{frame}[allowframebreaks]
   \frametitle{RNA-Seq Analysis Pipeline}
   \framesubtitle{Developed Solution}
 
+\begin{itemize}
+\item
+Uses iRAP (an RNA-Seq analysis pipeline) as its base.
+
+\item
+iRAP is flexible and allows users to choose what tool should be used in each
+step of the process.
+
+\item
+But, if users have little experience with these tools, how can they choose the
+best one for the job?
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.65\textwidth]{irap}
+\end{figure}
+
+\framebreak
+
 \begin{itemize}\small
 \item
-Uses iRAP as the analysis pipeline.
+Uses multiple differential expression analysis tools (edgeR e DESeq).
 
 \item
-Conducts multiple differential expression analyses with different tools.
-
-\item
-Combines results from multiple tools.
+Combines the results of those tools.
 \end{itemize}
 
 \begin{figure}
@@ -319,8 +336,9 @@ Combines results from multiple tools.
 
 \begin{itemize}
 \item
-Uses Ensembl and NCBI to identify gene species, obtain basic information and
-extract genetic sequences (5' UTR, 3' UTR, 3' UTR downstream).
+Uses DB2DB, Ensembl and NCBI to convert identifiers, identify gene species,
+obtain basic information and extract genetic sequences (5' UTR, 3' UTR, 3' UTR
+downstream).
 \end{itemize}\vspace{0.23cm}
 
 \begin{figure}
@@ -332,7 +350,8 @@ extract genetic sequences (5' UTR, 3' UTR, 3' UTR downstream).
 
 \begin{itemize}
 \item
-Uses RBPDB to discovery RNA binding proteins based on the obtained sequences.
+Uses RBPDB to discover RNA binding proteins (based on the obtained genetic
+sequences).
 
 \item
 Uses UniProt to enrich the obtained results and performs clustering analysis on
