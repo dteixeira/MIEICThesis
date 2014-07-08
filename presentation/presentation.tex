@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[xcolor=dvipsnames]{beamer}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINITIONS AND PACKAGES
@@ -45,10 +45,11 @@
 \makeatletter
 \usetheme{Luebeck}
 \usecolortheme{beaver}
-\usefonttheme{serif}
+%\usefonttheme{serif}
 \setbeamerfont{footline}{size=\fontsize{4}{12}\selectfont}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
+\setbeamertemplate{frametitle continuation}{}
 \setbeamertemplate{footline}
 {%
   \leavevmode%
@@ -63,6 +64,16 @@
     \end{beamercolorbox}}%
   \vskip0pt
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamercolor{local structure}{fg=Red}
+\setbeamercolor{frametitle}{bg=White}
+\setbeamercolor{title}{bg=White}
+\setbeamercolor{section in head/foot}{bg=White}
+\setbeamercolor{title in head/foot}{bg=White}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT
@@ -240,8 +251,8 @@ another for RBP discovery and analysis.\\ \vspace{0.8cm}
 
 \item
 Both pipelines should be available through web platforms. These platforms should
-be able to manage user accounts, user jobs (analysis tasks), results viewing and
-exporting, etc..\\ \vspace{0.8cm}
+be able to manage user accounts, user jobs (analysis tasks), view and export
+results, etc..\\ \vspace{0.8cm}
 
 \item
 These platforms should be able to overcome the three problems previously
@@ -354,8 +365,8 @@ Uses RBPDB to discover RNA binding proteins (based on the obtained genetic
 sequences).
 
 \item
-Uses UniProt to enrich the obtained results and performs clustering analysis on
-those results.
+Uses UniProt and KEGG to enrich the obtained results and performs clustering
+analysis on those results.
 \end{itemize}
 
 \begin{figure}
