@@ -12,6 +12,7 @@
 \selectlanguage{english}
 
 % Miscellaneous.
+\usepackage{fontspec}
 \usepackage{hyperref}
 \usepackage{array,multirow}
 
@@ -45,8 +46,11 @@
 \makeatletter
 \usetheme{Luebeck}
 \usecolortheme{beaver}
+\usefonttheme{professionalfonts}
 %\usefonttheme{serif}
+%\setmainfont{Helvetica Neue}
 \setbeamerfont{footline}{size=\fontsize{4}{12}\selectfont}
+\setbeamerfont{title}{size={\fontsize{22}{26}}}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
 \setbeamertemplate{frametitle continuation}{}
@@ -211,7 +215,7 @@ might be useful to biologists, using data mining techniques.
   \begin{column}{0.45\textwidth}
     \textcolor<2-3>{gray!40}{\textbf{Create simpler tools}\scriptsize\\
     Any user should be able to use the tools, with little to no training.\\
-    \vspace{1.1cm}}
+    \vspace{0.8cm}}
 
     \uncover<2->{\textcolor<3>{gray!40}{\textbf{Automate tasks}\scriptsize\\
     Automated systems should perform repetitive tasks, so that users can

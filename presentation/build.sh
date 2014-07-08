@@ -6,10 +6,10 @@ if [[ "$#" -eq 1 ]]; then
     # Remove existent PDF file.
     rm presentation.pdf 2> /dev/null
     #make presentation
-    pdflatex presentation
+    xelatex presentation
     bibtex presentation
-    pdflatex presentation
-    pdflatex presentation
+    xelatex presentation
+    xelatex presentation
     cp presentation.pdf view.pdf
     open view.pdf
   else
@@ -18,10 +18,10 @@ if [[ "$#" -eq 1 ]]; then
 else
   rm presentation.pdf 2> /dev/null
   #make presentation
-  pdflatex presentation
+  xelatex presentation
   bibtex presentation
-  pdflatex presentation
-  pdflatex presentation
+  xelatex presentation
+  xelatex presentation
   cp presentation.pdf view.pdf
 fi
 
