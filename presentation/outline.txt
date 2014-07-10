@@ -33,6 +33,7 @@ contida nas células dos seres vivos sobre a forma de DNA numa variedade de
 produtos genéticos funcionais como é o caso das proteínas, que são essenciais à
 manutenção da vida.
 
+# TODO REVIEW
 Ao longo desta dissertação concentrámo-nos em partes deste processo complexo,
 mais concretamente em dois problemas: a diferença entre a expressão génica entre
 vários indíviduos da mesma espécia, como forma de perceber de que maneira é que
@@ -82,6 +83,7 @@ aplicações que consigam reunir toda a informação relevante para o contexto n
 ### SLIDE 5 - DETALHES DE IMPLEMENTAÇÃO (OBJETIVOS PRIMÁRIOS)
 ################################################################################
 
+# TODO REVIEW
 Posto isto, chegamos a conclusão que tinhamos de implementar uma solução de
 software capaz de fazer três coisas.
 
@@ -99,10 +101,10 @@ informação que seja relevante para os biologos.
 
 ### SLIDE 6 - DETALHES DE IMPLEMENTAÇÃO (OBJETIVOS SECUNDÁRIOS)
 ################################################################################
+### TODO
 
 ### SLIDE 7 - PIPELINE DE ANÁLISE DE EXPRESSÃO DIFERENCIAL (IRAP)
 ################################################################################
-### TODO
 
 A ferramenta de análise de expressão diferencial usa como base o iRAP. O iRAP é
 uma pipeline de análise de dados de RNA-Seq, que não só permite executar todas
