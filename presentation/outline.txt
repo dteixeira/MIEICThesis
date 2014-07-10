@@ -33,24 +33,20 @@ contida nas células dos seres vivos sobre a forma de DNA numa variedade de
 produtos genéticos funcionais como é o caso das proteínas, que são essenciais à
 manutenção da vida.
 
-# TODO REVIEW
 Ao longo desta dissertação concentrámo-nos em partes deste processo complexo,
-mais concretamente em dois problemas: a diferença entre a expressão génica entre
-vários indíviduos da mesma espécia, como forma de perceber de que maneira é que
-pequenas alterações neste processo se expressam mais tarde na fisiologia dos
-seres vivos; e a descoberta e estudo de RNA binding proteins, que são proteínas
-que regulam várias fases do processo de expressão génica, sendo que este
-conhecimento pode ser usado para manipular o próprio processo e o RNA. Este
-conhecimento acaba por ser relevante tanto em áreas mais académicas, como depois
-também se traduz em áreas com impacto direto nas nossas vidas, como é o caso da
-medicina.
+mais concretamente em dois problemas. primeiro queriamos ser capazes de perceber
+que genes é que estão ativos em diferentes contextos e em diferentes indíviduos,
+e segundo, juntando essa informação ao conhecimento sobre mecanismos reguladores
+da expressão génica, como é o caso das RNA binding proteins, perceber como esses
+fatores influenciam a velocidade de transcrição, ou seja, a velocidade com que o
+DNA é transformado em RNA.
 
 ### SLIDE 4 - MOTIVAÇÃO E OBJETIVOS
 ################################################################################
 
 Ao longo do projeto nós tivemos uma colaboração muito próxima com alguns
-investigadores do IBMC, sendo que o interesse de estudar estes dois problemas
-específicos partiu em parte deles.
+biólogos do IBMC, sendo que o interesse de estudar estes dois problemas
+específicos partiu em grande parte deles.
 
 Mas mais do que apenas estudar esses problemas, tentamos perceber as razões por
 detrás do interesse de introduzir novas ferramentas nestes processos, de forma a
@@ -73,35 +69,47 @@ bases de dados. Muitas vezes é necessário visitar 3, 4, 5 ou até mais sites
 diferentes para reunir informação relevante sobre um objecto de estudo.
 
 Nós tentamos pegar nestes problemas e torná-los em pontos fortes das soluções
-que desenvolvemos, fazendo muito simples e fáceis de utilizar para qualquer
+que desenvolvemos, tornando-as muito simples e fáceis de utilizar para qualquer
 pessoa com poucos conhecimentos informáticos; o mais automatizadas possível,
 para que o utilizador apenas tenha de fornecer os seus dados de entrada e não
 tenha de voltar a interagir com o sistema até ter resultados; e por fim, criar
-aplicações que consigam reunir toda a informação relevante para o contexto num
-único local.
+aplicações que consigam reunir toda a informação relevante para o contexto em
+análise num único local.
 
 ### SLIDE 5 - DETALHES DE IMPLEMENTAÇÃO (OBJETIVOS PRIMÁRIOS)
 ################################################################################
 
-# TODO REVIEW
 Posto isto, chegamos a conclusão que tinhamos de implementar uma solução de
 software capaz de fazer três coisas.
 
 Em primeiro lugar, receber reads, ou seja, pequenos fragmentos de RNA obtidos
 experimentalmente através de processos de sequenciação, alinhá-los contra um
-genoma de referência, usando depois essa informação para analise de expressão
-diferencial.
+genoma de referência, usando depois essa informação para perceber quais são
+aqueles que estão ativos em diferentes individuos, ou seja, para fazer uma
+analise de expressão diferencial.
 
-Em segundo lugar, receber uma lista de identificadores de genes, pesquisar e
-cruzar dados sobre esses identificadores em várias plataformas e descobrir as
-RNA binding proteins que se ligam a esses genes.
+Em segundo lugar, pegar na lista desses genes, cruzá-los com informação de
+diversas plataformas e descobrir as RNA binding proteins que interagem com eles.
 
 Por último, ser capaz de utilizar técnicas de data mining para descobrir nova
 informação que seja relevante para os biologos.
 
 ### SLIDE 6 - DETALHES DE IMPLEMENTAÇÃO (OBJETIVOS SECUNDÁRIOS)
 ################################################################################
-### TODO
+
+Como objetivos secundários queriamos em primeiro lugar implementar duas
+pipelines separadas, uma para a análise RNA-Seq e outra para a descoberta e
+análise de RBPs. Quisemos fazer esta divisão porque embora para o nosso problema
+em particular seja importante fazer a análise completa, ambas as pipelines são
+úteis individualmente.
+
+Também decidimos que ambas as pipelines deviam ser disponibilizadas ao público
+através de plataformas web, que não permitissem usar as pipelines mas que também
+tivessem outras funcionalidades, como gestão de utilizadores, gestão de
+experienciais, visualização e exportação de resultados, email reporting, etc.
+
+Por fim, queriamos desenvolver a solução de forma tão modular como possível,
+para permitir acrescentar facilmente novas features no futuro.
 
 ### SLIDE 7 - PIPELINE DE ANÁLISE DE EXPRESSÃO DIFERENCIAL (IRAP)
 ################################################################################
@@ -146,6 +154,7 @@ um grau de confiança elevado.
 
 ### SLIDE 12 - INTEGRAÇÂO (PLATAFORMA PARTE 1)
 ################################################################################
+# TODO REVIEW ALL
 
 Estando as pipelines prontas começamos a pensar na solução como um todo.
 Chegamos rapidamente à conclusão que uma vez que agregação da informação é um
