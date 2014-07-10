@@ -3,50 +3,289 @@
 ################################################################################
 
 ### SLIDE 1 - CAPA
+################################################################################
+
+Boa tarde, o meu nome é Diogo Teixeira e vou fazer uma breve apresentação do meu
+trabalho de dissertação, intitulado "A Computational Platform for Gene
+Expression Analysis".
 
 ### SLIDE 2 - DESCRIÇÃO APRESENTAÇÃO
+################################################################################
+
+Vou começar por uma breve apresentação dos problemas com os quais a dissertação
+lida e a motivação por detrás do estudo destes problemas. Depois falarei do
+trabalho que foi desenvolvido e dos casos de estudo que realizamos para avaliar
+a qualidade desse trabalho. Por fim vou fazer uma breve revisão sobre os
+objetivos atingidos e não atingidos, e apresentar algumas possibilidades para o
+trabalho futuro.
 
 ### SLIDE 3 - PROBLEMA DE DOMÍNIO
+################################################################################
+
+A biologia molecular é uma área de estudo ainda muito jovem que surgiu na
+primeira metade do século XX mas só começou a ganhar grande força já na segunda
+metade do sécula, com a descoberta da estrutura molecular do DNA.
+
+Assim sendo, é de esperar que numa disciplina tão recente existam ainda muitas
+incógnitas e conhecimento incompleto. Um exemplo disso é o processo de expressão
+génica. Este processo é responsável pela transformação da informação genética
+contida nas células dos seres vivos sobre a forma de DNA numa variedade de
+produtos genéticos funcionais como é o caso das proteínas, que são essenciais à
+manutenção da vida.
+
+Ao longo desta dissertação concentrámo-nos em partes deste processo complexo,
+mais concretamente em dois problemas: a diferença entre a expressão génica entre
+vários indíviduos da mesma espécia, como forma de perceber de que maneira é que
+pequenas alterações neste processo se expressam mais tarde na fisiologia dos
+seres vivos; e a descoberta e estudo de RNA binding proteins, que são proteínas
+que regulam várias fases do processo de expressão génica, sendo que este
+conhecimento pode ser usado para manipular o próprio processo e o RNA. Este
+conhecimento acaba por ser relevante tanto em áreas mais académicas, como depois
+também se traduz em áreas com impacto direto nas nossas vidas, como é o caso da
+medicina.
 
 ### SLIDE 4 - MOTIVAÇÃO E OBJETIVOS
+################################################################################
+
+Ao longo do projeto nós tivemos uma colaboração muito próxima com alguns
+investigadores do IBMC, sendo que o interesse de estudar estes dois problemas
+específicos partiu em parte deles.
+
+Mas mais do que apenas estudar esses problemas, tentamos perceber as razões por
+detrás do interesse de introduzir novas ferramentas nestes processos, de forma a
+consiguirmos adaptar melhor o nosso trabalho às necessidades reais dos
+investigadores.
+
+Um dos problemas apontados foi a complexidade das ferramentas. Embora exista uma
+grande quantidade de ferramentas para os problemas desta área, muitas são
+complexas e exigem conhecimentos muito técnicos de informática para serem
+usadas, que muitos biologistas não tem.
+
+Outro problema que enfrentam, que deriva do problema anterior, é o facto de, se
+não usam ferramentas para estas tarefas, terão de as fazer manualmente. Isto é
+especialmente penoso quando estamos a falar de analisar grandes quantidades de
+dados, o que pode levar meses.
+
+Por fim, e embora a internet seja um repositório fantástico de informação
+biológica, muitas vezes essa informação está dispersa por várias plataformas e
+bases de dados. Muitas vezes é necessário visitar 3, 4, 5 ou até mais sites
+diferentes para reunir informação relevante sobre um objecto de estudo.
+
+Nós tentamos pegar nestes problemas e torná-los em pontos fortes das soluções
+que desenvolvemos, fazendo muito simples e fáceis de utilizar para qualquer
+pessoa com poucos conhecimentos informáticos; o mais automatizadas possível,
+para que o utilizador apenas tenha de fornecer os seus dados de entrada e não
+tenha de voltar a interagir com o sistema até ter resultados; e por fim, criar
+aplicações que consigam reunir toda a informação relevante para o contexto num
+único local.
 
 ### SLIDE 5 - DETALHES DE IMPLEMENTAÇÃO (OBJETIVOS PRIMÁRIOS)
+################################################################################
+
+Posto isto, chegamos a conclusão que tinhamos de implementar uma solução de
+software capaz de fazer três coisas.
+
+Em primeiro lugar, receber reads, ou seja, pequenos fragmentos de RNA obtidos
+experimentalmente através de processos de sequenciação, alinhá-los contra um
+genoma de referência, usando depois essa informação para analise de expressão
+diferencial.
+
+Em segundo lugar, receber uma lista de identificadores de genes, pesquisar e
+cruzar dados sobre esses identificadores em várias plataformas e descobrir as
+RNA binding proteins que se ligam a esses genes.
+
+Por último, ser capaz de utilizar técnicas de data mining para descobrir nova
+informação que seja relevante para os biologos.
 
 ### SLIDE 6 - DETALHES DE IMPLEMENTAÇÃO (OBJETIVOS SECUNDÁRIOS)
+################################################################################
 
 ### SLIDE 7 - PIPELINE DE ANÁLISE DE EXPRESSÃO DIFERENCIAL (IRAP)
+################################################################################
+### TODO
+
+A ferramenta de análise de expressão diferencial usa como base o iRAP. O iRAP é
+uma pipeline de análise de dados de RNA-Seq, que não só permite executar todas
+as fases da análise, como também é muito flexível e permite aos utilizadores
+escolher a ferramenta a usar em cada fase da análise.
+
+Mas esta flexibilidade acarreta alguns problemas. Como referi anteriormente,
+alguem com pouca experiência com estas ferramentas dificilmente saberá escolher
+a melhor ferramenta para cada caso. É igualmente difícil para uma computador
+fazer essa escolha sem ter conhecimento extenso sobre os dados que serão
+analisados.
 
 ### SLIDE 8 - PIPELINE DE ANÁLISE DE EXPRESSÃO DIFERENCIAL (MELHORIAS)
+################################################################################
+
+Em vez de forçarmos uma única ferramenta de análise de expressão diferencial,
+que seria apenas indicada para algumas situações, implementamos um sistema que
+permite utilizar o iRAP com diferentes ferramentas de análise, neste caso o
+edgeR e o DESeq, combinando depois os resultados dessas ferramentas.
+
+A combinação de resultados é feita em dois passos. Primeiro os resultados de
+cada ferramenta são filtrados pelo seu p-value, removendo qualquer gene cujo
+p-value seja igual ou superior a 5%. Depois fazemos a intersecção dos resultados
+de todas as ferramentas, garantindo que um determinado gene só é considerado
+diferencialmente expresso caso todas as ferramentas corroborem essa decisão com
+um grau de confiança elevado.
 
 ### SLIDE 9 - PBS FINDER (PROCESSO PARTE 1)
+################################################################################
+### TODO
 
 ### SLIDE 10 - PBS FINDER (PROCESSO PARTE 2)
+################################################################################
+### TODO
 
 ### SLIDE 11 - PBS FINDER (CLUSTERING)
+################################################################################
+### TODO
 
 ### SLIDE 12 - INTEGRAÇÂO (PLATAFORMA PARTE 1)
+################################################################################
+
+Estando as pipelines prontas começamos a pensar na solução como um todo.
+Chegamos rapidamente à conclusão que uma vez que agregação da informação é um
+dos nossos objetivos, não fazia sentido ter duas plataformas web distintas.
 
 ### SLIDE 12 - INTEGRAÇÂO (PLATAFORMA PARTE 2)
+################################################################################
+
+Assim sendo fizemos com que ambas as pipelines pudessem ser usadas através da
+mesma plataforma web.
 
 ### SLIDE 12 - INTEGRAÇÂO (PIPELINE PARTE 1)
+################################################################################
+
+Pensamos também nos resultados da pipeline de análise de expressão génica. Esta
+pipeline devolve como resultado uma lista com os identificadores dos genes
+diferencialmente expressos. Mas esta informação não serve de muito só por si, o
+biologo teria de pesquisar esses identificadores para obter informação relevante
+sobre esses genes.
 
 ### SLIDE 12 - INTEGRAÇÂO (PIPELINE PARTE 2)
+################################################################################
+
+Uma vez que já temos uma ferramenta capaz de fazer enriquecimento de genes, o
+PBDS Finder, criámos uma terceira pipeline conceptual, em que os resultados da
+analise de expressao diferencial sao automaticamente passados ao PBS Finder, que
+os enriquece.
 
 ### SLIDE 12 - INTEGRAÇÂO (FINAL)
+################################################################################
+
+No final ficamos com uma solução totalmente integrada, na qual o utilizador pode
+optar por executar qualquer uma das pipelines individualmente ou então pode
+executa-las em conjunto.
 
 ### SLIDE 13 - CASO DE ESTUDO IRAP (SETUP)
+################################################################################
+
+Realizamos dois casos de estudo, um para cada pipeline. O primeiro caso de
+estudo é relativo à pipeline de análise RNA-Seq.
+
+Neste caso de estudo não foi possível obter a validação dos resultados do ponto
+de vista biologico por parte do IBMC, por isso concentrámo-nos apenas na
+avaliação do ponto de vista da informática. Assim o nosso objetivo com este caso
+de estudo foi determinar se de facto a ferramenta desenvolvida apresenta alguma
+melhoria nos resultados fazendo a sua combinação, quando comparado com a
+execução de apenas uma ferramenta.
+
+Para isso reproduzimos uma experiência de análise diferencial disponível no
+ArrayExpress, relativa à bacteria E. coli. Escolhe-mos esta experiência porque,
+uma vez que um genoma bacteriano é tipicamente pequeno, é possível realizar a
+análise em pouco tempo.
 
 ### SLIDE 14 - CASO DE ESTUDO IRAP (RESULTADOS)
+################################################################################
+
+Concluimos que a combinação de resultados era capaz de um conjunto de genes mais
+reduzido, quando comparado com a utilização das ferramentas em separado, com uma
+filtragem simples por p-value, como mostra a segunda coluna.
+
+Esperamos assim que estes resultados sejam mais úteis para os biologos, uma vez
+que têm um nível de confiança superior, e que o processo utilizado seja eficaz
+para reduzir os problemas da escolha não informada de uma ferramenta.
 
 ### SLIDE 15 - CASO DE ESTUDO PBS FINDER (SETUP)
+################################################################################
+
+O segundo caso de estudo teve como alvo o PBS Finder. Este caso de estudo foi
+particularmente interessante porque foi possível validar os resultados do ponto
+de vista biologico experimentalmente, sendo que também serve como base para um
+artigo cientifico sobre o PBS Finder, que será submetido brevemente.
+
+Tinhamos três grandes objetivos para este case de estudo. O primeiro era
+verificar a utilidade do PBS Finder e determinar se é capaz de reproduzir os
+mesmos resultados de um especialista. Em segundo lugar queriamos comparar a
+ferramenta com os métodos de analise manual que se praticavam, em termos de
+tempo gasto. Por fim, e um pouco menos importante, queriamos determinar se
+diferenças entre em que a ferramenta corre produz diferenças consideráveis no
+tempo de análise. Este último objetivo serviu sobretudo para determinar se era
+viável utilizar a ferramenta em computadores pessoais, no caso de instituições
+que nao tenham a sua disposição servidores de aplicações com hardware de alta
+performance.
+
+Como data set analisámos um conjunto de 23 genes, fornecido pelo IBMC. Estes
+genes são relativos à espécie Rattus norvegicus, ou rato norueguês, que é um
+organismo modelo bastante utilizado.
 
 ### SLIDE 16 - CASO DE ESTUDO PBS FINDER (RESULTADOS)
+################################################################################
+
+Em termos de resultados obtidos, importa referir em primeiro lugar que as
+experiencias feitas pelo IBMC corroboram os resultados obtidos pela ferramenta.
+
+Do ponto de vista informática, concluimos que a ferramenta era não só capaz de
+reproduzir os resultados dos especialistas, como também apresentar ainda mais
+informação relevante, sobretudo em termos de agrupamento de proteínas e genes.
+
+Também podemos ver que com a ferramenta podiamos facilmente comprimir meses de
+trabalho humano em poucas horas. Por exemplo, analisar 900 identificadores
+individuais levaria cerca de 450 horas, ou cerca de 2 meses com dias de trabalho
+de 8 horas, baseado numa estimativa média de 30 minutos por investigador. Esta
+análise estava de facto a ser feita manualmente antes da introdução do PBS
+Finder, que foi capaz de completar a análise em cerca de 2 horas, utilizando
+computadores pessoais.
+
+Por fim, conseguimos observer que de facto diferenças em hardware tem um impacto
+significativo na performance da ferramenta. No entanto tambem verificamos que é
+possível utilizar a ferramenta com uma performance satisfatoria em computadores
+pessoais.
 
 ### SLIDE 17 - AVALIAÇÃO DOS OBJETIVOS
+################################################################################
+
+Revendo os nossos objetivos iniciais vemos que foram em grande parte cumpridos.
+Conseguimos implementar e testar as duas pipelines de análise. No caso do PBS
+Finder até nos foi possível testar com os utilizadores finais durante bastante
+tempo, uma vez que a aplicação tem estado em produção e sob análise desde Março.
+
+Infelizmente, e devido a alguns atrasos na comunicação com o IBMC não foi
+possível concluir a integração do pipeline de análise de expressão diferencial
+com a plataforma web.
 
 ### SLIDE 18 - TRABALHO FUTURO
+################################################################################
+
+Como trabalho futuro era importante
+
+Em termos de trabalho futuro o principal seria terminar a integração da pipeline
+de expressão diferencial com a plataforma web.
+
+Seria também interessante estudar a possibilidade e os requerimentos necessários
+para lançar a ferramenta em grande escala.
 
 ### SLIDE 19/20 - FIM
+################################################################################
+
+Concluo assim a minha apresentação. Muito obrigado e fico à espera das vossas
+questões :)
+
+################################################################################
+################################################################################
+################################################################################
 
 ################################################################################
 # APRESENTAÇÃO ANTIGA

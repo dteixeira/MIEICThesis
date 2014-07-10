@@ -31,7 +31,7 @@
 \institute[FEUP]
 {
   \inst{1}
-  LIAAD INESC, Porto \& DEI FEUP, Universidade do Porto, Porto
+  LIAAD INESC \& DEI FEUP, Universidade do Porto
   \and
   \inst{2}
   EMBL-EBI, Cambridge, UK
@@ -49,7 +49,7 @@
 \usefonttheme{professionalfonts}
 %\usefonttheme{serif}
 \setmainfont{Helvetica Neue}
-\setbeamerfont{footline}{size=\fontsize{4}{12}\selectfont}
+\setbeamerfont{footline}{size=\fontsize{5}{12}\selectfont}
 \setbeamerfont{title}{size={\fontsize{22}{26}}}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
@@ -57,13 +57,13 @@
 \setbeamertemplate{footline}
 {%
   \leavevmode%
-  \hbox{\begin{beamercolorbox}[wd=.23\paperwidth,ht=3.0ex,dp=2.0ex,center]{author in head/foot}%
+  \hbox{\begin{beamercolorbox}[wd=.20\paperwidth,ht=3.0ex,dp=2.0ex,center]{author in head/foot}%
       \usebeamerfont{author in head/foot}\insertshortauthor%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.65\paperwidth,ht=3.0ex,dp=2.0ex,center]{title in head/foot}%
+    \begin{beamercolorbox}[wd=.60\paperwidth,ht=3.0ex,dp=2.0ex,center]{title in head/foot}%
       \usebeamerfont{title in head/foot}\insertshorttitle
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.12\paperwidth,ht=3.0ex,dp=2.0ex,center]{author in head/foot}%
+    \begin{beamercolorbox}[wd=.20\paperwidth,ht=3.0ex,dp=2.0ex,center]{author in head/foot}%
       \usebeamerfont{author in head/foot} \insertframenumber{} / \inserttotalframenumber
     \end{beamercolorbox}}%
   \vskip0pt
@@ -114,6 +114,7 @@ Molecular biology is a young field of study, with a lot of unknowns and partial
 knowledge.\\ \vspace{0.8cm}
 
 \item
+
 Studying gene expression is crucial to understand the mechanisms that control
 living organisms.\\ \vspace{0.8cm}
 
@@ -122,12 +123,11 @@ Two problems sparked the interest of biologists:
 
 \begin{itemize}
 \item
-understanding differences in gene expression between individuals of the same
-species;
+Under different contexts which genes became active  and which became inactive?
 
 \item
-understanding interactions between genes and RNA binding proteins that bind with
-them.
+What is the mechanism that regulates gene transcription speed?
+
 \end{itemize}
 \end{itemize}
 
@@ -177,33 +177,33 @@ them.
 
 \begin{columns}[<options>]
   \begin{column}{0.45\textwidth}
-    \textcolor<2-3>{gray!40}{\textbf{Tools are complex}\scriptsize\\
+    \textcolor<2-4>{gray!80}{\textbf{Tools are complex}\scriptsize\\
     Tools for biological data analysis often require a very technical set of
     skills.\\
     \vspace{0.8cm}}
 
-    \uncover<2->{\textcolor<3>{gray!40}{\textbf{Tasks are repetitive}\scriptsize\\
+    \uncover<2->{\textcolor<3-4>{gray!80}{\textbf{Tasks are repetitive}\scriptsize\\
     Analysing high quantities of data can be repetitive, especially if executed
     manually.\\
     \vspace{0.8cm}}}
 
-    \uncover<3->{\textbf{Information is scattered}\scriptsize\\
+    \uncover<3->{\textcolor<4>{gray!80}{\textbf{Information is scattered}\scriptsize\\
     Information is easy to acquire, but is often scattered through multiple
     platforms, services and institutions.\\
-    }
+    }}
   \end{column}
 
   \begin{column}{0.45\textwidth}
-    \textcolor<2-3>{gray!40}{\textbf{Create simpler tools}\scriptsize\\
+    \uncover<4>{\textbf{Create simpler tools}\scriptsize\\
     Any user should be able to use the tools, with little to no training.\\
     \vspace{0.8cm}}
 
-    \uncover<2->{\textcolor<3>{gray!40}{\textbf{Automate tasks}\scriptsize\\
+    \uncover<4>{\textbf{Automate tasks}\scriptsize\\
     Automated systems should perform repetitive tasks, so that users can
     focus on their work.\\
-    \vspace{0.8cm}}}
+    \vspace{0.8cm}}
 
-    \uncover<3>{\textbf{Gather information}\scriptsize\\
+    \uncover<4>{\textbf{Gather information}\scriptsize\\
     Information should be contextually aggregated, allowing for quick access of
     relevant information.
     }
@@ -256,12 +256,15 @@ to biologists, using data mining techniques.
 
 \item
 Develop two distinct pipelines: one for differential expression analysis and
-another for RBP discovery and analysis.\\ \vspace{0.8cm}
+another for RBP discovery and analysis.\\ \vspace{0.6cm}
 
 \item
 Both pipelines should be available through web platforms that can manage user
 accounts, user jobs (analysis tasks), and view and export results.\\
-\vspace{0.8cm}
+\vspace{0.6cm}
+
+\item
+The two pipelines may also be chained for a complete study.\\ \vspace{0.6cm}
 
 \item
 These platforms should be able to overcome the three problems previously
@@ -443,18 +446,18 @@ sense to separate the results into two different platforms?}
 \only<1>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{integration1}
+  \includegraphics[width=0.7\textwidth]{integration1}
 \end{figure}}
 
 \only<3-4>{
 A list of differentially expressed genes is not very useful without further
-information about those genes. Does it make sense for a user to launch a new
-gene enrichment task by hand?}
+information about those genes, and it does not make sense to look for RBPs
+without knowing what genes are active.}
 
 \only<2-3>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{integration2}
+  \includegraphics[width=0.7\textwidth]{integration2}
 \end{figure}}
 
 \only<5>{
@@ -465,7 +468,7 @@ isolated.}
 \only<4-5>{
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{integration3}
+  \includegraphics[width=0.7\textwidth]{integration3}
 \end{figure}}
 
 %NOTES:\\
@@ -513,10 +516,9 @@ Results (number of differentially expressed genes)
 \begin{table}[!htb]\footnotesize
   \centering
   \begin{tabular}{{l} | {c}{c}{c}}
-    & \textbf{\emph{Raw results}} & \textbf{\emph{Filtered results}} &
-    \textbf{\emph{Combined results}}\\ \hline
-    \textbf{\emph{edgeR}} & 4494 & 386 & \multirow{2}{*}{191}\\
-    \textbf{\emph{DESeq}} & 4494 & 204 \\ \hline
+    & \textbf{Raw results} & \textbf{Filtered results} & \textbf{Combined results}\\ \hline
+    \textbf{edgeR} & 4494 & 386 & \multirow{2}{*}{191}\\
+    \textbf{DESeq} & 4494 & 204 \\ \hline
   \end{tabular}
 \end{table}\vspace{0.6cm}
 
@@ -563,10 +565,10 @@ Results (expert estimation of 30 minutes per gene analysed)
 \begin{table}[!htb]\footnotesize
   \centering
   \begin{tabular}{{l} | {l}{l}{l}}
-    \textbf{\emph{Number of IDs}} & \textbf{\emph{Machine1}} & \textbf{\emph{Machine2}} & \textbf{\emph{Manual method}} \\ \hline
-    100  & 9m 56s          & 11m 1s      & $\approx$ 50h\\
-    500   & 41m 47s         & 55m 51s     & $\approx$ 250h\\
-    900   & 1h 33m 32s     & 2h 7m 4s   & $\approx$ 450h\\ \hline
+    \textbf{Number of IDs} & \textbf{Machine1} & \textbf{Machine2} & \textbf{Manual method} \\ \hline
+    100   & $\approx$ 10m           & $\approx$ 11m       & $\approx$ 50h\\
+    500   & $\approx$ 42m           & $\approx$ 56m       & $\approx$ 250h\\
+    900   & $\approx$ 1h 34m        & $\approx$ 2h 7m     & $\approx$ 450h\\ \hline
   \end{tabular}
 \end{table}\vspace{0.3cm}
 
@@ -604,7 +606,7 @@ platform achieves satisfactory performance on personal computer-level hardware.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
-\subsection{Objective Fulfilment}
+\subsection{Objectives Fulfilment}
 \begin{frame}
   \frametitle{Objective Fulfilment}
   \framesubtitle{Conclusions}
@@ -620,7 +622,7 @@ RNA-Seq analysis pipeline implemented and tested (iRAP deployed and result
 consolidation tool implemented).\\ \vspace{0.8cm}
 
 \item
-Integration of both tools could not be accomplished.
+Integration of both tools was not be accomplished.
 \end{itemize}
 
 %NOTES:\\
