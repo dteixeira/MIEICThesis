@@ -54,19 +54,19 @@ were addressed in the thesis, namely:
   Sequencing read alignment against a reference genome and differential
   expression analysis between samples of different individuals (of the same
   species). This is effectively one of the most complex problems addressed in
-  the thesis. We have used data obtained through a sequencing method called
+  the thesis. We used data obtained through a sequencing method called
   \rnaseq{}\footnote{\rnaseq{} is also referred to as \textit{Whole \Trans{}
   Shotgun Sequencing}, or WTSS.}. Further insight about this method will be
-  given in Chapter \ref{chap:sota}, with particular emphasis for tools used to
+  given in Chapter \ref{chap:sota}, with particular emphasis on tools used to
   align and analyze this data (Section \ref{sec:seqtools}).
 
   \item
   Gene enrichment and RBP analysis. This part of the work aims to collect as
   much relevant information as possible about the particular genes being studied
-  at the time, to help biologists to better understand their function. RBP
+  at the time, to help biologists better understand their function. RBP
   knowledge is particularly important for gene manipulation and a very useful
-  tool for better understanding gene expression, as will be further described in
-  Chapter \ref{chap:sota}.
+  tool for better understanding gene expression, as further described in Chapter
+  \ref{chap:sota}.
 
   \item
   Further analysis of the produced data, using machine learning techniques for
@@ -79,9 +79,9 @@ were addressed in the thesis, namely:
 
 Solving these problems requires the use of computational tools. As such, the
 development of a computer system (or multiple systems) to tackle these problems
-emerges as a secondary objective of the thesis. The details of the design of
-this system will be presented in Chapter \ref{chap:description}, while its
-concrete implementation will be discussed in Chapter \ref{chap:implementation}.
+emerges as another objective of the thesis. The details of the design of this
+system will be presented in Chapter \ref{chap:description}, while its concrete
+implementation will be discussed in Chapter \ref{chap:implementation}.
 
 \section{Motivation and Objectives} \label{sec:motivation}
 
@@ -102,16 +102,15 @@ problem, many of those tools require a very specific set of technical skills and
 have a steep learning curve. Possibly the most important motivation behind this
 thesis, and ultimately its main objective, is to provide researchers with
 powerful yet simple and user friendly tools. This means developing a system
-simple enough that any user can learn to operate it in a short period of time
-with minimal effort, but sufficiently advanced to suit the user's research
-needs.
+simple enough that any user can learn to operate in a short period of time with
+minimal effort, but sufficiently advanced to suit the user's research needs.
 
 Another typical problem that biology researchers face nowadays is information
 dispersion and the repetitive and lengthy task of compiling that information.
-Researchers frequently have to manually join information originating from a
-multitude of different platforms, which use inconsistent formats and notations.
-Our second objective is therefore to provide a system that is able to take this
-burden off the user, making the process faster and simpler.
+Researchers frequently have to manually merge information originating from a
+multitude of platforms, which use inconsistent formats and notations. Our
+objective is therefore to provide a system that is able to take this burden off
+the user, making the process faster and simpler.
 
 \section{Project} \label{sec:project}
 
@@ -132,8 +131,7 @@ architecture is divided into three major components:
   contrasts between different samples. The pipeline is based on the preexisting
   iRAP pipeline\footnote{\url{https://code.google.com/p/irap/}}. The pipeline's
   capabilities are further enhanced with both job configuration automation and
-  differential expression results consolidation (combining results from multiple
-  differential expression tools).
+  consolidation of differential expression results from multiple tools.
 
   \item[RNA-binding protein analysis workflow]
   aggregates information about RBPs from multiple biologic web databases
@@ -166,13 +164,12 @@ sequencing and assembly, their differences, applications and the tools and data
 formats typically used in those areas. Lastly, we give some insight about data
 mining algorithms and how they will be applied in the context of the project.
 Chapter \ref{chap:description} presents the design of the software solution. The
-basic system architecture is outline in this chapter, as well as relevant design
-decisions. Chapter \ref{chap:implementation} establish relevant implementation
+basic system architecture is outlined in this chapter, as well as relevant design
+decisions. Chapter \ref{chap:implementation} establishes relevant implementation
 details for the developed solution, giving a more in depth knowledge about its
 inner workings. Used technologies are also reviewed, and their selection is
 justified. In Chapter \ref{chap:casestudy} we present the case study that was
 used to assess the quality of the produced solutions. We review the test data
 set, test conditions and obtained results. Lastly, Chapter
-\ref{chap:conclusions} sums up the what has been accomplished during the
-project. We review objective fulfilment and present some possibilities for
-future work.
+\ref{chap:conclusions} sums up what was accomplished during the project. We
+review objective fulfilment and present some possibilities for future work.

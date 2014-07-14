@@ -15,7 +15,7 @@ process are described in detail.
 %- Availability, scalability, etc.\\
 %\end{Notes}
 
-As discussed, from a purely biological standpoint, this thesis has two major
+As discussed, from a purely biological standpoint, this thesis has two
 objectives: to perform differential expression analysis of RNA-Seq data and to
 discover and characterize RBPs related to groups of genes. While both objectives
 are important for our particular domain problem, they present different problems
@@ -64,16 +64,16 @@ presented as future work.
 
 \subsection{Analysis Configuration}
 
-iRAP is configured with an experience configuration file (see Appendix
+iRAP is configured with an experiment configuration file (see Appendix
 \ref{appendix:irapconfig}). This file must define the name of the species being
 analysed, the reference and read data files, the tools to use for the analysis,
-read libraries, etc.. Although many of these configurations are difficult to
-infer and define automatically, it is possible to create a more user friendly
-way to configure the experiments. This is accomplished through a web form. This
-web form has two different views: the \emph{normal view} allows users to
-configure only the essential settings of the experiment, those that cannot be
-inferred; the \emph{advanced view} allows more experienced users to tweak every
-configuration.
+read libraries, contrast groups, among other variables. Although many of these
+configurations are difficult to infer and define automatically, it is possible
+to create a more user friendly way to configure the experiments. This is
+accomplished through a web form. This web form has two different views: the
+\emph{normal view} allows users to configure only the essential settings of the
+experiment, those that cannot be inferred; the \emph{advanced view} allows more
+experienced users to tweak every configuration.
 
 \subsection{Experimental Data Management}
 
@@ -236,7 +236,7 @@ users can choose to be notified by email when the job finishes.
 
 \subsection{Analysis Workflow}\label{sec:pbsworkflow}
 
-PBS Finder is based around a three stage analysis model (Figure
+PBS Finder is based on a three stage analysis model (Figure
 \ref{fig:workflow2}): \emph{base analysis}, \emph{data set enrichment} and
 \emph{clustering analysis}.
 
@@ -281,12 +281,12 @@ These stages are described in more detail in Chapter \ref{chap:implementation}.
 %- Show integration diagram.\\
 %\end{Notes}
 
-In the designed solution both tools should be able to integrate, so that a user
-could perform the complete analysis creating a unique analysis job. This would
-be accomplished by using the interface of the RNA-Seq analysis pipeline as the
+In the designed solution both tools should be integrated, so that a user could
+perform the complete analysis creating a unique analysis job. This would be
+accomplished by using the interface of the RNA-Seq analysis pipeline as the
 master (or main) interface for job creation. When the analysis completes, the
 pipeline presents the preliminary results to the user and automatically launches
-a PBS Finder analysis for the result gene identifier list. At this point the
+a PBS Finder analysis for the resulting gene identifier list. At this point the
 RNA-Seq pipeline's interface should include a direct link to the created job in
 PBS Finder. That link can then be used by the user to view the results of the
 RBP localization analysis. Note that, while both tools are now integrated, the

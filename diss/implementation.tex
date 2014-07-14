@@ -79,16 +79,19 @@ framework built on top of the Sinatra\footnote{\url{http://www.sinatrarb.com}}
 web library. Padrino allows the creation of web applications that use Ruby to
 define their back-office logic.
 
-User and job data is persisted in a database. In this case the
+\subsection{Data Persistance}
+
+User and job data is persisted in a database; in this case the
 MongoDB\footnote{\url{http://www.mongodb.org}} database system was chosen.
 MongoDB is a document based, NoSQL database. While widely adopted relational
-database management system store information in large rely on large data banks
-and relational calculus, NoSQL databases store information in the form of files
-\cite{strauch2011nosql}. NoSQL databases sacrifice the possibility to use some
-complex mechanisms of classical relational (structured queries, enforced
-information integrity, etc.), in order to achieve higher performance and
-scalability. NoSQL databases are most effective when the saved records are large
-but are seen as loosely structured collections of information.
+database management systems rely on large data banks and relational calculus,
+NoSQL databases store information in the form of documents
+\cite{strauch2011nosql}, instead of relational table records. NoSQL databases
+sacrifice the possibility to use some complex mechanisms of classical relational
+databases (for example structured queries and enforced information integrity),
+in order to achieve higher performance and scalability. NoSQL databases are most
+effective when the saved records are large but are seen as loosely structured
+collections of information.
 
 \subsection{Analysis Server}
 
@@ -105,8 +108,11 @@ run multiple analyses at the same time. Note that the server is not bound to a
 single type of analysis, it can perform any type of analysis, as long as a valid
 implementation is available. The only two constraints to create a new type of
 analysis are that the analysis workflow must be encapsulated inside an
-instantiable class, and that class must implement a simple set of methods that
-allows the server to control it.
+instantiable class. That class must implement a defined interface, in other
+words, it must implement a simple set of methods that allows the server to
+control it. As such, new analysis methods can be easily added in the future as
+their core functionality can be opaque to the server as long as they implement
+the server's interface.
 
 Algorithm \ref{algo:server} represents the behaviour of the server when a new
 request arrives. The first step is to determine if the requested analysis method
@@ -144,10 +150,11 @@ saves an indication that that particular analysis is being executed.
   \label{algo:server}
 \end{algorithm}
 
-Once the analysis is complete the server is notified, its results are
-communicated to the web interface. The server is also notified and eliminates
-both the indication from its internal list and the file with the analysis'
-parameters.
+Once the analysis is complete the server is notified through its distributed
+instance, and the results are communicated to the web interface. This also
+prompts the server to eliminate both the indication of the running analysis from
+its internal list and the file with the analysis' parameters from the file
+system.
 
 %\begin{Notes}
 %- Configuration is based on external files.\\
@@ -193,15 +200,18 @@ which will be described in detail below.
 The first step in the pipeline is to prepare the gene identifiers for the
 following analysis steps. These identifiers can be written in five different
 notations, as described in Section \ref{sec:descworkflow}. As such, identifiers
-are separated according to their potential notation type in those five groups.
-However, some of those identifiers may be invalid, despite appearing to fit in
-one of the possible notations. It is assumed that if an identifier is valid, it
-can at least be converted to either \emph{Ensembl Gene} or \emph{Entrez}
-notation. This conversion is done using bioDBnet's \cite{Mudunuri15022009}
-identifier conversion service. \emph{Entrez} conversion is only attempted if
-\emph{Ensembl Gene} conversion is not available. While none of those platforms
-are preferred, converting as many identifiers as possible to one convention
-helps to maintain data set coherence.
+are separated according to their automatically detected notation in those five
+groups. However, some of those identifiers may be invalid, despite appearing to
+fit in one of the possible notations. It is assumed that if an identifier is
+valid, it can at least be converted to either \emph{Ensembl Gene} or
+\emph{Entrez} notation. These notations were chosen because they are the native
+notations for genes in the used platforms (Ensembl and NCBI). This conversion is
+done using bioDBnet's \cite{Mudunuri15022009} identifier conversion service. The
+service was chosen for its simplicity and its large conversion database, that
+draws from multiple conversion services like NCBI or Ensembl. \emph{Entrez}
+conversion is only attempted if \emph{Ensembl Gene} conversion is not available.
+While none of those platforms are preferred, converting as many identifiers as
+possible to one convention helps to maintain data set coherence.
 
 Since only two lists remain, one with \emph{Ensembl Gene} identifiers and the
 other with \emph{Entrez} identifiers, information about those genes' transcripts
@@ -218,9 +228,11 @@ transcript, if the retrieved 3’ UTR sequence is at least three hundred base
 pairs long it will be used with RBPDB. If the 3’ UTR is too short, the 3’ UTR
 downstream sequence (genomic sequence) will be used, with a fixed length of one
 thousand base pairs. If none of the above situations is possible, the 3’ UTR
-will be used as is (if it is at least one base pair long). This information is
-sufficient to answer one of this thesis' problems. However, it will be enriched
-and further analysed, bringing greater benefits to researchers.
+will be used as is (if it is at least one base pair long). Note that while the
+5' UTR sequence is also collected (when available), the consulted experts were
+interested in analysing only the 3' region. This information is sufficient to
+answer one of this thesis' problems. However, it will be enriched and further
+analysed, bringing greater benefits to researchers.
 
 \begin{table}[!htb]
   \centering
@@ -346,19 +358,22 @@ results. Each attempt is a variation of the analysis parameters, being that each
 possible value for a parameter is combined with every value for the remaining
 parameters, giving rise to a large number of experiments. When clustering by RBP
 presence the variable parameters are: clustering algorithm (either hierarchical
-clustering or partitioning around medoids); number of clusters (between two and
-ten); and distance matrix representation (either using a strictly binary matrix
-or a Jaccard distance matrix). While clustering by RBP information the same
-variable attributes apply. However, the decision about what RBP information is
-used for their comparison is also variable, from a minimum of two information
-fields. For example, in a particular clustering attempt only information about
-the RBPs' pathways and related tissues may be used, while another attempt may
-use all available information.
+clustering or partitioning around medoids); and the number of clusters (between
+two and ten). While clustering by RBP information the same variable attributes
+apply. However, the decision about what RBP information is used for their
+comparison is also variable, from a minimum of two information fields. For
+example, in a particular clustering attempt only information about the RBPs'
+pathways and related tissues may be used, while another attempt may use all
+available information. Furthermore, for this particular type of analysis the
+representation of the data set can also vary. The data set can be represented
+either as a binary matrix (as is the case in clustering by RBP presence) or by a
+Jaccard distance matrix, calculated from the sets of possible values for each of
+the protein's attributes.
 
 \subsubsection*{Result Selection}
 
 With the large number of results obtained from all the clustering attempts, it
-is not reasonable to expect a user to manually chose the ones that are most
+is not reasonable to expect a user to manually choose the ones that are most
 interesting. As such, internal evaluation techniques for clustering are coupled
 with rules that define minimum acceptance criteria for results, narrowing the
 result space to only one for each type of clustering. Algorithm
@@ -421,14 +436,21 @@ PBS Finder.
 \subsubsection*{Job View}
 
 Job view, also known as main view, is the default projection of a job's results
-(Figure \ref{fig:job_view}). It gives the user a matrix that matches every gene (and
-transcript) in the data set with their corresponding binding proteins, as well
-as an histogram of the genes (a bar chart of the counting of genes with which
+(Figure \ref{fig:job_view}). It gives the user a matrix that matches every gene
+(and transcript) in the data set with their corresponding binding proteins, as
+well as an histogram of the genes (a bar chart of the number of genes with which
 each RBP binds). This matrix also contains two columns that provide information
 about how the genes were grouped, based on the two distinct clustering
-techniques. In addition to this information,
-clicking any group of genes will give the user a list of all the characteristics
-that differentiate that particular group from all the others.
+techniques. In addition to this information, clicking any group of genes will
+give the user a list of all the characteristics that differentiate that
+particular group from all the others.
+
+This view also contains a mechanism that allows users to provide feedback and
+report problems. Clicking the \qt{Report a problem} button the user is presented
+with a form that allows them to provide a brief description of the problem. If
+the user chooses to send that report, the web platform will send an email to its
+administrator, containing the submitting user's information, the problem
+description and a direct link to the offending page.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -479,7 +501,7 @@ information about the defining characteristics of that particular group.
 The protein view (Figure \ref{fig:prot_view}) displays relevant classification
 information for every RBP (when available). This information includes the
 protein's name, links to other platforms (UniProt, KEGG, Gene3D, etc.), tissues
-in which the protein might be expressed, its related ontologies and the pathways
+in which the protein might be expressed, the protein's ontologies and the pathways
 in which the protein participates. Each pathway is coupled with a link to the
 corresponding KEGG pathway browser page.
 

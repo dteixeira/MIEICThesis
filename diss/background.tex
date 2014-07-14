@@ -20,8 +20,8 @@ techniques and relevant data representation formats for genetic information.
 %- Include part about RNA binding proteins.\\
 %\end{Notes}
 
-Before dwelling in the details of the state of the art that are on the
-foundation of the thesis, it is important to explain some concepts of the
+Before dwelling in the details of the state of the art that constitute the
+foundations of the thesis, it is important to explain some concepts of the
 domain of molecular biology.
 
 \subsection{Gene Expression}
@@ -37,8 +37,8 @@ itself is composed by two main stages, transcription and translation
 Transcription is the stage at which genetic data in the form of \dna{} is used
 to synthesize \rna{}, being this the process that concerns the thesis' main
 question. Several different types of \rna{} are produced by this process,
-including \emph{mRNA} (which specifies the sequences of amino acids that form a
-protein), \emph{rRNA} and \emph{tRNA}, both later used in the translation stage. Simplifying
+including \emph{messenger RNA} (which specifies the sequences of amino acids that form a
+protein), \emph{ribossomal RNA} and \emph{transfer RNA}, both later used in the translation stage. Simplifying
 a gene's structure, it can be seen as composed by two types of sequences,
 introns and exons, as seen in Figure \ref{fig:intron_exon}.
 
@@ -112,18 +112,17 @@ disease conditions.
 \subsection{Sequencing}
 
 Obtaining genetic information is done experimentally, by employing a sequencing
-technique. For quite some time this process was carried out using the Sanger's
-and other similar sequencing methods \cite{Reis-Filho2009}. Though
-effective, such methods were notably slow and costly, with large projects like
-the Human Genome Project (HGP) consuming roughly thirteen years and US\$ 3
-billion. These limitations were so severe that, other than the realm of human
-genetics, this kind of study was restricted to model organisms, such as the
-fruit fly and mouse genomes \cite{Wolf2013}. The past few years have seen the
-appearance and rise in popularity of the \ngs{} techniques. These techniques
-differ from the more classical ones by producing larger amounts of information,
-at lower cost. They are also typically more cost effective than previous
-techniques and can be easily employed by single laboratories, which has greatly
-contributed to their popularity.
+technique. For quite some time this process was carried out using Sanger's and
+other similar sequencing methods \cite{Reis-Filho2009}. Though effective, such
+methods were notably slow and costly, with large projects like the Human Genome
+Project (HGP) consuming roughly thirteen years and US\$ 3 billion. These
+limitations were so severe that, other than the realm of human genetics, this
+kind of study was restricted to model organisms, such as the fruit fly and mouse
+genomes \cite{Wolf2013}. The past few years have seen the appearance and rise in
+popularity of the \ngs{} techniques. These techniques differ from the more
+classical ones by producing larger amounts of information, at lower cost. As
+such, the techniques can be easily employed by single laboratories, which has
+greatly contributed to their popularity.
 
 The rise in popularity and availability of \ngs{} techniques, coupled with the
 importance of RNA knowledge in understanding gene expression, led to the
@@ -153,7 +152,7 @@ costs, greatly increased the availability of transcript sequencing data.
 For years, microarrays were the standard tool available for examining features
 of the transcriptome and global patterns of gene expression \cite{Wolf2013}.
 However, microarrays are typically more oriented towards assembly against
-existing reference data, hence limiting its application to species with well
+existing reference data, hence limiting their application to species with well
 known reference genomes. This is a severe constraint, as \ngs{} techniques allow
 to cheaply obtain genetic information of previously non-studied species. This is
 one of the reasons that led to the inception of RNA-Seq. Contrary to
@@ -177,16 +176,16 @@ file formats. Some of these formats are developed from the ground up to satisfy
 a specific need, while others are mere contextual adaptations or specializations
 of already established formats. Below we will present a few of the most popular
 and widely spread file formats, talking about their basic structure, the types
-of data they represent and their applications. Some examples of this file
+of data they represent and their applications. Some examples of these file
 formats can be consulted in Appendix \ref{annex:formats}.
 
 \subsubsection*{FASTA}
 
 FASTA is the standard line and character sequence format used by NCBI
-\cite{ncbi:fasta}, using this last organization's character code conventions
-(see Appendix \ref{annex:fasta}). It is a simple format, that can be used to
-easily store data represented by character sequences, like nucleotide (\dna,
-\rna) or amino acid (protein) sequences. This file format is widely use to store
+\cite{ncbi:fasta}, using this organization's character code conventions (see
+Appendix \ref{annex:fasta}). It is a simple format, that can be used to easily
+store data represented by character sequences, like nucleotide (\dna, \rna) or
+amino acid (protein) sequences. This file format is widely use to store
 sequencing reads, \dna/\rna{} sequences and other character sequences in
 database systems. Its simplicity makes it extremely easy to manipulate and
 parse, presenting itself as an attractive solution for data transfer between
@@ -199,9 +198,9 @@ FASTQ is used to store character sequences, typically nucleotide sequences
 standard FASTA format, in respect to the manner in which character sequences are
 represented. However, for every sequence, there is a second sequence of equal
 length, representing the quality scores of the original sequence. These quality
-scores are also represented as single characters, taking values between and
-including ASCII-33 to ASCII-126. It is typically used in the same situations as
-the FASTA format, when quality scores are available/relevant.
+scores are also represented as single characters, taking values between ASCII-33
+and ASCII-126. It is typically used in the same situations as the FASTA format,
+when quality scores are available/relevant.
 
 \subsubsection*{SAM and BAM}
 
@@ -227,11 +226,10 @@ genome sequencing projects became more common (like the 1000 Genomes
 Project\footnote{The 1000 Genomes Project, started back in 2008, is an
 international effort to establish the most comprehensive catalogue to date of
 human genetic variations.}), storing such large amounts of information became a
-serious concern. To address these concerns the VCF format was created. Instead
-of storing the complete genome, VCF stores only the variations (and their
-respective positions) of newly sequenced genomes relatively to a known reference
-genome, typically in a compressed text file. As such, it is a format often used
-when building genome databases.
+serious concern. Instead of storing the complete genome, VCF stores only the
+variations (and their respective positions) of newly sequenced genomes
+relatively to a known reference genome, typically in a compressed text file. As
+such, it is a format often used when building genome databases.
 
 \subsubsection*{GFF and GTF}
 
@@ -258,10 +256,10 @@ their initial relation, both formats continue to be developed individually.
 
 \subsection{RNA-Seq Pipeline}
 
-The analysis of RNA-Seq data is a complex process, with multiple stages. As
-such, in order to produce relevant results is usually used a pipeline. An
-analysis pipeline uses a set of tools, chained together in such a way that the
-output of one tool becomes the input to the succeeding tool.
+The analysis of RNA-Seq data is a complex process, with multiple stages,
+organized as a pipeline. An analysis pipeline uses a set of tools, chained
+together in such a way that the output of one tool becomes the input to the
+succeeding tool.
 
 A typical RNA-Seq analysis pipeline is composed by six essential stages
 \cite{rnaseqpipeline} (see Figure \ref{fig:rnaseq}):
@@ -288,7 +286,7 @@ A typical RNA-Seq analysis pipeline is composed by six essential stages
   sequence can be either a known and annotated reference genome (typically a
   combination of a FASTA file and a GTF file) or an assembled transcriptome,
   either assembled \emph{de novo} or against a reference genome (see Section
-  \ref{sec:transassembly}). This alignment will allow to assess gene abundance
+  \ref{sec:transassembly}). This alignment will allow assessing gene abundance
   in later stages of the pipeline.
 
   \item[Quantification]
@@ -300,7 +298,7 @@ A typical RNA-Seq analysis pipeline is composed by six essential stages
   \item[Differential expression]
   is the stage where transcript abundances between different samples are
   compared. As such, the produced count data is used to predict differences
-  between transcript abundances between two or more samples, effectively
+  between transcript abundances in two or more samples, effectively
   demonstrating differences in gene expression. A common task for differential
   expression analysis is the comparison between a control and a mutated sample.
 
@@ -356,8 +354,8 @@ present a set of tools, integrated in iRAP, that were used during this thesis.
 iRAP requires is a minimum set of user provided information to perform RNA-Seq
 analysis: the \emph{annotated reference genome} and the \emph{raw reads}, as
 previously mentioned. Note that the reads are organized in libraries. A library,
-in this case a cDNA library, is a collection of cDNA fragments that together
-constitute a portion of the transcriptome.
+in this case a \emph{complementary DNA} library, is a collection of cDNA
+fragments that together constitute a portion of the transcriptome.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -395,8 +393,9 @@ Bowtie is an ultrafast, memory-efficient short read aligner
 \cite{langmead2009ultrafast}. Bowtie is typically used to build a reference
 index for the genome of the organism being studied, for posterior use by other
 tools, like TopHat. It can also output alignments in the standard SAM format,
-allowing Bowtie to interoperate with tools like SAM Tools. However, it should
-not be used as a general purpose alignment tool, as it was created and is more
+allowing Bowtie to interoperate with tools like SAM
+Tools\footnote{\url{http://samtools.sourceforge.net}}. However, it should not be
+used as a general purpose alignment tool, as it was created and is more
 effective when aligning short read sequences against large reference genomes.
 
 \paragraph{TopHat}
@@ -420,20 +419,21 @@ package (see Section \ref{sec:clustertool}) designed to help the visualization a
 analysis of Cufflinks' \rnaseq{} output. As such, it is not directly involved in
 the trascriptome alignment process. It takes the various output files from
 Cufflinks and uses them to build a SQLite database describing appropriate
-relationships between genes, transcripts, etc. This database is later used to
-convert that data to R objects which allows them to be used by plotting
-functions, as well as by other commonly used data visualization tools.
+relationships between genes, transcripts, and other relevant data points. This
+database is later used to convert that data to R objects which allows them to be
+used by plotting functions, as well as by other commonly used data visualization
+tools.
 
 \subsubsection*{HTSeq}
 
 HTSeq is a programming framework used for processing data resulting from next
 generation sequencing methods \cite{htseq}, developed in Python. While many
 tools can efficiently align reads, sometimes data needs to be manipulated before
-being passed to those tools. This data can either be badly formated (or
+being passed to those tools. These data can either be badly formated (or
 \qt{dirty}), or simply in a format different from the one that is needed. The
 latter is a particularly common problem when trying to pass the results of one
-tool to the one that succeeds it in the pipeline. HTSeq is useful to easily
-create scripts that accomplish this task, acting as a \qt{glue} between tools.
+tool to the one that succeeds it in the pipeline. HTSeq is useful for easily
+creating scripts that accomplish this task, acting as a \qt{glue} between tools.
 
 HTSeq provides parsers for many popular formats for representing genetic
 information (see Section \ref{sec:formats}). In addition, it ships with two
@@ -446,11 +446,12 @@ gene's exons.
 \subsection{Differential Expression Analysis Tools}\label{sec:difexptools}
 
 Below we describe the tools that were used for differential expression analysis.
-These tools are integrated in the iRAP pipeline, are used in its fourth stage.
+These tools are integrated in the iRAP pipeline, as part of its fourth analysis
+stage.
 
 \subsubsection*{DESeq}
 
-DESeq \cite{20979621} is available in an R package (see Section
+DESeq \cite{20979621} is available as an R package (see Section
 \ref{sec:clustertool}), included in the Bioconductor super package. DESeq takes
 count data generated from RNA-Seq analysis assays. As count data is discrete and
 skewed, it is not well approximated by a normal distribution. DESeq solves this
@@ -460,7 +461,7 @@ differential expression.
 
 \subsubsection*{edgeR}
 
-edgeR \cite{robinson2010edger} is available in an R package (see Section
+edgeR \cite{robinson2010edger} as available in an R package (see Section
 \ref{sec:clustertool}), included in the Bioconductor super package. It provides
 methods for the statistical analysis of count data from comparative experiments
 on next generation sequencing platforms, among which is RNA-Seq, the most common
@@ -495,8 +496,8 @@ short read files can be either in FASTA or FASTQ format. FASTX is used to
 manipulate these files before the aligning stage, in order to produce better
 results. It includes tools to convert files from FASTQ to FASTA format, assess
 statistics about the reads, filter and remove sequences based on their quality,
-among others. Although the toolkit contains only command line based tools, some
-of them are already integrated in the Galaxy web based workflow manager.
+among others. Although the toolkit contains only command line tools, some of
+them are already integrated in the Galaxy web based workflow manager.
 
 \subsubsection*{FastQC}
 
@@ -505,7 +506,7 @@ is a tool for quality control for \ngs{} data, implemented in Java. Its main
 objective is to find errors and problematic areas in \ngs{} read data. FastQC
 accepts FASTQ, SAM and BAM files, and is able to report results both inside the
 tool itself and by exporting HTML files. These reports contain, among other
-information, summary graphs and table that allow quick access to the data.
+information, summary graphs and tables that allow quick access to the data.
 FastQC can either be used as a standalone tool with its graphical interface, or
 as part of an analysis pipeline.
 
@@ -532,15 +533,15 @@ totally, or at least partially, automated. As such, there are several algorithms
 for these tasks and tools that implement such algorithms, as presented in
 Section \ref{sec:clusteralgo} and Section \ref{sec:clustertool}, respectively.
 
-We can divide data mining into main types: \emph{descriptive data mining} and
-\emph{predictive data mining} \cite{Fayyad1996}. Descriptive data mining is
-focused on finding the underlying structure of a given set of data. Instead of
-predicting future values, it concerns the intrinsic structure, relations and
-interconnectedness of the data being analyzed, presenting its interesting
-characteristics without having any predefined target. On the other hand,
-predictive data mining is used to predict explicit values, based on patterns
-determined from the data set. With predictive data mining we try to build models
-using known data and use those models as a base to predict future behavior.
+We can divide data mining in \emph{descriptive data mining} and \emph{predictive
+data mining} \cite{Fayyad1996}. Descriptive data mining is focused on finding
+the underlying structure of a given set of data. Instead of predicting future
+values, it concerns the intrinsic structure, relations and interconnectedness of
+the data being analyzed, presenting its interesting characteristics without
+having any predefined target. On the other hand, predictive data mining is used
+to predict explicit values, based on patterns determined from the data set. With
+predictive data mining we try to build models using known data and use those
+models as a base to predict future behavior.
 
 As we can see, data mining does not represent a single type problem. In fact
 there are several different types of problems that can be addressed by data
@@ -577,7 +578,7 @@ method. A brief review of the most common type of problems is given below.
 
   \item[Change and deviation detection]
   tries to discover the most significant changes in the data, when compared with
-  previously measured data. This method is useful to find interesting data
+  previously measured data. This method is useful for finding interesting data
   variations or data errors.
 
 \end{description}
@@ -605,18 +606,18 @@ analysed. For example, while some data sets can be easily clustered using
 In other words, there is no global technique to group similar objects, it needs
 to adapt to the problem at hand. This multitude of different interpretations of
 the cluster notion led to the appearance of many different clustering methods
-and algorithms. There are five major categories in which we can classify
-clustering methods: \emph{partitioning methods}; \emph{hierarchical methods};
-\emph{density-based methods}; \emph{grid-based methods}; and \emph{model-based
-methods} \cite{han2006data}.
+and algorithms. Clustering methods can be classified in different categories:
+\emph{partitioning methods}; \emph{hierarchical methods}; \emph{density-based
+methods}; \emph{grid-based methods}; and \emph{model-based methods}
+\cite{han2006data}.
 
-Generally, there are two major types of clustering methods, \emph{divisive
-methods} and \emph{agglomerative methods}. In divisive methods all the objects
-in the data set start in the same cluster. At each iteration all clusters are
-divided into two smaller clusters, that better satisfy the fitness condition of
-that particular algorithm. This process stops when all clusters are composed by
-only one element. Inversely, agglomerative methods start with $n$ clusters with
-one elements, joining them iteratively until only one cluster remains.
+Generally, there are two types of clustering methods, \emph{divisive methods}
+and \emph{agglomerative methods}. In divisive methods all the objects in the
+data set start in the same cluster. At each iteration all clusters are divided
+into two smaller clusters, that better satisfy the fitness condition of that
+particular algorithm. This process stops when all clusters are composed by only
+one element. Inversely, agglomerative methods start with $n$ clusters with one
+elements, joining them iteratively until only one cluster remains.
 
 \subsubsection*{Partitioning Methods}
 
@@ -655,16 +656,16 @@ This hierarchy is represented as a tree structure. There are two strategies for
 hierarchical analysis, the \emph{divisive} strategy and the \emph{agglomerative}
 strategy \cite{han2006data}. The \emph{divisive} strategy consists of putting
 all objects in the same cluster and then divide them in multiple clusters, based
-on their distance. This process is repeated iteratively, until every object is
-in its own cluster. Inversely, the \emph{agglomerative} strategy starts by
-putting each object in its own clustering, and then iteratively merges clusters
-until all objects are part of one cluster.
+on their distance. Inversely, the \emph{agglomerative} strategy starts by
+putting each object in its own clustering, and then iteratively merges clusters.
 
 One notable weak point of hierarchical methods is that calculated results are
 irreversible; that is, once an objects is attributed to a cluster, that result
 will not be evaluated again. This may lead to incorrect labeling of some
-objects. These problems can be minimized by pre-processing the data set. Note
-that this single pass evaluation gives hierarchical methods good computational
+objects. These problems can be minimized by pre-processing the data set. A
+possible example of data set pre-processing is performing a dimension reduction,
+decreasing the number of random variables under consideration. Note that this
+single pass evaluation gives hierarchical methods good computational
 performance.
 
 \subsubsection*{Density-based Methods}
@@ -674,11 +675,8 @@ objects, density-based methods are based on the notion of \emph{cluster density}
 \cite{han2006data}. The basic idea of these methods is to keep growing a given
 cluster while the number of objects in its vicinity (or \emph{density}) exceeds
 a certain user defined threshold. Density-based methods are particularly useful
-to discover clusters with irregular shapes. It should be noted that algorithms
-implementing these kind of analysis, like DBSCAN \cite{Ester96adensity-based},
-are usually very computationally heavy, both in terms of processing power and
-memory usage
-(although optimizations exist).
+to discover clusters with irregular shapes. An example of an algorithm that
+implements this kind of analysis is DBSCAN \cite{Ester96adensity-based}.
 
 \subsubsection*{Grid-based Methods}
 
@@ -693,7 +691,7 @@ on the number of objects in the data set.
 \subsubsection*{Model-based Methods}
 
 Model-based methods work by hypothesizing a mathematical model for each cluster
-and then find the objects that best fit those models
+and then finding the objects that best fit those models
 \cite{DBLP:journals/corr/abs-1205-1117}. These methods typically follow the
 assumption that objects are distributed by clusters according to an underlying
 statistical probability. This also makes it possible for the number of clusters
@@ -726,6 +724,7 @@ Medoids (PAM) algorithm (see Algorithm \ref{alg:pam}).
   \KwResult{A set of $k$ clusters.}
   \BlankLine
 
+  choose $k$ objects at random as representatives of each cluster\;
   \Repeat{no change}{
     assign each remaining object to the cluster with the nearest representative
     object\;
@@ -776,19 +775,19 @@ problems, like classification, regression, clustering and association rules
 discovery.
 
 The first and most important motivation for ILP systems is that they overcome
-the representation limitations of attribute-value learning systems, such as the
-previously mentioned data mining algorithms. Attribute-value systems base their
-representations of data in table based representations. Although effective in
-many situations, this representation is not very expressive and might not even
-be feasible for certain problems \cite{Bratko:1995:AIL:219717.219771}. The
-second motivation for ILP is that by using a logical representation, the
-hypotheses are understandable and interpretable by humans, being therefore
-useful to explain the phenomenons that produce the data. This representation
-also means that background knowledge can be represented and employed in the
-induction process, in contrast to attribute-value models, where this information
-is difficult to represent. The expressive power of first-order logic enable an
-easy representation of data with complex structure, and the encoding of complex
-models that may combine numerical computation and relational information.
+the representation limitations of attribute-value learning systems.
+Attribute-value systems base their representations of data in tables. Although
+effective in many situations, this representation is not very expressive and
+might not even be feasible for certain problems
+\cite{Bratko:1995:AIL:219717.219771}. The second motivation for ILP is that by
+using a logical representation, the hypotheses are understandable and
+interpretable by humans, being therefore useful to explain the phenomenons that
+produce the data. This representation also means that background knowledge can
+be represented and employed in the induction process, in contrast to
+attribute-value models, where this information is difficult to represent. The
+expressive power of first-order logic enable an easy representation of data with
+complex structure, and the encoding of complex models that may combine numerical
+computation and relational information.
 
 Despite these advantages, ILP cannot be applied indiscriminately to any
 clustering or classification problems. ILP systems are typically very heavy when
@@ -803,7 +802,7 @@ objects in the same cluster, while maintaining the dissimilarity between other
 clusters \cite{Manning:2008:IIR:1394399}. This is called an \emph{internal
 evaluation criterion}, as it is only dependent on the clustered data itself.
 However, high internal evaluation scores do not necessarily translate to good
-effectiveness in a real application.
+results in a real application.
 
 To provide a better judgement of clustering results we may use \emph{external
 criteria} \cite{Manning:2008:IIR:1394399}. Such criteria act as a surrogate for
@@ -890,8 +889,8 @@ shown in Equation \ref{eq:eucl} (for $n$-dimensions).
 
 \paragraph{Squared Euclidean Distance}
 
-The squared Euclidean distance is a simple variation of the stadard distance,
-obtained by squaring it (Equation \ref{eq:sqeucl}). It is used when there is a
+The squared Euclidean distance is a simple variation of the standard distance,
+obtained by squaring it (Equation \ref{eq:sqeucl}). It is used when there is the
 need to attribute progressively greater weight to objects that are far apart
 from each other.
 \begin{equation}
@@ -930,10 +929,9 @@ dampening factors of other (closer) components.
 \subsubsection*{Jaccard Distance}
 
 The Jaccard distance is a measure of dissimilarity between two objects. It is
-related to the Jaccard coefficient, a similarity measure. These measures are
-applicable to binary and non-binary data. In these cases, a simple geometric
-distance, like the Euclidean distance, might not accurately represent the
-distance similarity (or dissimilarity) between the two objects.
+related to the Jaccard coefficient, a similarity measure. In some cases a simple
+geometric distance, like the Euclidean distance, might not accurately represent
+the distance (or dissimilarity) between the two objects.
 
 For binary attributes, the Jaccard coefficient (similarity) is computed as
 \begin{equation}
