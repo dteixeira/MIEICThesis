@@ -236,6 +236,16 @@ analysed, bringing greater benefits to researchers.
 
 \begin{table}[!htb]
   \centering
+  \caption[Information retrieved for genes and transcripts in the base analysis stage]{
+    Information retrieved for genes and transcripts in the base analysis stage.
+    Information marked with \qt{*} represent optional information; it might be
+    relevant to the researcher and is therefore shown if available, but it is
+    not crucial to the analysis. On the other hand, the unmarked fields
+    represent required information, without which analysis on that particular
+    gene/transcript cannot continue.
+  }
+  \label{tab:info_gene}
+
   \begin{tabular}{{l} | {l}}
     \multirow{3}{*}{\textbf{\emph{Gene}}}
     & Transcript identifiers\\
@@ -248,15 +258,6 @@ analysed, bringing greater benefits to researchers.
     & Names, locations and bind sequences of RBPs\\
   \end{tabular}
 
-  \caption[Information retrieved for genes and transcripts in the base analysis stage]{
-    Information retrieved for genes and transcripts in the base analysis stage.
-    Information marked with \qt{*} represent optional information; it might be
-    relevant to the researcher and is therefore shown if available, but it is
-    not crucial to the analysis. On the other hand, the unmarked fields
-    represent required information, without which analysis on that particular
-    gene/transcript cannot continue.
-  }
-  \label{tab:info_gene}
 \end{table}
 
 \subsection{Data Set Enrichment}
@@ -266,8 +267,8 @@ UniProt in order to obtain their respective accession identifiers. These are
 used internally by UniProt to refer to specific proteins. With the accession
 identifiers, the pages for each RBPs can be retrieved and analyzed individually.
 These pages contain information about their respective RBPs, including keywords,
-related tissues and information about the protein's ontologies (cellular
-components, molecular functions and biological processes).
+related tissues and information about the RBPs' ontologies (cellular components,
+molecular functions and biological processes).
 
 The information collected from UniProt may also contains links to the KEGG web
 platform. Among other useful information, KEGG contains information about
@@ -292,6 +293,16 @@ are provided.
 
 \begin{table}[!htb]
   \centering
+  \caption[Information retrieved for proteins in the data set enrichment stage]{
+    Information retrieved for proteins in the data set enrichment stage.
+    Information marked with \qt{*} represent optional information; it might be
+    relevant to the researcher and is therefore shown if available, but it is
+    not crucial to the analysis. On the other hand, the unmarked fields
+    represent required information, without which analysis on that particular
+    protein cannot continue.
+  }
+  \label{tab:info_prot}
+
   \begin{tabular}{{l} | {l}}
     \multirow{8}{*}{\textbf{\emph{Protein}}}
     & Protein name\\
@@ -303,16 +314,6 @@ are provided.
     & Ontologies*\\
     & URLs to external platforms*\\
   \end{tabular}
-
-  \caption[Information retrieved for proteins in the data set enrichment stage]{
-    Information retrieved for proteins in the data set enrichment stage.
-    Information marked with \qt{*} represent optional information; it might be
-    relevant to the researcher and is therefore shown if available, but it is
-    not crucial to the analysis. On the other hand, the unmarked fields
-    represent required information, without which analysis on that particular
-    protein cannot continue.
-  }
-  \label{tab:info_prot}
 \end{table}
 
 \subsection{Clustering Analysis}

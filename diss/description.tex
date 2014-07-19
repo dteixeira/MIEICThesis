@@ -138,9 +138,10 @@ that are present in all files.
 \begin{algorithm}
   \emph{genes} = empty map\;
   \emph{files} = load all result files\;
+  \emph{max\_pvalue} = 0.05\;
   \ForEach{file \emph{in} files}{
     \ForEach{entry \emph{in} file}{
-      \If{entry.pvalue $\leq$ 0.05}{
+      \If{entry.pvalue $\leq$ \emph{max\_pvalue}}{
         increase gene count in \emph{genes}[\emph{entry.gene}]\;
       }
     }
@@ -186,12 +187,17 @@ be referred to by that name.
 The only data PBS Finder collects from the user is a list of gene (or
 transcript) identifiers that should be analysed. These identifiers can be in one
 of five different formats: \emph{Ensembl Gene}, \emph{Ensembl Transcript},
-\emph{Entrez}, \emph{RefSeq} or \emph{GenBank} ( see Table \ref{tab:examples}).
+\emph{Entrez}, \emph{RefSeq} or \emph{GenBank} (see Table \ref{tab:examples}).
 Users can submit jobs with any combination of the previous types and use
 identifiers from multiple species.
 
 \begin{table}[!htb]
   \centering
+  \caption[Examples of identifiers accepted by PBS Finder] {
+    Two sets of examples of identifiers accepted by PBS Finder.
+  }
+  \label{tab:examples}
+
   \begin{tabular}{{l} | {l}{l}}
     \textbf{\emph{Ensembl Gene}}        & ENSG00000224274 & ENSRNOG00000013536\\
     \textbf{\emph{Ensembl Transcript}}  & ENST00000003156 & ENSRNOT00000117589\\
@@ -199,11 +205,6 @@ identifiers from multiple species.
     \textbf{\emph{RefSeq}}              & NM\_001107622.1 & NM\_031098.1\\
     \textbf{\emph{GenBank}}             & U49845          & C35522\\
   \end{tabular}
-
-  \caption[Examples of identifiers accepted by PBS Finder] {
-    Two sets of examples of identifiers accepted by PBS Finder.
-  }
-  \label{tab:examples}
 \end{table}
 
 While PBS Finder can accept all these kinds of identifiers, internally the
